@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+    <button class="layui-btn" id="createPdf">生成PDF</button>
+<button class="layui-btn layui-btn-normal" id="showPdf">展示PDF</button>
+
+<script type="text/javascript">
+    $(function () {
+        //给返回首页修改密码按钮添加单击事件
+        $("#createPdf").on("click", function () {
+            goFirstPage();
+        });
+
+        //给退出按钮添加单击事件
+        $("#showPdf").on("click", function () {
+            window.open("../Pdf/ShowPdf","_blank");
+        });
+
+    });
+    //返回首页
+    function goFirstPage() {
+        alert('你单击了返回首页的按钮');
+    }
+    //退出
+    function exitOut() {
+        alert('你单击了退出按钮');
+    }
+</script>
