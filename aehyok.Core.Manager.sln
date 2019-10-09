@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.Web", "aehyok.Core.Web\aehyok.Core.Web.csproj", "{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.Web", "aehyok.Core.Web\aehyok.Core.Web.csproj", "{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.DataAccess", "aehyok.Core.DataAccess\aehyok.Core.DataAccess.csproj", "{82F8D92B-9BAB-4943-9BEE-B86A49E688E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.Repository", "aehyok.Core.Repository\aehyok.Core.Repository.csproj", "{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82F8D92B-9BAB-4943-9BEE-B86A49E688E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82F8D92B-9BAB-4943-9BEE-B86A49E688E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82F8D92B-9BAB-4943-9BEE-B86A49E688E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82F8D92B-9BAB-4943-9BEE-B86A49E688E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

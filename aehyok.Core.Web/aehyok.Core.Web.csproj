@@ -339,4 +339,9 @@
     <None Include="wwwroot\pdf.js\web\旅检渠道一般程序案件智能快办处罚参数20181114.pdf" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\aehyok.Core.DataAccess\aehyok.Core.DataAccess.csproj" />
+    <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using aehyok.Core.DataAccess;
+using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +26,8 @@ namespace aehyok.Core.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<IDbAccossor>(new MySqlDbAccessor(Configuration));
+            services.AddTransient<ITestRepository, TestRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
