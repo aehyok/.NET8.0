@@ -23,9 +23,17 @@ namespace aehyok.Core.Web.Controllers
             document.Add(new Paragraph("你好!").SetFont(font));
             document.Close();
             return View();
+
         }
 
-        public FileContentResult ShowPdf()
+
+
+        public ActionResult ShowPdf()
+        {
+            return RedirectToAction("ShowPdfResult", "PDF", new { });
+        }
+
+        public FileContentResult ShowPdfResult()
         {
             FileStream fileStream = new FileStream("hello.pdf", FileMode.Open, FileAccess.Read, FileShare.Read);
             byte[] bytes = new byte[fileStream.Length];

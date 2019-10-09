@@ -1,0 +1,227 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table id="demo"></table>
+<script>
+    layui.use('table', function(){
+         var table = layui.table;
+ 
+  
+
+  
+
+
+
+  
+  
+  
+
+  //监听表格行点击
+  table.on('tr', function(obj){
+    console.log(obj)
+  });
+
+  //监听表格复选框选择
+  table.on('checkbox(test)', function(obj){
+    console.log(obj)
+  });
+
+  //监听表格单选框选择
+  table.on('radio(test)', function(obj){
+    console.log(obj)
+  });
+  
+  //监听表格单选框选择
+  table.on('rowDouble(test)', function(obj){
+    console.log(obj);
+  });
+  
+  //监听单元格编辑
+  table.on('edit(test)', function(obj){
+    var value = obj.value //得到修改后的值
+    ,data = obj.data //得到所在行所有键值
+    ,field = obj.field; //得到字段
+    
+    console.log(obj)
+  });
+  
+  //监听行工具事件
+  table.on('tool(test)', function(obj){
+    var data = obj.data;
+    //console.log(obj)
+    if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+        obj.del();
+        layer.close(index);
+      });
+    } else if(obj.event === 'edit'){
+      layer.prompt({
+        formType: 2
+        ,value: data.email
+      }, function(value, index){
+        obj.update({
+          email: value
+        });
+        layer.close(index);
+      });
+    }
+  });
+  
+  //监听排序
+  table.on('sort(test)', function(obj){
+    console.log(this)
+    
+    //return;
+    layer.msg('服务端排序。order by '+ obj.field + ' ' + obj.type);
+    //服务端排序
+    table.reload('test', {
+      initSort: obj
+      //,page: {curr: 1} //重新从第一页开始
+      ,where: { //重新请求服务端
+        key: obj.field //排序字段
+        ,order: obj.type //排序方式
+      }
+    });
+  });
+  
+  //return;
+  
+  //直接赋值数据
+  table.render({
+    elem: '#demo'
+    ,cellMinWidth: 80 
+    ,height: 874
+    ,cols: [[ //标题栏
+      {type: 'checkbox', LAY_CHECKED: true}
+      ,{field: 'id', title: 'ID', sort: true}
+      ,{field: 'username', title: '用户名'}
+      ,{field: 'email', title: '邮箱'}
+      ,{field: 'sign', title: '签名'}
+      ,{field: 'sex', title: '性别'}
+      ,{field: 'city', title: '城市'}
+      ,{field: 'experience', title: '积分', sort: true}
+    ]]
+    ,data: [{
+      "id": "10001"
+      ,"username": "杜甫"
+      ,"email": "xianxin@layui.com"
+      ,"sex": "男"
+      ,"city": "浙江杭州"
+      ,"sign": "人生恰似一场修行"
+      ,"experience": "116"
+      ,"ip": "192.168.0.8"
+      ,"logins": "108"
+      ,"joinTime": "2016-10-14"
+    }, {
+      "id": "10002"
+      ,"username": "李白"
+      ,"email": "xianxin@layui.com"
+      ,"sex": "男"
+      ,"city": "浙江杭州"
+      ,"sign": "人生恰似一场修行"
+      ,"experience": "12"
+      ,"ip": "192.168.0.8"
+      ,"logins": "106"
+      ,"joinTime": "2016-10-14"
+      ,"LAY_CHECKED": true
+    }, {
+      "id": "10003"
+      ,"username": "王勃"
+      ,"email": "xianxin@layui.com"
+      ,"sex": "男"
+      ,"city": "浙江杭州"
+      ,"sign": "人生恰似一场修行"
+      ,"experience": "65"
+      ,"ip": "192.168.0.8"
+      ,"logins": "106"
+      ,"joinTime": "2016-10-14"
+    }, {
+      "id": "10004"
+      ,"username": "贤心"
+      ,"email": "xianxin@layui.com"
+      ,"sex": "男"
+      ,"city": "浙江杭州"
+      ,"sign": "人生恰似一场修行"
+      ,"experience": "666"
+      ,"ip": "192.168.0.8"
+      ,"logins": "106"
+      ,"joinTime": "2016-10-14"
+    }, {
+      "id": "10005"
+      ,"username": "贤心"
+      ,"email": "xianxin@layui.com"
+      ,"sex": "男"
+      ,"city": "浙江杭州"
+      ,"sign": "人生恰似一场修行"
+      ,"experience": "86"
+      ,"ip": "192.168.0.8"
+      ,"logins": "106"
+      ,"joinTime": "2016-10-14"
+    }, {
+      "id": "10006"
+      ,"username": "贤心"
+      ,"email": "xianxin@layui.com"
+      ,"sex": "男"
+      ,"city": "浙江杭州"
+      ,"sign": "人生恰似一场修行"
+      ,"experience": "12"
+      ,"ip": "192.168.0.8"
+      ,"logins": "106"
+      ,"joinTime": "2016-10-14"
+    }, {
+      "id": "10007"
+      ,"username": "贤心"
+      ,"email": "xianxin@layui.com"
+      ,"sex": "男"
+      ,"city": "浙江杭州"
+      ,"sign": "人生恰似一场修行"
+      ,"experience": "16"
+      ,"ip": "192.168.0.8"
+      ,"logins": "106"
+      ,"joinTime": "2016-10-14"
+    }, {
+      "id": "10008"
+      ,"username": "贤心"
+      ,"email": "xianxin@layui.com"
+      ,"sex": "男"
+      ,"city": "浙江杭州"
+      ,"sign": "人生恰似一场修行"
+      ,"experience": "106"
+      ,"ip": "192.168.0.8"
+      ,"logins": "106"
+      ,"joinTime": "2016-10-14"
+    }]
+
+    ,skin: 'row' //表格风格
+    ,even: true
+    //,size: 'lg' //尺寸
+    
+    ,page: true //是否显示分页
+    ,limits: [3,5,10]
+    ,limit: 10 //每页默认显示的数量
+    //,loading: false //请求数据时，是否显示loading
+  });
+  
+  
+  var $ = layui.jquery, active = {
+    parseTable: function(){
+      table.init('parse-table-demo', {
+        limit: 3
+      });
+    }
+    ,add: function(){
+      table.addRow('test')
+    }
+  };
+  $('i').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+  $('.layui-btn').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+});
+</script>

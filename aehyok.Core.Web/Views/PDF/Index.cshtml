@@ -15,7 +15,8 @@
 
         //给退出按钮添加单击事件
         $("#showPdf").on("click", function () {
-            window.open("../Pdf/ShowPdf","_blank");
+            window.open(encodeURI("../Pdf/ShowPdf"), "_blank", "", false);
+            window.event.returnValue = false;
         });
 
     });
