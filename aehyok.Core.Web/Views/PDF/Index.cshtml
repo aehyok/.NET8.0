@@ -2,30 +2,20 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-    <button class="layui-btn" id="createPdf">生成PDF</button>
-<button class="layui-btn layui-btn-normal" id="showPdf">展示PDF</button>
-
-<script type="text/javascript">
-    $(function () {
-        //给返回首页修改密码按钮添加单击事件
-        $("#createPdf").on("click", function () {
-            goFirstPage();
-        });
-
-        //给退出按钮添加单击事件
-        $("#showPdf").on("click", function () {
-            window.open(encodeURI("../Pdf/ShowPdf"), "_blank", "", false);
-            window.event.returnValue = false;
-        });
-
-    });
-    //返回首页
-    function goFirstPage() {
-        alert('你单击了返回首页的按钮');
+    <div id="pdfIndex">
+        <template>
+            <el-button type="primary" :plain="true" :click="mainClick">主要按钮</el-button>
+            </template>
+</div>
+<script type="application/javascript">
+    var pdfMain = {
+        methods: {
+            mainClick() {
+            alert(111);
+            console.log("测试代码");
+            }
+        }
     }
-    //退出
-    function exitOut() {
-        alert('你单击了退出按钮');
-    }
+    var Ctor = Vue.extend(pdfMain)
+    new Ctor().$mount('#pdfIndex')
 </script>

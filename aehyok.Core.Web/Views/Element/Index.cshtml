@@ -126,23 +126,22 @@
 
     
 
-    <script>
+<script>
     var Main = {
         data() {
-          const item = {
+            const item = {
             date: '2016-05-02',
             name: '王小虎',
             address: '上海市普陀区金沙江路 1518 弄'
-          };
-          return {
+            };
+            return {
             tableData: Array(20).fill(item)
-          }
+            }
         }
-      };
+        };
     var Ctor = Vue.extend(Main)
     new Ctor().$mount('#app')
-    </script>
-
+</script>
 
 </body>
 </html>

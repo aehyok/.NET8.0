@@ -27,8 +27,7 @@
             line-height: 60px;
             justify-content: center;
             align-items: center;
-            padding:0;
-
+            padding: 0;
         }
 
         .el-footer {
@@ -40,6 +39,7 @@
         .el-col {
             border-radius: 2px
         }
+
         .el-main {
             background-color: #E9EEF3;
             color: #333;
@@ -49,7 +49,7 @@
             margin-bottom: 40px;
         }
 
-        .home_logo{
+        .home_logo {
             text-align: center;
             position: absolute;
             height: 60px;
@@ -60,45 +60,47 @@
         }
 
         .header_logo {
-            height:60px;
-            width:199px;
-            float:left;
+            height: 60px;
+            width: 199px;
+            float: left;
         }
 
         .header_title {
-            height:60px;
-            width:299px;
-            padding-left:4px;
-            float:left;
+            height: 60px;
+            width: 299px;
+            padding-left: 4px;
+            float: left;
         }
-          .header_user {
+
+        .header_user {
             width: 160px;
-            padding-right:2px;
+            padding-right: 2px;
             float: right;
-            height:60px;
-            display:inline;
-          }
-        .el-image__inner {
-            width:100%   
+            height: 60px;
+            display: inline;
         }
-        .header_userimage{
-            height:50px;
-            width:50px;
-            float:left;
+
+        .el-image__inner {
+            width: 100%
+        }
+
+        .header_userimage {
+            height: 50px;
+            width: 50px;
+            float: left;
             justify-content: center;
             align-items: center;
         }
 
         .userimage {
-            border-radius:50%;
+            border-radius: 50%;
         }
 
         .header_userinfo {
-            width:100px;
-            height:60px;
-            float:left;
+            width: 100px;
+            height: 60px;
+            float: left;
         }
-
     </style>
 </head>
 <body>
@@ -115,7 +117,7 @@
                     <div class="header_userimage">
                         <el-image :src="userUrl" class="userimage"></el-image>
                     </div>
-                    
+
                     <div class="header_userinfo">
                         <span>糖皮家三勺</span>
                     </div>
@@ -124,10 +126,10 @@
             <el-container>
                 <el-aside width="200px">
                     @*<el-radio-group v-model="isCollapse">
-                        <el-radio-button :label="false">展开</el-radio-button>
-                        <el-radio-button :label="true">收起</el-radio-button>
-                    </el-radio-group>*@
-                    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @@open="handleOpen" @@close="handleClose" :collapse="false">
+                            <el-radio-button :label="false">展开</el-radio-button>
+                            <el-radio-button :label="true">收起</el-radio-button>
+                        </el-radio-group>*@
+                    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @@open="handleOpen" @@close="handleClose" @@select="handleSelect()" :collapse="false">
                         <el-submenu index="1">
                             <template slot="title">
                                 <i class="el-icon-location"></i>
@@ -168,12 +170,27 @@
                                 运营管理
                             </span>
                         </el-menu-item>
-                        <el-menu-item index="7">
-                            <i class="el-icon-s-platform"></i>
-                            <span slot="title">
-                               系统设置
-                            </span>
-                        </el-menu-item>
+                        <el-submenu index="7">
+                            <template slot="title">
+                                <i class="el-icon-location"></i>
+                                <span slot="title">系统设置</span>
+                            </template>
+                            <el-menu-item-group>
+                                <el-menu-item index="7-1">角色管理</el-menu-item>
+                                <el-menu-item index="7-2">用户管理</el-menu-item>
+                            </el-menu-item-group>
+                        </el-submenu>
+
+                        <el-submenu index="8">
+                            <template slot="title">
+                                <i class="el-icon-location"></i>
+                                <span slot="title">页面demo</span>
+                            </template>
+                            <el-menu-item-group>
+                                <el-menu-item index="../Pdf/Index" >PDF</el-menu-item>
+                                <el-menu-item index="8-2">用户管理</el-menu-item>
+                            </el-menu-item-group>
+                        </el-submenu>
                     </el-menu>
                 </el-aside>
                 <el-container>
@@ -188,8 +205,8 @@
         data() {
           return {
               isCollapse: true,
-              url:"images/zxgl.png",
-              userUrl:"images/user.jpg"
+              url:"../images/zxgl.png",
+              userUrl:"../images/user.jpg"
           };
         },
         methods: {
@@ -198,6 +215,9 @@
           },
           handleClose(key, keyPath) {
             console.log(key, keyPath);
+          },
+          handleSelect(key,keyPath){
+           window.location.href="../Pdf/Index";
           }
         }
       }
@@ -210,5 +230,4 @@
         min-height: 500px;
     }
 </style>
-
 </html>
