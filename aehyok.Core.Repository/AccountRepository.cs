@@ -6,10 +6,13 @@ using System.Text;
 
 namespace aehyok.Core.Repository
 {
-    public class TestRepository: ITestRepository
+    /// <summary>
+    /// 账户中心实现
+    /// </summary>
+    public class AccountRepository : IAccountRepository
     {
         private readonly IDbAccossor _dbAccossor;
-        public TestRepository(IDbAccossor dbAccossor)
+        public AccountRepository(IDbAccossor dbAccossor)
         {
             this._dbAccossor = dbAccossor;
         }

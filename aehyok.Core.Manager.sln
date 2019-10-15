@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29318.209
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.Web", "aehyok.Core.Web\aehyok.Core.Web.csproj", "{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.DataAccess", "aehyok.Core.DataAccess\aehyok.Core.DataAccess.csproj", "{82F8D92B-9BAB-4943-9BEE-B86A49E688E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.DataAccess", "aehyok.Core.DataAccess\aehyok.Core.DataAccess.csproj", "{82F8D92B-9BAB-4943-9BEE-B86A49E688E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.Repository", "aehyok.Core.Repository\aehyok.Core.Repository.csproj", "{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.Repository", "aehyok.Core.Repository\aehyok.Core.Repository.csproj", "{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.Model", "aehyok.Core.Model\aehyok.Core.Model.csproj", "{E48B1D24-0212-4170-979C-DB374B2E8FA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E48B1D24-0212-4170-979C-DB374B2E8FA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E48B1D24-0212-4170-979C-DB374B2E8FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E48B1D24-0212-4170-979C-DB374B2E8FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E48B1D24-0212-4170-979C-DB374B2E8FA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

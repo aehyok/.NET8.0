@@ -12,15 +12,18 @@ using iText.Kernel.Pdf;
 using iText.Layout.Element;
 using iText.Layout;
 using aehyok.Core.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace aehyok.Core.Web.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ITestRepository _test;
+        private readonly IAccountRepository _test;
 
-        public HomeController(ILogger<HomeController> logger,ITestRepository test)
+        public HomeController(ILogger<HomeController> logger, IAccountRepository test)
         {
             _logger = logger;
             _test = test;

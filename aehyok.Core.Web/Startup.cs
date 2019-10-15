@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using aehyok.Core.DataAccess;
 using aehyok.Core.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,8 +28,18 @@ namespace aehyok.Core.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IDbAccossor>(new MySqlDbAccessor(Configuration));
-            services.AddTransient<ITestRepository, TestRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+                AddCookie(x =>
+                {
+                    x.Cookie.Name = "aehyok_login";
+                    //µÇÂ¼µØÖ·
+                    x.LoginPath = "/Account/Login";
+                    x.AccessDeniedPath = "/Home/Error";
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
