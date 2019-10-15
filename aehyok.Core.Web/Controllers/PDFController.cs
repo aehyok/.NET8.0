@@ -23,9 +23,7 @@ namespace aehyok.Core.Web.Controllers
             document.Add(new Paragraph("你好!").SetFont(font));
             document.Close();
             return View();
-
         }
-
 
 
         public ActionResult ShowPdf()
