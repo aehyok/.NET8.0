@@ -4,5 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Core.DataAccess\aehyok.Core.DataAccess.csproj" />
+    <ProjectReference Include="..\aehyok.Core.Model\aehyok.Core.Model.csproj" />
   </ItemGroup>
 </Project>

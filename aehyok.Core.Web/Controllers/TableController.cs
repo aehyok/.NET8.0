@@ -12,5 +12,10 @@ namespace aehyok.Core.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult TreeTable()
+        {
+            return View();
+        }
     }
 }

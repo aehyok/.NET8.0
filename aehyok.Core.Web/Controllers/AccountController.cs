@@ -57,10 +57,10 @@ namespace aehyok.Core.Web.Controllers
                             RedirectUri = returnUrl ?? "/Home/Index"
                         };
                         await _httpContextAccessor.HttpContext.SignInAsync(principal, authProperties);
-                        if (HttpContext.User.Identity.IsAuthenticated)
-                        {
-                            return RedirectToAction("Index", "Home", new { id = DateTime.Now.Ticks });
-                        }
+                        //if (HttpContext.User.Identity.IsAuthenticated)
+                        //{
+                        //    return RedirectToAction("Index", "Home", new { id = DateTime.Now.Ticks });
+                        //}
 
                     }
                     else

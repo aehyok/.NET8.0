@@ -31,7 +31,7 @@ namespace aehyok.Core.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IDbAccossor>(new MySqlDbAccessor(Configuration));
             services.AddTransient<IAccountRepository, AccountRepository>();
-
+            services.AddTransient<IMenuRepository, MenuRepository>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
                 AddCookie(x =>
                 {

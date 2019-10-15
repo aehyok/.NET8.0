@@ -40,12 +40,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\layui\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\module\treetable-lay\treetable.js" />
     <None Include="wwwroot\pdf.js\build\pdf.js" />
     <None Include="wwwroot\pdf.js\build\pdf.js.map" />
     <None Include="wwwroot\pdf.js\build\pdf.worker.js" />
@@ -348,5 +348,7 @@
     <ProjectReference Include="..\aehyok.Core.Model\aehyok.Core.Model.csproj" />
     <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4module_4json_4data_1json__JsonSchema="http://json.schemastore.org/apple-app-site-association" /></VisualStudio></ProjectExtensions>
 
 </Project>
