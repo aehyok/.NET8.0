@@ -31,6 +31,7 @@ namespace aehyok.Core.Web.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogError("测试代码");
             var result=_test.CheckLogin("", "");
             return View();
         }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 
 namespace aehyok.Core.Web
 {
@@ -13,7 +14,20 @@ namespace aehyok.Core.Web
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
+            try
+            {
+                logger.Debug("init main");
+                CreateHostBuilder(args).Build().Run();
+            }
+            catch (Exception e)
+            {
+                //NLog: catch setup errors
+                logger.Error(e, "Stopped program because of exception");
+                throw;
+            }
+
+            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -21,6 +35,7 @@ namespace aehyok.Core.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseNLog();
                 });
     }
 }
