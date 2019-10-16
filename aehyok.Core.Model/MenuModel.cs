@@ -8,12 +8,12 @@ namespace aehyok.Core.Model
     /// </summary>
     public class MenuModel
     {
-        public string Id;
+        public string Id { get; set; }
 
-        public string Name;
+        public string Name { get; set; }
 
-        public string Pid;
+        public string Pid { get; set; }
 
-        public string Sex;
+        public string Sex { get; set; }
     }
 }

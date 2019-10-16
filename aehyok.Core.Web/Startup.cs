@@ -27,7 +27,11 @@ namespace aehyok.Core.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+
+            services.AddControllers();
+
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();   //启用运行时编译
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IDbAccossor>(new MySqlDbAccessor(Configuration));
             services.AddTransient<IAccountRepository, AccountRepository>();

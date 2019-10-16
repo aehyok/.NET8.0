@@ -22,8 +22,7 @@ namespace aehyok.Core.Web.Controllers
 
         public dynamic GetMenuList()
         {
-
-            ResultModel result = new ResultModel();
+            var result = new ResultModel();
             result.Code = "0";
             result.Msg = "ok";
 
@@ -38,18 +37,8 @@ namespace aehyok.Core.Web.Controllers
                 model.Sex = "man";
                 menuList.Add(model);
             }
-            //result.Data = new List<MenuModel>();
-            //result.Data = menuList;
-            List<ResultModel> resultList = new List<ResultModel>();
-            resultList.Add(result);
-            return Ok(resultList);
-
-            //return "Hello World";
-
-            Dictionary<string, object> pairs = new Dictionary<string, object>();
-            pairs.Add("1", "teemo");
-            pairs.Add("2", "Jolinson");
-            return pairs;
+            result.Data = menuList;
+            return Ok(result);
         }
     }
 }

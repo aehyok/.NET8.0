@@ -41,11 +41,8 @@ namespace aehyok.Core.Web.Controllers
                 model.Sex = "man";
                 menuList.Add(model);
             }
-            //result.Data = new List<MenuModel>();
-            //result.Data = menuList;
-            List<ResultModel> resultList = new List<ResultModel>();
-            resultList.Add(result);
-            return  Ok(resultList);
+            result.Data = menuList;
+            return Ok(result);
         }
     }
 }
