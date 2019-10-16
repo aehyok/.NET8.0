@@ -4,7 +4,6 @@ using System.Text;
 
 namespace aehyok.Core.Model
 {
-    [Serializable]
     public class ResultModel
     {
         public string Code;
