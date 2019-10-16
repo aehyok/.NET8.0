@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,17 @@ namespace aehyok.Core.DataAccess
 {
     public class MySqlDbAccessor : IDbAccossor
     {
+        private readonly ILogger<MySqlDbAccessor> _logger;
         private readonly IConfiguration _configuration;
         private readonly string _defaultConnectionStr;
-        public MySqlDbAccessor(IConfiguration configuration, string configConnectionName = "DefaultConnection")
+
+
+        public MySqlDbAccessor(IConfiguration configuration, ILogger<MySqlDbAccessor> logger)
         {
+            this._logger = logger;
             this._configuration = configuration;
-            this._defaultConnectionStr = this._configuration.GetConnectionString(configConnectionName);
+            _logger.LogError("测试数据库链接");
+            this._defaultConnectionStr = this._configuration.GetConnectionString("DefaultConnection");
         }
 
         public IDbConnection DbDefaultConnection => new MySqlConnection(_defaultConnectionStr);

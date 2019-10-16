@@ -33,7 +33,7 @@ namespace aehyok.Core.Web
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();   //启用运行时编译
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IDbAccossor>(new MySqlDbAccessor(Configuration));
+            services.AddSingleton<IDbAccossor,MySqlDbAccessor>();
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IMenuRepository, MenuRepository>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
