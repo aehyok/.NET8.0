@@ -8,6 +8,7 @@ using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace aehyok.Core.Web.Controllers
 {
@@ -15,11 +16,13 @@ namespace aehyok.Core.Web.Controllers
     {
         private readonly IAccountRepository _accountRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(IAccountRepository accountRepository, IHttpContextAccessor httpContextAccessor)
+        public AccountController(IAccountRepository accountRepository, IHttpContextAccessor httpContextAccessor, ILogger<AccountController> logger)
         {
             _accountRepository = accountRepository;
             _httpContextAccessor = httpContextAccessor;
+            _logger = logger;
         }
         public IActionResult Login()
         {
@@ -35,7 +38,6 @@ namespace aehyok.Core.Web.Controllers
                 {
                     if (_accountRepository.CheckLogin(user.UserName, user.Password))
                     {
-                        
                         var tempUser = new { UserName = user.UserName, Password = user.Password };
                         var claims = new List<Claim>
                         {
@@ -57,11 +59,7 @@ namespace aehyok.Core.Web.Controllers
                             RedirectUri = returnUrl ?? "/Home/Index"
                         };
                         await _httpContextAccessor.HttpContext.SignInAsync(principal, authProperties);
-                        //if (HttpContext.User.Identity.IsAuthenticated)
-                        //{
-                        //    return RedirectToAction("Index", "Home", new { id = DateTime.Now.Ticks });
-                        //}
-
+                        ////return RedirectToAction("Index", "Home");
                     }
                     else
                     {
@@ -71,6 +69,7 @@ namespace aehyok.Core.Web.Controllers
             }
             catch (Exception exc)
             {
+                _logger.LogError(exc.Message);
                 throw exc;
             }
             return View();
