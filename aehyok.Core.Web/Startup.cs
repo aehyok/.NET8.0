@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 
 namespace aehyok.Core.Web
 {
@@ -27,8 +28,18 @@ namespace aehyok.Core.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                    {
+                        //可设置支持返回数据键首字母按照后端设置
+                        //options.SerializerSettings.ContractResolver = new DefaultContractResolver();   
+                        
+                        //忽略循环引用得问题
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                        
+                        //设置时间格式
+                        options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+                    });
 
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();   //启用运行时编译
