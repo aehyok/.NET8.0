@@ -14,7 +14,7 @@ namespace aehyok.Core.Web
     {
         public static void Main(string[] args)
         {
-            var logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
+            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
                 logger.Debug("init main");
@@ -23,11 +23,9 @@ namespace aehyok.Core.Web
             catch (Exception e)
             {
                 //NLog: catch setup errors
-                logger.Error(e, "Stopped program because of exception");
+                logger.Error(e, "Program.Main项目初始化启动发生错误");
                 throw;
             }
-
-            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

@@ -29,6 +29,12 @@ namespace aehyok.Core.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 登录按钮事件
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel user, string returnUrl)
         {
