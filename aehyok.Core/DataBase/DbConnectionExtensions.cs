@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace aehyok.Core.DataAccess
+namespace aehyok.Core.DataBase
 {
     /// <summary>
     /// DbConnection扩展

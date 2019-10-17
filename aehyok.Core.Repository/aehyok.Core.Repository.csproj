@@ -3,7 +3,12 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aehyok.Core.DataAccess\aehyok.Core.DataAccess.csproj" />
+    <PackageReference Include="Dapper" Version="2.0.30" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\aehyok.Core.IRepository\aehyok.Core.IRepository.csproj" />
     <ProjectReference Include="..\aehyok.Core.Model\aehyok.Core.Model.csproj" />
+    <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
   </ItemGroup>
 </Project>

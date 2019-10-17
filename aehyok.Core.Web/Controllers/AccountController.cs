@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using aehyok.Core.IRepository;
 using aehyok.Core.Model;
 using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Authentication;

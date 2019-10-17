@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace aehyok.Core.Repository
+namespace aehyok.Core.IRepository
 {
     public interface IMenuRepository
     {

@@ -1,4 +1,5 @@
-﻿using aehyok.Core.DataAccess;
+﻿using aehyok.Core.DataBase;
+using aehyok.Core.IRepository;
 using aehyok.Core.Model;
 using Dapper;
 using System;
@@ -12,7 +13,7 @@ namespace aehyok.Core.Repository
     {
         public MenuRepository(IDbAccossor dbAccossor) : base(dbAccossor)
         { }
-        public IDbAccossor DbAccossor => base.dbAccossor;
+        private IDbAccossor _dbAccossor => base.dbAccossor;
 
 
         private const string _sqlGetMenuList = @"select * from MD_MainMenu";
@@ -25,7 +26,7 @@ namespace aehyok.Core.Repository
             List<MenuItem> list = new List<MenuItem>();
             try
             {
-                DbAccossor.DbDefaultConnection.Using(dbConn =>
+                _dbAccossor.DbDefaultConnection.Using(dbConn =>
                 {
                     using (IDataReader dr = dbConn.ExecuteReader(_sqlGetMenuList, null, null, null, CommandType.Text))
                     {

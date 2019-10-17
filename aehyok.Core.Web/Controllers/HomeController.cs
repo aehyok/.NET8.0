@@ -14,6 +14,7 @@ using iText.Layout;
 using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using aehyok.Core.IRepository;
 
 namespace aehyok.Core.Web.Controllers
 {

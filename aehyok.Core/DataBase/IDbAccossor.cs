@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace aehyok.Core.DataAccess
+namespace aehyok.Core.DataBase
 {
     /// <summary>
-    /// 数据库访问者
+    /// 数据库访问中心
     /// </summary>
     public interface IDbAccossor
     {

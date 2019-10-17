@@ -1,4 +1,5 @@
-﻿using aehyok.Core.DataAccess;
+﻿using aehyok.Core.DataBase;
+using aehyok.Core.IRepository;
 using Dapper;
 using Microsoft.Extensions.Logging;
 using System;
