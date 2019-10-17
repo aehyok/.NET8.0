@@ -45,7 +45,6 @@ namespace aehyok.Core.Repository
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             return list;

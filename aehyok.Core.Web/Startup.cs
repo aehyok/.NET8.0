@@ -43,6 +43,7 @@ namespace aehyok.Core.Web
                     //登录地址
                     x.LoginPath = "/Account/Login";
                     x.AccessDeniedPath = "/Home/Error";
+                    x.Cookie.MaxAge =new TimeSpan(0,30,0);  //设置Cookie有效时间
                 });
         }
 
