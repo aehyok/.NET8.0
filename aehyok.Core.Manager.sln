@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core", "aehyok.Core\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.MySql", "aehyok.Core.MySql\aehyok.Core.MySql.csproj", "{E6C77199-BDA3-43BC-85A1-D688862882A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.IText", "aehyok.Core.IText\aehyok.Core.IText.csproj", "{1AE5647E-6243-4AC9-A797-23AEEFC2A1FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{E6C77199-BDA3-43BC-85A1-D688862882A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6C77199-BDA3-43BC-85A1-D688862882A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6C77199-BDA3-43BC-85A1-D688862882A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AE5647E-6243-4AC9-A797-23AEEFC2A1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE5647E-6243-4AC9-A797-23AEEFC2A1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE5647E-6243-4AC9-A797-23AEEFC2A1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE5647E-6243-4AC9-A797-23AEEFC2A1FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
