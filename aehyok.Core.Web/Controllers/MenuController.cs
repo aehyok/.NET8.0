@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using aehyok.Core.Data;
+using aehyok.Core.Data.Model;
 using aehyok.Core.IRepository;
-using aehyok.Core.Model;
 using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,6 +43,7 @@ namespace aehyok.Core.Web.Controllers
                 model.Sex = "man";
                 menuList.Add(model);
             }
+            result.Data = new List<MenuModel>();
             result.Data = menuList;
             return Ok(result);
         }

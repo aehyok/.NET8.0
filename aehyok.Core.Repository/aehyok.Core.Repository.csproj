@@ -7,8 +7,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\aehyok.Core.IRepository\aehyok.Core.IRepository.csproj" />
-    <ProjectReference Include="..\aehyok.Core.Model\aehyok.Core.Model.csproj" />
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
   </ItemGroup>
 </Project>

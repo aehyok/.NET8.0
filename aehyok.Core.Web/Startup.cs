@@ -58,6 +58,8 @@ namespace aehyok.Core.Web
                     x.AccessDeniedPath = "/Home/Error";
                     x.Cookie.MaxAge =new TimeSpan(0,30,0);  //设置Cookie有效时间
                 });
+
+            services.AddMemoryCache();  //添加缓存
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

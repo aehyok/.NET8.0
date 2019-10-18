@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace aehyok.Core.Model
+namespace aehyok.Core.Data
 {
     public class BaseEntity
     {

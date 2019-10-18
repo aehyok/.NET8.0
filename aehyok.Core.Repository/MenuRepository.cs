@@ -1,6 +1,6 @@
-﻿using aehyok.Core.DataBase;
+﻿using aehyok.Core.Data.Entity;
+using aehyok.Core.DataBase;
 using aehyok.Core.IRepository;
-using aehyok.Core.Model;
 using Dapper;
 using System;
 using System.Collections.Generic;

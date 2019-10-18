@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace aehyok.Core.Model
+namespace aehyok.Core.Data.Model
 {
-    /// <summary>
-    /// </summary>
     public class MenuModel
     {
         public string Id { get; set; }

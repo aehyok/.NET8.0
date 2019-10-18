@@ -15,6 +15,7 @@ using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using aehyok.Core.IRepository;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace aehyok.Core.Web.Controllers
 {
@@ -23,16 +24,29 @@ namespace aehyok.Core.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IAccountRepository _test;
+        private readonly IMemoryCache _memoryCache;
 
-        public HomeController(ILogger<HomeController> logger, IAccountRepository test)
+        public HomeController(ILogger<HomeController> logger, IAccountRepository test, IMemoryCache memoryCache)
         {
             _logger = logger;
             _test = test;
+            _memoryCache = memoryCache;
         }
 
         public IActionResult Index()
         {
             _logger.LogError("测试代码");
+
+            //var value=_memoryCache.Get("key");
+
+            //if(value==null)
+            //{
+            //    _memoryCache.Set("key", "test", new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(10)));
+            //}
+
+            //value=_memoryCache.Get("key");
+
+            //value = _memoryCache.Get("key");
             var result=_test.CheckLogin("", "");
             return View();
         }

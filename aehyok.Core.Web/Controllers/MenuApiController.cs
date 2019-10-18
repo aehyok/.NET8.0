@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using aehyok.Core.Data;
+using aehyok.Core.Data.Model;
 using aehyok.Core.IRepository;
-using aehyok.Core.Model;
 using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

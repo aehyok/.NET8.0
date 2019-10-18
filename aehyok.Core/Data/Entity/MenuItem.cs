@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace aehyok.Core.Model
+namespace aehyok.Core.Data.Entity
 {
     /// <summary>
     /// 菜单项定义
     /// </summary>
-    public class MenuItem:BaseEntity
+    public class MenuItem : BaseEntity
     {
         /// <summary>
 		/// 菜单显示标题

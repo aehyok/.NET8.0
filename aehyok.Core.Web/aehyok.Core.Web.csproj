@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="itext7" Version="7.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
@@ -33,6 +34,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.6.3">
       <PrivateAssets>all</PrivateAssets>
@@ -347,7 +349,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\aehyok.Core.Model\aehyok.Core.Model.csproj" />
     <ProjectReference Include="..\aehyok.Core.MySql\aehyok.Core.MySql.csproj" />
     <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
   </ItemGroup>
