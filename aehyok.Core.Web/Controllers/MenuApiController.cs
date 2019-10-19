@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace aehyok.Core.Web.Controllers
 {
+    /// <summary>
+    /// 菜单Api
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class MenuApiController : ControllerBase
@@ -22,6 +25,11 @@ namespace aehyok.Core.Web.Controllers
             _menuRepository = menuRepository;
         }
 
+        /// <summary>
+        /// 获取菜单列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public dynamic GetMenuList()
         {
             var result = new ResultModel();
