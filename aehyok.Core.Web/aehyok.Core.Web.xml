@@ -12,6 +12,11 @@
             <param name="returnUrl"></param>
             <returns></returns>
         </member>
+        <member name="T:aehyok.Core.Web.Controllers.GuideLineController">
+            <summary>
+            指标定义器
+            </summary>
+        </member>
         <member name="T:aehyok.Core.Web.Controllers.MenuApiController">
             <summary>
             菜单Api
