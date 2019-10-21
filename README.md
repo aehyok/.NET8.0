@@ -1,6 +1,16 @@
 # dotnetCore3.0
 netCore3.0 、Mysql、Dapper、layui
 
+>>>UI展示 https://www.layui.com
+
+>>>数据库使用 MySql 
+
+>>> Dapper访问数据库 https://github.com/StackExchange/Dapper
+
+
+---
+
+
 
 - **1、IText7生成PDF**
 >>>https://github.com/itext/itext7-dotnet
