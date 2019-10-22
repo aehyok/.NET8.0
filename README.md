@@ -24,4 +24,5 @@ netCore3.0 、Mysql、Dapper、layui
 - **4、Nlog写日志（本地文件和数据库）**
 >>>https://www.cnblogs.com/inday/p/asp-net-core-use-nlog-for-mysql-some-issues.html
 
-
+- **5、AutoMapper组件**
+>>>https://www.cnblogs.com/danvic712/p/11628523.html
