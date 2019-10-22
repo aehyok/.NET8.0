@@ -10,8 +10,14 @@ namespace aehyok.Core.IRepository
     /// <summary>
     /// 指标定义接口
     /// </summary>
-    public interface IGuideLineRepository : IRepository
+    public interface IGuideLineRepository : IDependency
     {
+        /// <summary>
+        /// 获取指标定义列表
+        /// </summary>
+        /// <returns></returns>
+        List<MD_GuideLine> GetGuideLineList();
+
         /// <summary>
         /// 取指标定义
         /// </summary>

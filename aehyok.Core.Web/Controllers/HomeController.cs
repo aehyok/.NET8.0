@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using aehyok.Core.IRepository;
 using Microsoft.Extensions.Caching.Memory;
+using AutoMapper;
+using aehyok.Core.AutoMapper;
 
 namespace aehyok.Core.Web.Controllers
 {
@@ -25,18 +27,22 @@ namespace aehyok.Core.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IAccountRepository _test;
         private readonly IMemoryCache _memoryCache;
+        private readonly IMapper _mapper;
 
-        public HomeController(ILogger<HomeController> logger, IAccountRepository test, IMemoryCache memoryCache)
+        public HomeController(ILogger<HomeController> logger, IAccountRepository test, IMemoryCache memoryCache, IMapper mapper)
         {
             _logger = logger;
             _test = test;
             _memoryCache = memoryCache;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
             _logger.LogError("测试代码");
 
+            User user = new User();
+            var userDTO = _mapper.Map<UserDTO>(user);
             //var value=_memoryCache.Get("key");
 
             //if(value==null)

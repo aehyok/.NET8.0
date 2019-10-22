@@ -31,6 +31,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="itext7" Version="7.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
@@ -356,6 +357,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\aehyok.Core.AutoMapper\aehyok.Core.AutoMapper.csproj" />
     <ProjectReference Include="..\aehyok.Core.MySql\aehyok.Core.MySql.csproj" />
     <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
   </ItemGroup>

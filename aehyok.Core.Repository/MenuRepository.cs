@@ -2,6 +2,7 @@
 using aehyok.Core.DataBase;
 using aehyok.Core.IRepository;
 using Dapper;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,16 +12,15 @@ namespace aehyok.Core.Repository
 {
     public class MenuRepository : AbstractBaseRepository,IMenuRepository
     {
-        public MenuRepository(IDbAccossor dbAccossor) : base(dbAccossor)
+        //private readonly ILogger<MenuRepository> _logger;
+        public MenuRepository(IDbAccossor dbAccossor, ILogger<MenuRepository> logger) : base(dbAccossor, logger) 
         { }
-        private IDbAccossor _dbAccossor => base.dbAccossor;
 
-
-        private const string _sqlGetMenuList = @"select * from MD_MainMenu";
         /// <summary>
         /// 获取菜单列表
         /// </summary>
         /// <returns></returns>
+        private const string _sqlGetMenuList = @"select * from MD_MainMenu";
         public List<MenuItem> GetMenuList()
         {
             List<MenuItem> list = new List<MenuItem>();
@@ -46,6 +46,7 @@ namespace aehyok.Core.Repository
             }
             catch (Exception e)
             {
+                _logger.LogError("获取菜单列表时发生错误，错误信息为" + e.Message);
                 throw e;
             }
             return list;

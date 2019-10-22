@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Threading.Tasks;
+using aehyok.Core.AutoMapper;
 using aehyok.Core.Data;
 using aehyok.Core.DataBase;
 using aehyok.Core.IRepository;
@@ -12,6 +13,7 @@ using aehyok.Core.MySql;
 using aehyok.Core.Repository;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -97,7 +99,14 @@ namespace aehyok.Core.Web
             });
 
 
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapping());
+            });
+            //“˝»ÎAutoMapper
+            AutoMapperExtension.AddAutoMapperProfiles(services);
 
+            //services.AddScoped<IMapper, Mapper>();
         }
 
         /// <summary>
