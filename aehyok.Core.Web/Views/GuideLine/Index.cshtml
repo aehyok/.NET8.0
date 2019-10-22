@@ -3,5 +3,215 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="~/layui/css/layui.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/layui/layui.js"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+    <div id="test12" class="demo-tree-more"></div>  
+    <script>
+        layui.use(['tree', 'util'], function(){
+          var tree = layui.tree
+          ,layer = layui.layer
+          ,util = layui.util
+
+          //模拟数据
+          ,data = [{
+            title: '一级1'
+            ,id: 1
+            ,field: 'name1'
+            ,checked: true
+            ,spread: true
+            ,children: [{
+              title: '二级1-1 可允许跳转'
+              ,id: 3
+              ,field: 'name11'
+              ,href: 'https://www.layui.com/'
+              ,children: [{
+                title: '三级1-1-3'
+                ,id: 23
+                ,field: ''
+                ,children: [{
+                  title: '四级1-1-3-1'
+                  ,id: 24
+                  ,field: ''
+                  ,children: [{
+                    title: '五级1-1-3-1-1'
+                    ,id: 30
+                    ,field: ''
+                  },{
+                    title: '五级1-1-3-1-2'
+                    ,id: 31
+                    ,field: ''
+                  }]
+                }]
+              },{
+                title: '三级1-1-1'
+                ,id: 7
+                ,field: ''
+                ,children: [{
+                  title: '四级1-1-1-1 可允许跳转'
+                  ,id: 15
+                  ,field: ''
+                  ,href: 'https://www.layui.com/doc/'
+                }]
+              },{
+                title: '三级1-1-2'
+                ,id: 8
+                ,field: ''
+                ,children: [{
+                  title: '四级1-1-2-1'
+                  ,id: 32
+                  ,field: ''
+                }]
+              }]
+            },{
+              title: '二级1-2'
+              ,id: 4
+              ,spread: true
+              ,children: [{
+                title: '三级1-2-1'
+                ,id: 9
+                ,field: ''
+                ,disabled: true
+              },{
+                title: '三级1-2-2'
+                ,id: 10
+                ,field: ''
+              }]
+            },{
+              title: '二级1-3'
+              ,id: 20
+              ,field: ''
+              ,children: [{
+                title: '三级1-3-1'
+                ,id: 21
+                ,field: ''
+              },{
+                title: '三级1-3-2'
+                ,id: 22
+                ,field: ''
+              }]
+            }]
+          }]
+
+
+
+          //基本演示
+          tree.render({
+            elem: '#test12'
+            ,data: data
+            ,showCheckbox: false  //是否显示复选框
+            ,id: 'demoId1'
+            ,isJump: true //是否允许点击节点时弹出新窗口跳转
+            ,click: function(obj){
+              var data = obj.data;  //获取当前点击的节点数据
+              layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+            }
+          });
+
+          //按钮事件
+          util.event('lay-demo', {
+            getChecked: function(othis){
+              var checkedData = tree.getChecked('demoId1'); //获取选中节点的数据
+
+              layer.alert(JSON.stringify(checkedData), {shade:0});
+              console.log(checkedData);
+            }
+            ,setChecked: function(){
+              tree.setChecked('demoId1', [12, 16]); //勾选指定节点
+            }
+            ,reload: function(){
+              //重载实例
+              tree.reload('demoId1', {
+
+              });
+
+            }
+          });
+
+          //常规用法
+          tree.render({
+            elem: '#test1' //默认是点击节点可进行收缩
+            ,data: data1
+          });
+
+          //无连接线风格
+          tree.render({
+            elem: '#test13'
+            ,data: data1
+            ,showLine: false  //是否开启连接线
+          });
+
+          //仅节点左侧图标控制收缩
+          tree.render({
+            elem: '#test2'
+            ,data: data1
+            ,onlyIconControl: true  //是否仅允许节点左侧图标控制展开收缩
+            ,click: function(obj){
+              layer.msg(JSON.stringify(obj.data));
+            }
+          });
+          //手风琴模式
+          tree.render({
+            elem: '#test4'
+            ,data: [{
+              title: '优秀'
+              ,children: [{
+                title: '80 ~ 90'
+              },{
+                title: '90 ~ 100'
+              }]
+            },{
+              title: '良好'
+              ,children: [{
+                title: '70 ~ 80'
+              },{
+                title: '60 ~ 70'
+              }]
+            },{
+              title: '要努力奥'
+              ,children: [{
+                title: '0 ~ 60'
+              }]
+            }]
+            ,accordion: true
+          });
+
+          //点击节点新窗口跳转
+          tree.render({
+            elem: '#test5'
+            ,data: data
+            ,isJump: true  //link 为参数匹配
+          });
+
+          //开启复选框
+          tree.render({
+            elem: '#test7'
+            ,data: data2
+            ,showCheckbox: true
+          });
+
+          //开启节点操作图标
+          tree.render({
+            elem: '#test9'
+            ,data: data1
+            ,edit: ['add', 'update', 'del'] //操作节点的图标
+            ,click: function(obj){
+              layer.msg(JSON.stringify(obj.data));
+            }
+          });
+        });
+    </script>
+</body>
+</html>
 
