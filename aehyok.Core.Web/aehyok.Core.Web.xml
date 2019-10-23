@@ -12,6 +12,23 @@
             <param name="returnUrl"></param>
             <returns></returns>
         </member>
+        <member name="T:aehyok.Core.Web.Controllers.ArtificialIntelligenceController">
+            <summary>
+            人工智能控制器
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.ArtificialIntelligenceController.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            
+            </summary>
+            <param name="memoryCache"></param>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.ArtificialIntelligenceController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.Web.Controllers.GuideLineController">
             <summary>
             指标定义器
