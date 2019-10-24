@@ -26,3 +26,7 @@ netCore3.0 、Mysql、Dapper、layui
 
 - **5、AutoMapper组件**
 >>>https://www.cnblogs.com/danvic712/p/11628523.html
+
+- **6、RabbitMQ组件**
+>>>Centos7下安装RabbitMQ  https://www.jianshu.com/p/ed07a5a913c6
+
