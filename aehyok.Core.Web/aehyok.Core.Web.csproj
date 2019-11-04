@@ -361,6 +361,7 @@
     <ProjectReference Include="..\aehyok.Core.AI\aehyok.Core.AI.csproj" />
     <ProjectReference Include="..\aehyok.Core.AutoMapper\aehyok.Core.AutoMapper.csproj" />
     <ProjectReference Include="..\aehyok.Core.MySql\aehyok.Core.MySql.csproj" />
+    <ProjectReference Include="..\aehyok.Core.RabbitMQ\aehyok.Core.RabbitMQ.csproj" />
     <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
   </ItemGroup>
 

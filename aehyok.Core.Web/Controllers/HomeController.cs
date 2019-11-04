@@ -18,6 +18,7 @@ using aehyok.Core.IRepository;
 using Microsoft.Extensions.Caching.Memory;
 using AutoMapper;
 using aehyok.Core.AutoMapper;
+using aehyok.Core.RabbitMQ;
 
 namespace aehyok.Core.Web.Controllers
 {
@@ -39,6 +40,7 @@ namespace aehyok.Core.Web.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogDebug("Debugger测试代码");
             _logger.LogError("测试代码");
 
             User user = new User();
@@ -54,6 +56,8 @@ namespace aehyok.Core.Web.Controllers
 
             //value = _memoryCache.Get("key");
             var result=_test.CheckLogin("", "");
+
+            RabbitDemo.Consumer();
             return View();
         }
 
