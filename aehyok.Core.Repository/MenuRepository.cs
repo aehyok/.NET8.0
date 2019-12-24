@@ -51,5 +51,25 @@ namespace aehyok.Core.Repository
             }
             return list;
         }
+
+        public List<MenuItem> ReadSystemFullMenu(string systemId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddModifyMenu(MenuItem menuItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteMenu(decimal menuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public MenuItem GetMenuById(string menuid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

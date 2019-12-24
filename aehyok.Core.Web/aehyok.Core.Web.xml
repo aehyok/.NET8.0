@@ -50,6 +50,36 @@
             菜单控制器
             </summary>
         </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数初始化
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.GetAccessToken">
+            <summary>
+            获取微信AccessToken值(AccessToken每次只暂存2小时需要进行程序处理)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.SendTemplate">
+            <summary>
+            给用户发送模板消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.SendMiniTemplate">
+            <summary>
+            给用户发送模板消息（小程序）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.CreateMenuList">
+            <summary>
+            创建自定义菜单
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:aehyok.Core.Web.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
             <summary>
             Autofac容器使用

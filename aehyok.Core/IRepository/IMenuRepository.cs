@@ -13,5 +13,12 @@ namespace aehyok.Core.IRepository
         /// </summary>
         /// <returns></returns>
         List<MenuItem> GetMenuList();
+
+        List<MenuItem> ReadSystemFullMenu(string systemId);
+
+        bool AddModifyMenu(MenuItem menuItem);
+
+        bool DeleteMenu(decimal menuid);
+        MenuItem GetMenuById(string menuid);
     }
 }
