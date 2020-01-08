@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\aehyok\GitHub\DotNetCore3.0\aehyok.Core.Web\aehyok.Core.Web.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp3.0\netcoreapp3.0\aehyok.Core.Web.xml</DocumentationFile>
+    <OutputPath>bin\Debug\netcoreapp3.0\netcoreapp3.0\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
