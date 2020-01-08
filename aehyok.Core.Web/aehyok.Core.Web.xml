@@ -62,6 +62,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.SendMail">
+            <summary>
+            发送邮件测试
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.SendTemplate">
             <summary>
             给用户发送模板消息
