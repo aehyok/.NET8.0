@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,31 @@ namespace aehyok.Core.Web.Controllers
             return accessToken;
         }
 
+        /// <summary>
+        /// 发送邮件测试
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public dynamic SendMail()
+        {
+            SmtpClient client = new SmtpClient();
+            client.Host = "smtp.163.com";//使用163的SMTP服务器发送邮件
+            client.UseDefaultCredentials = true;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Credentials = new System.Net.NetworkCredential("aehyok", "Hk1997mc1999");//163的SMTP服务器需要用163邮箱的用户名和密码作认证，如果没有需要去163申请个,
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("aehyok@163.com");//这里需要注意，163似乎有规定发信人的邮箱地址必须是163的
+            message.To.Add("455043818@qq.com");//将邮件发送给QQ邮箱
+            var url = "https://www.aehyok.com";
+            message.Subject = "邮箱发送消息测试";
+            message.Body = url;
+            message.SubjectEncoding = System.Text.Encoding.UTF8;
+            message.BodyEncoding = System.Text.Encoding.UTF8;
+            message.Priority = MailPriority.High;
+            message.IsBodyHtml = true;
+            client.Send(message);
+            return "发送成功！";
+        }
 
         /// <summary>
         /// 给用户发送模板消息
