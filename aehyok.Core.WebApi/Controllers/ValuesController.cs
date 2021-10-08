@@ -8,10 +8,18 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.WebApi.Controllers
 {
+    /// <summary>
+    /// 测试控制器
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        /// <summary>
+        /// 获取列表数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public dynamic Get()
         {
             ResultModel result = new ResultModel();

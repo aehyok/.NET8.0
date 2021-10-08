@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>aehyok.Core.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:aehyok.Core.WebApi.Controllers.ValuesController">
+            <summary>
+            测试控制器
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.ValuesController.Get">
+            <summary>
+            获取列表数据
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
