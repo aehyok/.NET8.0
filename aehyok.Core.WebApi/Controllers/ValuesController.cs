@@ -1,4 +1,5 @@
 ﻿using aehyok.Core.Data;
+using aehyok.Core.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,6 +16,11 @@ namespace aehyok.Core.WebApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ITestRepository testRepository;
+        public ValuesController(ITestRepository _testRepository)
+        {
+            this.testRepository = _testRepository;
+        }
         /// <summary>
         /// 获取列表数据
         /// </summary>
@@ -28,6 +34,7 @@ namespace aehyok.Core.WebApi.Controllers
                 Message = "OK",
                 Data = new Dictionary<string, string>()
             };
+            testRepository.GetTest();
             return result;
         }
     }

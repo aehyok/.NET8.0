@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
   </ItemGroup>
 

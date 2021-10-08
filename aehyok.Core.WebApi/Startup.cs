@@ -1,4 +1,6 @@
 using aehyok.Core.Config;
+using aehyok.Core.IRepository;
+using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -44,6 +46,7 @@ namespace aehyok.Core.WebApi
                 c.IncludeXmlComments(xmlPath, true);
             });
             services.AddControllers();
+            services.AddScoped<ITestRepository, TestRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
