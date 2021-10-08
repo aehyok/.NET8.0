@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>aehyok.Core.Web</name>
+    </assembly>
+    <members>
+        <member name="M:aehyok.Core.Web.Controllers.AccountController.Login(aehyok.Core.Data.Model.LoginModel,System.String)">
+            <summary>
+            登录按钮事件
+            </summary>
+            <param name="user"></param>
+            <param name="returnUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="T:aehyok.Core.Web.Controllers.ArtificialIntelligenceController">
+            <summary>
+            人工智能控制器
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.ArtificialIntelligenceController.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            
+            </summary>
+            <param name="memoryCache"></param>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.ArtificialIntelligenceController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:aehyok.Core.Web.Controllers.GuideLineController">
+            <summary>
+            指标定义器
+            </summary>
+        </member>
+        <member name="T:aehyok.Core.Web.Controllers.MenuApiController">
+            <summary>
+            菜单Api
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.MenuApiController.GetMenuList">
+            <summary>
+            获取菜单列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:aehyok.Core.Web.Controllers.MenuController">
+            <summary>
+            菜单控制器
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造函数初始化
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.GetAccessToken">
+            <summary>
+            获取微信AccessToken值(AccessToken每次只暂存2小时需要进行程序处理)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.SendMail">
+            <summary>
+            发送邮件测试
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.SendTemplate">
+            <summary>
+            给用户发送模板消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.SendMiniTemplate">
+            <summary>
+            给用户发送模板消息（小程序）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.Web.Controllers.WeiXinApiController.CreateMenuList">
+            <summary>
+            创建自定义菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.Web.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            Autofac容器使用
+            </summary>
+            <param name="builder"></param>
+        </member>
+    </members>
+</doc>
