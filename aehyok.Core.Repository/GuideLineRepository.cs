@@ -31,16 +31,14 @@ namespace aehyok.Core.Repository
             {
                 _dbAccossor.DbDefaultConnection.Using(dbConn =>
                 {
-                    using (IDataReader dr = dbConn.ExecuteReader(_sqlGetGuideLineList, null, null, null, CommandType.Text))
+                    using IDataReader dr = dbConn.ExecuteReader(_sqlGetGuideLineList, null, null, null, CommandType.Text);
+                    while (dr.Read())
                     {
-                        while (dr.Read())
-                        {
-                            MD_GuideLine item = new MD_GuideLine();
-                            item.Id = dr.IsDBNull(0) ? "" : dr.GetString(0);
-                            item.GuideLineName = dr.IsDBNull(1) ? "" : dr.GetString(1);
-                            item.DisplayOrder = dr.IsDBNull(2) ? 0 : dr.GetInt32(2);
-                            guideLineList.Add(item);
-                        }
+                        MD_GuideLine item = new MD_GuideLine();
+                        item.Id = dr.IsDBNull(0) ? "" : dr.GetString(0);
+                        item.GuideLineName = dr.IsDBNull(1) ? "" : dr.GetString(1);
+                        item.DisplayOrder = dr.IsDBNull(2) ? 0 : dr.GetInt32(2);
+                        guideLineList.Add(item);
                     }
                 });
             }

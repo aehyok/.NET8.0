@@ -28,19 +28,17 @@ namespace aehyok.Core.Repository
             {
                 _dbAccossor.DbDefaultConnection.Using(dbConn =>
                 {
-                    using (IDataReader dr = dbConn.ExecuteReader(_sqlGetMenuList, null, null, null, CommandType.Text))
+                    using IDataReader dr = dbConn.ExecuteReader(_sqlGetMenuList, null, null, null, CommandType.Text);
+                    while (dr.Read())
                     {
-                        while (dr.Read())
-                        {
-                            MenuItem sinoMenu = new MenuItem(
-                                        dr.IsDBNull(0) ? "" : dr.GetString(0),
-                                        dr.IsDBNull(1) ? "" : dr.GetString(1),
-                                        dr.IsDBNull(2) ? "" : dr.GetString(2),
-                                        dr.IsDBNull(3) ? "" : dr.GetString(3),
-                                        dr.IsDBNull(4) ? 0 : Convert.ToInt32(dr.GetDecimal(4)),
-                                        dr.IsDBNull(5) ? "0" : dr.GetString(5), true, 1, "", "");
-                            list.Add(sinoMenu);
-                        }
+                        MenuItem sinoMenu = new MenuItem(
+                                    dr.IsDBNull(0) ? "" : dr.GetString(0),
+                                    dr.IsDBNull(1) ? "" : dr.GetString(1),
+                                    dr.IsDBNull(2) ? "" : dr.GetString(2),
+                                    dr.IsDBNull(3) ? "" : dr.GetString(3),
+                                    dr.IsDBNull(4) ? 0 : Convert.ToInt32(dr.GetDecimal(4)),
+                                    dr.IsDBNull(5) ? "0" : dr.GetString(5), true, 1, "", "");
+                        list.Add(sinoMenu);
                     }
                 });
             }

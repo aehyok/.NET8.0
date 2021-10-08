@@ -22,7 +22,7 @@ namespace aehyok.Core.MySql
             this._logger = logger;
             this._configuration = configuration;
             _logger.LogError("测试数据库链接");
-            this._defaultConnectionStr = this._configuration.GetConnectionString("DefaultConnection");
+            this._defaultConnectionStr = this._configuration.GetConnectionString("MySQL");
         }
 
         public IDbConnection DbDefaultConnection => new MySqlConnection(_defaultConnectionStr);

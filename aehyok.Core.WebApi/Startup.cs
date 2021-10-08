@@ -34,7 +34,7 @@ namespace aehyok.Core.WebApi
             // 添加Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "乾坤微服务后台API接口", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "曹老板私服接口API", Version = "v1" });
 
                 // 获取xml文件名
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -58,7 +58,7 @@ namespace aehyok.Core.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "乾坤微服务后台API接口V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "曹老板私服接口API");
             });
 
             app.UseHttpsRedirection();
