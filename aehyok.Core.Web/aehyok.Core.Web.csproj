@@ -61,6 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="wwwroot\module\treetable-lay\treetable.js" />
     <None Include="wwwroot\pdf.js\build\pdf.js" />
     <None Include="wwwroot\pdf.js\build\pdf.js.map" />

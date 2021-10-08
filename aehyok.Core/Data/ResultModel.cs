@@ -6,10 +6,24 @@ namespace aehyok.Core.Data
 {
     public class ResultModel
     {
-        public string Code { get; set; }
+        /// <summary>
+        /// 返回的CODE
+        /// </summary>
+        public int Code { get; set; }
 
-        public string Msg { get; set; }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string Message { get; set; }
 
+        /// <summary>
+        /// 时间戳
+        /// </summary>
+        public long Timestamp { get; set; }
+
+        /// <summary>
+        /// 返回的描述
+        /// </summary>
         public object Data { get; set; }
     }
 }

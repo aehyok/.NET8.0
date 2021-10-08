@@ -22,10 +22,12 @@ namespace aehyok.Core.WebApi.Controllers
         [HttpGet]
         public dynamic Get()
         {
-            ResultModel result = new ResultModel();
-            result.Code = "200";
-            result.Msg = "OK";
-            result.Data = new Dictionary<string, string>();
+            ResultModel result = new ResultModel
+            {
+                Code = 200,
+                Message = "OK",
+                Data = new Dictionary<string, string>()
+            };
             return result;
         }
     }

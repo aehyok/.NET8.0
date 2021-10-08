@@ -32,19 +32,23 @@ namespace aehyok.Core.Web.Controllers
         [HttpGet]
         public dynamic GetMenuList()
         {
-            var result = new ResultModel();
-            result.Code = "0";
-            result.Msg = "ok";
+            var result = new ResultModel
+            {
+                Code = "0",
+                Msg = "ok"
+            };
 
             var list = _menuRepository.GetMenuList();
             List<MenuModel> menuList = new List<MenuModel>();
             foreach (var item in list)
             {
-                MenuModel model = new MenuModel();
-                model.Id = item.Id;
-                model.Name = item.MenuTitle;
-                model.Pid = item.FatherId;
-                model.Sex = "man";
+                MenuModel model = new MenuModel
+                {
+                    Id = item.Id,
+                    Name = item.MenuTitle,
+                    Pid = item.FatherId,
+                    Sex = "man"
+                };
                 menuList.Add(model);
             }
             result.Data = menuList;
