@@ -1,7 +1,7 @@
-# dotnetCore3.0
-netCore3.0 、Mysql、Dapper、layui
+# dotnetCore3.1
+netCore3.1 、Mysql、Dapper、Vue3.2 Element-plus
 
->>>UI展示 https://www.layui.com
+>>>UI展示 https://element-plus.gitee.io/
 
 >>>数据库使用 MySql 
 
