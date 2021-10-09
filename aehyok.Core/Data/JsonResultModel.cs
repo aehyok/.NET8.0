@@ -4,7 +4,7 @@ using System.Text;
 
 namespace aehyok.Core.Data
 {
-    public class ResultModel
+    public class JsonResultModel
     {
         /// <summary>
         /// 返回的CODE

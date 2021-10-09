@@ -15,11 +15,22 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.ValuesController.GetTest">
+            <summary>
+            获取列表数据
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:aehyok.Core.WebApi.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
             <summary>
             Autofac容器使用
             </summary>
             <param name="builder"></param>
+        </member>
+        <member name="T:aehyok.Core.WebApi.Utils.AuthorizationFilter">
+            <summary>
+            控制器构造函数之后，接口方法调用之前
+            </summary>
         </member>
     </members>
 </doc>

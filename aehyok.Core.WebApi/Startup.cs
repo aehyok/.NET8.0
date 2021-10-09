@@ -2,6 +2,7 @@ using aehyok.Core.Config;
 using aehyok.Core.Data;
 using aehyok.Core.IRepository;
 using aehyok.Core.Repository;
+using aehyok.Core.WebApi.Utils;
 using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,8 +51,11 @@ namespace aehyok.Core.WebApi
                 // 添加控制器层注释，true表示显示控制器注释
                 c.IncludeXmlComments(xmlPath, true);
             });
-            services.AddControllers().AddControllersAsServices();
-            //services.AddScoped<ITestRepository, TestRepository>();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<JsonResultFilter>();
+                options.Filters.Add<AuthorizationFilter>();
+            }).AddControllersAsServices();
         }
 
         /// <summary>
@@ -63,8 +67,6 @@ namespace aehyok.Core.WebApi
             // 在这里添加服务注册
             builder.RegisterType<HttpContextAccessor>();
             //builder.RegisterType<TestRepository>();
-            //builder.RegisterType<AccountRepository>();
-            //builder.RegisterType<MenuRepository>();
 
             var baseType = typeof(IDependency);
             List<Assembly> assemblyList = new List<Assembly>();

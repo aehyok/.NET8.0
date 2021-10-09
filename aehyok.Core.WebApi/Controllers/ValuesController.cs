@@ -28,13 +28,26 @@ namespace aehyok.Core.WebApi.Controllers
         [HttpGet]
         public dynamic Get()
         {
-            ResultModel result = new ResultModel
+            JsonResultModel result = new JsonResultModel
             {
                 Code = 200,
                 Message = "OK",
                 Data = new Dictionary<string, string>()
             };
             testRepository.GetTest();
+            return result;
+        }
+
+        /// <summary>
+        /// 获取列表数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public dynamic GetTest()
+        {
+            var result = new Dictionary<string,object>();
+            result.Add("name", "aehyok");
+            result.Add("age", 33);
             return result;
         }
     }
