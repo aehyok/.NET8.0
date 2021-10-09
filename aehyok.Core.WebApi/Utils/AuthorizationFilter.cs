@@ -38,8 +38,8 @@ namespace aehyok.Core.WebApi.Utils
                 string token = context.HttpContext.Request.Headers["Authorization"];
                 if (string.IsNullOrWhiteSpace(token))
                 {
-                    throw new ValidException("无效的Token!");
-                    //token = context.HttpContext.Request.Headers["Token"];
+                    //throw new ValidException("无效的Token!");
+                    token = context.HttpContext.Request.Headers["Token"];
                 }
                 //if (!string.IsNullOrWhiteSpace(token))
                 //{
