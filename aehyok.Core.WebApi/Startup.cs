@@ -40,17 +40,19 @@ namespace aehyok.Core.WebApi
             //ConfigInitialize.ConnectionString = Configuration.GetConnectionString("MySQL");
             ConfigInitialize.ConnectionString = ConfigurationManager.GetConfig("ConnectionStrings:MySQL");
             // 添加Swagger
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(optios =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "曹老板私服接口API", Version = "v1" });
+                optios.SwaggerDoc("v1", new OpenApiInfo { Title = "曹老板私服接口API", Version = "v1" });
 
+                optios.OperationFilter<SwaggerOperationFilter>();
                 // 获取xml文件名
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 // 获取xml文件路径
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 // 添加控制器层注释，true表示显示控制器注释
-                c.IncludeXmlComments(xmlPath, true);
+                optios.IncludeXmlComments(xmlPath, true);
             });
+
             services.AddControllers(options =>
             {
                 options.Filters.Add<JsonResultFilter>();
