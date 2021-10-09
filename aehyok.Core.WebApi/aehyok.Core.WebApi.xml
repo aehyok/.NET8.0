@@ -15,5 +15,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:aehyok.Core.WebApi.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            Autofac容器使用
+            </summary>
+            <param name="builder"></param>
+        </member>
     </members>
 </doc>

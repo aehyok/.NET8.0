@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -8,7 +8,14 @@
     <DocumentationFile>E:\work\aehyok\github\dotnetCore3.0\aehyok.Core.WebApi\aehyok.Core.WebApi.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup>
+	<PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
   </ItemGroup>
@@ -17,6 +24,4 @@
     <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
   </ItemGroup>
-
-
 </Project>
