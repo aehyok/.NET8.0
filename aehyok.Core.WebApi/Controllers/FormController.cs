@@ -17,10 +17,11 @@ namespace aehyok.Core.WebApi.Controllers
             this._logger.Debug("form Debugger");
         }
         [HttpPost]
-        public dynamic Save()
+        public dynamic Save(dynamic json)
         {
-            this._logger.Debug("FormController");
-            return "OK";
+            this._logger.Debug(json);
+
+            return "OK1111111";
             //if (string.IsNullOrEmpty(confirm_parm))
             //{
             //    confirm_parm = "2";

@@ -10,7 +10,6 @@ namespace aehyok.Core.WebApi.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    //[VisualizationResult]
     public class BaseApiController : ControllerBase
     {
         /// <summary>

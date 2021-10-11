@@ -36,6 +36,264 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.ColumnId">
+            <summary>
+            列Id
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.ColumnName">
+            <summary>
+            字段名称
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.DisplayName">
+            <summary>
+            显示名称
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.DisplayOrder">
+            <summary>
+            显示顺序
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.MaxInputLength">
+            <summary>
+            录入字符的最大长度
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.ColumnType">
+            <summary>
+            字段类型
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.InputModelId">
+            <summary>
+            录入模型Id
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.CanDisplay">
+            <summary>
+            是否显示此字段
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.IsCompute">
+            <summary>
+            是否为计算字段
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.ReadOnly">
+            <summary>
+            是否只读
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.DWDM">
+            <summary>
+            单位代码
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.DefaultValue">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.InputRule">
+            <summary>
+            录入规则
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.DataChangedEvent">
+            <summary>
+            数据变更处理事件
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.CanEditRule">
+            <summary>
+            可编辑规则
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.Width">
+            <summary>
+            字段宽度
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.LineHeight">
+            <summary>
+            行高度
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.TextAlign">
+            <summary>
+            文本对其方式
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.EditFormat">
+            <summary>
+            编辑格式
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.Required">
+            <summary>
+            是否必填项
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.ToolTipText">
+            <summary>
+            工具提示文本
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.DisplayFormat">
+            <summary>
+            展示格式
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.MD_InputModel_Column.DefaultShow">
+            <summary>
+            默认显示
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.IsDefaultPost">
+            <summary>
+            此岗位的角色列表
+            </summary>
+            <summary>
+            是否默认岗位
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.PostId">
+            <summary>
+            岗位ID
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.PostName">
+            <summary>
+            岗位名称
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.PostDwId">
+            <summary>
+            岗位所在的单位ID
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.PostDWDM">
+            <summary>
+            岗位权限所在单位代码
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.PostDWMC">
+            <summary>
+            岗位所在的单位名称
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.PostDWGUID">
+            <summary>
+            权限所在单位的GUID
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.SecretLevel">
+            <summary>
+            安全级别
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoPost.PostDescript">
+            <summary>
+            岗位描述
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoRequestUser.BaseInfo">
+            <summary>
+            用户基本信息
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoRequestUser.SinoPost">
+            <summary>
+            岗位基本信息
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoRequestUser.SystemId">
+            <summary>
+            用户当前所在的系统Id
+            </summary>
+        </member>
+        <member name="F:aehyok.Core.WebApi.Models.SinoUserBaseInfo.UserType">
+            <summary>
+            用户类型    值为：1:“海关用户”　或	2:“缉私局用户”
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.LoginName">
+            <summary>
+            用户登录名
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.UserId">
+            <summary>
+            用户ID
+            </summary>		
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.UserName">
+            <summary>
+            用户名称
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.UserGuid">
+            <summary>
+            用户的GUID
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.UserCustomsNo">
+            <summary>
+            用户的海关关号
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.DwId">
+            <summary>
+            单位ID
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.DwName">
+            <summary>
+            单位名称
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.DwCode">
+            <summary>
+            单位代码
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.DwGuid">
+            <summary>
+            单位的GUID
+            </summary>
+        </member>
+        <member name="F:aehyok.Core.WebApi.Models.SinoUserBaseInfo.SecretLevel">
+            <summary>
+            安全级别
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.DefaultPostId">
+            <summary>
+            默认岗位ID
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.Posts">
+            <summary>
+            用户具有岗位集
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.DefaultPost">
+            <summary>
+            用户默认岗位
+            </summary>
+        </member>
+        <member name="P:aehyok.Core.WebApi.Models.SinoUserBaseInfo.CurrentPost">
+            <summary>
+            用户当前使用的岗位
+            </summary>
+        </member>
         <member name="M:aehyok.Core.WebApi.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
             <summary>
             Autofac容器使用
