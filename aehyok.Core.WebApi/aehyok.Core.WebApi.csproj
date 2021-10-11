@@ -17,6 +17,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
     <PackageReference Include="X.PagedList" Version="8.1.0" />
   </ItemGroup>
@@ -24,5 +25,11 @@
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="nlog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
