@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using aehyok.Core.WebApi.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,14 @@ namespace aehyok.Core.WebApi.Controllers
             this._logger.Debug("form Debugger");
         }
         [HttpPost]
-        public dynamic Save(dynamic json)
+        public Task<dynamic> Save(FormModel formModel)
         {
-            this._logger.Debug(json);
-
-            return "OK1111111";
+            this._logger.Debug(formModel);
+            var task = Task.Run(() =>
+            {
+                return formModel as dynamic;
+            });
+            return task;
             //if (string.IsNullOrEmpty(confirm_parm))
             //{
             //    confirm_parm = "2";
