@@ -28,9 +28,9 @@ namespace aehyok.Core.Web.Controllers
 
         public dynamic GetMenuList()
         {
-            ResultModel result = new ResultModel();
-            result.Code = "0";
-            result.Msg = "ok";
+            JsonResultModel result = new JsonResultModel();
+            result.Code = 0;
+            result.Message = "ok";
 
             var list = _menuRepository.GetMenuList();
             List<MenuModel> menuList= new List<MenuModel>();
