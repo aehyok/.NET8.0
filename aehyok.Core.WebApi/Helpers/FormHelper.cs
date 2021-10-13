@@ -1,5 +1,4 @@
-﻿using aehyok.Core.WebApi.Models;
-using aehyok.Core.WebApi.Utils;
+﻿using aehyok.Core.Data.Model;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
@@ -281,7 +280,7 @@ namespace aehyok.Core.WebApi.Helpers
                         case "当前单位":
                             if (!string.IsNullOrEmpty(""))
                             {
-                                entity.InputData.Add(column.ColumnName, sinoRequestUser.BaseInfo.CurrentPost.PostDwId);
+                                //entity.InputData.Add(column.ColumnName, sinoRequestUser.BaseInfo.CurrentPost.PostDwId);
                             }
                             break;
                         case "当前用户":

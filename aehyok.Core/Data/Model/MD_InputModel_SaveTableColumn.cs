@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace aehyok.Core.WebApi.Models
+namespace aehyok.Core.Data.Model
 {
     public class MD_InputModel_SaveTableColumn
     {

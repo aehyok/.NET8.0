@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace aehyok.Core.WebApi.Utils
+namespace aehyok.Core.Utils
 {
     public static class StrUtils
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace aehyok.Core.WebApi.Models
+namespace aehyok.Core.Data.Model
 {
     public class SinoUserBaseInfo
     {
@@ -84,22 +84,22 @@ namespace aehyok.Core.WebApi.Models
         
         virtual public string Sex { get; set; }
 
-        /// <summary>
-        /// 用户具有岗位集
-        /// </summary>
+        ///// <summary>
+        ///// 用户具有岗位集
+        ///// </summary>
         
-        virtual public List<SinoPost> Posts { get; set; }
+        //virtual public List<SinoPost> Posts { get; set; }
 
-        /// <summary>
-        /// 用户默认岗位
-        /// </summary>
+        ///// <summary>
+        ///// 用户默认岗位
+        ///// </summary>
         
-        virtual public SinoPost DefaultPost { get; set; }
+        //virtual public SinoPost DefaultPost { get; set; }
 
-        /// <summary>
-        /// 用户当前使用的岗位
-        /// </summary>
+        ///// <summary>
+        ///// 用户当前使用的岗位
+        ///// </summary>
         
-        virtual public SinoPost CurrentPost { get; set; }
+        //virtual public SinoPost CurrentPost { get; set; }
     }
 }

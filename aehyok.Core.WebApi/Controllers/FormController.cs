@@ -1,4 +1,4 @@
-﻿using aehyok.Core.WebApi.Models;
+﻿using aehyok.Core.Data.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
