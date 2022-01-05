@@ -1,13 +1,12 @@
-﻿using aehyok.Core.Config;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
 
-namespace aehyok.Core.MySqlDataAccessor
+namespace aehyok.Core.MySql
 {
-    public class SqlLogWriter
+    public class MysqlLogWriter
     {
         private const string SQL_WriteSystemLog = @"insert into xt_systemlog  (ID,CZSJ,LOGTYPE,LOGTEXT) values  (@ID,now(),@LOGTYPE,@LOGTEXT) ";
         /// <summary>
@@ -19,7 +18,7 @@ namespace aehyok.Core.MySqlDataAccessor
         static public bool WriteSystemLog(string _msg, string _type)
         {
             if (_msg.Length > 3700) _msg = _msg.Substring(0, 3700);
-            using (MySqlConnection cn = new MySqlConnection(ConfigInitialize.ConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(MysqlDBHelper.conf))
             {
                 cn.Open();
                 MySqlTransaction _txn = cn.BeginTransaction();
@@ -36,19 +35,17 @@ namespace aehyok.Core.MySqlDataAccessor
 
         private const string SQL_WriteQueryLog = @"insert into metadata.md_querylog (ID,SJ,USETIME,QUERY_STR,LX,YHID)
                                                    values (@ID,now(),@USETIME,@QUERY_STR,@LX,@YHID)";
-        public static bool WriteQueryLog(string _sqlStr, int _userTime, string _lx)
+        public static bool WriteQueryLog(string _sqlStr, int _userTime,string _lx)
         {
             string UserID = "0000";
-            using (MySqlConnection cn = new MySqlConnection(ConfigInitialize.ConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(MysqlDBHelper.conf))
             {
                 cn.Open();
                 MySqlTransaction _txn = cn.BeginTransaction();
                 try
-                {
-                    MySqlCommand _cmd = new MySqlCommand(SQL_WriteQueryLog, cn)
-                    {
-                        CommandType = CommandType.Text
-                    };
+                {                    
+                    MySqlCommand _cmd = new MySqlCommand(SQL_WriteQueryLog, cn);
+                    _cmd.CommandType = CommandType.Text;
                     _cmd.Parameters.Add(new MySqlParameter("@ID", Guid.NewGuid().ToString()));
                     _cmd.Parameters.Add(new MySqlParameter("@USETIME", Convert.ToInt32(_userTime)));
                     _cmd.Parameters.Add(new MySqlParameter("@QUERY_STR", (_sqlStr.Length > 2000) ? _sqlStr.Substring(0, 2000) : _sqlStr));
@@ -58,9 +55,9 @@ namespace aehyok.Core.MySqlDataAccessor
                     _txn.Commit();
                     cn.Close();
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
-                    _txn.Rollback();
+                    _txn.Rollback();            
                     cn.Close();
                     throw ex;
                 }
@@ -88,7 +85,7 @@ namespace aehyok.Core.MySqlDataAccessor
         {
             if (_cxnr.Length > 3700) _cxnr = _cxnr.Substring(0, 3700);
             if (_czlx.Length > 70) _czlx = _czlx.Substring(0, 70);
-            using (MySqlConnection cn = new MySqlConnection(ConfigInitialize.ConnectionString))
+            using (MySqlConnection cn = new MySqlConnection(MysqlDBHelper.conf))
             {
                 cn.Open();
 
@@ -108,8 +105,10 @@ namespace aehyok.Core.MySqlDataAccessor
             return true;
         }
 
-        public static int TestPro()
+
+        public static int testpro()
         {
+
             try
             {
                 //MySqlParameter[] parameters = {
@@ -127,39 +126,41 @@ namespace aehyok.Core.MySqlDataAccessor
 
 
 
-                using MySqlConnection cn = SqlHelper.OpenConnection();
-                MySqlCommand myComm = new MySqlCommand("testpro", cn)
+                using (MySqlConnection cn = MysqlDBHelper.OpenConnection())
                 {
-                    CommandType = CommandType.StoredProcedure
-                };
-                var t = 0;
+                    MySqlCommand myComm = new MySqlCommand("testpro", cn);
+                    myComm.CommandType = CommandType.StoredProcedure;
+                    var t = 0;
 
-                MySqlParameter myParameter;
-                myParameter = new MySqlParameter("@id", MySqlDbType.Decimal)
-                {
-                    Value = 233,
-                    Direction = ParameterDirection.Input
-                };
-                myComm.Parameters.Add(myParameter);
+                    MySqlParameter myParameter;
+                    myParameter = new MySqlParameter("@id", MySqlDbType.Decimal);
+                    myParameter.Value = 233;
+                    myParameter.Direction = ParameterDirection.Input;
+                    myComm.Parameters.Add(myParameter);
 
-                MySqlParameter par;
-                par = new MySqlParameter("@cnt", MySqlDbType.Decimal)
-                {
-                    Value = null,
-                    Direction = ParameterDirection.Output
-                };
-                myComm.Parameters.Add(par);
-                myComm.ExecuteNonQuery();
+                    MySqlParameter par;
+                    par = new MySqlParameter("@cnt", MySqlDbType.Decimal);
+                    par.Value = null;
+                    par.Direction = ParameterDirection.Output;
+                    myComm.Parameters.Add(par);
+                    myComm.ExecuteNonQuery();
 
-                var ret = par.Value;
+                    var ret = par.Value;
 
-                return 0;
+
+                    return 0;
+                }
+
             }
             catch (Exception ex)
             {
-                SqlLogWriter.WriteSystemLog(ex.Message, "ERROR");
+                MysqlLogWriter.WriteSystemLog(ex.Message, "ERROR");
                 return 0;
             }
+
         }
+
+
+
     }
 }

@@ -55,5 +55,176 @@
             控制器构造函数之后，接口方法调用之前
             </summary>
         </member>
+        <member name="T:aehyok.Base.Controllers.MdGuidelineController">
+            <summary>
+            指标查询方法
+            </summary>
+        </member>
+        <member name="M:aehyok.Base.Controllers.MdGuidelineController.GetGuidelineDefine(System.String)">
+            <summary>
+            获取指标定义
+            </summary>
+            <param name="guideLineId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Base.Controllers.MdGuidelineController.GetGuidelineData(aehyok.Base.Models.QueryGuidelineModel)">
+            <summary>
+            取指标全部数据 1438771804981694464
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Base.Controllers.MdGuidelineController.GetGuidelineDataPaged(aehyok.Base.Models.QueryGuidelinePageModel)">
+            <summary>
+            分页取指标数据
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="T:aehyok.Base.Models.JsonResultModel">
+            <summary>
+            返回的JSON结构
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.JsonResultModel.Code">
+            <summary>
+            返回的CODE 200为成功
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.JsonResultModel.Message">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.JsonResultModel.Timestamp">
+            <summary>
+            时间戳
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.JsonResultModel.Data">
+            <summary>
+            返回的描述
+            </summary>
+        </member>
+        <member name="T:aehyok.Base.Models.PagedJsonResultModel">
+            <summary>
+            分页返回JSON结构
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.PagedJsonResultModel.Page">
+            <summary>
+            当前页码
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.PagedJsonResultModel.Pages">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.PagedJsonResultModel.Total">
+            <summary>
+            总记录数
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.PagedJsonResultModel.Limit">
+            <summary>
+            每页记录条数
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.PagedJsonResultModel.Docs">
+            <summary>
+            分页数据
+            </summary>
+        </member>
+        <member name="T:aehyok.Base.Models.QueryGuidelineModel">
+            <summary>
+            指标查询模型
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.QueryGuidelineModel.GuideLineId">
+            <summary>
+            指标ID
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.QueryGuidelineModel.Param">
+            <summary>
+            参数键值对
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.QueryGuidelineModel.FilterWord">
+            <summary>
+            查询关键字
+            </summary>
+        </member>
+        <member name="T:aehyok.Base.Models.QueryGuidelinePageModel">
+            <summary>
+            指标分页查询
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.QueryGuidelinePageModel.PageIndex">
+            <summary>
+            当前页 默认为1
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.QueryGuidelinePageModel.PageSize">
+            <summary>
+            每页记录数 默认为15
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.QueryGuidelinePageModel.SortBy">
+            <summary>
+            排序字段
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.QueryGuidelinePageModel.SortDirection">
+            <summary>
+            排序方向 ASC  DESC
+            </summary>
+        </member>
+        <member name="T:aehyok.Base.Models.SaveGuideLineParamModel">
+            <summary>
+            保存指标参数定义模型
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.SaveGuideLineParamModel.ParamSetting">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.SaveGuideLineParamModel.Paramters">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:aehyok.Base.Models.SaveRefTableModel">
+            <summary>
+            保存代码表模型
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.SaveRefTableModel.RefTable">
+            <summary>
+            代码表定义
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.SaveRefTableModel.RefData">
+            <summary>
+            代码表数据
+            </summary>
+        </member>
+        <member name="T:aehyok.Base.Models.SaveTableModel">
+            <summary>
+            保存的TABLE模型
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.SaveTableModel.TableMeta">
+            <summary>
+            TABLE定义
+            </summary>
+        </member>
+        <member name="P:aehyok.Base.Models.SaveTableModel.NameSpace">
+            <summary>
+            命名空间定义
+            </summary>
+        </member>
     </members>
 </doc>

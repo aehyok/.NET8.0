@@ -3,6 +3,7 @@ using aehyok.Core.Data;
 using aehyok.Core.IRepository;
 using aehyok.Core.Repository;
 using aehyok.Core.WebApi.Utils;
+using aehyok.Lib.Config;
 using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,7 +39,11 @@ namespace aehyok.Core.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             //ConfigInitialize.ConnectionString = Configuration.GetConnectionString("MySQL");
-            ConfigInitialize.ConnectionString = ConfigurationManager.GetConfig("ConnectionStrings:MySQL");
+            //ConfigInitialize.ConnectionString = ConfigurationManager.GetConfig("ConnectionStrings:MySQL");
+            MDEConfig.ConnectionString = Configuration.GetConnectionString("MySQL");
+            MDEConfig.QueryString = Configuration.GetConnectionString("Query");
+            //MDEConfig.RedisConnectionString = Configuration.GetSection("Redis:ConnectionString").Value;
+            MDEConfig.DbUser = Configuration.GetSection("DbUser").Value;
             // Ìí¼ÓSwagger
             services.AddSwaggerGen(optios =>
             {

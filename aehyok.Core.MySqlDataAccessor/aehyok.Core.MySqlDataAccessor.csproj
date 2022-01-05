@@ -6,10 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.26" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Snowflake.Core" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\aehyok.Core.MySql\aehyok.Core.MySql.csproj" />
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
+    <ProjectReference Include="..\aehyok.Lib\aehyok.Lib.csproj" />
   </ItemGroup>
 
 </Project>
