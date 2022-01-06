@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using aehyok.Core.MySql;
 
-namespace aehyok.MysqlDataAccess
+namespace aehyok.Core.MySqlDataAccessor
 {
     /// <summary>
     /// 查询语句生成器 (mysql语法)

@@ -9,9 +9,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using aehyok.MysqlDataAccess;
+using aehyok.Core.MySql;
 
-namespace aehyok.Core.MySql
+namespace aehyok.Core.MySqlDataAccessor
 {
     public class MyDA_MetaDataManager : IMetaDataManager
     {

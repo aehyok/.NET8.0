@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace aehyok.MysqlDataAccess
+namespace aehyok.Core.MySqlDataAccessor
 {
     public class MySqlResultItemBuilder
     {

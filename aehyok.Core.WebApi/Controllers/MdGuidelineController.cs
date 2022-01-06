@@ -4,13 +4,13 @@ using aehyok.Base.Models;
 using aehyok.Lib;
 using aehyok.Lib.MetaData.Define;
 using aehyok.Lib.Services;
-using aehyok.MysqlDataAccess;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using aehyok.Core.MySqlDataAccessor;
 
 namespace aehyok.Base.Controllers
 {

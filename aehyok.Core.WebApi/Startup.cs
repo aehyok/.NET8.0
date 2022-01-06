@@ -1,9 +1,13 @@
 using aehyok.Core.Config;
 using aehyok.Core.Data;
 using aehyok.Core.IRepository;
+using aehyok.Core.MySql;
+using aehyok.Core.MySqlDataAccessor;
 using aehyok.Core.Repository;
 using aehyok.Core.WebApi.Utils;
+using aehyok.Lib;
 using aehyok.Lib.Config;
+using aehyok.Lib.Services;
 using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -47,7 +51,7 @@ namespace aehyok.Core.WebApi
             // 添加Swagger
             services.AddSwaggerGen(optios =>
             {
-                optios.SwaggerDoc("v1", new OpenApiInfo { Title = "曹老板私服接口API", Version = "v1" });
+                optios.SwaggerDoc("v1", new OpenApiInfo { Title = "Tally.so私服接口API", Version = "v1" });
 
                 optios.OperationFilter<SwaggerOperationFilter>();
                 // 获取xml文件名
@@ -57,7 +61,11 @@ namespace aehyok.Core.WebApi
                 // 添加控制器层注释，true表示显示控制器注释
                 optios.IncludeXmlComments(xmlPath, true);
             });
+            services.AddScoped<IEncryptionService, EncryptionService>();
 
+            services.AddScoped<IMetaDataManager, MyDA_MetaDataManager>();
+
+            services.AddScoped<IMetaDataQuery, MyDA_MetaDataQuery>();
             services.AddControllers(options =>
             {
                 options.Filters.Add<JsonResultFilter>();
@@ -109,7 +117,7 @@ namespace aehyok.Core.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "曹老板私服接口API");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "通用接口API");
             });
 
             app.UseHttpsRedirection();

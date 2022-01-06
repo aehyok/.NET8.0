@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 
-namespace aehyok.Core.MySql
+namespace aehyok.Core.MySqlDataAccessor
 {
     /// <summary>
     /// MySql数据仓库

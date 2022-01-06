@@ -11,9 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using X.PagedList;
 using aehyok.Core.MySql;
-using aehyok.MysqlDataAccess;
 
-namespace aehyok.MysqlDataAccess
+namespace aehyok.Core.MySqlDataAccessor
 {
     public class GuidelineAccessor
     {

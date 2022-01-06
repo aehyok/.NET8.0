@@ -22,7 +22,7 @@ namespace aehyok.Core.WebApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>().UseNLog();
+                    webBuilder.UseStartup<Startup>().UseNLog(); //.UseUrls("http://*:5000;");
                 }).UseServiceProviderFactory(new AutofacServiceProviderFactory());
     }
 }

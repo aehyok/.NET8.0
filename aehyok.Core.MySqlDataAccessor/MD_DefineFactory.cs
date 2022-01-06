@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Text;
 using aehyok.Core.MySql;
 
-namespace aehyok.MysqlDataAccess
+namespace aehyok.Core.MySqlDataAccessor
 {
     public class MD_DefineFactory
     {

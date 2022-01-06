@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using aehyok.Core.MySql;
 
-namespace aehyok.MysqlDataAccess
+namespace aehyok.Core.MySqlDataAccessor
 {
     public class MySqlConditionItemBuilder
     {
