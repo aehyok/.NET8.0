@@ -221,6 +221,37 @@ namespace aehyok.Core.MySql
             }
         }
 
+        public static MySqlDataReader ExecuteReader(MySqlConnection mySqlConnection, CommandType cmdType, string cmdText, params MySqlParameter[] commandParameters)
+        {
+            //Create the command and connection
+            MySqlCommand cmd = new MySqlCommand();
+            try
+            {
+                //Prepare the command to execute
+                PrepareCommand(cmd, mySqlConnection, null, cmdType, cmdText, commandParameters);
+                //Execute the query, stating that the connection should close when the resulting datareader has been read
+                MySqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                cmd.Parameters.Clear();
+                return rdr;
+
+            }
+            catch (Exception e)
+            {
+                string _errmsg = string.Format("执行SQL语句出错,错误信息为:{0}!\n类型:{1}\n查询语句为:{2}\n参数:",
+                               e.Message, cmdType, cmdText);
+                if (commandParameters != null)
+                {
+                    foreach (MySqlParameter _p in commandParameters)
+                    {
+                        _errmsg += string.Format("{0}={1}\n", _p.ParameterName, _p.Value.ToString());
+                    }
+                }
+                MysqlLogWriter.WriteSystemLog(_errmsg, "ERROR");
+                //mySqlConnection.Close();
+                throw e;
+            }
+        }
+
         public static async Task<int> ExecuteNonQuery(MySqlConnection connection, CommandType cmdType, string cmdText, params MySqlParameter[] commandParameters)
         {
             try
@@ -343,6 +374,49 @@ namespace aehyok.Core.MySql
                 finally
                 {
                     connection.Close();
+                }
+            }
+            return _dt;
+        }
+
+        /// <summary>
+        /// 通过查询语句填充表
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="cmdType"></param>
+        /// <param name="cmdText"></param>
+        /// <param name="commandParameters"></param>
+        /// <returns></returns>
+        public static DataTable FillDataTable(MySqlConnection mySqlConnection, CommandType cmdType, string cmdText, params MySqlParameter[] commandParameters)
+        {
+            DbDataReader rdr;
+            MySqlCommand cmd = new MySqlCommand();
+            DataTable _dt = new DataTable("ResultTable");
+            
+            {
+                try
+                {
+                    PrepareCommand(cmd, mySqlConnection, null, cmdType, cmdText, commandParameters);
+                    rdr = cmd.ExecuteReader();
+                    FillTableByReader(_dt, rdr);
+                    rdr.Close();
+                }
+                catch (Exception e)
+                {
+                    string _errmsg = string.Format("执行SQL语句出错,错误信息为:{0}!\n类型:{1}\n查询语句为:{2}\n参数:",
+                           e.Message, cmdType, cmdText);
+                    if (commandParameters != null)
+                    {
+                        foreach (MySqlParameter _p in commandParameters)
+                        {
+                            _errmsg += string.Format("{0}={1}\n", _p.ParameterName, _p.Value.ToString());
+                        }
+                    }
+                    MysqlLogWriter.WriteSystemLog(_errmsg, "ERROR");
+                    throw;
+                }
+                finally
+                {
                 }
             }
             return _dt;

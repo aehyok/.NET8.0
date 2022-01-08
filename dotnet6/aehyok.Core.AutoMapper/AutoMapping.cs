@@ -16,12 +16,12 @@ namespace aehyok.Core.AutoMapper
         public AutoMapping()
         {
             CreateMap<User, UserDTO>();
-            CreateMap<MD_GuideLine, GuideLineModel>()
-                .ForMember(dest => dest.Id, item => item.MapFrom(source => source.Id))
-                .ForMember(dest => dest.Title, item => item.MapFrom(source => source.GuideLineName))
-                .ForMember(dest => dest.Field, item => item.MapFrom(source => source.Id))
-                .ForMember(dest => dest.Id, item => item.MapFrom(source => source.Id))
-                .ForMember(dest => dest.Id, item => item.MapFrom(source => source.Id));
+            //CreateMap<MD_GuideLine, GuideLineModel>()
+            //    .ForMember(dest => dest.Id, item => item.MapFrom(source => source.Id))
+            //    .ForMember(dest => dest.Title, item => item.MapFrom(source => source.GuideLineName))
+            //    .ForMember(dest => dest.Field, item => item.MapFrom(source => source.Id))
+            //    .ForMember(dest => dest.Id, item => item.MapFrom(source => source.Id))
+            //    .ForMember(dest => dest.Id, item => item.MapFrom(source => source.Id));
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using aehyok.Core.Data;
 using aehyok.Core.Data.Model;
+using aehyok.Core.MySql;
 using aehyok.Core.MySqlDataAccessor;
 using aehyok.Core.Utils;
 using MySql.Data.MySqlClient;
@@ -193,7 +194,7 @@ namespace aehyok.Core.Repository.Accessor
         public OperationResult WriteEntity(MD_InputEntity inputEntity)
         {
             OperationResult operationResult = new OperationResult();
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 MySqlTransaction MySqlTransaction = MySqlConnection.BeginTransaction();
                 try
@@ -235,7 +236,7 @@ namespace aehyok.Core.Repository.Accessor
                     List<string> mainKeyList = InputModelAccessor.GetDbPrimayKeyList(tableName);
                     string sql = string.Format("select whxh from {0} where {1}= :BZID", tableName, mainKeyList[0]);
                     MySqlParameter[] param = { new MySqlParameter(":BZID", bzid) };
-                    string curWHXH = SqlHelper.ExecuteScalar(SqlHelper.GetConnectionStr(), CommandType.Text, sql, param).ToString();
+                    string curWHXH = MysqlDBHelper.ExecuteScalar(MysqlDBHelper.conf, CommandType.Text, sql, param).ToString();
                     if (whxh != curWHXH)
                     {
                         operationResult.Success = false;
@@ -243,7 +244,7 @@ namespace aehyok.Core.Repository.Accessor
                     }
                     else
                     {
-                        operationResult.ReturnValue = SqlHelper.ExecuteScalar(cn, CommandType.Text, sql, param).ToString();
+                        operationResult.ReturnValue = MysqlDBHelper.ExecuteScalar(cn, CommandType.Text, sql, param).ToString();
                     }
                 }
                 catch (Exception e)
@@ -379,7 +380,7 @@ namespace aehyok.Core.Repository.Accessor
                 }
             }
             sb.Append(string.Format("  where {0}={1}", key, value));
-            SqlHelper.ExecuteNonQuery(MySqlConnection, CommandType.Text, sb.ToString(), null);
+            MysqlDBHelper.ExecuteNonQuery(MySqlConnection, CommandType.Text, sb.ToString(), null);
         }
 
         #region 删除子模型数据
@@ -394,7 +395,7 @@ namespace aehyok.Core.Repository.Accessor
         {
             MD_InputModel InputModel = this.InputModel;
             string[] array = idArray.Split(',');
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 MySqlTransaction MySqlTransaction = MySqlConnection.BeginTransaction();
                 try
@@ -419,7 +420,7 @@ namespace aehyok.Core.Repository.Accessor
                                 }
                             }
                             sb.Append(string.Format("  where {0}={1}", columnName, columnValue));
-                            SqlHelper.ExecuteNonQuery(MySqlConnection, CommandType.Text, sb.ToString(), null);
+                            MysqlDBHelper.ExecuteNonQuery(MySqlConnection, CommandType.Text, sb.ToString(), null);
                         }
                     }
                     MySqlTransaction.Commit();
@@ -496,7 +497,7 @@ namespace aehyok.Core.Repository.Accessor
                         MySqlParameters.Add(MySqlParameter);
                     }
                 }
-                SqlHelper.ExecuteNonQuery(connection, CommandType.StoredProcedure, proName, MySqlParameters.ToArray());
+                MysqlDBHelper.ExecuteNonQuery(connection, CommandType.StoredProcedure, proName, MySqlParameters.ToArray());
                 return true;
             }
 
@@ -614,7 +615,7 @@ namespace aehyok.Core.Repository.Accessor
                         }
                     }
                 }
-                SqlHelper.ExecuteNonQuery(cn, CommandType.Text, _sb.ToString(), _param.ToArray());
+                MysqlDBHelper.ExecuteNonQuery(cn, CommandType.Text, _sb.ToString(), _param.ToArray());
             }
             catch (Exception e)
             {
@@ -795,7 +796,7 @@ namespace aehyok.Core.Repository.Accessor
 
                     }
                 }
-                SqlHelper.ExecuteNonQuery(MySqlConnection, CommandType.Text, stringBuilder.ToString(), _param.ToArray());
+                MysqlDBHelper.ExecuteNonQuery(MySqlConnection, CommandType.Text, stringBuilder.ToString(), _param.ToArray());
             }
             catch (Exception e)
             {
@@ -849,7 +850,7 @@ namespace aehyok.Core.Repository.Accessor
         public MD_InputEntity GetDocData(Dictionary<string, object> parameter)
         {
             MD_InputEntity md_InputEntity = new MD_InputEntity();
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 md_InputEntity = GetDocData(parameter, MySqlConnection);
             }
@@ -989,7 +990,7 @@ namespace aehyok.Core.Repository.Accessor
         public DataTable ChildInputData(MD_InputModel_Child _child, MD_InputEntity entity)
         {
             DataTable dataTable = null;
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 dataTable = ChildInputData(_child, entity, MySqlConnection);
             }
@@ -1107,7 +1108,7 @@ namespace aehyok.Core.Repository.Accessor
                         var jzsj = new DateTime(intYear, 12, 31);
 
                         const string SqlDeleteData = "delete from JSYW_XZKP_SJBLB  where ksrq=:KSRQ and jzrq=:JZRQ ";
-                        using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+                        using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
                         {
                             MySqlTransaction MySqlTransaction = MySqlConnection.BeginTransaction();
                             MySqlParameter[] MySqlParameter = {
@@ -1117,7 +1118,7 @@ namespace aehyok.Core.Repository.Accessor
 
                             MySqlParameter[0].Value = kssj;
                             MySqlParameter[1].Value = jzsj;
-                            SqlHelper.ExecuteNonQuery(MySqlConnection, CommandType.Text, SqlDeleteData, MySqlParameter);
+                            MysqlDBHelper.ExecuteNonQuery(MySqlConnection, CommandType.Text, SqlDeleteData, MySqlParameter);
 
                             for (var index = 0; index < dataTable.Rows.Count; index++)
                             {
@@ -1162,7 +1163,7 @@ namespace aehyok.Core.Repository.Accessor
                     }
                     break;
                 default:
-                    using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+                    using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
                     {
                         MySqlTransaction MySqlTransaction = MySqlConnection.BeginTransaction();
                         for (var index = 0; index < dataTable.Rows.Count; index++)

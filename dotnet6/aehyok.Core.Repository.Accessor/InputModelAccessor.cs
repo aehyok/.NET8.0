@@ -1,4 +1,5 @@
 ﻿using aehyok.Core.Data.Model;
+using aehyok.Core.MySql;
 using aehyok.Core.MySqlDataAccessor;
 using aehyok.Core.Utils;
 using MySql.Data.MySqlClient;
@@ -32,7 +33,7 @@ namespace aehyok.Core.Repository.Accessor
                 string postid;
 
                 string dwid = cs;
-                using (MySqlDataReader dr = SqlHelper.ExecuteReader(SqlHelper.OpenConnection(), CommandType.Text, SqlGetPost, new MySqlParameter[2] { new MySqlParameter(":DWID", Convert.ToDecimal(dwid)), new MySqlParameter(":MENUID", Convert.ToDecimal(7030000010141)) }))
+                using (MySqlDataReader dr = MysqlDBHelper.ExecuteReader(MysqlDBHelper.conf, CommandType.Text, SqlGetPost, new MySqlParameter[2] { new MySqlParameter(":DWID", Convert.ToDecimal(dwid)), new MySqlParameter(":MENUID", Convert.ToDecimal(7030000010141)) }))
                 {
 
                     while (dr.Read())
@@ -90,7 +91,7 @@ namespace aehyok.Core.Repository.Accessor
 
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
             string postId = InputModelAccessor.GetPostId(sinoRequestUser, cs);
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 if (!string.IsNullOrEmpty(cs))
                 {
@@ -200,7 +201,7 @@ namespace aehyok.Core.Repository.Accessor
         public static Dictionary<string, string> GetDocDefaultValue(string docTypeDetailId, string inputModelName, SinoRequestUser sinoRequestUser)
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 try
                 {
@@ -261,7 +262,7 @@ namespace aehyok.Core.Repository.Accessor
         public static bool CheckUserDefaulValue(string docTypeDetailId, string inputModelName, SinoRequestUser sinoRequestUser, int type)
         {
             bool check = true;
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 try
                 {
@@ -330,7 +331,7 @@ namespace aehyok.Core.Repository.Accessor
                 modelName = inputModelName;
             }
 
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 MySqlTransaction MySqlTransaction = MySqlConnection.BeginTransaction();
                 try
@@ -430,7 +431,7 @@ namespace aehyok.Core.Repository.Accessor
             }
 
 
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 MySqlTransaction MySqlTransaction = MySqlConnection.BeginTransaction();
                 try
@@ -512,7 +513,7 @@ namespace aehyok.Core.Repository.Accessor
             string postId = InputModelAccessor.GetPostId(sinoRequestUser, cs);
             string modelName;
             modelName = inputModelName.Split('-')[1];
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 MySqlTransaction MySqlTransaction = MySqlConnection.BeginTransaction();
                 try
@@ -573,7 +574,7 @@ namespace aehyok.Core.Repository.Accessor
             string nameSpace = inputNames[0];
             string modelName = inputNames[1];
 
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 MySqlCommand MySqlCommand = new MySqlCommand(SqlGetInputModelByName, MySqlConnection);
                 //MySqlCommand.Parameters.Add(":NS", nameSpace);
@@ -631,7 +632,7 @@ namespace aehyok.Core.Repository.Accessor
         {
             if (mdInputModel.Groups == null) { mdInputModel.Groups = new List<MD_InputModel_ColumnGroup>(); }
             mdInputModel.Groups.Clear();
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 MySqlCommand MySqlCommand = new MySqlCommand(SqlGetInputModelColumnGroups, MySqlConnection);
                 //MySqlCommand.Parameters.Add(":IVID", decimal.Parse(mdInputModel.Id));
@@ -723,7 +724,7 @@ namespace aehyok.Core.Repository.Accessor
         {
             List<MD_InputModel_SaveTable> md_InputModel_SaveTableList = new List<MD_InputModel_SaveTable>();
             MySqlParameter[] MySqlParameter = { new MySqlParameter(":IVID", inputModel.Id) };
-            using (MySqlDataReader MySqlDataReader = SqlHelper.ExecuteReader(MySqlConnection, CommandType.Text, SqlGetWriteDesTableOfInputModel, MySqlParameter))
+            using (MySqlDataReader MySqlDataReader = MysqlDBHelper.ExecuteReader(MySqlConnection, CommandType.Text, SqlGetWriteDesTableOfInputModel, MySqlParameter))
             {
                 while (MySqlDataReader.Read())
                 {
@@ -755,7 +756,7 @@ namespace aehyok.Core.Repository.Accessor
         {
 
             MySqlParameter[] MySqlParameter = { new MySqlParameter(":TID", decimal.Parse(md_InputModel_SaveTable.Id)) };
-            using (MySqlDataReader MySqlDataReader = SqlHelper.ExecuteReader(MySqlConnection, CommandType.Text, SqlGetInputModelSaveTableColumn, MySqlParameter))
+            using (MySqlDataReader MySqlDataReader = MysqlDBHelper.ExecuteReader(MySqlConnection, CommandType.Text, SqlGetInputModelSaveTableColumn, MySqlParameter))
             {
                 while (MySqlDataReader.Read())
                 {
@@ -850,7 +851,7 @@ namespace aehyok.Core.Repository.Accessor
         {
             List<MD_InputModel_Column> md_InputModel_ColumnList = new List<MD_InputModel_Column>();
 
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 MySqlCommand MySqlCommand = new MySqlCommand(SqlGetInputModelColumnDefine, MySqlConnection);
                 //MySqlCommand.Parameters.Add(":IVID", decimal.Parse(inputModelId));
@@ -900,12 +901,12 @@ namespace aehyok.Core.Repository.Accessor
         public static List<string> GetDbPrimayKeyList(string tableName)
         {
             List<string> ret = new List<string>();
-            using (MySqlConnection MySqlConnection = SqlHelper.OpenConnection())
+            using (MySqlConnection MySqlConnection = MysqlDBHelper.OpenConnection())
             {
                 try
                 {
                     MySqlParameter[] MySqlParameterArray = { new MySqlParameter(":TNAME", tableName) };
-                    using (MySqlDataReader MySqlDataReader = SqlHelper.ExecuteReader(MySqlConnection, CommandType.Text, SqlGetDbPrimayKeyList, MySqlParameterArray))
+                    using (MySqlDataReader MySqlDataReader = MysqlDBHelper.ExecuteReader(MySqlConnection, CommandType.Text, SqlGetDbPrimayKeyList, MySqlParameterArray))
                     {
                         while (MySqlDataReader.Read())
                         {

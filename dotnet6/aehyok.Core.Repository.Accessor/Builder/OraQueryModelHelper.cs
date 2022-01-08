@@ -1,4 +1,5 @@
 ﻿using aehyok.Core.Data.Model;
+using aehyok.Core.MySql;
 using aehyok.Core.MySqlDataAccessor;
 using MySql.Data.MySqlClient;
 using MySql.Data.Types;
@@ -17,7 +18,7 @@ namespace aehyok.Core.Repository.Accessor.Builder
 		{
 			_count = 0;
 			DataTable _t = new DataTable(_tableName);
-			using (MySqlConnection cn = SqlHelper.OpenConnection())
+			using (MySqlConnection cn = MysqlDBHelper.OpenConnection())
 			{
 				try
 				{
@@ -83,7 +84,7 @@ namespace aehyok.Core.Repository.Accessor.Builder
 
 		public static DataTable FillResultData(string _selectStr, string _tableName, MySqlConnection cn)
 		{
-			DataTable _dt = SqlHelper.FillDataTable(cn, CommandType.Text, _selectStr);
+			DataTable _dt = MysqlDBHelper.FillDataTable(cn, CommandType.Text, _selectStr);
 			_dt.TableName = _tableName;
 			return _dt;
 		}
@@ -92,7 +93,7 @@ namespace aehyok.Core.Repository.Accessor.Builder
 		{
 			MySqlDataReader rdr;
 			MDQueryResult_Table _dt = new MDQueryResult_Table(tableName);
-			rdr = SqlHelper.ExecuteReader(cn, CommandType.Text, selectStr);
+			rdr = MysqlDBHelper.ExecuteReader(cn, CommandType.Text, selectStr);
 			FillTableByReader(_dt, rdr);
 			rdr.Close();
 			return _dt;

@@ -1,4 +1,5 @@
 ﻿using aehyok.Core.Data.Model;
+using aehyok.Core.MySql;
 using aehyok.Core.MySqlDataAccessor;
 using aehyok.Core.Utils;
 using MySql.Data.MySqlClient;
@@ -344,7 +345,7 @@ namespace aehyok.Core.Repository.Accessor.Builder
             {
                 string _fun = _retstr.Substring(_pos, _pos2 - _pos + 1);
                 string _sql = string.Format("select {0} RETVALUE from dual", _fun.Replace("&", ""));
-                _retValue = SqlHelper.ExecuteScalar(SqlHelper.GetConnectionStr(), CommandType.Text, _sql, null); ;
+                _retValue = MysqlDBHelper.ExecuteScalar(MysqlDBHelper.OpenConnection(), CommandType.Text, _sql, null); ;
                 if (_retValue != null)
                 {
                     _res = _retstr.Replace(_fun, _retValue.ToString());
@@ -403,7 +404,7 @@ namespace aehyok.Core.Repository.Accessor.Builder
 
         public static string ExcuteProcedure(string _pStr)
         {
-            using (MySqlConnection cn = SqlHelper.OpenConnection())
+            using (MySqlConnection cn = MysqlDBHelper.OpenConnection())
             {
                 MySqlTransaction _txn = cn.BeginTransaction();
                 try
@@ -416,7 +417,7 @@ namespace aehyok.Core.Repository.Accessor.Builder
                     //
                     //
                     //_cmd.ExecuteNonQuery();
-                    SqlHelper.ExecuteNonQuery(cn, CommandType.Text, _sql, _p1);
+                    MysqlDBHelper.ExecuteNonQuery(cn, CommandType.Text, _sql, _p1);
                     _txn.Commit();
                     return _p1.Value.ToString();
                 }

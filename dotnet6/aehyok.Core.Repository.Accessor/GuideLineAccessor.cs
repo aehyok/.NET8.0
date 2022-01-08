@@ -1,5 +1,6 @@
 ﻿using aehyok.Core.Data.Entity.GuideLine;
 using aehyok.Core.Data.Model;
+using aehyok.Core.MySql;
 using aehyok.Core.MySqlDataAccessor;
 using aehyok.Core.Repository.Accessor.Builder;
 using MySql.Data.MySqlClient;
@@ -45,7 +46,7 @@ namespace aehyok.Core.Repository.Accessor
                     define = GuidelineDefine[guideLineId];
                 else
                 {
-                    using (MySqlConnection cn = SqlHelper.OpenConnection())
+                    using (MySqlConnection cn = MysqlDBHelper.OpenConnection())
                     {
                         try
                         {
@@ -171,7 +172,7 @@ namespace aehyok.Core.Repository.Accessor
                 }
                 try
                 {
-                    ret = Convert.ToInt32(SqlHelper.ExecuteScalar(SqlHelper.GetConnectionStr(), CommandType.Text, string.Format("select count(*) from (\n {0} \n) ", queryStr)));
+                    ret = Convert.ToInt32(MysqlDBHelper.ExecuteScalar(MysqlDBHelper.conf, CommandType.Text, string.Format("select count(*) from (\n {0} \n) ", queryStr)));
                 }
                 catch (Exception exception)
                 {
@@ -215,7 +216,7 @@ namespace aehyok.Core.Repository.Accessor
                 }
                 try
                 {
-                    ret = Convert.ToInt32(SqlHelper.ExecuteScalar(cn, CommandType.Text, string.Format("select count(*) from (\n {0} \n) ", queryStr)));
+                    ret = Convert.ToInt32(MysqlDBHelper.ExecuteScalar(cn, CommandType.Text, string.Format("select count(*) from (\n {0} \n) ", queryStr)));
                 }
                 catch (Exception exception)
                 {
@@ -402,7 +403,7 @@ namespace aehyok.Core.Repository.Accessor
 
                 try
                 {
-                    recordCount = Convert.ToInt32(SqlHelper.ExecuteScalar(SqlHelper.GetConnectionStr(), CommandType.Text, string.Format("select count(*) from (\n {0} \n) ", queryStr)));
+                    recordCount = Convert.ToInt32(MysqlDBHelper.ExecuteScalar(MysqlDBHelper.conf, CommandType.Text, string.Format("select count(*) from (\n {0} \n) ", queryStr)));
                 }
                 catch (Exception e)
                 {
@@ -492,7 +493,7 @@ namespace aehyok.Core.Repository.Accessor
             {
                 param[0].Value = decimal.Parse(guideLineId);
 
-                object sfobj = SqlHelper.ExecuteScalar(SqlHelper.GetConnectionStr(), CommandType.Text, SqlGetGuideLineMethod, param);
+                object sfobj = MysqlDBHelper.ExecuteScalar(MysqlDBHelper.conf, CommandType.Text, SqlGetGuideLineMethod, param);
                 if (sfobj == null || sfobj == DBNull.Value) return "";
                 return sfobj.ToString();
             }
