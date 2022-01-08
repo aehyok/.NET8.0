@@ -1,4 +1,4 @@
-import { message, Form } from 'antd';
+import { message, Form, Card } from 'antd';
 import {
   ProFormDigit,
   ProFormText,
@@ -38,6 +38,7 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
   };
 
   return (
+    <Card bordered={false}>
         <Form
           hideRequiredMark
           form={form}
@@ -99,6 +100,7 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
             placeholder="请输入你的阶段性工作目标"
           />
         </Form>
+      </Card>
   );
 };
 

@@ -61,10 +61,10 @@ const GuidelineManage = () =>{
           </Col>
           <Col lg={17} md={24}>
             <Row gutter={24}>
-              <Col span={24} style={{height:'300px', border: '1px solid black'}}>
+              <Col span={24} >
                 <GuidelineForm  guidelineData= {guidelineData} />
               </Col>
-              <Col span={24} style={{height:'300px', border: '1px solid black'}}>
+              <Col span={24}>
                 <GuidelineTable  guidelineData= {guidelineData} />
               </Col>
             </Row>

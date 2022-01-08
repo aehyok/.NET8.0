@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Tabs } from 'antd'
+import { Card, Tabs } from 'antd'
 import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
 import type { ProFormInstance } from '@ant-design/pro-form';
@@ -115,41 +115,44 @@ const GuidelineTable = (props: any) => {
   ];
 
   return (
-    <Tabs defaultActiveKey="1">
-      <TabPane tab="参数定义" key="1">
-        <ProForm<{
-          table: DataSourceType[];
-        }>
-          formRef={formRef}
-          initialValues={{
-            table: defaultData,
-          }}
-        >
-          <EditableProTable<DataSourceType>
-            rowKey="id"
-            maxLength={5}
-            name="table"
-            recordCreatorProps={
-              position !== 'hidden'
-                ? {
-                    position: position as 'top',
-                    record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
-                  }
-                : false
-            }
-            columns={columns}
-            editable={{
-              type: 'multiple',
-              editableKeys,
-              onChange: setEditableRowKeys,
+    <Card bordered={false} style={{marginTop: '15px'}}>
+      <Tabs defaultActiveKey="1">
+        <TabPane tab="参数定义" key="1">
+          <ProForm<{
+            table: DataSourceType[];
+          }>
+            submitter={false}
+            formRef={formRef}
+            initialValues={{
+              table: defaultData,
             }}
-          />
-        </ProForm>
-      </TabPane>
-      <TabPane tab="显示结果字段定义" key="2">
-        Content of Tab Pane 2
-      </TabPane>
-    </Tabs>
+          >
+            <EditableProTable<DataSourceType>
+              rowKey="id"
+              maxLength={5}
+              name="table"
+              recordCreatorProps={
+                position !== 'hidden'
+                  ? {
+                      position: position as 'top',
+                      record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
+                    }
+                  : false
+              }
+              columns={columns}
+              editable={{
+                type: 'multiple',
+                editableKeys,
+                onChange: setEditableRowKeys,
+              }}
+            />
+          </ProForm>
+        </TabPane>
+        <TabPane tab="显示结果字段定义" key="2">
+          Content of Tab Pane 2
+        </TabPane>
+      </Tabs>
+    </Card>  
   );
 };
 

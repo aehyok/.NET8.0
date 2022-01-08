@@ -83,7 +83,7 @@ const GuidelineTree= (props: any) => {
 
   return (
     <>
-      <Search style={{ marginBottom: 8 }} placeholder="Search" />
+      <Search style={{ marginBottom: 8 }} placeholder="请输入指标id或名称" />
       <Tree loadData={onLoadData} treeData={treeData} onSelect = { (selectedKeys)=> { onSelectClick(selectedKeys)} } />
     </>
   )

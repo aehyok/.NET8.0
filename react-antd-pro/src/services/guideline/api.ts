@@ -27,9 +27,9 @@ export async function GetGuidelineDefine(id: string) {
  * @param data
  * @returns
  */
-export async function SaveNewGuideLine(data: any) {
-  return request(`/so/api/mddefine/SaveNewGuideLine`, {
+export async function InsertNewGuideLine(data: any) {
+  return request(`/so/api/mddefine/InsertNewGuideLine`, {
     method: 'POST',
-    data
+    data,
   });
 }

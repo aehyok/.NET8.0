@@ -1,6 +1,6 @@
 import { Modal, Form,Input, Button } from 'antd';
 import { useRef } from 'react';
-import { SaveNewGuideLine } from '@/services/guideline/api'
+import { InsertNewGuideLine } from '@/services/guideline/api'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 const GuidelineModal = (props: {modalVisible: boolean, hiddenModal: Function, selectGuidelineId: any}) => {
@@ -21,9 +21,9 @@ const GuidelineModal = (props: {modalVisible: boolean, hiddenModal: Function, se
 
   const onSubmit = async(values: any) => {
     console.log('submit--abb', selectGuidelineId,values)
-    const result = await SaveNewGuideLine({
+    const result = await InsertNewGuideLine({
       GuideLineName: values.GuideLineName,
-      FatherID: selectGuidelineId[0],
+      FatherID: Number(selectGuidelineId[0]),
       GroupName: 'ccc'
     })
     console.log(result, '保存结果')
