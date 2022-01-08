@@ -33,3 +33,15 @@ export async function InsertNewGuideLine(data: any) {
     data,
   });
 }
+
+/**
+ * 通过id删除定义的指标
+ * @param id
+ * @returns
+ */
+export async function DelGuideLine(data: any) {
+  return request(`/so/api/mddefine/DelGuideLine?GuideLineID=${data}`, {
+    method: 'POST',
+    data,
+  });
+}

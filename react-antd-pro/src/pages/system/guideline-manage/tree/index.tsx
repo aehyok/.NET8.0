@@ -48,7 +48,7 @@ const GuidelineTree= (props: any) => {
     console.log(list, '--list--')
     if(type === 'one') {
       setTreeData(list)
-      setDefault([list[0].key])
+      // setDefault([list[0].key])
     } else {
       setTreeData(origin => {
         console.log(origin, '原始的数据')

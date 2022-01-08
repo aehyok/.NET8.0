@@ -1,12 +1,13 @@
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, message, Modal } from 'antd';
 import {PageContainer ,GridContent } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
 import GuidelineForm from './form'
 import GuidelineTable from './table'
 import GuidelineModal from './modal'
 import GuidelineTree from './tree'
-import { GetGuidelineDefine} from '@/services/guideline/api'
-import { CheckCircleOutlined, CopyOutlined, DeleteOutlined, ExportOutlined, FileAddOutlined, ImportOutlined, ScissorOutlined } from '@ant-design/icons';
+import { GetGuidelineDefine , DelGuideLine} from '@/services/guideline/api'
+import styles from './index.less'
+import { CheckCircleOutlined, CopyOutlined, DeleteOutlined, ExclamationCircleOutlined, ExportOutlined, FileAddOutlined, ImportOutlined, ScissorOutlined } from '@ant-design/icons';
 
 const GuidelineManage = () =>{
 
@@ -30,26 +31,56 @@ const GuidelineManage = () =>{
   },[selectGuidelineId])
 
   const showModal = () => {
-    setIsModalVisible(true);
+    if(selectGuidelineId && selectGuidelineId.length> 0) {
+      setIsModalVisible(true);
+    }
+    else {
+      message.warn(`请先选择指标父节点`);
+    }
   };
 
+  const deleteSubmitCallBack = async() => {
+    if(selectGuidelineId && selectGuidelineId.length === 1) {
+      const response = await DelGuideLine(selectGuidelineId[0])
+      console.log(response, '--detail--response--')
+      if(response.data) {
+        setSelectGuidelineId([])
+      }
+    }
+  }
+
+  function confirm() {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined />,
+      content: '请确认是否删除该指标（以及该指标节点下的指标）?',
+      okText: '确认',
+      onOk:() => {deleteSubmitCallBack()},
+      onCancel : () => {console.log('取消')},
+      cancelText: '取消',
+    });
+  }
+  
+  const deleteGuidelineClick = () => {
+    confirm()
+  }
   return (
     <PageContainer>
       <GuidelineModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} selectGuidelineId={selectGuidelineId} />
       <GridContent>
-        <Row style={{margin: '5px'}} justify={'space-between'}>
-          <Col>
-            <Button type="primary" icon={<FileAddOutlined />} onClick={() => showModal()}>添加指标</Button>
-            <Button type="dashed" icon={<DeleteOutlined />}>删除指标</Button>
-            <Button type="dashed" icon={ <ExportOutlined />}>导入指标</Button>
-            <Button type="dashed" icon={ <ImportOutlined />}>导出指标</Button>
+        <Row style={{margin: '5px 0'}} justify={'space-between'}>
+          <Col> 
+            <Button type="primary" icon={<FileAddOutlined />} onClick={() => showModal()} className={styles.buttonmarginright}>添加指标</Button>
+            <Button type="dashed" icon={<DeleteOutlined />} onClick={() => deleteGuidelineClick()}>删除指标</Button>
+            {/* <Button type="dashed" icon={ <ExportOutlined />}>导入指标</Button>
+            <Button type="dashed" icon={ <ImportOutlined />}>导出指标</Button> */}
            </Col>
            <Col>
-            <Button icon={<FileAddOutlined />} type="primary">添加参数</Button>
-            <Button type="dashed" icon={<DeleteOutlined />}>删除参数</Button>
-            <Button type="dashed" icon={<CopyOutlined />}>复制参数</Button>
-            <Button type='dashed' icon={<ScissorOutlined />}>粘贴参数</Button>
-            <Button type="dashed" icon={<CheckCircleOutlined />}>保存</Button>
+            <Button icon={<FileAddOutlined />} type="primary" className={styles.buttonmarginright}>添加参数</Button>
+            <Button type="dashed" icon={<DeleteOutlined />} className={styles.buttonmarginright}>删除参数</Button>
+            <Button type="dashed" icon={<CopyOutlined />} className={styles.buttonmarginright}>复制参数</Button>
+            <Button type='dashed' icon={<ScissorOutlined />} className={styles.buttonmarginright}>粘贴参数</Button>
+            <Button type="dashed" icon={<CheckCircleOutlined />} className={styles.buttonmarginright}>保存</Button>
             <Button type='dashed' icon={<DeleteOutlined />}>取消</Button>
           </Col>
         </Row>

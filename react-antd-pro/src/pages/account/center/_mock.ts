@@ -55,10 +55,10 @@ const currentUseDetail = {
   name: '超级管理员',
   avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
   userid: '00000001',
-  email: 'antdesign@alipay.com',
+  email: 'aehyok@hengxing.com',
   signature: '海纳百川，有容乃大',
   title: '交互专家',
-  group: '蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED',
+  group: '珩玲科技－某某某事业群－某某平台部－某某技术部－UED',
   tags: [
     {
       key: '0',
@@ -192,7 +192,7 @@ function fakeList(count: number): ListItemDataType[] {
       like: Math.ceil(Math.random() * 100) + 100,
       message: Math.ceil(Math.random() * 10) + 10,
       content:
-        '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+        '段落示意：珩玲科技设计平台 ant.design，用最小的工作量，无缝接入珩玲科技生态，提供跨越设计与开发的体验解决方案。珩玲科技设计平台 ant.design，用最小的工作量，无缝接入珩玲科技生态，提供跨越设计与开发的体验解决方案。',
       members: [
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',

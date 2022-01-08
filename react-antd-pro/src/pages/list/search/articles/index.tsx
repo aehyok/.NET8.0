@@ -208,7 +208,7 @@ const Articles: FC = () => {
                   <span>
                     <Tag>Ant Design</Tag>
                     <Tag>设计语言</Tag>
-                    <Tag>蚂蚁金服</Tag>
+                    <Tag>珩玲科技</Tag>
                   </span>
                 }
               />

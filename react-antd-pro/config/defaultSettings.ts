@@ -14,7 +14,7 @@ const Settings: LayoutSettings & {
   colorWeak: false,
   title: 'tally.so',
   pwa: false,
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  logo: 'https://v3.cn.vuejs.org/logo.png',
   iconfontUrl: '',
 };
 
