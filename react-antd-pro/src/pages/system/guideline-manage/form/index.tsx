@@ -38,7 +38,7 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
   };
 
   return (
-    <Card bordered={false} style={{marginTop: '10px'}}>
+    <Card bordered={false}>
         <Form
           hideRequiredMark
           form={form}
@@ -53,6 +53,12 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
         >
           <ProFormText
             width="md"
+            label="指标ID"
+            name="id"
+            disabled={true}
+          />
+          <ProFormText
+            width="md"
             label="指标名称"
             name="name"
             rules={[
@@ -61,43 +67,19 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
                 message: '请输入指标名称',
               },
             ]}
-            placeholder="给目标起个名字"
-          />
-          <ProFormText
-            width="md"
-            label="指标ID"
-            name="id"
-            rules={[
-              {
-                required: true,
-                message: '请输入ID',
-              },
-            ]}
-            placeholder="给目标起个名字"
+            placeholder="请输入指标名称"
           />
           <ProFormDigit
             width="md"
             label="显示顺序"
             name="displayOrder"
-            rules={[
-              {
-                required: true,
-                message: '请输入ID',
-              },
-            ]}
-            placeholder="给目标起个名字"
+            placeholder="请输入显示顺序"
           />
           <ProFormTextArea
             label="指标算法"
-            width="xl"
             name="goal"
-            rules={[
-              {
-                required: true,
-                message: '请输入目标描述',
-              },
-            ]}
-            placeholder="请输入你的阶段性工作目标"
+            // autoSize={{minRows: 3, maxRows: 6}}
+            placeholder="请输入指标算法"
           />
         </Form>
       </Card>

@@ -2,7 +2,7 @@ import { Row, Col, Button, message, Modal } from 'antd';
 import {PageContainer ,GridContent } from '@ant-design/pro-layout';
 import React, { useEffect } from 'react';
 import GuidelineForm from './form'
-import GuidelineTable from './table'
+import GuidelineTab from './tab'
 import GuidelineModal from './modal'
 import GuidelineTree from './tree'
 import { GetGuidelineDefine , DelGuideLine} from '@/services/guideline/api'
@@ -78,11 +78,11 @@ const GuidelineManage = () =>{
             <Button type="dashed" icon={ <ImportOutlined />}>导出指标</Button> */}
            </Col>
            <Col style={{margin: '5px 0'}} >
-            <Button icon={<FileAddOutlined />} type="primary" className={styles.buttonmarginright}>添加参数</Button>
+            <Button icon={<FileAddOutlined />} type="primary" className={styles.buttonmarginright}>保存</Button>
 
           </Col>
         </Row>
-        <Row gutter={24}>
+        <Row gutter={12}>
           <Col lg={7} md={24}>
             <div>
               <GuidelineTree setDefault= {setSelectGuidelineId} />
@@ -94,7 +94,7 @@ const GuidelineManage = () =>{
                 <GuidelineForm  guidelineData= {guidelineData} />
               </Col>
               <Col span={24}>
-                <GuidelineTable  guidelineData= {guidelineData} />
+                <GuidelineTab  guidelineData= {guidelineData} />
               </Col>
             </Row>
           </Col>
