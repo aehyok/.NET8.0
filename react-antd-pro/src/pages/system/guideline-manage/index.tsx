@@ -45,6 +45,8 @@ const GuidelineManage = () =>{
       console.log(response, '--detail--response--')
       if(response.data) {
         setSelectGuidelineId([])
+        message.success('删除指标成功')
+        // TODO 待刷新左侧树
       }
     }
   }
@@ -60,7 +62,7 @@ const GuidelineManage = () =>{
       cancelText: '取消',
     });
   }
-  
+
   const deleteGuidelineClick = () => {
     confirm()
   }
@@ -68,20 +70,16 @@ const GuidelineManage = () =>{
     <PageContainer>
       <GuidelineModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} selectGuidelineId={selectGuidelineId} />
       <GridContent>
-        <Row style={{margin: '5px 0'}} justify={'space-between'}>
-          <Col> 
+        <Row justify={'space-between'}>
+          <Col style={{margin: '5px 0'}} >
             <Button type="primary" icon={<FileAddOutlined />} onClick={() => showModal()} className={styles.buttonmarginright}>添加指标</Button>
             <Button type="dashed" icon={<DeleteOutlined />} onClick={() => deleteGuidelineClick()}>删除指标</Button>
             {/* <Button type="dashed" icon={ <ExportOutlined />}>导入指标</Button>
             <Button type="dashed" icon={ <ImportOutlined />}>导出指标</Button> */}
            </Col>
-           <Col>
+           <Col style={{margin: '5px 0'}} >
             <Button icon={<FileAddOutlined />} type="primary" className={styles.buttonmarginright}>添加参数</Button>
-            <Button type="dashed" icon={<DeleteOutlined />} className={styles.buttonmarginright}>删除参数</Button>
-            <Button type="dashed" icon={<CopyOutlined />} className={styles.buttonmarginright}>复制参数</Button>
-            <Button type='dashed' icon={<ScissorOutlined />} className={styles.buttonmarginright}>粘贴参数</Button>
-            <Button type="dashed" icon={<CheckCircleOutlined />} className={styles.buttonmarginright}>保存</Button>
-            <Button type='dashed' icon={<DeleteOutlined />}>取消</Button>
+
           </Col>
         </Row>
         <Row gutter={24}>

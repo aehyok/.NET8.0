@@ -38,7 +38,7 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
   };
 
   return (
-    <Card bordered={false}>
+    <Card bordered={false} style={{marginTop: '10px'}}>
         <Form
           hideRequiredMark
           form={form}

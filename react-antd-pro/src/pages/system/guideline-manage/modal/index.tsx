@@ -1,4 +1,4 @@
-import { Modal, Form,Input, Button } from 'antd';
+import { Modal, Form,Input, Button, message } from 'antd';
 import { useRef } from 'react';
 import { InsertNewGuideLine } from '@/services/guideline/api'
 
@@ -26,6 +26,11 @@ const GuidelineModal = (props: {modalVisible: boolean, hiddenModal: Function, se
       FatherID: Number(selectGuidelineId[0]),
       GroupName: 'ccc'
     })
+    if(result.code === 200) {
+      message.success('新增指标成功')
+      handleCancel()
+      // TODO 还没有刷新左侧树
+    }
     console.log(result, '保存结果')
   }
   return (
