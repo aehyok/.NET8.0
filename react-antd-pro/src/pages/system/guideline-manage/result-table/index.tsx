@@ -1,178 +1,119 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
-import type { ActionType } from '@ant-design/pro-table';
-import { Button, Input, Space, Tag, Form } from 'antd';
-import styles from '../index.less'
-import { CheckCircleOutlined, CopyOutlined, DeleteOutlined, PlusOutlined, ScissorOutlined } from '@ant-design/icons';
-
-const waitTime = (time: number = 100, key: any, rows: any) => {
-  console.log(key, rows, 'values', )
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
-
+import { Button } from 'antd';
+import { ProFormField } from '@ant-design/pro-form';
 
 type DataSourceType = {
   id: React.Key;
-  parameterName?: string;
-  displayTitle?: string;
-  parameterType?: string;
-  displayOrder?: number;
+  title?: string;
+  decs?: string;
+  state?: string;
+  created_at?: string;
+  children?: DataSourceType[];
 };
 
-const defaultData: DataSourceType[] = [
-  {
-      "id": 1,
-      "parameterName": "p_nf",
-      "displayTitle": "统计年份",
-      "displayOrder": 1,
-      "parameterType": "数值型"
-  },
-  {
-      "id": 2,
-      "parameterName": "p_hy",
-      "displayTitle": "行业类型",
-      "displayOrder": 2,
-      "parameterType": "代码表"
-  }
-]
+const defaultData: DataSourceType[] = new Array(5).fill(1).map((_, index) => {
+  return {
+    id: (Date.now() + index).toString(),
+    title: `活动名称${index}`,
+    decs: '这个活动真好玩',
+    state: 'open',
+    created_at: '2020-05-26T09:42:56Z',
+  };
+});
 
-const columns: ProColumns<DataSourceType>[] = [
-  {
-    key: '1',
-    title: '参数名称',
-    dataIndex: 'parameterName',
-    formItemProps: {
-      rules: [
-        {
-          required: true,
-          message: '请输入参数名称',
+export default () => {
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(() =>
+    defaultData.map((item) => item.id),
+  );
+  const [dataSource, setDataSource] = useState<DataSourceType[]>(() => defaultData);
+
+  const columns: ProColumns<DataSourceType>[] = [
+    {
+      title: '活动名称',
+      dataIndex: 'title',
+      width: '30%',
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            whitespace: true,
+            message: '此项是必填项',
+          },
+          {
+            message: '必须包含数字',
+            pattern: /[0-9]/,
+          },
+          {
+            max: 16,
+            whitespace: true,
+            message: '最长为 16 位',
+          },
+          {
+            min: 6,
+            whitespace: true,
+            message: '最小为 6 位',
+          },
+        ],
+      },
+    },
+    {
+      title: '状态',
+      key: 'state',
+      dataIndex: 'state',
+      valueType: 'select',
+      valueEnum: {
+        all: { text: '全部', status: 'Default' },
+        open: {
+          text: '未解决',
+          status: 'Error',
         },
-      ],
-    },
-    width: '22%',
-  },
-  {
-    key: '2',
-    title: '显示名称',
-    dataIndex: 'displayTitle',
-    width: '20%',
-  },
-  {
-    key: '3',
-    title: '参数类型',
-    dataIndex: 'parameterType',
-    valueType: 'select',
-    width: '20%',
-    valueEnum: {
-      all: { text: '代码表', status: 'Default' },
-      open: {
-        text: '字符型',
-        status: 'Error',
-      },
-      closed: {
-        text: '已解决',
-        status: 'Success',
+        closed: {
+          text: '已解决',
+          status: 'Success',
+        },
       },
     },
-  },
-  {
-    key: '4',
-    title: '顺序',
-    dataIndex: 'displayOrder',
-    width: '20%',
-  },
-  {
-    title: '操作',
-    valueType: 'option',
-    width: 120,
-    render: (text, record, _, action) => [
-      <a
-        key="editable"
-        onClick={() => {
-          action?.startEditable?.(record.id);
-        }}
-      >
-        编辑
-      </a>,
-      <EditableProTable.RecordCreator
-        key="copy"
-        record={{
-          ...record,
-          id: (Math.random() * 1000000).toFixed(0),
-        }}
-      >
-        <a>删除</a>
-      </EditableProTable.RecordCreator>,
-    ],
-  },
-];
+    {
+      title: '描述',
+      dataIndex: 'decs',
+    },
+    {
+      title: '操作',
+      valueType: 'option',
+      width: 250,
+      render: () => {
+        return null;
+      },
+    },
+  ];
 
-const ParameterTable = () => {
-  const actionRef = useRef<ActionType>();
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
-  const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
-  const [form] = Form.useForm();
   return (
     <>
-      <Space>
-        <Button
-          type="primary"
-          onClick={() => {
-            actionRef.current?.addEditRecord?.({
-              id: (Math.random() * 1000000).toFixed(0),
-              title: '添加参数',
-            });
-          }}
-          icon={<PlusOutlined />}
-        >
-          添加参数
-        </Button>
-        <Button
-          key="rest"
-          onClick={() => {
-            form.resetFields();
-          }}
-        >
-          重置表单
-        </Button>
-        {/* <Button type="dashed" icon={<DeleteOutlined />} className={styles.buttonmarginright}>删除参数</Button> */}
-        <Button type="dashed" icon={<CopyOutlined />} className={styles.buttonmarginright}>复制参数</Button>
-        <Button type='dashed' icon={<ScissorOutlined />} className={styles.buttonmarginright}>粘贴参数</Button>
-        {/* <Button type="dashed" icon={<CheckCircleOutlined />} className={styles.buttonmarginright}>保存</Button> */}
-        {/* <Button type='dashed' icon={<DeleteOutlined />}>取消</Button> */}
-      </Space>
-
       <EditableProTable<DataSourceType>
-        rowKey="id"
-        actionRef={actionRef}
-        maxLength={5}
-        // 关闭默认的新建按钮
-        recordCreatorProps={false}
         columns={columns}
-        request={async () => ({
-          data: defaultData,
-          total: 3,
-          success: true,
-        })}
+        rowKey="id"
         value={dataSource}
         onChange={setDataSource}
+        recordCreatorProps={{
+          newRecordType: 'dataSource',
+          record: () => ({
+            id: Date.now(),
+          }),
+        }}
         editable={{
-          form,
+          type: 'multiple',
           editableKeys,
-          onSave: async (key,rows) => {
-            await waitTime(2000,key, rows);
+          actionRender: (row, config, defaultDoms) => {
+            return [defaultDoms.delete];
+          },
+          onValuesChange: (record, recordList) => {
+            setDataSource(recordList);
           },
           onChange: setEditableRowKeys,
-          actionRender: (row, config, dom) => [dom.save, dom.cancel],
         }}
       />
     </>
   );
 };
-
-export default ParameterTable;
