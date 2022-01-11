@@ -17,8 +17,7 @@ const GuidelineTable = (props: any) => {
           <ParameterTable />
         </TabPane>
         <TabPane tab="显示结果字段定义" key="2">
-        <ResultTable />
-          {/* <ResultTable resultGroups={guidelineData.resultGroups}  /> */}
+          <ResultTable resultGroups={guidelineData.resultGroups}  />
         </TabPane>
       </Tabs>
     </Card>
