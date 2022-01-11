@@ -12,6 +12,13 @@ export async function currentUser(options?: { [key: string]: any }) {
   });
 }
 
+/** 获取当前的用户 GET /api/getUser */
+export async function getUser() {
+  return request('/api/getUser', {
+    method: 'GET',
+  });
+}
+
 /** 退出登录接口 POST /api/login/outLogin */
 export async function outLogin(options?: { [key: string]: any }) {
   return request<Record<string, any>>('/api/login/outLogin', {

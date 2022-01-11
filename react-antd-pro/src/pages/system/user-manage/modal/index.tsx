@@ -1,19 +1,35 @@
-import { Modal, Form,Input, Button, message, Select } from 'antd';
-import { useRef } from 'react';
-import { InsertNewGuideLine } from '@/services/guideline/api'
+import { Modal, Form,Input, Button, message, Select, Skeleton } from 'antd';
+import { useRef, useEffect, useState } from 'react';
 const { Option } = Select;
+import { getUser } from '@/services/ant-design-pro/api'
 // eslint-disable-next-line @typescript-eslint/ban-types
-export default (props: {modalVisible: boolean, hiddenModal: Function}) => {
-  const { modalVisible, hiddenModal } = props
-  console.log(props.modalVisible, modalVisible, 'ssss----ss')
-
+export default (props: any) => {
+  const { modalVisible, hiddenModal, editId, actionRef } = props
+  console.log(props.modalVisible, editId, 'ssss----ss')
+  console.log(actionRef, 'actionRef')
   const handleOk = () => {
     hiddenModal()
   }
 
+  const [initialValues,setInitialValues] = useState(undefined)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const fetch = async () => {
+      const result = await getUser()
+      console.log(result, 'result')
+      setInitialValues(result.data)
+      // initialValues = result.data
+    }
+    if(editId !== undefined) {
+      fetch()
+    }
+
+    console.log('---fetch---')
+  }, [])
+
   const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: { span: 6 },
+    wrapperCol: { span: 18 },
   };
   const formRef = useRef(null);
   const [form] = Form.useForm();
@@ -24,16 +40,8 @@ export default (props: {modalVisible: boolean, hiddenModal: Function}) => {
   }
 
   const onSubmit = async(values: any) => {
-    const result = await InsertNewGuideLine({
-      GuideLineName: values.GuideLineName,
-      GroupName: 'ccc'
-    })
-    if(result.code === 200) {
-      message.success('新增指标成功')
-      handleCancel()
-      // TODO 还没有刷新左侧树
-    }
-    console.log(result, '保存结果')
+    console.log(values, '保存结果')
+    message.success('结果保存成功')
   }
 
   const onChange = () => {}
@@ -41,7 +49,11 @@ export default (props: {modalVisible: boolean, hiddenModal: Function}) => {
   const onSearch = () => {}
   return (
     <Modal title="添加用户" footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
-      <Form form={form} onFinish={(values: any)=> onSubmit(values) } ref={formRef} {...layout} >
+      {
+        initialValues === undefined ? <Skeleton /> :
+
+
+      <Form form={form} onFinish={(values: any)=> onSubmit(values) } ref={formRef} {...layout}  initialValues={initialValues}>
         <Form.Item
           label="姓名"
           name="nickName"
@@ -74,7 +86,7 @@ export default (props: {modalVisible: boolean, hiddenModal: Function}) => {
         </Form.Item>
         <Form.Item
           label="用户角色"
-          name="role"
+          name="roleInfo"
         >
         <Select
             showSearch
@@ -83,8 +95,8 @@ export default (props: {modalVisible: boolean, hiddenModal: Function}) => {
             onChange={onChange}
             onSearch={onSearch}
           >
-            <Option value="0">管理员</Option>
-            <Option value="1">普通用户</Option>
+            <Option value="1">管理员</Option>
+            <Option value="2">普通用户</Option>
           </Select>
         </Form.Item>
         <Form.Item style={{textAlign:'right'}}>
@@ -96,6 +108,7 @@ export default (props: {modalVisible: boolean, hiddenModal: Function}) => {
           </Button>
         </Form.Item>
       </Form>
+    }
     </Modal>
   );
 };
