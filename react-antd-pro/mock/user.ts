@@ -117,6 +117,70 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
+
+  // GET POST 可省略
+  'GET /api/getUsers': {
+    page: 1,
+    success: true,
+    total: 30,
+    data: [
+      {
+        id: '1',
+        nickName: '陈双尾',
+        account: 'csw',
+        sex: '2',
+        createdAt: '2022-01-10',
+        updatedAt: '2022-01-10',
+        roleInfo: '2',
+      },
+      {
+        id: '2',
+        nickName: '陈双尾',
+        account: 'csw',
+        sex: '2',
+        createdAt: '2022-01-10',
+        updatedAt: '2022-01-10',
+        roleInfo: '1',
+      },
+      {
+        id: '3',
+        nickName: '陈双尾',
+        account: 'csw',
+        sex: '2',
+        createdAt: '2022-01-10',
+        updatedAt: '2022-01-10',
+        roleInfo: '2',
+      },
+      {
+        id: '4',
+        nickName: '陈双尾',
+        account: 'csw',
+        sex: '1',
+        createdAt: '2022-01-10',
+        updatedAt: '2022-01-10',
+        roleInfo: '1',
+      },
+      {
+        id: '5',
+        nickName: '陈双尾',
+        account: 'csw',
+        sex: '0',
+        createdAt: '2022-01-10',
+        updatedAt: '2022-01-10',
+        roleInfo: '2',
+      },
+      {
+        id: '7',
+        nickName: '陈双尾',
+        account: 'csw',
+        sex: '2',
+        createdAt: '2022-01-10',
+        updatedAt: '2022-01-10',
+        roleInfo: '2',
+      },
+    ],
+  },
+
   'POST /api/login/account': async (req: Request, res: Response) => {
     const { password, username, type } = req.body;
     await waitTime(2000);
