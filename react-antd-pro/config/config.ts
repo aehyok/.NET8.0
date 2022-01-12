@@ -127,6 +127,12 @@ export default defineConfig({
           path: '/system/guideline-manage',
           component: './system/guideline-manage',
         },
+        {
+          name: 'dictionary-manage',
+          icon: 'smile',
+          path: '/system/dictionary-manage',
+          component: './system/dictionary-manage',
+        },
       ],
     },
     {

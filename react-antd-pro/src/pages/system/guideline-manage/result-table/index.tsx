@@ -94,6 +94,7 @@ export default (props: any) => {
     },
   ];
 
+
   return (
     <>
       <EditableProTable<DataSourceType>
@@ -101,6 +102,13 @@ export default (props: any) => {
         rowKey="id"
         value={dataSource}
         onChange={setDataSource}
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              console.log('recor--onrow--d', record)
+            },
+          };
+        }}
         recordCreatorProps={{
           newRecordType: 'dataSource',
           record: () => ({

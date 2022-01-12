@@ -50,7 +50,7 @@ export default (props: any) => {
   return (
     <Modal title="添加用户" footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
       {
-        initialValues === undefined ? <Skeleton /> :
+        initialValues === undefined && editId !== undefined ? <Skeleton /> :
 
 
       <Form form={form} onFinish={(values: any)=> onSubmit(values) } ref={formRef} {...layout}  initialValues={initialValues}>

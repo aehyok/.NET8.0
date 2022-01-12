@@ -161,6 +161,7 @@ const ParameterTable = () => {
         })}
         value={dataSource}
         onChange={setDataSource}
+        onRow={(row) => { return console.log(row);}}
         editable={{
           form,
           editableKeys,
