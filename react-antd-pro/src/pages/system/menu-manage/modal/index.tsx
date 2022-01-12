@@ -11,7 +11,6 @@ export default (props: any) => {
     hiddenModal()
   }
 
-  const title = editId === undefined ? '添加用户': '编辑用户'
   const [initialValues,setInitialValues] = useState(undefined)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -49,7 +48,7 @@ export default (props: any) => {
 
   const onSearch = () => {}
   return (
-    <Modal title={title} footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
+    <Modal title="添加用户" footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
       {
         initialValues === undefined && editId !== undefined ? <Skeleton /> :
 
