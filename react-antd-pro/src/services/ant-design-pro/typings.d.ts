@@ -99,3 +99,26 @@ declare namespace API {
     type?: NoticeIconItemType;
   };
 }
+
+// @ts-ignore
+/* eslint-disable */
+
+declare namespace SYSTEM {
+  type DictionaryList = {
+    data?: DictionaryItem[];
+    code?: number;
+    message?: string;
+  };
+
+  type Status = '正常' | '禁用';
+  type DictionaryItem = {
+    id: number;
+    code: string; // 编码
+    name: string; // 名称
+    // status: string;
+    status: Status; // 状态 0 禁用，1 正常
+    sequence: number; // 顺序
+    remark: string; // 备注
+    iconFileUrl: string; // 图标预览
+  };
+}

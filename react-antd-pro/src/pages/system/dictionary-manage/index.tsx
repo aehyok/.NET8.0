@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import type { BadgeProps } from 'antd';
-import { Button, Badge } from 'antd';
+import { Button } from 'antd';
 import type { ProColumns } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import ProCard from '@ant-design/pro-card';
@@ -8,12 +7,9 @@ import ProCard from '@ant-design/pro-card';
 import styles from './split.less';
 import { request } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
+import { getDictionaryList } from '@/services/ant-design-pro/api'
 
-type TableListItem = {
-  createdAtRange?: number[];
-  createdAt: number;
-  code: string;
-};
+
 
 type DetailListProps = {
   typeCode: string;
@@ -21,64 +17,107 @@ type DetailListProps = {
 
 const DictionaryList: React.FC<DetailListProps> = (props) => {
   const { typeCode } = props;
-  const [tableListDataSource, setTableListDataSource] = useState<TableListItem[]>([]);
+  const [tableListDataSource, setTableListDataSource] = useState<SYSTEM.DictionaryItem[]>([]);
 
-  const columns: ProColumns<TableListItem>[] = [
+  const columns: ProColumns<SYSTEM.DictionaryItem>[] = [
     {
-      title: '时间点',
-      key: 'createdAt',
-      dataIndex: 'createdAt',
-      valueType: 'dateTime',
+      dataIndex: 'index',
+      valueType: 'indexBorder',
+      key:'index',
+      width: 48,
     },
     {
-      title: '代码',
+      title: '名称',
+      key: 'name',
+      width: 80,
+      dataIndex: 'name',
+    },
+    {
+      title: '编码',
       key: 'code',
       width: 80,
       dataIndex: 'code',
-      valueType: 'code',
+    },
+    {
+      title: '排序',
+      key: 'sequence',
+      width: 80,
+      dataIndex: 'sequence',
+    },
+    {
+      title: '备注',
+      key: 'remark',
+      width: 80,
+      dataIndex: 'remark',
+    },
+    {
+      title: '状态',
+      key: 'status',
+      width: 80,
+      dataIndex: 'status',
     },
     {
       title: '操作',
       key: 'option',
       width: 80,
       valueType: 'option',
-      render: () => [<a key="a">预警</a>],
+      render: () => [
+      // <><a key="a" >编辑</a><a key="b">删除</a><a key="c">禁用</a></>
+      <a
+          key="edit"
+          onClick={() => {
+
+          }}
+        >
+          编辑
+        </a>,
+        <a
+        key="delete"
+        onClick={() => {
+
+        }}
+      >
+        删除
+      </a>,
+    ],
     },
   ];
 
   useEffect(() => {
-    const source = [];
-    for (let i = 0; i < 15; i += 1) {
-      source.push({
-        createdAt: Date.now() - Math.floor(Math.random() * 10000),
-        code: `const getData = async params => {};`,
-        key: i,
-      });
+    const fetch = async() => {
+      const source = await getDictionaryList()
+      console.log(source, 'source')
+      setTableListDataSource(source.data|| []);
     }
 
-    setTableListDataSource(source);
+    fetch()
+    console.log('fetch--request')
+
   }, [typeCode]);
 
   return (
-    <ProTable<TableListItem>
+    <ProTable<SYSTEM.DictionaryItem>
       columns={columns}
       dataSource={tableListDataSource}
       pagination={{
-        pageSize: 3,
+        pageSize: 10,
         showSizeChanger: false,
       }}
-      rowKey="key"
-      toolBarRender={false}
+      rowKey="id"
+      // toolBarRender={false}
       search={false}
+      toolbar={{
+        actions: [
+          <Button key="lists" type="primary">
+            新建
+          </Button>,
+        ],
+      }}
     />
   );
 };
 
-type statusType = BadgeProps['status'];
-
-const valueEnum: statusType[] = ['success', 'error', 'processing', 'default'];
-
-export type IpListItem = {
+export type DictionaryTypeItem = {
   typeCode?: string;
   name?: string;
 };

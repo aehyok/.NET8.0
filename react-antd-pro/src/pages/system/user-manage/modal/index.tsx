@@ -52,7 +52,6 @@ export default (props: any) => {
       {
         initialValues === undefined && editId !== undefined ? <Skeleton /> :
 
-
       <Form form={form} onFinish={(values: any)=> onSubmit(values) } ref={formRef} {...layout}  initialValues={initialValues}>
         <Form.Item
           label="姓名"
