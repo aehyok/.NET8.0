@@ -110,7 +110,6 @@ declare namespace SYSTEM {
     message?: string;
   };
 
-  type Status = '正常' | '禁用';
   type DictionaryItem = {
     id: number;
     code: string; // 编码
@@ -120,5 +119,32 @@ declare namespace SYSTEM {
     sequence: number; // 顺序
     remark: string; // 备注
     iconFileUrl: string; // 图标预览
+  };
+
+  type MenuList = {
+    data?: MenuItem[];
+    code?: number;
+    message?: string;
+  };
+
+  type ResultItem = {
+    data?: MenuItem;
+    code?: number;
+    message?: string;
+  };
+
+  type MenuItem = {
+    action: number;
+    biggest: number;
+    children: MenuItem[];
+    code: string;
+    description: '';
+    id: number;
+    leaf: number;
+    name: string;
+    pcode: string;
+    sequence: number;
+    status: number;
+    uiPath: string;
   };
 }

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'antd';
-import type { ProColumns } from '@ant-design/pro-table';
+import { ProColumns, TableDropdown } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import ProCard from '@ant-design/pro-card';
 // @ts-ignore
 import styles from './split.less';
 import { request } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
-import { getDictionaryList } from '@/services/ant-design-pro/api'
+import { getDictionaryList } from '@/services/ant-design-pro/dictionary'
 
 
 
@@ -131,7 +131,7 @@ for (let i = 0; i < 10; i += 1) {
 }
 
 type IPListProps = {
-  typeCode: string;
+  typeCode: undefined;
   onChange: (id: string) => void;
 };
 
@@ -154,28 +154,20 @@ const DictionaryType: React.FC<IPListProps> = (props) => {
       title: '操作',
       valueType: 'option',
       render: () =>[
-        <a
-          key="editable"
-          onClick={() => {
-
-          }}
-        >
-          编辑
-        </a>,
-        <a
-        key="deleteable"
-        onClick={() => {
-
-        }}
-      >
-        删除
-      </a>,
+        <TableDropdown
+          key="actionGroup"
+          menus={[
+            { key: 'copy', name: '编辑' },
+            { key: 'delete', name: '删除' },
+          ]}
+        />,
       ],
     },
   ];
   return (
     <ProTable<IpListItem>
       columns={columns}
+      showHeader={false}
       request={(params, sorter, filter) => {
         // 表单搜索项会从 params 传入，传递给后端接口。
         console.log(params, sorter, filter);
@@ -220,7 +212,7 @@ const DictionaryManage: React.FC = () => {
     <PageContainer>
       <ProCard split="vertical">
         <ProCard colSpan="324px" ghost>
-          <DictionaryType onChangeClick={(typeCode: any) => setTypeCode(typeCode)} typeCode={typeCode} />
+          <DictionaryType onChangeClick={() => setTypeCode(typeCode)} typeCode={typeCode} />
         </ProCard>
         <ProCard title={typeCode}>
           <DictionaryList typeCode={typeCode} />

@@ -7,21 +7,29 @@ import ProForm, {
   ProFormTextArea,
   ProFormSelect
 } from '@ant-design/pro-form';
-import { getUser } from '@/services/ant-design-pro/api'
+import { getMenu } from '@/services/ant-design-pro/menu'
 
 export default (props: any) => {
+
+  const formItemLayout = {
+    labelCol: { span: 4 },
+    wrapperCol: { span: 20 },
+  }
+
   const { modalVisible, hiddenModal, editId, actionRef } = props
   console.log(props.modalVisible, editId, 'ssss----ss')
   console.log(actionRef, 'actionRef')
+  const [form] = Form.useForm();
+
   const handleOk = () => {
     hiddenModal()
   }
 
-  const [initialValues,setInitialValues] = useState(undefined)
+  const [initialValues,setInitialValues] = useState<SYSTEM.MenuItem>()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetch = async () => {
-      const result = await getUser()
+      const result = await getMenu()
       console.log(result, 'result')
       setInitialValues(result.data)
       // initialValues = result.data
@@ -34,7 +42,6 @@ export default (props: any) => {
   }, [])
 
   const formRef = useRef(null);
-  const [form] = Form.useForm();
 
   const handleCancel = () => {
     form.resetFields()
@@ -51,23 +58,31 @@ export default (props: any) => {
       {
         initialValues === undefined && editId !== undefined ? <Skeleton /> :
         <ProForm
+        form={form}
+        {...formItemLayout}
+        layout={'horizontal'}
           submitter={false}
+          initialValues={initialValues}
           onFinish={async (values) => onSubmit(values)}
       >
-        <ProForm.Group>
+          <ProFormText
+            name="pp"
+            label="上级菜单"
+            disabled
+          />
           <ProFormText
             name="name"
             label="菜单名称"
+            rules={[{ required: true, message: '请输入菜单名称' }]}
             placeholder="请输入菜单名称"
           />
+
           <ProFormText
-            name="path"
+            name="uiPath"
             label="菜单路由"
           />
-        </ProForm.Group>
-        <ProForm.Group>
           <ProFormText
-            name="displayOrder"
+            name="sequence"
             label="显示顺序"
             placeholder="请输入显示顺序"
           />
@@ -87,9 +102,8 @@ export default (props: any) => {
           name="taxRate"
           label="是否禁用"
         />
-        </ProForm.Group>
-        <ProFormTextArea width="xl" label="参数" name="remark"  autoSize ={{minRows: 6, maxRow: 10}} />
-        <ProForm.Group style={{textAlign:'right'}}>
+        <ProFormTextArea label="参数" name="remark"/>
+        <ProForm.Group style={{ textAlign: 'right' }}>
           <Button htmlType="button" onClick={ handleCancel }>
             取消
           </Button>

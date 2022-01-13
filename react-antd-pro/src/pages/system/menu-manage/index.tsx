@@ -3,8 +3,13 @@ import type { ActionType, ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
 import ProCard from '@ant-design/pro-card';
 import { ProFormField } from '@ant-design/pro-form';
-import { Button } from 'antd';
+import { Button, message, Modal } from 'antd';
 import MenuModal from './modal'
+import { request } from 'umi';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import MenuItem from './../../editor/mind/components/EditorContextMenu/MenuItem';
+import { PageContainer } from '@ant-design/pro-layout';
+
 const waitTime = (time: number = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -72,85 +77,66 @@ const defaultData: DataSourceType[] = [
   },
 ];
 
-const loopDataSourceFilter = (
-  data: DataSourceType[],
-  id: React.Key | undefined,
-): DataSourceType[] => {
-  return data
-    .map((item) => {
-      if (item.id !== id) {
-        if (item.children) {
-          const newChildren = loopDataSourceFilter(item.children, id);
-          return {
-            ...item,
-            children: newChildren.length > 0 ? newChildren : undefined,
-          };
-        }
-        return item;
-      }
-      return null;
-    })
-    .filter(Boolean) as DataSourceType[];
-};
 export default () => {
 
   const actionRef = useRef<ActionType>();
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const [editId, setEditId] = React.useState(undefined)
+  const [editId, setEditId] = React.useState<number>()
 
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const [dataSource, setDataSource] = useState<DataSourceType[]>(() => defaultData);
 
-  const [parentKey, setParentKey] = useState(undefined)
-  const columns: ProColumns<DataSourceType>[] = [
-    {
-      title: '活动名称',
-      dataIndex: 'title',
-      formItemProps: (form, { rowIndex }) => {
-        return {
-          rules: rowIndex > 2 ? [{ required: true, message: '此项为必填项' }] : [],
-        };
+  const editClick = (record: SYSTEM.MenuItem) => {
+    console.log(record, '-------编辑-----------')
+    setEditId(record.id)
+    setIsModalVisible(true)
+  }
+
+  const addChildClick = (record: SYSTEM.MenuItem) => {
+    console.log(record, '-----添加-----')
+    setIsModalVisible(true)
+  }
+
+  const deleteClick = (record: SYSTEM.MenuItem) => {
+    console.log(record, '-----删除---')
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined />,
+      content: '请确认是否删除该菜单（以及该指标节点下的指标）?',
+      okText: '确认',
+      onOk:() => {
+        message.success('删除成功')
+        actionRef.current?.reload()
       },
+      onCancel : () => {console.log('取消')},
+      cancelText: '取消',
+    });
+
+  }
+  const columns: ProColumns<SYSTEM.MenuItem>[] = [
+    {
+      title: '菜单名称',
+      dataIndex: 'name',
+      width: '30%',
+    },
+    {
+      title: '菜单路由',
+      dataIndex: 'uiPath',
+      width: '30%',
+    },
+    {
+      title: 'CODE',
+      dataIndex: 'code',
+      width: '30%',
+    },
+    {
+      title: '顺序',
+      dataIndex: 'sequence',
       width: '30%',
     },
     {
       title: '状态',
-      key: 'state',
-      dataIndex: 'state',
-      valueType: 'select',
-      valueEnum: {
-        all: { text: '全部', status: 'Default' },
-        open: {
-          text: '未解决',
-          status: 'Error',
-        },
-        closed: {
-          text: '已解决',
-          status: 'Success',
-        },
-      },
-    },
-    {
-      title: '描述',
-      dataIndex: 'decs',
-      fieldProps: (from, { rowKey, rowIndex }) => {
-        if (from.getFieldValue([rowKey || '', 'title']) === '不好玩') {
-          return {
-            disabled: true,
-          };
-        }
-        if (rowIndex > 9) {
-          return {
-            disabled: true,
-          };
-        }
-        return {};
-      },
-    },
-    {
-      title: '活动时间',
-      dataIndex: 'created_at',
-      valueType: 'date',
+      dataIndex: 'status',
+      width: '30%',
     },
     {
       title: '操作',
@@ -159,19 +145,19 @@ export default () => {
       render: (text, record) => [
         <a
           key="edit"
+          onClick={ () => {editClick(record)}}
         >
           编辑
         </a>,
         <a
           key="删除"
+          onClick={ () => {deleteClick(record)}}
         >
         删除
         </a>,
         <a
           key="addChild"
-          onClick={() => {
-            setDataSource(loopDataSourceFilter(dataSource, record.id));
-          }}
+          onClick={ () => {addChildClick(record)}}
         >
           添加子菜单
         </a>,
@@ -185,39 +171,46 @@ export default () => {
 
   return (
     <>
-      <EditableProTable<DataSourceType>
-        expandable={{
-          // 使用 request 请求数据时无效
-          defaultExpandAllRows: true,
-        }}
-        actionRef={actionRef}
-        rowKey="id"
-        headerTitle="菜单树"
-        // maxLength={5}
-        recordCreatorProps={false}
-        columns={columns}
-        value={dataSource}
-        onChange={setDataSource}
-        onRow={(row) => {
-          return {
-            onClick: () => {
-              console.log('row', row)
-              setParentKey(row.id)
-            },
-          }
-        }}
-        toolbar={{
-          actions: [
-            <Button key="lists" type="primary" onClick={() => {addRootMenuClick()}}>
-              添加根菜单
-            </Button>,
-          ],
-        }}
-      />
-            {
-        !isModalVisible ? '' :
-        <MenuModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} editId ={editId} actionRef={actionRef}/>
-      }
+      <PageContainer>
+        <EditableProTable<SYSTEM.MenuItem>
+          expandable={{
+            // 使用 request 请求数据时无效
+            defaultExpandAllRows: true,
+          }}
+          request={async (params = {}, sort, filter) => {
+            console.log(sort, filter);
+            return request<{
+              data: SYSTEM.MenuItem[];
+            }>('/api/getMenuList', {
+              params,
+            });
+          }}
+          actionRef={actionRef}
+          rowKey="id"
+          headerTitle="菜单树"
+          recordCreatorProps={false}
+          columns={columns}
+          onChange={setDataSource}
+          onRow={(row) => {
+            return {
+              onClick: () => {
+                console.log('row', row)
+              },
+            }
+          }}
+          toolbar={{
+            actions: [
+              <Button key="lists" type="primary" onClick={() => {addRootMenuClick()}}>
+                添加根菜单
+              </Button>,
+            ],
+          }}
+        />
+        {
+          !isModalVisible ? '' :
+          <MenuModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} editId ={editId} actionRef={actionRef}/>
+        }
+      </PageContainer>
     </>
   );
 };
