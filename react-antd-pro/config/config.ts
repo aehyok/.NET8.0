@@ -133,6 +133,30 @@ export default defineConfig({
           path: '/system/dictionary-manage',
           component: './system/dictionary-manage',
         },
+        {
+          name: 'form-manage',
+          icon: 'smile',
+          path: '/system/form-manage',
+          component: './system/form-manage',
+        },
+        {
+          name: 'flow-manage',
+          icon: 'smile',
+          path: '/system/flow-manage',
+          component: './system/flow-manage',
+        },
+        {
+          name: 'query-manage',
+          icon: 'smile',
+          path: '/system/query-manage',
+          component: './system/query-manage',
+        },
+        {
+          name: 'db-manage',
+          icon: 'smile',
+          path: '/system/db-manage',
+          component: './system/db-manage',
+        },
       ],
     },
     {

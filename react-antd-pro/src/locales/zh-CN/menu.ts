@@ -55,4 +55,8 @@ export default {
   'menu.system.menu-manage': '菜单管理',
   'menu.system.guideline-manage': '指标管理',
   'menu.system.dictionary-manage': '字典管理',
+  'menu.system.form-manage': '表单管理',
+  'menu.system.flow-manage': '流程管理',
+  'menu.system.query-manage': '查询管理',
+  'menu.system.db-manage': '数据表管理',
 };
