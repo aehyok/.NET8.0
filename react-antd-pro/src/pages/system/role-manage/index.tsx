@@ -1,9 +1,13 @@
 import React from 'react';
+import RoleInfo from './roleInfo'
+import { PageContainer } from '@ant-design/pro-layout';
 
-const NoFoundPage: React.FC = () => (
+const Role: React.FC = () => (
     <>
-      <div>角色管理</div>
+      <PageContainer>
+        <RoleInfo />
+      </PageContainer>
     </>
 );
 
-export default NoFoundPage;
+export default Role;
