@@ -5,8 +5,6 @@ import ProTable from '@ant-design/pro-table';
 // @ts-ignore
 import { getDictionaryList } from '@/services/ant-design-pro/dictionary'
 
-
-
 type ListProps = {
   typeCode: number| undefined;
   title: string | undefined;
