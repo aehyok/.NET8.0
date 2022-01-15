@@ -2,11 +2,10 @@ import { Modal, Form,Input, Button, message, Select, Skeleton } from 'antd';
 import { useRef, useEffect, useState } from 'react';
 const { Option } = Select;
 import { saveUser, getUser } from '@/services/ant-design-pro/user'
-// eslint-disable-next-line @typescript-eslint/ban-types
+
 export default (props: any) => {
   const { modalVisible, hiddenModal, editId, actionRef } = props
-  console.log(props.modalVisible, editId, 'ssss----ss')
-  console.log(actionRef, 'actionRef')
+
   const handleOk = () => {
     hiddenModal()
   }
@@ -56,6 +55,7 @@ export default (props: any) => {
       message.success('结果保存成功')
       actionRef.current.reload()
       hiddenModal()
+      form.resetFields()
     }
     console.log(result, 'result-saveUser----')
   }
@@ -64,7 +64,7 @@ export default (props: any) => {
 
   const onSearch = () => {}
   return (
-    <Modal title={title} footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
+    <Modal title={title} footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel} destroyOnClose={true}>
       {
         initialValues === undefined && editId !== undefined ? <Skeleton /> :
 

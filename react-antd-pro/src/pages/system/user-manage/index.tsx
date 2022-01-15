@@ -14,6 +14,7 @@ export default () => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const [editId, setEditId] = React.useState(undefined)
   const addUserClick = () => {
+    setEditId(undefined)
     setIsModalVisible(true)
   }
 
