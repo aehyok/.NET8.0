@@ -166,6 +166,10 @@ namespace aehyok.Core.EntityFrameCore.MySql.Data
                     .HasColumnName("status")
                     .HasDefaultValueSql("'1'");
 
+                entity.Property(e => e.Test)
+                    .HasMaxLength(255)
+                    .HasColumnName("test");
+
                 entity.Property(e => e.Type)
                     .HasColumnType("tinyint(2)")
                     .HasColumnName("type")

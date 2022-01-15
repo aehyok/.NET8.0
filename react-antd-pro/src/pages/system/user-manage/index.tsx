@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, Tag, Space, Skeleton } from 'antd';
+import { ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Button, Tag, Space, Skeleton, Modal, message } from 'antd';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import request from 'umi-request';
 import { PageContainer } from '@ant-design/pro-layout';
 import UserModal from './modal'
 import type { UserItem } from './type.d'
-
+import { deleteUser } from '@/services/ant-design-pro/user'
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -20,6 +20,27 @@ export default () => {
   const editClick = (record: any) => {
     setEditId(record.id)
     setIsModalVisible(true)
+  }
+
+  const deleteClick = (record: any) => {
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined />,
+      content: '请确认是否删除该指标（以及该指标节点下的指标）?',
+      okText: '确认',
+      onOk: async() => {
+        const result = await deleteUser({
+            id: record.id
+          }
+        )
+        if(result.code === 200) {
+          message.success('删除成功')
+          actionRef.current?.reload()
+        }
+      },
+      onCancel : () => {console.log('取消')},
+      cancelText: '取消',
+    });
   }
   const columns: ProColumns<UserItem>[] = [
     {
@@ -97,7 +118,12 @@ export default () => {
         >
           编辑
         </a>,
-        <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
+        <a  key="view"
+        onClick={() => {
+          //action?.startEditable?.(record.id);
+          deleteClick(record)
+        }}
+        >
           删除
         </a>,
       ],

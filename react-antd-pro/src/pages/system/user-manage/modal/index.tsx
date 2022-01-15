@@ -1,8 +1,7 @@
 import { Modal, Form,Input, Button, message, Select, Skeleton } from 'antd';
 import { useRef, useEffect, useState } from 'react';
 const { Option } = Select;
-import { getUser } from '@/services/ant-design-pro/api'
-import { saveUser } from '@/services/ant-design-pro/user'
+import { saveUser, getUser } from '@/services/ant-design-pro/user'
 // eslint-disable-next-line @typescript-eslint/ban-types
 export default (props: any) => {
   const { modalVisible, hiddenModal, editId, actionRef } = props
@@ -17,10 +16,12 @@ export default (props: any) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetch = async () => {
-      const result = await getUser()
+      console.log(editId, '--editId--')
+      const result = await getUser({
+        id:editId
+      })
       console.log(result, 'result')
       setInitialValues(result.data)
-      // initialValues = result.data
     }
     if(editId !== undefined) {
       fetch()
@@ -43,9 +44,18 @@ export default (props: any) => {
 
   const onSubmit = async(values: any) => {
     console.log(values, '保存结果')
-    const result = await saveUser(values)
+    let user = values
+    if(editId !== undefined) {
+      user= {
+        ...values,
+        id: editId
+      }
+    }
+    const result = await saveUser(user)
     if(result?.code === 200) {
       message.success('结果保存成功')
+      actionRef.current.reload()
+      hiddenModal()
     }
     console.log(result, 'result-saveUser----')
   }

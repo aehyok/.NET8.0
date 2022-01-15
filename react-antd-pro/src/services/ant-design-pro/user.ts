@@ -6,3 +6,17 @@ export async function saveUser(options: any) {
     data: options,
   });
 }
+
+/** 删除用户信息POST */
+export async function deleteUser(options: any) {
+  return request('/so/api/User/DeleteUser?id=' + options.id, {
+    method: 'POST',
+  });
+}
+
+/** 删除用户信息POST */
+export async function getUser(options: any) {
+  return request('/so/api/User/GetUser?id=' + options.id, {
+    method: 'GET',
+  });
+}

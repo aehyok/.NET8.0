@@ -28,10 +28,8 @@ namespace aehyok.Core.WebApi.Controllers
             try
             {
                 var context = new MyDbConext();
-                int pagesize = 10; // 分页大小(每一页大小)
-                                   //使用方法
-
-                var list = context.BaseUsers.OrderByDescending(item => item.CreatedAt).Skip(pagesize * pageIndex).Take(pagesize).ToList();
+                int pagesize = 10; 
+                var list = context.BaseUsers.Where(item=> item.IsDeleted==false).OrderByDescending(item => item.CreatedAt).Skip(pagesize * pageIndex).Take(pagesize).ToList();
                 this._logger.Info(list.Count);
                 return list;
             }
@@ -40,7 +38,27 @@ namespace aehyok.Core.WebApi.Controllers
                 this._logger.Error(error);
                 return null;
             }
+        }
 
+        /// <summary>
+        /// 获取用户详情
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<BaseUser> GetUser(int id)
+        {
+            try
+            {
+                var context = new MyDbConext();
+                var user = await context.BaseUsers.FindAsync(id);
+                return user;
+            }
+            catch (Exception error)
+            {
+                this._logger.Error(error);
+                return null;
+            }
         }
 
         /// <summary>
@@ -53,19 +71,37 @@ namespace aehyok.Core.WebApi.Controllers
         {
             try
             {
-                this._logger.Info(user);
-                var context = new MyDbConext();
-                user.IsDeleted = false;
-                var result = await context.BaseUsers.AddAsync(user);
-                context.SaveChanges();
-                return true;
+                this._logger.Info(user.Id);
+                if(user!=null  && user.Id > 0)
+                {
+                    var context = new MyDbConext();
+                    user.CreatedAt = DateTime.Now;
+                    user.IsDeleted = false;
+                    user.UpdatedAt = DateTime.Now;
+                    context.Update(user);
+                    await context.SaveChangesAsync();
+                    return true;
+                } 
+                else
+                {
+                    this._logger.Info(user);
+                    var context = new MyDbConext();
+                    user.IsDeleted = false;
+                    user.CreatedAt= DateTime.Now;
+                    user.UpdatedAt = DateTime.Now;
+                    var result = await context.BaseUsers.AddAsync(user);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+                
             }catch(Exception error)
             {
                 this._logger.Error(error);
                 return false;
             }
-
         }
+
+
 
         /// <summary>
         ///删除用户
@@ -82,20 +118,5 @@ namespace aehyok.Core.WebApi.Controllers
             context.SaveChanges();
             return true;
         }
-
-        /// <summary>
-        ///删除用户
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<bool> UpdateUser(BaseUser user)
-        {
-            var context = new MyDbConext();
-            context.Update(user);
-            await context.SaveChangesAsync();
-            return true;
-        }
-
     }
 }

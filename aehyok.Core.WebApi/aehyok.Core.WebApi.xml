@@ -30,6 +30,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.GetUser(System.Int32)">
+            <summary>
+            获取用户详情
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:aehyok.Core.WebApi.Controllers.UserController.SaveUser(aehyok.Core.EntityFrameCore.MySql.Models.BaseUser)">
              <summary>
             保存用户
@@ -37,12 +43,6 @@
              <returns></returns>
         </member>
         <member name="M:aehyok.Core.WebApi.Controllers.UserController.DeleteUser(System.Int32)">
-             <summary>
-            删除用户
-             </summary>
-             <returns></returns>
-        </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.UserController.UpdateUser(aehyok.Core.EntityFrameCore.MySql.Models.BaseUser)">
              <summary>
             删除用户
              </summary>

@@ -82,5 +82,6 @@ namespace aehyok.Core.EntityFrameCore.MySql.Models
         /// 是否网格员，0否， 1一级网格员，2二级网格员(网格长)
         /// </summary>
         public int? IsGrid { get; set; }
+        public string? Test { get; set; }
     }
 }
