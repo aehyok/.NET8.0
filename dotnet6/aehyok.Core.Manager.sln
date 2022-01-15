@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29318.209
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32104.313
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.Web", "aehyok.Core.Web\aehyok.Core.Web.csproj", "{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.Repository", "aehyok.Core.Repository\aehyok.Core.Repository.csproj", "{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core", "aehyok.Core\aehyok.Core.csproj", "{0D3BFC06-4A73-469E-83DD-03E7E97C1A7C}"
@@ -30,7 +28,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.MySqlDataAccess
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.Repository.Accessor", "aehyok.Core.Repository.Accessor\aehyok.Core.Repository.Accessor.csproj", "{DEA0E6D0-5DBD-4F74-9350-4C3B6B1FF5BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Lib", "aehyok.Lib\aehyok.Lib.csproj", "{9AFD8D19-E7D9-4951-B8C4-C63D9DB998FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Lib", "aehyok.Lib\aehyok.Lib.csproj", "{9AFD8D19-E7D9-4951-B8C4-C63D9DB998FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.EntityFrameCore.MySql", "aehyok.Core.EntityFrameCore.MySql\aehyok.Core.EntityFrameCore.MySql.csproj", "{E140DF87-F4B0-4263-89DB-C23F33F6D7B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{3B668B56-DC4B-41E8-8CE5-7FF088900120}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,10 +40,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5F121A3-86A1-4C1C-8ED1-C8FC6B645E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4D0047E-CFAC-49B1-A7CF-0242480CCF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -86,6 +84,14 @@ Global
 		{9AFD8D19-E7D9-4951-B8C4-C63D9DB998FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AFD8D19-E7D9-4951-B8C4-C63D9DB998FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AFD8D19-E7D9-4951-B8C4-C63D9DB998FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E140DF87-F4B0-4263-89DB-C23F33F6D7B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E140DF87-F4B0-4263-89DB-C23F33F6D7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E140DF87-F4B0-4263-89DB-C23F33F6D7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E140DF87-F4B0-4263-89DB-C23F33F6D7B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B668B56-DC4B-41E8-8CE5-7FF088900120}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B668B56-DC4B-41E8-8CE5-7FF088900120}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B668B56-DC4B-41E8-8CE5-7FF088900120}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B668B56-DC4B-41E8-8CE5-7FF088900120}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

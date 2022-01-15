@@ -19,6 +19,12 @@
             Form表单通用保存
             </summary>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.GetUserList">
+            <summary>
+            获取用户列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.ValuesController">
             <summary>
             测试控制器

@@ -1,5 +1,0 @@
-.layui-btn:not(.layui-btn-lg ):not(.layui-btn-sm):not(.layui-btn-xs) {
-    height: 34px;
-    line-height: 34px;
-    padding: 0 8px;
-}
