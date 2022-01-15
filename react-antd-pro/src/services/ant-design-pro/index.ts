@@ -5,8 +5,10 @@
 import * as api from './api';
 import * as login from './login';
 import * as dictionary from './dictionary';
+import * as user from './user';
 export default {
   api,
   login,
   dictionary,
+  user,
 };

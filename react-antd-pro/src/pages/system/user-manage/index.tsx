@@ -113,7 +113,7 @@ export default () => {
           console.log(sort, filter);
           return request<{
             data: UserItem[];
-          }>('/api/getUsers', {
+          }>('/so/api/User/getUserList', {
             params,
           });
         }}

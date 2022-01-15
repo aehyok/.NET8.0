@@ -2,6 +2,7 @@ import { Modal, Form,Input, Button, message, Select, Skeleton } from 'antd';
 import { useRef, useEffect, useState } from 'react';
 const { Option } = Select;
 import { getUser } from '@/services/ant-design-pro/api'
+import { saveUser } from '@/services/ant-design-pro/user'
 // eslint-disable-next-line @typescript-eslint/ban-types
 export default (props: any) => {
   const { modalVisible, hiddenModal, editId, actionRef } = props
@@ -42,7 +43,11 @@ export default (props: any) => {
 
   const onSubmit = async(values: any) => {
     console.log(values, '保存结果')
-    message.success('结果保存成功')
+    const result = await saveUser(values)
+    if(result?.code === 200) {
+      message.success('结果保存成功')
+    }
+    console.log(result, 'result-saveUser----')
   }
 
   const onChange = () => {}
@@ -64,7 +69,7 @@ export default (props: any) => {
         <Form.Item
           label="账号"
           name="account"
-          // rules={[{ required: true, message: '请输入账号' }]}
+          rules={[{ required: true, message: '请输入账号' }]}
         >
           <Input />
         </Form.Item>
