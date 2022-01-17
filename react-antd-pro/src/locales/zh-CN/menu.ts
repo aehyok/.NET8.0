@@ -59,5 +59,5 @@ export default {
   'menu.system.flow-manage': '流程管理',
   'menu.system.query-manage': '查询管理',
   'menu.system.db-manage': '数据表管理',
-  'menu.system.flow-manage.flow-detail': '流程详情',
+  'menu.system.flow-detail': '流程详情',
 };

@@ -18,7 +18,7 @@ type FlowType = {
 
 const jumpFlowDetail =(record: any) => {
   console.log('11111111111', record)
-  history.push('/system/flow-manage/flowDetailInfo')
+  history.push('/system/flow-detail')
 }
 
 const columns: ProColumns<FlowType>[] = [

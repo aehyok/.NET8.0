@@ -1,9 +1,8 @@
 import { PageContainer } from '@ant-design/pro-layout'
 import LogicFlow from "@logicflow/core";
-import { DndPanel, Menu, Control, Snapshot  } from '@logicflow/extension';
+import { DndPanel, Menu, Control, Snapshot, NodeResize  } from '@logicflow/extension';
 import "@logicflow/core/dist/style/index.css";
 import '@logicflow/extension/lib/style/index.css'
-import {  } from '@logicflow/extension';
 
 import { useEffect, useRef } from "react";
 import initStatus from './components/init-status';
@@ -15,6 +14,8 @@ const FlowDetail = () => {
   LogicFlow.use(Menu);
   LogicFlow.use(Control);
   LogicFlow.use(Snapshot);
+  LogicFlow.use(NodeResize);
+
   useEffect(() => {
     const lf = new LogicFlow({
       container: refContainer.current,
@@ -92,7 +93,7 @@ const FlowDetail = () => {
                 "text": {
                     "x": 300,
                     "y": 380,
-                    "value": "登记状态"
+                    "value": "摸排登记状态"
                 }
             },
             {
@@ -128,7 +129,7 @@ const FlowDetail = () => {
                 "text": {
                     "x": 290,
                     "y": 810,
-                    "value": "待评议"
+                    "value": "摸排通过待评议"
                 }
             }
         ],
