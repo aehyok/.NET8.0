@@ -201,3 +201,91 @@ declare namespace SYSTEM {
     userTotal: number;
   };
 }
+
+declare namespace FLOW {
+  /**
+   * 流程类型
+   */
+  type FlowEntityType = {
+    id: string;
+    flowName: string;
+    description: string;
+    displayOrder: number;
+    created_at: string;
+    updated_at: string;
+  };
+
+  /**
+   * 流程状态
+   */
+  type FlowEntityStatus = {
+    id?: string;
+    flowId?: string; // 所属流程ID
+    stateName?: string; // 状态名称[英文的标识]
+    stateDisplayName?: string; // 状态显示名称
+    stateDescript?: string; // 状态描述
+    stateType?: string; // 状态类型 初始、通用、结束
+    displayOrder: number; // 顺序
+    created_at: string; // 创建时间
+    updated_at: string; // 修改时间
+  };
+
+  /**
+   * 流程动作flow_statetransition
+   */
+  type FlowStatusTransition = {
+    id?: string;
+    stateId?: string;
+    actionName?: string;
+    actionTitle?: string;
+    targetStateId?: string; // 通过动作后流转到下一个状态Id
+    actionType?: string; //
+    userType?: string;
+    displayOrder: number; // 顺序
+    actionParameter?: string;
+    created_at: string; // 创建时间
+    updated_at: string; // 修改时间
+  };
+
+  type ResultItem = {
+    data?: MenuItem;
+    code?: number;
+    message?: string;
+  };
+
+  type MenuItem = {
+    action: number;
+    biggest: number;
+    children: MenuItem[];
+    code: string;
+    description: '';
+    id: number;
+    leaf: number;
+    name: string;
+    pcode: string;
+    sequence: number;
+    status: number;
+    uiPath: string;
+  };
+
+  // 角色列表
+  type RoleList = {
+    code?: number;
+    message?: string;
+    data?: RoleItem[];
+  };
+  /**
+   * 用户角色
+   */
+  type RoleItem = {
+    dataAccess?: string;
+    description?: string;
+    id: number;
+    name?: string;
+    sequence?: number;
+    status: number;
+    type: number;
+    updatedAt: Date;
+    userTotal: number;
+  };
+}
