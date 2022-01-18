@@ -299,7 +299,10 @@ const FlowDetail = () => {
   return (
       <PageContainer>
         <ProCard  bordered style={{marginBottom: '10px'}}>
-          <Row justify='end'>
+          <Row justify='space-between'>
+          <Col>
+            防返贫摸排登记流程
+            </Col>
             <Col>
               <Button icon={<SaveOutlined />} style={{marginRight:'5px'}}>保存</Button>
               <Button icon = {<DownloadOutlined />} style={{marginRight:'5px'}}>下载图片</Button>
