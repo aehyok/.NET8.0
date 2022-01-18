@@ -10,11 +10,11 @@ import styles from './index.less'
 
 const FlowDetail = () => {
   const refContainer = useRef();
-  LogicFlow.use(DndPanel);
-  LogicFlow.use(Menu);
-  LogicFlow.use(Control);
-  LogicFlow.use(Snapshot);
-  LogicFlow.use(NodeResize);
+  LogicFlow.use(DndPanel); // 左上角拖拽列表
+  LogicFlow.use(Menu);   // 右键菜单
+  LogicFlow.use(Control);  // 右上角操作
+  LogicFlow.use(Snapshot); // 生成图片下载
+  LogicFlow.use(NodeResize); // 节点可放大缩小
 
   useEffect(() => {
     const lf = new LogicFlow({
@@ -71,204 +71,238 @@ const FlowDetail = () => {
     ]);
 
     const graphData = {
-        "nodes": [
-            {
-                "id": "5565d72f-d1cd-470a-89bf-346bfa83396c",
-                "type": "UserTask",
-                "x": 1000,
-                "y": 500,
-                "properties": {}
-            },
-            {
-                "id": "70258c1e-bb80-4067-98ee-ba7019f86090",
-                "type": "UserTask",
-                "x": 300,
-                "y": 120,
-                "properties": {},
-                "text": {
-                    "x": 300,
-                    "y": 120,
-                    "value": "初始状态"
-                }
-            },
-            {
-                "id": "c9566437-6e4f-47a2-a913-e26ad2623016",
-                "type": "rect",
-                "x": 300,
-                "y": 380,
-                "properties": {},
-                "text": {
-                    "x": 300,
-                    "y": 380,
-                    "value": "摸排登记状态"
-                }
-            },
-            {
-                "id": "cfa81721-53c3-4d4a-9087-d8d5c3d4a058",
-                "type": "diamond",
-                "x": 300,
-                "y": 580,
-                "properties": {},
-                "text": {
-                    "x": 300,
-                    "y": 580,
-                    "value": "是否通过"
-                }
-            },
-            {
-                "id": "1b640a1f-a09c-4d0d-8cc8-32e0028b766f",
-                "type": "rect",
-                "x": 550,
-                "y": 570,
-                "properties": {},
-                "text": {
-                    "x": 550,
-                    "y": 570,
-                    "value": "不通过"
-                }
-            },
-            {
-                "id": "6b7e581b-9cb2-48f7-8377-0a074e8a7767",
-                "type": "rect",
-                "x": 290,
-                "y": 810,
-                "properties": {},
-                "text": {
-                    "x": 290,
-                    "y": 810,
-                    "value": "摸排通过待评议"
-                }
-            }
-        ],
-        "edges": [
-            {
-                "id": "0e6b000f-ea06-457d-a66d-5141710af40b",
-                "type": "polyline",
-                "sourceNodeId": "70258c1e-bb80-4067-98ee-ba7019f86090",
-                "targetNodeId": "c9566437-6e4f-47a2-a913-e26ad2623016",
-                "startPoint": {
-                    "x": 300,
-                    "y": 170
-                },
-                "endPoint": {
-                    "x": 300,
-                    "y": 330
-                },
-                "properties": {},
-                "text": {
-                    "x": 300,
-                    "y": 239,
-                    "value": "登记"
-                },
-                "pointsList": [
-                    {
-                        "x": 300,
-                        "y": 170
-                    },
-                    {
-                        "x": 300,
-                        "y": 330
-                    }
-                ]
-            },
-            {
-                "id": "6eb2c0ee-3839-4f50-adba-30396e8abe23",
-                "type": "polyline",
-                "sourceNodeId": "c9566437-6e4f-47a2-a913-e26ad2623016",
-                "targetNodeId": "cfa81721-53c3-4d4a-9087-d8d5c3d4a058",
-                "startPoint": {
-                    "x": 300,
-                    "y": 430
-                },
-                "endPoint": {
-                    "x": 300,
-                    "y": 530
-                },
-                "properties": {},
-                "pointsList": [
-                    {
-                        "x": 300,
-                        "y": 430
-                    },
-                    {
-                        "x": 300,
-                        "y": 530
-                    }
-                ]
-            },
-            {
-                "id": "ca6838c0-99e9-41b2-a4d4-8b71d5f2a23d",
-                "type": "polyline",
-                "sourceNodeId": "cfa81721-53c3-4d4a-9087-d8d5c3d4a058",
-                "targetNodeId": "1b640a1f-a09c-4d0d-8cc8-32e0028b766f",
-                "startPoint": {
-                    "x": 330,
-                    "y": 580
-                },
-                "endPoint": {
-                    "x": 500,
-                    "y": 570
-                },
-                "properties": {},
-                "pointsList": [
-                    {
-                        "x": 330,
-                        "y": 580
-                    },
-                    {
-                        "x": 415,
-                        "y": 580
-                    },
-                    {
-                        "x": 415,
-                        "y": 570
-                    },
-                    {
-                        "x": 500,
-                        "y": 570
-                    }
-                ]
-            },
-            {
-                "id": "9f225a1a-76fe-4b57-a4aa-9fef28e52713",
-                "type": "polyline",
-                "sourceNodeId": "cfa81721-53c3-4d4a-9087-d8d5c3d4a058",
-                "targetNodeId": "6b7e581b-9cb2-48f7-8377-0a074e8a7767",
-                "startPoint": {
-                    "x": 300,
-                    "y": 630
-                },
-                "endPoint": {
-                    "x": 290,
-                    "y": 760
-                },
-                "properties": {},
-                "text": {
-                    "x": 300,
-                    "y": 692,
-                    "value": "通过"
-                },
-                "pointsList": [
-                    {
-                        "x": 300,
-                        "y": 630
-                    },
-                    {
-                        "x": 300,
-                        "y": 695
-                    },
-                    {
-                        "x": 290,
-                        "y": 695
-                    },
-                    {
-                        "x": 290,
-                        "y": 760
-                    }
-                ]
-            }
-        ]
-    }
+      "nodes": [
+          {
+              "id": "5565d72f-d1cd-470a-89bf-346bfa83396c",
+              "type": "UserTask",
+              "x": 1000,
+              "y": 500,
+              "properties": {}
+          },
+          {
+              "id": "70258c1e-bb80-4067-98ee-ba7019f86090",
+              "type": "UserTask",
+              "x": 300,
+              "y": 120,
+              "properties": {},
+              "text": {
+                  "x": 300,
+                  "y": 120,
+                  "value": "初始状态"
+              }
+          },
+          {
+              "id": "c9566437-6e4f-47a2-a913-e26ad2623016",
+              "type": "rect",
+              "x": 300,
+              "y": 380,
+              "properties": {
+                  "nodeSize": {
+                      "width": 180,
+                      "height": 80
+                  }
+              },
+              "text": {
+                  "x": 300,
+                  "y": 380,
+                  "value": "摸排登记状态"
+              }
+          },
+          {
+              "id": "cfa81721-53c3-4d4a-9087-d8d5c3d4a058",
+              "type": "diamond",
+              "x": 300,
+              "y": 580,
+              "properties": {
+                  "nodeSize": {
+                      "rx": 90,
+                      "ry": 50
+                  }
+              },
+              "text": {
+                  "x": 300,
+                  "y": 580,
+                  "value": "是否通过"
+              }
+          },
+          {
+              "id": "1b640a1f-a09c-4d0d-8cc8-32e0028b766f",
+              "type": "rect",
+              "x": 560,
+              "y": 580,
+              "properties": {},
+              "text": {
+                  "x": 540,
+                  "y": 560,
+                  "value": "不通过"
+              }
+          },
+          {
+              "id": "6b7e581b-9cb2-48f7-8377-0a074e8a7767",
+              "type": "rect",
+              "x": 300,
+              "y": 820,
+              "properties": {},
+              "text": {
+                  "x": 280,
+                  "y": 800,
+                  "value": "摸排通过待评议"
+              }
+          },
+          {
+              "id": "3b5669d3-23ec-4bff-add1-cda17af92d53",
+              "type": "text",
+              "x": 180,
+              "y": 240,
+              "properties": {},
+              "text": {
+                  "x": 180,
+                  "y": 240,
+                  "value": "网格员"
+              }
+          },
+          {
+              "id": "eee5b31b-117b-49ba-a032-f4e190c6a9a2",
+              "type": "text",
+              "x": 180,
+              "y": 380,
+              "properties": {},
+              "text": {
+                  "x": 180,
+                  "y": 380,
+                  "value": "网格员"
+              }
+          }
+      ],
+      "edges": [
+          {
+              "id": "0e6b000f-ea06-457d-a66d-5141710af40b",
+              "type": "polyline",
+              "sourceNodeId": "70258c1e-bb80-4067-98ee-ba7019f86090",
+              "targetNodeId": "c9566437-6e4f-47a2-a913-e26ad2623016",
+              "startPoint": {
+                  "x": 300,
+                  "y": 170
+              },
+              "endPoint": {
+                  "x": 300,
+                  "y": 330
+              },
+              "properties": {},
+              "text": {
+                  "x": 300,
+                  "y": 239,
+                  "value": "登记"
+              },
+              "pointsList": [
+                  {
+                      "x": 300,
+                      "y": 170
+                  },
+                  {
+                      "x": 300,
+                      "y": 330
+                  }
+              ]
+          },
+          {
+              "id": "6eb2c0ee-3839-4f50-adba-30396e8abe23",
+              "type": "polyline",
+              "sourceNodeId": "c9566437-6e4f-47a2-a913-e26ad2623016",
+              "targetNodeId": "cfa81721-53c3-4d4a-9087-d8d5c3d4a058",
+              "startPoint": {
+                  "x": 300,
+                  "y": 430
+              },
+              "endPoint": {
+                  "x": 300,
+                  "y": 530
+              },
+              "properties": {},
+              "pointsList": [
+                  {
+                      "x": 300,
+                      "y": 430
+                  },
+                  {
+                      "x": 300,
+                      "y": 530
+                  }
+              ]
+          },
+          {
+              "id": "ca6838c0-99e9-41b2-a4d4-8b71d5f2a23d",
+              "type": "polyline",
+              "sourceNodeId": "cfa81721-53c3-4d4a-9087-d8d5c3d4a058",
+              "targetNodeId": "1b640a1f-a09c-4d0d-8cc8-32e0028b766f",
+              "startPoint": {
+                  "x": 390,
+                  "y": 580
+              },
+              "endPoint": {
+                  "x": 500,
+                  "y": 570
+              },
+              "properties": {},
+              "pointsList": [
+                  {
+                      "x": 390,
+                      "y": 580
+                  },
+                  {
+                      "x": 445,
+                      "y": 580
+                  },
+                  {
+                      "x": 445,
+                      "y": 570
+                  },
+                  {
+                      "x": 500,
+                      "y": 570
+                  }
+              ]
+          },
+          {
+              "id": "9f225a1a-76fe-4b57-a4aa-9fef28e52713",
+              "type": "polyline",
+              "sourceNodeId": "cfa81721-53c3-4d4a-9087-d8d5c3d4a058",
+              "targetNodeId": "6b7e581b-9cb2-48f7-8377-0a074e8a7767",
+              "startPoint": {
+                  "x": 300,
+                  "y": 630
+              },
+              "endPoint": {
+                  "x": 290,
+                  "y": 760
+              },
+              "properties": {},
+              "text": {
+                  "x": 300,
+                  "y": 692,
+                  "value": "通过"
+              },
+              "pointsList": [
+                  {
+                      "x": 300,
+                      "y": 630
+                  },
+                  {
+                      "x": 300,
+                      "y": 695
+                  },
+                  {
+                      "x": 290,
+                      "y": 695
+                  },
+                  {
+                      "x": 290,
+                      "y": 760
+                  }
+              ]
+          }
+      ]
+  }
 
     lf.render(
       graphData
