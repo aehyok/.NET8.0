@@ -4,11 +4,18 @@ import { DndPanel, Menu, Control, Snapshot, NodeResize  } from '@logicflow/exten
 import "@logicflow/core/dist/style/index.css";
 import '@logicflow/extension/lib/style/index.css'
 import theme from './components/theme'
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import initStatus from './components/init-status';
 import styles from './index.less'
+import FlowStatus from './status/index'
+import FlowAction from './action/index'
+import FlowType from './type/index'
+import ProCard from '@ant-design/pro-card';
+import { Button, Col, Row } from 'antd';
+import { ArrowLeftOutlined, DownloadOutlined, ExportOutlined, SaveOutlined } from '@ant-design/icons';
 
 const FlowDetail = () => {
+  const [type, setType] = useState('')
   const refContainer = useRef();
   LogicFlow.use(DndPanel); // 左上角拖拽列表
   LogicFlow.use(Menu);   // 右键菜单
@@ -31,6 +38,7 @@ const FlowDetail = () => {
 
     lf.register(initStatus)
     lf.on('node:click', (data) => {
+      setType('node')
       console.log(data, 'node click', lf.getGraphData())
       // lf.getSnapshot() 下载图片
 
@@ -38,6 +46,7 @@ const FlowDetail = () => {
 
     lf.on('edge:click', (data) => {
       console.log(data, 'edge click',lf)
+      setType('edge')
     })
     lf.setPatternItems([
       {
@@ -289,7 +298,28 @@ const FlowDetail = () => {
 
   return (
       <PageContainer>
-      <div className={styles.flowContainer} ref={refContainer} />
+        <ProCard  bordered style={{marginBottom: '10px'}}>
+          <Row justify='end'>
+            <Col>
+              <Button icon={<SaveOutlined />} style={{marginRight:'5px'}}>保存</Button>
+              <Button icon = {<DownloadOutlined />} style={{marginRight:'5px'}}>下载图片</Button>
+              <Button icon = {<ExportOutlined />} style={{marginRight:'5px'}}>查看json</Button>
+              <Button icon = {<ArrowLeftOutlined />} style={{marginRight:'5px'}}>返回列表</Button>
+            </Col>
+          </Row>
+        </ProCard>
+        <ProCard split="vertical">
+          <ProCard>
+            <div className={styles.flowContainer} ref={refContainer} />
+          </ProCard>
+          <ProCard colSpan="400px" ghost>
+            {
+              type === 'node' ? <FlowStatus /> :
+              type === 'edge' ? <FlowAction /> :
+              type === '' ? <FlowType /> : ''
+            }
+          </ProCard>
+        </ProCard>
       </PageContainer>
   )
 }
