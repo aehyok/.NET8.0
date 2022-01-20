@@ -83,7 +83,7 @@ namespace aehyok.Core.DataBase
                     catch (Exception tranExc)
                     {
                         transaction.Rollback();
-                        throw tranExc;
+                        //throw tranExc;
                     }
                 }
                 dbConnection.Close();
@@ -142,7 +142,7 @@ namespace aehyok.Core.DataBase
                     catch (Exception tranExc)
                     {
                         transaction.Rollback();
-                        throw tranExc;
+                        //throw tranExc;
                     }
                 }
                 dbConnection.Close();

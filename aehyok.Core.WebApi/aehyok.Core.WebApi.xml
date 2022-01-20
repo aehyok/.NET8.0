@@ -14,6 +14,12 @@
             Controller
             </summary>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityTypeList">
+            <summary>
+            获取流程列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.FormController">
             <summary>
             Form表单通用保存

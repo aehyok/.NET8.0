@@ -66,6 +66,7 @@ namespace aehyok.Core.WebApi
             services.AddScoped<IMetaDataManager, MyDA_MetaDataManager>();
 
             services.AddScoped<IMetaDataQuery, MyDA_MetaDataQuery>();
+            services.AddScoped<IFlowRepository, FlowRepository>();
             services.AddControllers(options =>
             {
                 options.Filters.Add<JsonResultFilter>();

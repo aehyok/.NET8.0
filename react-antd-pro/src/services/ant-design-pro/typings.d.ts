@@ -5,7 +5,7 @@ declare namespace COMMON {
     code?: number;
     message?: string;
     data: T;
-  }
+  };
 }
 
 declare namespace API {
@@ -114,7 +114,6 @@ declare namespace API {
  * 系统管理
  */
 declare namespace SYSTEM {
-
   /**
    * 字典类型项
    */
@@ -122,15 +121,6 @@ declare namespace SYSTEM {
     name?: string;
     typeCode?: number;
   };
-
-  // /**
-  //  * 单个字典列表
-  //  */
-  // type DictionaryList = {
-  //   code?: number;
-  //   message?: string;
-  //   data?: DictionaryItem[];
-  // };
 
   /**
    * 字典中的某一项
