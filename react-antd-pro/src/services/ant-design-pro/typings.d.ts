@@ -1,5 +1,12 @@
 // @ts-ignore
 /* eslint-disable */
+declare namespace COMMON {
+  type ResultModel<T> = {
+    code?: number;
+    message?: string;
+    data: T;
+  }
+}
 
 declare namespace API {
   type CurrentUser = {
@@ -107,14 +114,6 @@ declare namespace API {
  * 系统管理
  */
 declare namespace SYSTEM {
-  /**
-   * 字典类型列表
-   */
-  type DictionaryTypeList = {
-    code?: number;
-    message?: string;
-    data?: DictionaryTypeItem[];
-  };
 
   /**
    * 字典类型项
@@ -124,14 +123,14 @@ declare namespace SYSTEM {
     typeCode?: number;
   };
 
-  /**
-   * 单个字典列表
-   */
-  type DictionaryList = {
-    code?: number;
-    message?: string;
-    data?: DictionaryItem[];
-  };
+  // /**
+  //  * 单个字典列表
+  //  */
+  // type DictionaryList = {
+  //   code?: number;
+  //   message?: string;
+  //   data?: DictionaryItem[];
+  // };
 
   /**
    * 字典中的某一项
@@ -150,21 +149,6 @@ declare namespace SYSTEM {
     typeCode?: number;
   };
 
-  /**
-   * 菜单列表
-   */
-  type MenuList = {
-    data?: MenuItem[];
-    code?: number;
-    message?: string;
-  };
-
-  type ResultItem = {
-    data?: MenuItem;
-    code?: number;
-    message?: string;
-  };
-
   type MenuItem = {
     action: number;
     biggest: number;
@@ -180,12 +164,6 @@ declare namespace SYSTEM {
     uiPath: string;
   };
 
-  // 角色列表
-  type RoleList = {
-    code?: number;
-    message?: string;
-    data?: RoleItem[];
-  };
   /**
    * 用户角色
    */
@@ -245,47 +223,5 @@ declare namespace FLOW {
     actionParameter?: string;
     created_at: string; // 创建时间
     updated_at: string; // 修改时间
-  };
-
-  type ResultItem = {
-    data?: MenuItem;
-    code?: number;
-    message?: string;
-  };
-
-  type MenuItem = {
-    action: number;
-    biggest: number;
-    children: MenuItem[];
-    code: string;
-    description: '';
-    id: number;
-    leaf: number;
-    name: string;
-    pcode: string;
-    sequence: number;
-    status: number;
-    uiPath: string;
-  };
-
-  // 角色列表
-  type RoleList = {
-    code?: number;
-    message?: string;
-    data?: RoleItem[];
-  };
-  /**
-   * 用户角色
-   */
-  type RoleItem = {
-    dataAccess?: string;
-    description?: string;
-    id: number;
-    name?: string;
-    sequence?: number;
-    status: number;
-    type: number;
-    updatedAt: Date;
-    userTotal: number;
   };
 }
