@@ -84,7 +84,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<List<FlowStateTransition >> GetFlowEntityActionList(string stateId)
         {
-            return await this._flowRepository.GetFlowEntityTransitions(stateId);
+            return await this._flowRepository.GetFlowEntityTransitionList(stateId);
         }
     }
 }
