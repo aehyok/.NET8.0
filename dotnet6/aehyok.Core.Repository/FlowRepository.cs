@@ -23,7 +23,9 @@ namespace aehyok.Core.Repository
 
         public Task<FlowEntityState> GetFlowEntityState(string stateId)
         {
-            throw new NotImplementedException();
+            var context = new MyDbConext();
+            var result = context.FlowEntityStates.FirstOrDefaultAsync(t => t.Id == stateId);
+            return result;
         }
 
         public async Task<List<FlowEntityState>> GetFlowEntityStateList(string flowId)
@@ -35,7 +37,9 @@ namespace aehyok.Core.Repository
 
         public Task<List<FlowStateTransition>> GetFlowEntityTransitionList(string stateId)
         {
-            throw new NotImplementedException();
+            var context = new MyDbConext();
+            var result = context.FlowStateTransitions.Where(t => t.StateId == stateId).ToListAsync();
+            return result;
         }
 
         public async Task<List<FlowStateTransition>> GetFlowEntityTransitions(string stateId)
@@ -45,7 +49,7 @@ namespace aehyok.Core.Repository
             return list;
         }
 
-        public Task<FlowEntityType> GetFlowEntityTypeById(string flowId)
+        public Task<FlowEntityType> GetFlowEntityType(string flowId)
         {
             var context = new MyDbConext();
             return context.FlowEntityTypes.FirstOrDefaultAsync(t => t.Id == flowId);
@@ -60,12 +64,27 @@ namespace aehyok.Core.Repository
 
         public Task<FlowStateTransition> GetFlowStateTransition(string actionId)
         {
-            throw new NotImplementedException();
+            var context = new MyDbConext();
+            var result = context.FlowStateTransitions.FirstOrDefaultAsync(t => t.Id == actionId);
+            return result;
         }
 
-        public Task<int> SaveFlowEntityState(FlowEntityState flowEntityState)
+        public async Task<int> SaveFlowEntityState(FlowEntityState flowEntityState)
         {
-            throw new NotImplementedException();
+            if (flowEntityState != null && flowEntityState.Id != null)
+            {
+                var context = new MyDbConext();
+                context.Update(flowEntityState);
+                var result = await context.SaveChangesAsync();
+                return result;
+            }
+            else
+            {
+                var context = new MyDbConext();
+                await context.FlowEntityStates.AddAsync(flowEntityState);
+                var result = await context.SaveChangesAsync();
+                return result;
+            }
         }
 
         public async Task<int> SaveFlowEntityType(FlowEntityType flowEntityType)
@@ -87,9 +106,22 @@ namespace aehyok.Core.Repository
 
         }
 
-        public Task<FlowStateTransition> SaveFlowStateTransition(FlowStateTransition flowStateTransition)
+        public async Task<int> SaveFlowStateTransition(FlowStateTransition flowStateTransition)
         {
-            throw new NotImplementedException();
+            if (flowStateTransition != null && flowStateTransition.Id != null)
+            {
+                var context = new MyDbConext();
+                context.Update(flowStateTransition);
+                var result = await context.SaveChangesAsync();
+                return result;
+            }
+            else
+            {
+                var context = new MyDbConext();
+                await context.FlowStateTransitions.AddAsync(flowStateTransition);
+                var result = await context.SaveChangesAsync();
+                return result;
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<FlowEntityType> GetFlowEntityType(string flowId)
         {
-            return await this._flowRepository.GetFlowEntityTypeById(flowId);
+            return await this._flowRepository.GetFlowEntityType(flowId);
         }
 
         /// <summary>

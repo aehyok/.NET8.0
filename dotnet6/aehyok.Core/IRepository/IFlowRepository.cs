@@ -31,7 +31,7 @@ namespace aehyok.Core.IRepository
         /// </summary>
         /// <param name="flowId"></param>
         /// <returns></returns>
-        Task<FlowEntityType> GetFlowEntityTypeById(string flowId);
+        Task<FlowEntityType> GetFlowEntityType(string flowId);
 
         /// <summary>
         /// 删除流程类型
@@ -79,6 +79,6 @@ namespace aehyok.Core.IRepository
         /// </summary>
         /// <param name="flowStateTransition"></param>
         /// <returns></returns>
-        Task<FlowStateTransition> SaveFlowStateTransition(FlowStateTransition flowStateTransition);
+        Task<int> SaveFlowStateTransition(FlowStateTransition flowStateTransition);
     }
 }
