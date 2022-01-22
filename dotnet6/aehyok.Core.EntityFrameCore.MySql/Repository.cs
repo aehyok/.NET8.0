@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using aehyok.Base;
 using aehyok.Core.EntityFrameCore.MySql.Data;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,15 @@ namespace aehyok.Core.EntityFrameCore.MySql
             return this.GetQueryable().ToList();
         }
 
+        /// <summary>
+        /// 获取对象集合
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await this.GetQueryable().Where(predicate).ToListAsync();
+        }
 
         public async Task<int> Insert(TEntity entity)
         {

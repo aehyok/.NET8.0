@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using aehyok.Base;
+using System.Linq.Expressions;
 
 namespace aehyok.Core.EntityFrameCore.MySql
 {
@@ -11,6 +12,8 @@ namespace aehyok.Core.EntityFrameCore.MySql
         IQueryable<TEntity> GetQueryable();
 
         List<TEntity> GetList();
+
+        Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate);
 
         //增加单个实体
         Task<int> Insert(TEntity entity);

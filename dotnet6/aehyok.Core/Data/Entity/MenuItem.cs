@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using aehyok.Base;
 
 namespace aehyok.Core.Data.Entity
 {

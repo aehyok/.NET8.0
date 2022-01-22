@@ -10,17 +10,28 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.WebApi.Controllers
 {
+    /// <summary>
+    /// 流程引擎定义表
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class FlowController : BaseApiController
     {
         private readonly IFlowRepository _flowRepository;
-        private readonly IRepository<FlowEntityType> _repository;
+        private readonly IRepository<FlowEntityType> _flowEntityTypeRepository;
+        private readonly IRepository<FlowEntityState> _flowEntityStateRepository;
+        private readonly IRepository<FlowStateTransition> _flowEntityActionRepository;
 
-        public FlowController(IFlowRepository flowRepository, IRepository<FlowEntityType> repository)
+        public FlowController(IFlowRepository flowRepository,
+            IRepository<FlowEntityType> flowEntityTypeRepository,
+            IRepository<FlowEntityState> flowEntityStateRepository,
+            IRepository<FlowStateTransition> flowEntityActionRepository
+            )
         {
             this._flowRepository = flowRepository;
-            this._repository = repository;
+            this._flowEntityTypeRepository = flowEntityTypeRepository;
+            this._flowEntityStateRepository = flowEntityStateRepository;
+            this._flowEntityActionRepository = flowEntityActionRepository;
         }
 
         /// <summary>
@@ -31,7 +42,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public List<FlowEntityType> GetFlowEntityTypeList_ex()
         {
-            return this._repository.GetList();
+            return this._flowEntityTypeRepository.GetList();
         }
 
         /// <summary>
@@ -42,7 +53,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<FlowEntityType> GetFlowEntityType_ex(string id)
         {
-            return await this._repository.GetByKey(id);
+            return await this._flowEntityTypeRepository.GetByKey(id);
         }
 
 
@@ -52,9 +63,9 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<List<FlowEntityType>> GetFlowEntityTypeList()
+        public List<FlowEntityType> GetFlowEntityTypeList()
         {
-            return await this._flowRepository.GetFlowEntityTypeList();
+            return this._flowEntityTypeRepository.GetList();
         }
 
         /// <summary>
@@ -76,7 +87,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<FlowEntityType> GetFlowEntityType(string flowId)
         {
-            return await this._flowRepository.GetFlowEntityType(flowId);
+            return await this._flowEntityTypeRepository.GetByKey(flowId);
         }
 
         /// <summary>
@@ -99,7 +110,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<List<FlowEntityState>> GetFlowEntityStateList(string flowId)
         {
-            return await this._flowRepository.GetFlowEntityStateList(flowId);
+            return await this._flowEntityStateRepository.GetListAsync(item => item.FlowId == flowId);
         }
 
         /// <summary>
@@ -111,7 +122,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<List<FlowStateTransition >> GetFlowEntityActionList(string stateId)
         {
-            return await this._flowRepository.GetFlowEntityTransitionList(stateId);
+            return await this._flowEntityActionRepository.GetListAsync(item => item.StateId == stateId);
         }
     }
 }
