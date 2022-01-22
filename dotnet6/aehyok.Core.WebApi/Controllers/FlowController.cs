@@ -1,4 +1,5 @@
-﻿using aehyok.Core.EntityFrameCore.MySql.Models;
+﻿using aehyok.Core.EntityFrameCore.MySql;
+using aehyok.Core.EntityFrameCore.MySql.Models;
 using aehyok.Core.IRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +14,7 @@ namespace aehyok.Core.WebApi.Controllers
     public class FlowController : BaseApiController
     {
         private readonly IFlowRepository _flowRepository;
+        //private readonly IRepository<FlowEntityType> _repository;
 
         public FlowController(IFlowRepository flowRepository)
         {

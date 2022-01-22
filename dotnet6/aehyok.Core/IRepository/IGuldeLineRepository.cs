@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using aehyok.Base;
 
 namespace aehyok.Core.IRepository
 {

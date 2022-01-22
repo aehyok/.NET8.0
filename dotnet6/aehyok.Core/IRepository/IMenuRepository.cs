@@ -3,6 +3,7 @@ using aehyok.Core.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using aehyok.Base;
 
 namespace aehyok.Core.IRepository
 {

@@ -6,13 +6,13 @@ using aehyok.Core.EntityFrameCore.MySql.Models;
 
 namespace aehyok.Core.EntityFrameCore.MySql.Data
 {
-    public partial class MyDbConext : DbContext
+    public partial class MyDbContext : DbContext
     {
-        public MyDbConext()
+        public MyDbContext()
         {
         }
 
-        public MyDbConext(DbContextOptions<MyDbConext> options)
+        public MyDbContext(DbContextOptions<MyDbContext> options)
             : base(options)
         {
         }

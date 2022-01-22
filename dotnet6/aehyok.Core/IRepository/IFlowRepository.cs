@@ -1,4 +1,5 @@
-﻿using aehyok.Core.Data;
+﻿using aehyok.Base;
+using aehyok.Core.Data;
 using aehyok.Core.EntityFrameCore.MySql.Models;
 using System;
 using System.Collections.Generic;

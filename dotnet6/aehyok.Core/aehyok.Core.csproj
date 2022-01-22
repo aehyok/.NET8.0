@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Core.EntityFrameCore.MySql\aehyok.Core.EntityFrameCore.MySql.csproj" />
+    <ProjectReference Include="..\aehyok.Base\aehyok.Base.csproj" />
   </ItemGroup>
 
 </Project>

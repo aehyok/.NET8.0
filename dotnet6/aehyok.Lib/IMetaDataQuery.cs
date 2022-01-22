@@ -1,4 +1,5 @@
-﻿using aehyok.Core.Data;
+﻿using aehyok.Base;
+using aehyok.Core.Data;
 using aehyok.Lib.MetaData.Define;
 using aehyok.Lib.MetaData.Query;
 using aehyok.Lib.MetaData.RefCode;

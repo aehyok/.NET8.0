@@ -8,5 +8,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
+    <ProjectReference Include="..\aehyok.Core.EntityFrameCore.MySql\aehyok.Core.EntityFrameCore.MySql.csproj" />
   </ItemGroup>
 </Project>

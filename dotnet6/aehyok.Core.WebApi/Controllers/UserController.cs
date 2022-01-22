@@ -27,7 +27,7 @@ namespace aehyok.Core.WebApi.Controllers
         {
             try
             {
-                var context = new MyDbConext();
+                var context = new MyDbContext();
                 int pagesize = 10; 
                 var list = context.BaseUsers.Where(item=> item.IsDeleted==false).OrderByDescending(item => item.CreatedAt).Skip(pagesize * pageIndex).Take(pagesize).ToList();
                 this._logger.Info(list.Count);
@@ -50,7 +50,7 @@ namespace aehyok.Core.WebApi.Controllers
         {
             try
             {
-                var context = new MyDbConext();
+                var context = new MyDbContext();
                 var user = await context.BaseUsers.FindAsync(id);
                 return user;
             }
@@ -74,7 +74,7 @@ namespace aehyok.Core.WebApi.Controllers
                 this._logger.Info(user.Id);
                 if(user!=null  && user.Id > 0)
                 {
-                    var context = new MyDbConext();
+                    var context = new MyDbContext();
                     user.CreatedAt = DateTime.Now;
                     user.IsDeleted = false;
                     user.UpdatedAt = DateTime.Now;
@@ -85,7 +85,7 @@ namespace aehyok.Core.WebApi.Controllers
                 else
                 {
                     this._logger.Info(user);
-                    var context = new MyDbConext();
+                    var context = new MyDbContext();
                     user.IsDeleted = false;
                     user.CreatedAt= DateTime.Now;
                     user.UpdatedAt = DateTime.Now;
@@ -111,7 +111,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<bool> DeleteUser(int id)
         {
-            var context = new MyDbConext();
+            var context = new MyDbContext();
             var user = await context.BaseUsers.FindAsync(id);
             user.IsDeleted = true;
             context.Update(user);

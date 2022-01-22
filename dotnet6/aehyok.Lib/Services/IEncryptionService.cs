@@ -1,4 +1,5 @@
-﻿using aehyok.Core.Data;
+﻿using aehyok.Base;
+using aehyok.Core.Data;
 using System.Threading.Tasks;
 
 namespace aehyok.Lib.Services
