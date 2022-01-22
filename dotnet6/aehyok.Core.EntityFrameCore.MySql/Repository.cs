@@ -9,22 +9,31 @@ namespace aehyok.Core.EntityFrameCore.MySql
     {
         MyDbContext EF = new MyDbContext();
 
-        public DbSet<TEntity> Entities
+        public DbSet<TEntity> Table
         {
             get { return EF.Set<TEntity>(); }
         }
 
-        DbSet<TEntity> IRepository<TEntity>.Entities => throw new NotImplementedException();
+        public IQueryable<TEntity> GetQueryable()
+        {
+            return this.Table.AsNoTracking();
+        }
+
+        public List<TEntity> GetList()
+        {
+            return this.GetQueryable().ToList();
+        }
+
 
         public async Task<int> Insert(TEntity entity)
         {
-            Entities.Add(entity);
+            Table.Add(entity);
             return await EF.SaveChangesAsync();
         }
 
         public async Task<int> Insert(IEnumerable<TEntity> entities)
         {
-            Entities.AddRange(entities);
+            Table.AddRange(entities);
             return await EF.SaveChangesAsync();
         }
 
@@ -37,7 +46,7 @@ namespace aehyok.Core.EntityFrameCore.MySql
         public async Task<int> Delete(object id)
         {
             ///删除操作实现
-            var item = await Entities.FindAsync(id);
+            var item = await Table.FindAsync(id);
             if(item != null)
             {
                 EF.Remove<TEntity>(item);
@@ -48,7 +57,7 @@ namespace aehyok.Core.EntityFrameCore.MySql
 
         public async Task<TEntity> GetByKey(object key)
         {
-            return await Entities.FindAsync(key);
+            return await Table.FindAsync(key);
         }
     }
 }

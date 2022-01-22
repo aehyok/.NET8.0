@@ -1,6 +1,7 @@
 ﻿using aehyok.Core.EntityFrameCore.MySql;
 using aehyok.Core.EntityFrameCore.MySql.Models;
 using aehyok.Core.IRepository;
+using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,12 +15,36 @@ namespace aehyok.Core.WebApi.Controllers
     public class FlowController : BaseApiController
     {
         private readonly IFlowRepository _flowRepository;
-        //private readonly IRepository<FlowEntityType> _repository;
+        private readonly IRepository<FlowEntityType> _repository;
 
-        public FlowController(IFlowRepository flowRepository)
+        public FlowController(IFlowRepository flowRepository, IRepository<FlowEntityType> repository)
         {
             this._flowRepository = flowRepository;
+            this._repository = repository;
         }
+
+        /// <summary>
+        /// 获取流程列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public List<FlowEntityType> GetFlowEntityTypeList_ex()
+        {
+            return this._repository.GetList();
+        }
+
+        /// <summary>
+        /// 获取流程列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<FlowEntityType> GetFlowEntityType_ex(string id)
+        {
+            return await this._repository.GetByKey(id);
+        }
+
 
         /// <summary>
         /// 获取流程列表

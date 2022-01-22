@@ -6,7 +6,11 @@ namespace aehyok.Core.EntityFrameCore.MySql
 {
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {
-        DbSet<TEntity> Entities { get; }
+        DbSet<TEntity> Table { get; }
+
+        IQueryable<TEntity> GetQueryable();
+
+        List<TEntity> GetList();
 
         //增加单个实体
         Task<int> Insert(TEntity entity);
