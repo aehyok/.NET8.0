@@ -19,9 +19,9 @@ namespace aehyok.Core.EntityFrameCore.MySql.Data
 
         public virtual DbSet<BaseUser> BaseUsers { get; set; } = null!;
         public virtual DbSet<BasicUser> BasicUsers { get; set; } = null!;
-        public virtual DbSet<FlowEntityState> FlowEntityStates { get; set; } = null!;
-        public virtual DbSet<FlowEntityType> FlowEntityTypes { get; set; } = null!;
-        public virtual DbSet<FlowStateTransition> FlowStateTransitions { get; set; } = null!;
+        //public virtual DbSet<FlowEntityState> FlowEntityStates { get; set; } = null!;
+        //public virtual DbSet<FlowEntityType> FlowEntityTypes { get; set; } = null!;
+        //public virtual DbSet<FlowStateTransition> FlowStateTransitions { get; set; } = null!;
         public virtual DbSet<MdComputecolumn> MdComputecolumns { get; set; } = null!;
         public virtual DbSet<MdFunction> MdFunctions { get; set; } = null!;
         public virtual DbSet<MdInputgroup> MdInputgroups { get; set; } = null!;
