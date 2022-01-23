@@ -6,13 +6,29 @@ using Microsoft.EntityFrameworkCore;
 
 namespace aehyok.Core.EntityFrameCore.MySql
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
         MyDbContext EF = new MyDbContext();
 
         public DbSet<TEntity> Table
         {
             get { return EF.Set<TEntity>(); }
+        }
+
+        /// <summary>
+        /// 获取详细错误信息并回滚
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <returns></returns>
+        private string GetFullErrorTextAndRollback(DbUpdateException exception)
+        {
+            var entries = this.EF.ChangeTracker.Entries().Where(a => a.State == EntityState.Added || a.State == EntityState.Modified).ToList();
+
+            entries.ForEach(a => a.State = EntityState.Unchanged);
+
+            this.EF.SaveChanges();
+
+            return exception.ToString();
         }
 
         public IQueryable<TEntity> GetQueryable()
@@ -65,9 +81,39 @@ namespace aehyok.Core.EntityFrameCore.MySql
             return 0;
         }
 
+
+        public async Task<int> DeleteAsync(object id)
+        {
+            var entity = await this.GetAsync(id);
+            return await this.DeleteAsync(entity);
+        }
+
+        private async Task<int> DeleteAsync(TEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            try
+            {
+                this.Table.Remove(entity);
+                return await EF.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
+            }
+        }
+
         public async Task<TEntity> GetByKey(object key)
         {
             return await Table.FindAsync(key);
+        }
+
+        public async Task<TEntity> GetAsync(object id)
+        {
+            return await Table.FindAsync(id);
         }
     }
 }

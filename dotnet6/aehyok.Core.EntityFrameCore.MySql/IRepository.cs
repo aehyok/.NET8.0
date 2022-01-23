@@ -27,8 +27,11 @@ namespace aehyok.Core.EntityFrameCore.MySql
         //删除
         Task<int> Delete(object id);
 
+        Task<int> DeleteAsync(object id);
         //根据逐渐获取实体
         Task<TEntity> GetByKey(object key);
+
+        Task<TEntity> GetAsync(object id);
     }
 }
 
