@@ -17,7 +17,7 @@ namespace aehyok.Core.WebApi.Controllers
     [ApiController]
     public class FlowController : BaseApiController
     {
-        private readonly IFlowRepository _flowRepository;
+        //private readonly IFlowRepository _flowRepository;
         private readonly IRepository<FlowEntityType> _flowEntityTypeRepository;
         private readonly IRepository<FlowEntityState> _flowEntityStateRepository;
         private readonly IRepository<FlowStateTransition> _flowEntityActionRepository;
@@ -55,7 +55,15 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<int> SaveFlowEntityType(FlowEntityType flowEntityType)
         {
-            return await this._flowRepository.SaveFlowEntityType(flowEntityType);
+            if (flowEntityType != null && flowEntityType.Id != null)
+            {
+                return await this._flowEntityTypeRepository.UpdateAsync(flowEntityType);
+            }
+            else
+            {
+                var result = await this._flowEntityTypeRepository.InsertAsync(flowEntityType);
+                return (result.Id != null) ? 1 : 0;
+            }
         }
 
         /// <summary>
