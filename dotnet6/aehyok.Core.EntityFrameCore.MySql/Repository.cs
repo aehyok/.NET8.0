@@ -52,25 +52,45 @@ namespace aehyok.Core.EntityFrameCore.MySql
             return await this.GetQueryable().Where(predicate).ToListAsync();
         }
 
-        public async Task<int> Insert(TEntity entity)
+        public async Task<TEntity> InsertAsync(TEntity entity)
         {
-            Table.Add(entity);
-            return await EF.SaveChangesAsync();
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            try
+            {
+                await this.Table.AddAsync(entity);
+                await EF.SaveChangesAsync();
+
+                return entity;
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
+            }
         }
 
-        public async Task<int> Insert(IEnumerable<TEntity> entities)
+        public async Task<int> InsertRangeAsync(IEnumerable<TEntity> entities)
         {
-            Table.AddRange(entities);
-            return await EF.SaveChangesAsync();
+            if (entities == null)
+            {
+                throw new ArgumentNullException(nameof(entities));
+            }
+
+            try
+            {
+                await this.Table.AddRangeAsync(entities);
+                return await EF.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
+            }
         }
 
-        public async Task<int> Update(TEntity entity)
-        {
-            EF.Entry(entity).State = EntityState.Modified;
-            return await EF.SaveChangesAsync();
-        }
-
-        public async Task<int> Delete(object id)
+        public async Task<int> DeleteAsync(object id)
         {
             ///删除操作实现
             var item = await Table.FindAsync(id);
@@ -80,13 +100,6 @@ namespace aehyok.Core.EntityFrameCore.MySql
                 return await EF.SaveChangesAsync();
             }
             return 0;
-        }
-
-
-        public async Task<int> DeleteAsync(object id)
-        {
-            var entity = await this.GetAsync(id);
-            return await this.DeleteAsync(entity);
         }
 
         private async Task<int> DeleteAsync(TEntity entity)
@@ -143,6 +156,78 @@ namespace aehyok.Core.EntityFrameCore.MySql
         {
             var query = this.GetQueryable().Where(predicate);
             return asc ? await query.OrderBy(orderBy).ToPagedListAsync(page, limit) : await query.OrderByDescending(orderBy).ToPagedListAsync(page, limit);
+        }
+
+        public async Task<int> InsertRangeAsync(params TEntity[] entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException(nameof(entities));
+            }
+
+            try
+            {
+                await this.Table.AddRangeAsync(entities);
+                return await EF.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
+            }
+        }
+
+        public async Task<int> UpdateAsync(TEntity entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+
+            try
+            {
+                this.Table.Update(entity);
+                return await EF.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
+            }
+        }
+
+        public async Task<int> UpdateRangeAsync(params TEntity[] entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException(nameof(entities));
+            }
+
+            try
+            {
+                this.Table.UpdateRange(entities);
+                return await EF.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
+            }
+        }
+
+        public async Task<int> UpdateRangeAsync(IEnumerable<TEntity> entities)
+        {
+            if (entities == null)
+            {
+                throw new ArgumentNullException(nameof(entities));
+            }
+
+            try
+            {
+                this.Table.UpdateRange(entities);
+                return await EF.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
+            }
         }
     }
 }

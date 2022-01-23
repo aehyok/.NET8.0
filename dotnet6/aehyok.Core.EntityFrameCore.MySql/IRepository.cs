@@ -16,19 +16,23 @@ namespace aehyok.Core.EntityFrameCore.MySql
 
         Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate);
 
-        //增加单个实体
-        Task<int> Insert(TEntity entity);
 
-        //增加多个实体
-        //int Insert(IEnumerable<TEntity> entities);
+        Task<TEntity> InsertAsync(TEntity entity);
 
-        //更新实体
-        Task<int> Update(TEntity entity);
+        Task<int> InsertRangeAsync(IEnumerable<TEntity> entities);
+
+        Task<int> InsertRangeAsync(params TEntity[] entities);
+
+
+        Task<int> UpdateAsync(TEntity entity);
+
+        Task<int> UpdateRangeAsync(params TEntity[] entities);
+
+        Task<int> UpdateRangeAsync(IEnumerable<TEntity> entities);
 
         //删除
-        Task<int> Delete(object id);
-
         Task<int> DeleteAsync(object id);
+
         //根据逐渐获取实体
         Task<TEntity> GetByKey(object key);
 
