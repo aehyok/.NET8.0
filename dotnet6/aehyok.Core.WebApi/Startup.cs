@@ -1,5 +1,7 @@
+using aehyok.Base;
 using aehyok.Core.Config;
 using aehyok.Core.Data;
+using aehyok.Core.EntityFrameCore.MySql;
 using aehyok.Core.IRepository;
 using aehyok.Core.MySql;
 using aehyok.Core.MySqlDataAccessor;
@@ -48,17 +50,17 @@ namespace aehyok.Core.WebApi
             MDEConfig.QueryString = Configuration.GetConnectionString("Query");
             //MDEConfig.RedisConnectionString = Configuration.GetSection("Redis:ConnectionString").Value;
             MDEConfig.DbUser = Configuration.GetSection("DbUser").Value;
-            // Ìí¼ÓSwagger
+            // æ·»åŠ Swagger
             services.AddSwaggerGen(optios =>
             {
-                optios.SwaggerDoc("v1", new OpenApiInfo { Title = "Tally.soË½·ş½Ó¿ÚAPI", Version = "v1" });
+                optios.SwaggerDoc("v1", new OpenApiInfo { Title = "Tally.soç§æœæ¥å£API", Version = "v1" });
 
                 optios.OperationFilter<SwaggerOperationFilter>();
-                // »ñÈ¡xmlÎÄ¼şÃû
+                // è·å–xmlæ–‡ä»¶å
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                // »ñÈ¡xmlÎÄ¼şÂ·¾¶
+                // è·å–xmlæ–‡ä»¶è·¯å¾„
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                // Ìí¼Ó¿ØÖÆÆ÷²ã×¢ÊÍ£¬true±íÊ¾ÏÔÊ¾¿ØÖÆÆ÷×¢ÊÍ
+                // æ·»åŠ æ§åˆ¶å™¨å±‚æ³¨é‡Šï¼Œtrueè¡¨ç¤ºæ˜¾ç¤ºæ§åˆ¶å™¨æ³¨é‡Š
                 optios.IncludeXmlComments(xmlPath, true);
             });
             services.AddScoped<IEncryptionService, EncryptionService>();
@@ -66,7 +68,7 @@ namespace aehyok.Core.WebApi
             services.AddScoped<IMetaDataManager, MyDA_MetaDataManager>();
 
             services.AddScoped<IMetaDataQuery, MyDA_MetaDataQuery>();
-            services.AddScoped<IFlowRepository, FlowRepository>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddControllers(options =>
             {
                 options.Filters.Add<JsonResultFilter>();
@@ -75,12 +77,12 @@ namespace aehyok.Core.WebApi
         }
 
         /// <summary>
-        /// AutofacÈİÆ÷Ê¹ÓÃ
+        /// Autofacå®¹å™¨ä½¿ç”¨
         /// </summary>
         /// <param name="builder"></param>
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            // ÔÚÕâÀïÌí¼Ó·şÎñ×¢²á
+            // åœ¨è¿™é‡Œæ·»åŠ æœåŠ¡æ³¨å†Œ
             builder.RegisterType<HttpContextAccessor>();
             //builder.RegisterType<TestRepository>();
 
@@ -114,11 +116,11 @@ namespace aehyok.Core.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            // Ìí¼ÓSwaggerÓĞ¹ØÖĞ¼ä¼ş
+            // æ·»åŠ Swaggeræœ‰å…³ä¸­é—´ä»¶
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Í¨ÓÃ½Ó¿ÚAPI");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "é€šç”¨æ¥å£API");
             });
 
             app.UseHttpsRedirection();

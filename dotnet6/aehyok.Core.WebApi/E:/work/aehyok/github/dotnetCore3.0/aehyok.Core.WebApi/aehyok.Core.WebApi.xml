@@ -14,6 +14,11 @@
             Controller
             </summary>
         </member>
+        <member name="T:aehyok.Core.WebApi.Controllers.FlowController">
+            <summary>
+            流程引擎定义表
+            </summary>
+        </member>
         <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityTypeList">
             <summary>
             获取流程列表
@@ -34,7 +39,20 @@
         </member>
         <member name="M:aehyok.Core.WebApi.Controllers.FlowController.DeleteFlowEntityType(System.String)">
             <summary>
-            删除流程
+            通过流程id删除流程
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityState(System.String)">
+            <summary>
+            通过状态Id主键获取状态详情
+            </summary>
+            <param name="stateId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.DeleteFlowEntityState(System.String)">
+            <summary>
+            通过状态id删除状态
             </summary>
             <returns></returns>
         </member>
@@ -43,6 +61,19 @@
             通过流程ID获取流程状态列表
             </summary>
             <param name="flowId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityAction(System.String)">
+            <summary>
+            通过动作Id主键获取动作详情
+            </summary>
+            <param name="actionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.DeleteFlowEntityAction(System.String)">
+            <summary>
+            通过动作id删除动作
+            </summary>
             <returns></returns>
         </member>
         <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityActionList(System.String)">
@@ -113,7 +144,7 @@
         </member>
         <member name="M:aehyok.Core.WebApi.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
             <summary>
-            Autofac����ʹ��
+            Autofac容器使用
             </summary>
             <param name="builder"></param>
         </member>

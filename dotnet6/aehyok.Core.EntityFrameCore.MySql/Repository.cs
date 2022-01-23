@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using aehyok.Base;
 using aehyok.Core.EntityFrameCore.MySql.Data;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace aehyok.Core.EntityFrameCore.MySql
 {
@@ -114,6 +115,34 @@ namespace aehyok.Core.EntityFrameCore.MySql
         public async Task<TEntity> GetAsync(object id)
         {
             return await Table.FindAsync(id);
+        }
+
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <param name="page">分页索引</param>
+        /// <param name="limit">分页大小</param>
+        /// <returns></returns>
+        public async Task<IPagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> predicate, int page, int limit)
+        {
+            return await this.GetQueryable().Where(predicate).ToPagedListAsync(page, limit);
+        }
+
+        /// <summary>
+        /// 获取分页数据
+        /// </summary>
+        /// <typeparam name="TOrder"></typeparam>
+        /// <param name="predicate"></param>
+        /// <param name="orderBy"></param>
+        /// <param name="page"></param>
+        /// <param name="limit"></param>
+        /// <param name="asc"></param>
+        /// <returns></returns>
+        public async Task<IPagedList<TEntity>> GetPagedListAsync<TOrder>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TOrder>> orderBy, int page, int limit = 10, bool asc = true)
+        {
+            var query = this.GetQueryable().Where(predicate);
+            return asc ? await query.OrderBy(orderBy).ToPagedListAsync(page, limit) : await query.OrderByDescending(orderBy).ToPagedListAsync(page, limit);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using aehyok.Base;
 using System.Linq.Expressions;
+using X.PagedList;
 
 namespace aehyok.Core.EntityFrameCore.MySql
 {
@@ -32,6 +33,11 @@ namespace aehyok.Core.EntityFrameCore.MySql
         Task<TEntity> GetByKey(object key);
 
         Task<TEntity> GetAsync(object id);
+
+        Task<IPagedList<TEntity>> GetPagedListAsync(Expression<Func<TEntity, bool>> predicate, int page, int limit);
+
+        Task<IPagedList<TEntity>> GetPagedListAsync<TOrder>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TOrder>> orderBy, int page, int limit = 10, bool asc = true);
+
     }
 }
 
