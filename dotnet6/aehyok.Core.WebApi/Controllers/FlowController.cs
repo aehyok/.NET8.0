@@ -125,6 +125,25 @@ namespace aehyok.Core.WebApi.Controllers
         {
             return await this._flowEntityStateRepository.GetListAsync(item => item.FlowId == flowId);
         }
+
+        /// <summary>
+        /// 保存流程状态
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<int> SaveFlowEntityState(FlowEntityState flowEntityState)
+        {
+            if (flowEntityState != null && flowEntityState.Id != null)
+            {
+                return await this._flowEntityStateRepository.UpdateAsync(flowEntityState);
+            }
+            else
+            {
+                var result = await this._flowEntityStateRepository.InsertAsync(flowEntityState);
+                return (result.Id != null) ? 1 : 0;
+            }
+        }
         #endregion
 
         #region 流程动作管理
@@ -152,7 +171,6 @@ namespace aehyok.Core.WebApi.Controllers
             return await this._flowEntityActionRepository.DeleteAsync(actionId);
         }
 
-
         /// <summary>
         /// 通过状态Id获取流程动作列表
         /// </summary>
@@ -163,6 +181,25 @@ namespace aehyok.Core.WebApi.Controllers
         public async Task<List<FlowStateTransition>> GetFlowEntityActionList(string stateId)
         {
             return await this._flowEntityActionRepository.GetListAsync(item => item.StateId == stateId);
+        }
+
+        /// <summary>
+        /// 保存流程动作
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<int> SaveFlowEntityAction(FlowStateTransition flowStateTransition)
+        {
+            if (flowStateTransition != null && flowStateTransition.Id != null)
+            {
+                return await this._flowEntityActionRepository.UpdateAsync(flowStateTransition);
+            }
+            else
+            {
+                var result = await this._flowEntityActionRepository.InsertAsync(flowStateTransition);
+                return (result.Id != null) ? 1 : 0;
+            }
         }
         #endregion
 

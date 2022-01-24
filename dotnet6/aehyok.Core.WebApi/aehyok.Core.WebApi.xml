@@ -14,10 +14,120 @@
             Controller
             </summary>
         </member>
+        <member name="T:aehyok.Core.WebApi.Controllers.FlowController">
+            <summary>
+            流程引擎定义表
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityTypeList">
+            <summary>
+            获取流程列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityType(aehyok.Core.EntityFrameCore.MySql.Models.FlowEntityType)">
+            <summary>
+            保存流程
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityType(System.String)">
+            <summary>
+            获取流程详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.DeleteFlowEntityType(System.String)">
+            <summary>
+            通过流程id删除流程
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityState(System.String)">
+            <summary>
+            通过状态Id主键获取状态详情
+            </summary>
+            <param name="stateId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.DeleteFlowEntityState(System.String)">
+            <summary>
+            通过状态id删除状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityStateList(System.String)">
+            <summary>
+            通过流程ID获取流程状态列表
+            </summary>
+            <param name="flowId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityState(aehyok.Core.EntityFrameCore.MySql.Models.FlowEntityState)">
+            <summary>
+            保存流程状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityAction(System.String)">
+            <summary>
+            通过动作Id主键获取动作详情
+            </summary>
+            <param name="actionId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.DeleteFlowEntityAction(System.String)">
+            <summary>
+            通过动作id删除动作
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityActionList(System.String)">
+            <summary>
+            通过状态Id获取流程动作列表
+            </summary>
+            <param name="stateId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityAction(aehyok.Core.EntityFrameCore.MySql.Models.FlowStateTransition)">
+            <summary>
+            保存流程动作
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.FormController">
             <summary>
             Form表单通用保存
             </summary>
+        </member>
+        <member name="T:aehyok.Core.WebApi.Controllers.UserController">
+            <summary>
+            用户管理
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.GetUserList(System.Int32)">
+            <summary>
+            获取用户列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.GetUser(System.Int32)">
+            <summary>
+            获取用户详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.SaveUser(aehyok.Core.EntityFrameCore.MySql.Models.BaseUser)">
+             <summary>
+            保存用户
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.DeleteUser(System.Int32)">
+             <summary>
+            删除用户
+             </summary>
+             <returns></returns>
         </member>
         <member name="T:aehyok.Core.WebApi.Controllers.ValuesController">
             <summary>
