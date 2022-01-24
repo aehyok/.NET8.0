@@ -13,6 +13,7 @@ import FlowType from './type/index'
 import ProCard from '@ant-design/pro-card';
 import { Button, Col, Row } from 'antd';
 import { ArrowLeftOutlined, DownloadOutlined, ExportOutlined, SaveOutlined } from '@ant-design/icons';
+import { history } from 'umi';
 
 const FlowDetail = () => {
   const [type, setType] = useState('')
@@ -296,6 +297,9 @@ const FlowDetail = () => {
     );
   }, []);
 
+  const backFlowListClick = () => {
+    history.goBack()
+  }
   return (
       <PageContainer>
         <ProCard  bordered style={{marginBottom: '10px'}}>
@@ -307,7 +311,7 @@ const FlowDetail = () => {
               <Button icon={<SaveOutlined />} style={{marginRight:'5px'}}>保存</Button>
               <Button icon = {<DownloadOutlined />} style={{marginRight:'5px'}}>下载图片</Button>
               <Button icon = {<ExportOutlined />} style={{marginRight:'5px'}}>查看json</Button>
-              <Button icon = {<ArrowLeftOutlined />} style={{marginRight:'5px'}}>返回列表</Button>
+              <Button icon = {<ArrowLeftOutlined />} style={{marginRight:'5px'}} onClick={() => { backFlowListClick()}}>返回列表</Button>
             </Col>
           </Row>
         </ProCard>

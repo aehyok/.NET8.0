@@ -6,22 +6,12 @@ import ProTable, { TableDropdown } from '@ant-design/pro-table';
 import request from 'umi-request';
 import { history } from 'umi';
 
-type FlowType = {
-  id: number;
-  number: number;
-  flowName: string;
-  description: string;
-  displayOrder: number;
-  created_at: string;
-  updated_at: string;
-};
-
 const jumpFlowDetail =(record: any) => {
   console.log('11111111111', record)
   history.push('/system/flow-detail')
 }
 
-const columns: ProColumns<FlowType>[] = [
+const columns: ProColumns<FLOW.FlowEntityType>[] = [
   {
     dataIndex: 'index',
     valueType: 'indexBorder',
@@ -41,6 +31,11 @@ const columns: ProColumns<FlowType>[] = [
   {
     title: '排序',
     dataIndex: 'displayOrder',
+    search: false,
+  },
+  {
+    title: '状态',
+    dataIndex: 'status',
     search: false,
   },
   {
@@ -90,14 +85,14 @@ const columns: ProColumns<FlowType>[] = [
 const RoleInfo = () => {
   const actionRef = useRef<ActionType>();
   return (
-    <ProTable<FlowType>
+    <ProTable<FLOW.FlowEntityType>
       columns={columns}
       actionRef={actionRef}
       request={async (params = {}, sort, filter) => {
         console.log(sort, filter);
         return request<{
-          data: FlowType[];
-        }>('https://proapi.azurewebsites.net/github/issues', {
+          data: FLOW.FlowEntityType[];
+        }>('/so/api/Flow/GetFlowEntityTypeList', {
           params,
         });
       }}
