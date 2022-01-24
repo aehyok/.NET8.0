@@ -14,6 +14,7 @@ import ProCard from '@ant-design/pro-card';
 import { Button, Col, Row } from 'antd';
 import { ArrowLeftOutlined, DownloadOutlined, ExportOutlined, SaveOutlined } from '@ant-design/icons';
 import { history } from 'umi';
+import { getFlowEntityType } from '@/services/ant-design-pro/flow'
 
 const FlowDetail = () => {
   const [type, setType] = useState('')
@@ -24,6 +25,17 @@ const FlowDetail = () => {
   LogicFlow.use(Snapshot); // 生成图片下载
   LogicFlow.use(NodeResize); // 节点可放大缩小
 
+  const [flow, setFlow] = useState({})
+  const flowId: string = history?.location?.query?.id
+  useEffect(() => {
+    if(flowId) {
+      getFlowEntityType(flowId).then(result => {
+        if(result?.code ===200) {
+          setFlow(result.data)
+        }
+      })
+    }
+  }, [flowId])
   useEffect(() => {
     const lf = new LogicFlow({
       container: refContainer.current,
@@ -305,7 +317,7 @@ const FlowDetail = () => {
         <ProCard  bordered style={{marginBottom: '10px'}}>
           <Row justify='space-between'>
           <Col>
-            防返贫摸排登记流程
+            {flow?.flowName}
             </Col>
             <Col>
               <Button icon={<SaveOutlined />} style={{marginRight:'5px'}}>保存</Button>

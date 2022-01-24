@@ -33,3 +33,9 @@ export async function getFlowEntityType(id: string) {
     method: 'GET',
   });
 }
+
+export async function deleteFlowEntityType(id: string) {
+  return request<FLOW.FlowEntityType>(`/so/api/Flow/DeleteFlowEntityType?flowId=${id}`, {
+    method: 'POST',
+  });
+}

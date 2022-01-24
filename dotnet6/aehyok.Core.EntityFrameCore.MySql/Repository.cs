@@ -82,7 +82,6 @@ namespace aehyok.Core.EntityFrameCore.MySql
             {
                 throw new ArgumentNullException(nameof(entities));
             }
-
             try
             {
                 await this.Table.AddRangeAsync(entities);
@@ -100,6 +99,7 @@ namespace aehyok.Core.EntityFrameCore.MySql
             var item = await Table.FindAsync(id);
             if(item != null)
             {
+                EF.Entry<TEntity>(item).State = EntityState.Detached;
                 EF.Remove<TEntity>(item);
                 return await EF.SaveChangesAsync();
             }
