@@ -5,6 +5,7 @@ using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -55,7 +56,10 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<int> SaveFlowEntityType(FlowEntityType flowEntityType)
         {
-            if (flowEntityType != null && flowEntityType.Id != null)
+            var item = await this._flowEntityTypeRepository.GetAsync(flowEntityType.Id);
+            _flowEntityTypeRepository.EF.Entry(item).State = EntityState.Detached;
+           
+            if (item != null && item.Id != null)
             {
                 return await this._flowEntityTypeRepository.UpdateAsync(flowEntityType);
             }
@@ -134,6 +138,8 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<int> SaveFlowEntityState(FlowEntityState flowEntityState)
         {
+            var item = await this._flowEntityStateRepository.GetAsync(flowEntityState.Id);
+            _flowEntityStateRepository.EF.Entry(item).State = EntityState.Detached;
             if (flowEntityState != null && flowEntityState.Id != null)
             {
                 return await this._flowEntityStateRepository.UpdateAsync(flowEntityState);
@@ -191,6 +197,8 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<int> SaveFlowEntityAction(FlowStateTransition flowStateTransition)
         {
+            var item = await this._flowEntityActionRepository.GetAsync(flowStateTransition.Id);
+            _flowEntityActionRepository.EF.Entry(item).State = EntityState.Detached;
             if (flowStateTransition != null && flowStateTransition.Id != null)
             {
                 return await this._flowEntityActionRepository.UpdateAsync(flowStateTransition);

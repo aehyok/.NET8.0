@@ -9,7 +9,11 @@ namespace aehyok.Core.EntityFrameCore.MySql
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
     {
-        MyDbContext EF = new MyDbContext();
+        public DbContext EF { get; }
+        public Repository()
+        {
+            this.EF = new MyDbContext();
+        }
 
         public DbSet<TEntity> Table
         {
@@ -185,6 +189,7 @@ namespace aehyok.Core.EntityFrameCore.MySql
 
             try
             {
+                EF.Entry(entity).State = EntityState.Modified;
                 this.Table.Update(entity);
                 return await EF.SaveChangesAsync();
             }

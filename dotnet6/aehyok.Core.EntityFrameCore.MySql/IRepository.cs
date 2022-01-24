@@ -8,6 +8,7 @@ namespace aehyok.Core.EntityFrameCore.MySql
 {
     public interface IRepository<TEntity> where TEntity : BaseEntity
     {
+        DbContext EF { get; }
         DbSet<TEntity> Table { get; }
 
         IQueryable<TEntity> GetQueryable();
