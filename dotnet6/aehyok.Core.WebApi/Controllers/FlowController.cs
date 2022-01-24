@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -56,18 +57,68 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<int> SaveFlowEntityType(FlowEntityType flowEntityType)
         {
-            var item = await this._flowEntityTypeRepository.GetAsync(flowEntityType.Id);
-            _flowEntityTypeRepository.EF.Entry(item).State = EntityState.Detached;
-           
-            if (item != null && item.Id != null)
+            this._logger.Info(flowEntityType.FlowName);
+            try
             {
-                return await this._flowEntityTypeRepository.UpdateAsync(flowEntityType);
+                var item = await this._flowEntityTypeRepository.GetAsync(flowEntityType.Id);
+                _flowEntityTypeRepository.EF.Entry(item).State = EntityState.Detached;
+
+                if (item != null && item.Id != null)
+                {
+                    return await this._flowEntityTypeRepository.UpdateAsync(flowEntityType);
+                }
+                else
+                {
+                    var result = await this._flowEntityTypeRepository.InsertAsync(flowEntityType);
+                    return (result.Id != null) ? 1 : 0;
+                }
             }
-            else
+            catch(Exception error)
+            {
+                this._logger.Error(error, error.Message);
+                this._logger.Error(error, error.Message);
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 添加流程
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<int> AddFlowEntityType(FlowEntityType flowEntityType)
+        {
+            this._logger.Info(flowEntityType.FlowName);
+            try
             {
                 var result = await this._flowEntityTypeRepository.InsertAsync(flowEntityType);
                 return (result.Id != null) ? 1 : 0;
             }
+            catch (Exception error)
+            {
+                this._logger.Error(error, error.Message);
+                this._logger.Error(error, error.Message);
+                return -1;
+            }
+        }
+
+        /// <summary>
+        /// 修改流程
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<int> UpdateFlowEntityType(FlowEntityType flowEntityType)
+        {
+            var item = await this._flowEntityTypeRepository.GetAsync(flowEntityType.Id);
+            _flowEntityTypeRepository.EF.Entry(item).State = EntityState.Detached;
+
+            if (item != null && item.Id != null)
+            {
+                return await this._flowEntityTypeRepository.UpdateAsync(flowEntityType);
+            }
+            return -1;
         }
 
         /// <summary>

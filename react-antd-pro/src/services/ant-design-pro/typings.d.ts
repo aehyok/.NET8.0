@@ -175,12 +175,11 @@ declare namespace FLOW {
    * 流程类型
    */
   type FlowEntityType = {
-    id: string;
-    flowName: string;
-    description: string;
-    displayOrder: number;
-    created_at: string;
-    updated_at: string;
+    id?: string;
+    flowName?: string;
+    description?: string;
+    displayOrder?: number;
+    // status?: number | null;
   };
 
   /**

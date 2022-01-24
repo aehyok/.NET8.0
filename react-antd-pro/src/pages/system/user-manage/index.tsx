@@ -140,7 +140,7 @@ export default () => {
           console.log(sort, filter);
           return request<{
             data: UserItem[];
-          }>('/so/api/User/getUserList', {
+          }>('/so/api/Flow/GetFlowEntityTypeList', {
             params,
           });
         }}

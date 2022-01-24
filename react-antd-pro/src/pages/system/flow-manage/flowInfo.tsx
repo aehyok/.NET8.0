@@ -1,90 +1,105 @@
 import React, { useRef } from 'react';
-import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { Button, Tag, Space, Menu, Dropdown } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
-import ProTable, { TableDropdown } from '@ant-design/pro-table';
+import ProTable from '@ant-design/pro-table';
 import request from 'umi-request';
 import { history } from 'umi';
+import FlowModal from './modal';
 
-const jumpFlowDetail =(record: any) => {
-  console.log('11111111111', record)
-  history.push('/system/flow-detail')
-}
+const FlowInfo = () => {
+  const actionRef = useRef<ActionType>();
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [editId, setEditId] = React.useState<string|undefined>(undefined)
 
-const columns: ProColumns<FLOW.FlowEntityType>[] = [
-  {
-    dataIndex: 'index',
-    valueType: 'indexBorder',
-    width: 48,
-  },
-  {
-    title: '流程名称',
-    dataIndex: 'flowName',
-    ellipsis: true,
-    render: (text: any,record: any) => <a onClick={ ()=> {jumpFlowDetail(record)}}>{text}</a>,
-  },
-  {
-    title: '流程说明',
-    dataIndex: 'description',
-    filters: true,
-  },
-  {
-    title: '排序',
-    dataIndex: 'displayOrder',
-    search: false,
-  },
-  {
-    title: '状态',
-    dataIndex: 'status',
-    search: false,
-  },
-  {
-    title: '创建时间',
-    key: 'showTime',
-    dataIndex: 'created_at',
-    valueType: 'dateTime',
-    sorter: true,
-    // hideInSearch: true,
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'created_at',
-    valueType: 'dateRange',
-    // hideInTable: true,
-    search: {
-      transform: (value) => {
-        return {
-          startTime: value[0],
-          endTime: value[1],
-        };
+  const jumpFlowDetail =(record: any) => {
+    console.log('11111111111', record)
+    history.push('/system/flow-detail')
+  }
+
+  const editFlowTypeClick = (record: FLOW.FlowEntityType) => {
+    console.log(record, '--record--')
+    setEditId(record.id);
+    setIsModalVisible(true)
+  }
+
+  const columns: ProColumns<FLOW.FlowEntityType>[] = [
+    {
+      dataIndex: 'index',
+      valueType: 'indexBorder',
+      width: 48,
+    },
+    {
+      title: '流程名称',
+      dataIndex: 'flowName',
+      ellipsis: true,
+      render: (text: any,record: any) => <a onClick={ ()=> {jumpFlowDetail(record)}}>{text}</a>,
+    },
+    {
+      title: '流程说明',
+      dataIndex: 'description',
+      filters: true,
+    },
+    {
+      title: '排序',
+      dataIndex: 'displayOrder',
+      search: false,
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      search: false,
+    },
+    {
+      title: '创建时间',
+      key: 'showTime',
+      dataIndex: 'created_at',
+      valueType: 'dateTime',
+      sorter: true,
+      // hideInSearch: true,
+    },
+    {
+      title: '更新时间',
+      dataIndex: 'created_at',
+      valueType: 'dateRange',
+      // hideInTable: true,
+      search: {
+        transform: (value) => {
+          return {
+            startTime: value[0],
+            endTime: value[1],
+          };
+        },
       },
     },
-  },
-  {
-    title: '操作',
-    valueType: 'option',
-    render: (text, record, _, action) => [
-      <a
-        key="editable"
-        onClick={() => {
-          action?.startEditable?.(record.id);
-        }}
-      >
-        编辑
-      </a>,
-      <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-        删除
-      </a>,
-      <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-        启用
-      </a>
-    ],
-  },
-];
+    {
+      title: '操作',
+      valueType: 'option',
+      render: (text, record, _, action) => [
+        <a
+          key="editable"
+          onClick={() => {
+            editFlowTypeClick(record)
+          }}
+        >
+          编辑
+        </a>,
+        <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
+          删除
+        </a>,
+        <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
+          启用
+        </a>
+      ],
+    },
+  ];
 
-const RoleInfo = () => {
-  const actionRef = useRef<ActionType>();
+  const onAddFlowClick = () => {
+    setEditId(undefined)
+    setIsModalVisible(true)
+  }
   return (
+    <>
     <ProTable<FLOW.FlowEntityType>
       columns={columns}
       actionRef={actionRef}
@@ -118,12 +133,17 @@ const RoleInfo = () => {
       dateFormatter="string"
       headerTitle="流程列表"
       toolBarRender={() => [
-        <Button key="button" icon={<PlusOutlined />} type="primary">
+        <Button key="button" icon={<PlusOutlined />} type="primary" onClick={() => { onAddFlowClick() }}>
           新增
         </Button>,
       ]}
     />
+    {
+      !isModalVisible ? '' :
+      <FlowModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} editId ={editId} actionRef={actionRef}/>
+    }
+    </>
   );
 };
 
-export default RoleInfo
+export default FlowInfo

@@ -31,6 +31,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.AddFlowEntityType(aehyok.Core.EntityFrameCore.MySql.Models.FlowEntityType)">
+            <summary>
+            添加流程
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.UpdateFlowEntityType(aehyok.Core.EntityFrameCore.MySql.Models.FlowEntityType)">
+            <summary>
+            修改流程
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:aehyok.Core.WebApi.Controllers.FlowController.GetFlowEntityType(System.String)">
             <summary>
             获取流程详情
