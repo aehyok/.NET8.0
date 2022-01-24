@@ -149,7 +149,8 @@ export default defineConfig({
           name: 'flow-detail',
           icon: 'smile',
           path: '/system/flow-detail',
-          component: './system/flow-manage/flowDetailInfo',
+          hideInMenu: true,
+          component: './system/flow-manage/flow-detail',
         },
         {
           name: 'query-manage',
