@@ -179,7 +179,7 @@ declare namespace FLOW {
     flowName?: string;
     description?: string;
     displayOrder?: number;
-    // status?: number | null;
+    status?: number;
   };
 
   /**
