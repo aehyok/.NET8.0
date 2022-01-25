@@ -7,22 +7,19 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { getMenuList } from '@/services/ant-design-pro/menu'
 
-
-const listConvertTree = (list: SYSTEM.MenuItem[], fatherId: string) => {
-  const menuObj: SYSTEM.MenuItem[] = []
-  list.forEach(item => {
-      item.children = []
-      if(item.id) {
-        menuObj[item.id] = item
-      }
-  })
-  return list.filter(item => {
-      if (item.fatherId !== fatherId) {
-          menuObj[item.fatherId].children.push(item)
-          return false
-      }
-      return true
-  })
+/**
+ * @param {arr: array 原数组数组, id: number 父节点id}
+ * @return {children: array 子数组}
+ */
+ function getChildren(arr, id) {
+  const res = [];
+  for (let item of arr) {
+    if (item.fatherId === id) { // 找到当前id的子元素
+      // 插入子元素，每个子元素的children通过回调生成
+      res.push({...item, children: getChildren(arr, item.id)});
+    }
+  }
+  return res;
 }
 
 export default () => {
@@ -38,7 +35,7 @@ export default () => {
     getMenuList().then((result: any) => {
       setDataSource(result.data)
       console.log(result.data, 'result.data')
-      const list = listConvertTree(result.data,'1')
+      const list = getChildren(result.data,'1')
       console.log(list, '------list-------')
     })
   }, [])
