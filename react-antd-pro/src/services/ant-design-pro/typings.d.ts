@@ -140,18 +140,15 @@ declare namespace SYSTEM {
   };
 
   type MenuItem = {
-    action: number;
-    biggest: number;
     children: MenuItem[];
     code: string;
-    description: '';
-    id: number;
-    leaf: number;
-    name: string;
-    pcode: string;
-    sequence: number;
+    menuParameter?: string;
+    id?: string;
+    displayOrder?: number;
+    menuName: string;
+    fatherId: string;
+    menuPath: string;
     status: number;
-    uiPath: string;
   };
 
   /**

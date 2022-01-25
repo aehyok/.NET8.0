@@ -1,81 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { ActionType, ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
-import ProCard from '@ant-design/pro-card';
-import { ProFormField } from '@ant-design/pro-form';
 import { Button, message, Modal } from 'antd';
 import MenuModal from './modal'
-import { request } from 'umi';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import MenuItem from './../../editor/mind/components/EditorContextMenu/MenuItem';
 import { PageContainer } from '@ant-design/pro-layout';
-
-const waitTime = (time: number = 100) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
-
-type DataSourceType = {
-  id?: React.Key;
-  title?: string;
-  decs?: string;
-  state?: string;
-  created_at?: string;
-  update_at?: string;
-  children?: DataSourceType[];
-};
-
-const defaultData: DataSourceType[] = [
-  {
-    id: 624748504,
-    title: '活动名称一',
-    decs: '这个活动真好玩',
-    state: 'open',
-    created_at: '2020-05-26T09:42:56Z',
-    update_at: '2020-05-26T09:42:56Z',
-    children: [
-      {
-        id: 62469122931,
-        title: '活动名称二',
-        decs: '这个活动真好玩',
-        state: 'closed',
-        created_at: '2020-05-26T08:19:22Z',
-        update_at: '2020-05-26T08:19:22Z',
-        children: [
-          {
-            id: 62469122932,
-            title: '活动名称二',
-            decs: '这个活动真好玩',
-            state: 'closed',
-            created_at: '2020-05-26T08:19:22Z',
-            update_at: '2020-05-26T08:19:22Z',
-            children: [
-              {
-                id: 62469122933,
-                title: '活动名称二',
-                decs: '这个活动真好玩',
-                state: 'closed',
-                created_at: '2020-05-26T08:19:22Z',
-                update_at: '2020-05-26T08:19:22Z',
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 624691229,
-    title: '活动名称二',
-    decs: '这个活动真好玩',
-    state: 'closed',
-    created_at: '2020-05-26T08:19:22Z',
-    update_at: '2020-05-26T08:19:22Z',
-  },
-];
+import { getMenuList } from '@/services/ant-design-pro/menu'
+import { request } from 'umi';
 
 export default () => {
 
@@ -83,7 +14,15 @@ export default () => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const [editId, setEditId] = React.useState<number>()
 
-  const [dataSource, setDataSource] = useState<DataSourceType[]>(() => defaultData);
+  const [dataSource, setDataSource] = useState<SYSTEM.MenuItem[]>(() =>[]);
+
+  useEffect(()=> {
+    console.log('getMenuList')
+    getMenuList().then((result: any) => {
+      console.log(result, '---result--')
+
+    })
+  }, [])
 
   const editClick = (record: SYSTEM.MenuItem) => {
     console.log(record, '-------编辑-----------')
@@ -115,22 +54,17 @@ export default () => {
   const columns: ProColumns<SYSTEM.MenuItem>[] = [
     {
       title: '菜单名称',
-      dataIndex: 'name',
+      dataIndex: 'menuName',
       width: '30%',
     },
     {
       title: '菜单路由',
-      dataIndex: 'uiPath',
-      width: '30%',
-    },
-    {
-      title: 'CODE',
-      dataIndex: 'code',
+      dataIndex: 'menuPath',
       width: '30%',
     },
     {
       title: '顺序',
-      dataIndex: 'sequence',
+      dataIndex: 'displayOrder',
       width: '30%',
     },
     {
@@ -181,7 +115,7 @@ export default () => {
             console.log(sort, filter);
             return request<{
               data: SYSTEM.MenuItem[];
-            }>('/api/getMenuList', {
+            }>('/so/api/menu/getMenuList', {
               params,
             });
           }}
