@@ -25,19 +25,19 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityType(aehyok.Core.EntityFrameCore.MySql.Models.FlowEntityType)">
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityType(aehyok.Core.EntityFramework.MySql.Models.FlowEntityType)">
             <summary>
             保存流程
             </summary>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.AddFlowEntityType(aehyok.Core.EntityFrameCore.MySql.Models.FlowEntityType)">
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.AddFlowEntityType(aehyok.Core.EntityFramework.MySql.Models.FlowEntityType)">
             <summary>
             添加流程
             </summary>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.UpdateFlowEntityType(aehyok.Core.EntityFrameCore.MySql.Models.FlowEntityType)">
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.UpdateFlowEntityType(aehyok.Core.EntityFramework.MySql.Models.FlowEntityType)">
             <summary>
             修改流程
             </summary>
@@ -75,7 +75,7 @@
             <param name="flowId"></param>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityState(aehyok.Core.EntityFrameCore.MySql.Models.FlowEntityState)">
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityState(aehyok.Core.EntityFramework.MySql.Models.FlowEntityState)">
             <summary>
             保存流程状态
             </summary>
@@ -101,7 +101,7 @@
             <param name="stateId"></param>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityAction(aehyok.Core.EntityFrameCore.MySql.Models.FlowStateTransition)">
+        <member name="M:aehyok.Core.WebApi.Controllers.FlowController.SaveFlowEntityAction(aehyok.Core.EntityFramework.MySql.Models.FlowStateTransition)">
             <summary>
             保存流程动作
             </summary>
@@ -129,7 +129,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.UserController.SaveUser(aehyok.Core.EntityFrameCore.MySql.Models.BaseUser)">
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.SaveUser(aehyok.Core.EntityFramework.MySql.Models.BaseUser)">
              <summary>
             保存用户
              </summary>

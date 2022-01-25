@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using aehyok.Base;
 
-namespace aehyok.Core.EntityFrameCore.MySql.Models
+namespace aehyok.Core.EntityFramework.MySql.Models
 {
-    public partial class FlowStateTransition: BaseEntity
+    public partial class FlowStateTransition: EntityBase
     {
         //public string Id { get; set; } = null!;
         public string? StateId { get; set; }

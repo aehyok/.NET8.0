@@ -9,7 +9,7 @@ namespace aehyok.Core.Data.Entity
     /// <summary>
     /// 菜单项定义
     /// </summary>
-    public class MenuItem : BaseEntity
+    public class MenuItem : EntityBase
     {
         /// <summary>
 		/// 菜单显示标题

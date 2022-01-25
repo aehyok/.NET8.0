@@ -1,5 +1,5 @@
-﻿using aehyok.Core.EntityFrameCore.MySql;
-using aehyok.Core.EntityFrameCore.MySql.Models;
+﻿using aehyok.Core.EntityFramework.MySql;
+using aehyok.Core.EntityFramework.MySql.Models;
 using aehyok.Core.IRepository;
 using aehyok.Core.Repository;
 using Microsoft.AspNetCore.Authorization;

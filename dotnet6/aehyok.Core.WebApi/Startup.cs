@@ -1,7 +1,7 @@
 using aehyok.Base;
 using aehyok.Core.Config;
 using aehyok.Core.Data;
-using aehyok.Core.EntityFrameCore.MySql;
+using aehyok.Core.EntityFramework.MySql;
 using aehyok.Core.IRepository;
 using aehyok.Core.MySql;
 using aehyok.Core.MySqlDataAccessor;

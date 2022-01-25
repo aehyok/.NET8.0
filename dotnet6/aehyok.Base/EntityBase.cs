@@ -5,12 +5,12 @@ using System.Text;
 
 namespace aehyok.Base
 {
-    public abstract class BaseEntity
+    public abstract class EntityBase
     {
         [Key]
         public string Id { get; set; }
 
-        public BaseEntity()
+        public EntityBase()
         {
             Id = Guid.NewGuid().ToString();
         }

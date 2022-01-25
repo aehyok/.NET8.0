@@ -30,9 +30,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.Repository.Acce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Lib", "aehyok.Lib\aehyok.Lib.csproj", "{9AFD8D19-E7D9-4951-B8C4-C63D9DB998FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core.EntityFrameCore.MySql", "aehyok.Core.EntityFrameCore.MySql\aehyok.Core.EntityFrameCore.MySql.csproj", "{E140DF87-F4B0-4263-89DB-C23F33F6D7B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core.EntityFramework.MySql", "aehyok.Core.EntityFrameCore.MySql\aehyok.Core.EntityFramework.MySql.csproj", "{E140DF87-F4B0-4263-89DB-C23F33F6D7B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Base", "aehyok.Base\aehyok.Base.csproj", "{6690349F-F5F1-4674-B96B-1019810DD127}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Base", "aehyok.Base\aehyok.Base.csproj", "{6690349F-F5F1-4674-B96B-1019810DD127}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

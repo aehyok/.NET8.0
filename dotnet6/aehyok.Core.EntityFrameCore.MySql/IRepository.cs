@@ -4,9 +4,9 @@ using aehyok.Base;
 using System.Linq.Expressions;
 using X.PagedList;
 
-namespace aehyok.Core.EntityFrameCore.MySql
+namespace aehyok.Core.EntityFramework.MySql
 {
-    public interface IRepository<TEntity> where TEntity : BaseEntity
+    public interface IRepository<TEntity> where TEntity : EntityBase
     {
         DbContext EF { get; }
         DbSet<TEntity> Table { get; }

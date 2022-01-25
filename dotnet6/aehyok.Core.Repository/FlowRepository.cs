@@ -1,5 +1,5 @@
-﻿//using aehyok.Core.EntityFrameCore.MySql.Data;
-//using aehyok.Core.EntityFrameCore.MySql.Models;
+﻿//using aehyok.Core.EntityFramework.MySql.Data;
+//using aehyok.Core.EntityFramework.MySql.Models;
 //using aehyok.Core.IRepository;
 //using Microsoft.EntityFrameworkCore;
 //using System;

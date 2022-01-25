@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using aehyok.Core.EntityFrameCore.MySql.Models;
+using aehyok.Core.EntityFramework.MySql.Models;
 
-namespace aehyok.Core.EntityFrameCore.MySql.Data
+namespace aehyok.Core.EntityFramework.MySql.Data
 {
     public partial class MyDbContext : DbContext
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace aehyok.Core.EntityFrameCore.MySql.Models
+namespace aehyok.Core.EntityFramework.MySql.Models
 {
     /// <summary>
     /// 指标展示项目表

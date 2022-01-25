@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 using aehyok.Base;
-using aehyok.Core.EntityFrameCore.MySql.Data;
+using aehyok.Core.EntityFramework.MySql.Data;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 
-namespace aehyok.Core.EntityFrameCore.MySql
+namespace aehyok.Core.EntityFramework.MySql
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
     {
         public DbContext EF { get; }
         public Repository()
