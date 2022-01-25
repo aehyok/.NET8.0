@@ -19,6 +19,7 @@ namespace aehyok.Core.EntityFramework.MySql.Data
 
         public virtual DbSet<BaseUser> BaseUsers { get; set; } = null!;
         public virtual DbSet<BasicUser> BasicUsers { get; set; } = null!;
+        //public virtual DbSet<SystemMenu> SystemMenus { get; set; } = null!;
         //public virtual DbSet<FlowEntityState> FlowEntityStates { get; set; } = null!;
         //public virtual DbSet<FlowEntityType> FlowEntityTypes { get; set; } = null!;
         //public virtual DbSet<FlowStateTransition> FlowStateTransitions { get; set; } = null!;
@@ -461,6 +462,38 @@ namespace aehyok.Core.EntityFramework.MySql.Data
                 entity.Property(e => e.UserType)
                     .HasColumnType("int(11)")
                     .HasColumnName("userType");
+            });
+
+            modelBuilder.Entity<SystemMenu>(entity =>
+            {
+                entity.ToTable("SystemMenu");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.MenuName)
+                    .HasMaxLength(50)
+                    .HasColumnName("menuName");
+
+                entity.Property(e => e.menuParameter)
+                    .HasMaxLength(1000)
+                    .HasColumnName("menuParameter");
+
+                entity.Property(e => e.FatherId)
+                    .HasMaxLength(50)
+                    .HasColumnName("fatherId");
+
+                entity.Property(e => e.MenuPath)
+                    .HasMaxLength(50)
+                    .HasColumnName("menuPath");
+
+                entity.Property(e => e.DisplayOrder)
+                    .HasColumnType("int(11)")
+                    .HasColumnName("displayOrder");
+                entity.Property(e => e.Status)
+                .HasColumnType("int(1)")
+                .HasColumnName("status");
             });
 
             modelBuilder.Entity<MdComputecolumn>(entity =>

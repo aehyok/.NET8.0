@@ -112,6 +112,35 @@
             Form表单通用保存
             </summary>
         </member>
+        <member name="T:aehyok.Core.WebApi.Controllers.MenuController">
+            <summary>
+            菜单管理
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.MenuController.GetMenuList">
+            <summary>
+            获取所有菜单列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.MenuController.GetMenu(System.String)">
+            <summary>
+            通过菜单Id获取菜单详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.MenuController.AddMenu(aehyok.Core.EntityFramework.MySql.Models.SystemMenu)">
+            <summary>
+            添加菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.MenuController.UpdateMenu(aehyok.Core.EntityFramework.MySql.Models.SystemMenu)">
+            <summary>
+            修改菜单
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.UserController">
             <summary>
             用户管理
