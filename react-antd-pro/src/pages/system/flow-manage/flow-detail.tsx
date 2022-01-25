@@ -15,7 +15,7 @@ import { Button, Col, Row } from 'antd';
 import { ArrowLeftOutlined, DownloadOutlined, ExportOutlined, SaveOutlined } from '@ant-design/icons';
 import { history } from 'umi';
 import { getFlowEntityType } from '@/services/ant-design-pro/flow'
-
+import { Effect, Subscription } from 'umi';
 const FlowDetail = () => {
   const [type, setType] = useState('')
   const refContainer = useRef();

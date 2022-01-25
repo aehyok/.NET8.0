@@ -167,6 +167,12 @@ export default defineConfig({
       ],
     },
     {
+      path: '/dva',
+      name: 'dva',
+      icon: 'dashboard',
+      component: './dva',
+    },
+    {
       path: '/form',
       icon: 'form',
       name: 'form',

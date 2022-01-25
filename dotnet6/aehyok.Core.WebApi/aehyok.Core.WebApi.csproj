@@ -8,6 +8,10 @@
     <DocumentationFile>.\aehyok.Core.WebApi.xml</DocumentationFile>
   </PropertyGroup>
 
+	<PropertyGroup>
+	  <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+	</PropertyGroup>
+
   <PropertyGroup>
 	<PreserveCompilationReferences>true</PreserveCompilationReferences>
     <PreserveCompilationContext>true</PreserveCompilationContext>

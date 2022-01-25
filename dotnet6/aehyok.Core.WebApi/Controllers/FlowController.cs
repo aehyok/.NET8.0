@@ -46,6 +46,7 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public List<FlowEntityType> GetFlowEntityTypeList()
         {
+            this._logger.Info("aehyok"+ DateTime.Now.ToString());
             return this._flowEntityTypeRepository.GetList();
         }
 
