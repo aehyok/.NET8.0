@@ -6,7 +6,24 @@ import MenuModal from './modal'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { getMenuList } from '@/services/ant-design-pro/menu'
-import { request } from 'umi';
+
+
+const listConvertTree = (list: SYSTEM.MenuItem[], fatherId: string) => {
+  const menuObj: SYSTEM.MenuItem[] = []
+  list.forEach(item => {
+      item.children = []
+      if(item.id) {
+        menuObj[item.id] = item
+      }
+  })
+  return list.filter(item => {
+      if (item.fatherId !== fatherId) {
+          menuObj[item.fatherId].children.push(item)
+          return false
+      }
+      return true
+  })
+}
 
 export default () => {
 
@@ -19,8 +36,10 @@ export default () => {
   useEffect(()=> {
     console.log('getMenuList')
     getMenuList().then((result: any) => {
-      console.log(result, '---result--')
-
+      setDataSource(result.data)
+      console.log(result.data, 'result.data')
+      const list = listConvertTree(result.data,'1')
+      console.log(list, '------list-------')
     })
   }, [])
 
@@ -111,14 +130,7 @@ export default () => {
             // 使用 request 请求数据时无效
             defaultExpandAllRows: true,
           }}
-          request={async (params = {}, sort, filter) => {
-            console.log(sort, filter);
-            return request<{
-              data: SYSTEM.MenuItem[];
-            }>('/so/api/menu/getMenuList', {
-              params,
-            });
-          }}
+          value={dataSource}
           actionRef={actionRef}
           rowKey="id"
           headerTitle="菜单树"
