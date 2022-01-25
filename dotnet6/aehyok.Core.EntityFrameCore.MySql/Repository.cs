@@ -106,27 +106,35 @@ namespace aehyok.Core.EntityFramework.MySql
             return 0;
         }
 
-        private async Task<int> DeleteAsync(TEntity entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException(nameof(entity));
-            }
+        //private async Task<int> DeleteAsync(TEntity entity)
+        //{
+        //    if (entity == null)
+        //    {
+        //        throw new ArgumentNullException(nameof(entity));
+        //    }
 
-            try
-            {
-                this.Table.Remove(entity);
-                return await EF.SaveChangesAsync();
-            }
-            catch (DbUpdateException ex)
-            {
-                throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
-            }
-        }
+        //    try
+        //    {
+        //        this.Table.Remove(entity);
+        //        return await EF.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateException ex)
+        //    {
+        //        throw new Exception(this.GetFullErrorTextAndRollback(ex), ex);
+        //    }
+        //}
 
         public async Task<TEntity> GetByKey(object key)
         {
-            return await Table.FindAsync(key);
+            if(key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            } 
+            else
+            {
+                return await this.Table.FindAsync(key);
+            }
+            
         }
 
         public async Task<TEntity> GetAsync(object id)

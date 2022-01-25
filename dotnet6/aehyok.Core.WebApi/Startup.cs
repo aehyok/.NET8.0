@@ -87,7 +87,7 @@ namespace aehyok.Core.WebApi
             //builder.RegisterType<TestRepository>();
 
             var baseType = typeof(IDependency);
-            List<Assembly> assemblyList = new List<Assembly>();
+            List<Assembly> assemblyList = new();
 
             ////var list = AppDomain.CurrentDomain.GetAssemblies().OrderBy(item => item.FullName).ToList();
             ////var list= AssemblyLoadContext.Default.Assemblies.OrderBy(item => item.FullName).ToList();

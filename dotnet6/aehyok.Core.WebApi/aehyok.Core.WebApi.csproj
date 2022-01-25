@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Core.EntityFrameCore.MySql\aehyok.Core.EntityFramework.MySql.csproj" />
-    <ProjectReference Include="..\aehyok.Core.EntityFramework.MySql\aehyok.Core.EntityFramework.MySql.csproj" />
     <ProjectReference Include="..\aehyok.Core.MySqlDataAccessor\aehyok.Core.MySqlDataAccessor.csproj" />
     <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
