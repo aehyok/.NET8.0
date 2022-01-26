@@ -7,36 +7,68 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
 import { getMenuList } from '@/services/ant-design-pro/menu'
 
-/**
- * @param {arr: array 原数组数组, id: number 父节点id}
- * @return {children: array 子数组}
- */
- function getChildren(arr, id) {
-  const res = [];
-  for (let item of arr) {
-    if (item.fatherId === id) { // 找到当前id的子元素
-      // 插入子元素，每个子元素的children通过回调生成
-      res.push({...item, children: getChildren(arr, item.id)});
-    }
-  }
-  return res;
-}
+
 
 export default () => {
 
+
+  function makeTree(treeNodes: SYSTEM.MenuItem[]): SYSTEM.MenuItem[] {
+    // 提前生成节点查找表。
+    // 如果明确节点是顺序可以保证先父后子，可以省去这次遍历，在后面边遍历过程中填充查找表
+    const nodesMap = new Map<string| undefined, SYSTEM.MenuItem>(
+        treeNodes.map(node => [node.id, node])
+    );
+
+    // 引入虚拟根节点来统一实现 parent 始终有效，避免空判断
+    const virtualRoot = { } as Partial<SYSTEM.MenuItem>;
+    treeNodes.forEach((node) => {
+        // 首先通过fatherId获取节点信息，如果不存在，说明是根结点
+        const parent = nodesMap.get(node.fatherId) ?? virtualRoot;
+        //
+        (parent.children ??= []).push(node);
+    });
+
+    return virtualRoot.children ?? [];
+  }
+
   const actionRef = useRef<ActionType>();
+  const rootId ='1'
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const [editId, setEditId] = React.useState<number>()
 
   const [dataSource, setDataSource] = useState<SYSTEM.MenuItem[]>(() =>[]);
 
+
+  let treeList: SYSTEM.MenuItem[] = []
+  function listToTree(list: SYSTEM.MenuItem[], fatherId: string|undefined,current: SYSTEM.MenuItem | null){
+    // 先根据fatherId找出父节点列表
+    // 第一次 通过fatherid =1,查找出2，3，4节点列表
+    // 第二次 通过fatherid =2 ,查找出5，6，7
+
+    const parentList = list.filter((item: SYSTEM.MenuItem) => item.fatherId === fatherId)
+    console.log(parentList, 'parentList')
+    // 第一次查找出来后将节点list放入到树中
+    //
+    if(current === null ||  treeList.length === 0) {
+      treeList = parentList
+    } else {
+      current.children = parentList
+    }
+
+    // 第一次 开始循环 2，3，4
+    parentList.forEach((item: SYSTEM.MenuItem) => {
+      listToTree(list, item.id, item)
+    })
+  }
+
   useEffect(()=> {
     console.log('getMenuList')
     getMenuList().then((result: any) => {
-      setDataSource(result.data)
-      console.log(result.data, 'result.data')
-      const list = getChildren(result.data,'1')
-      console.log(list, '------list-------')
+      const temp: SYSTEM.MenuItem | null = null
+      console.log(dataSource, 'dataSource')
+      listToTree(result.data, rootId, temp)
+      console.log(treeList, 'treeList')
+      setDataSource(treeList)
     })
   }, [])
 
