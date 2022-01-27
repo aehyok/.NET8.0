@@ -8,15 +8,25 @@ import ProForm, {
   ProFormSelect
 } from '@ant-design/pro-form';
 import { getMenu, addMenu, updateMenu } from '@/services/ant-design-pro/menu'
+import { ActionType } from '@ant-design/pro-table';
 
-export default (props: any) => {
+type ModalProps = {
+  modalVisible: boolean;
+  hiddenModal: Function;
+  editId: string;
+  actionRef: ActionType;
+  fatherId: string;
+};
+
+const MenuModal: React.FC<ModalProps> = (props) => {
+// export default (props: any) => {
 
   const formItemLayout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 20 },
   }
 
-  const { modalVisible, hiddenModal, editId, actionRef } = props
+  const { modalVisible, hiddenModal, editId, actionRef, fatherId } = props
   console.log(props.modalVisible, editId, 'ssss----ss')
   console.log(actionRef, 'actionRef')
   const [form] = Form.useForm();
@@ -57,18 +67,19 @@ export default (props: any) => {
       updateMenu({
         ...values,
         id: editId,
+        fatherId: fatherId
       }).then((result: any) => {
         if(result.code == 200) {
           console.log(result, 'result')
           handleCancel()
-          actionRef.current.reload()
+          actionRef?.current?.reload()
           message.success('修改菜单成功')
         }
       })
     } else {
       addMenu({
         ...values,
-        fatherId: '1'
+        fatherId: fatherId,
       }).then((result: any) => {
         if(result.code == 200) {
           console.log(result, 'result')
@@ -142,3 +153,5 @@ export default (props: any) => {
     </Modal>
   );
 };
+
+export default MenuModal;

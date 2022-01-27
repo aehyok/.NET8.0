@@ -64,5 +64,18 @@ namespace aehyok.Core.WebApi.Controllers
         {
             return await this._menuRepository.UpdateAsync(systemMenu);
         }
+
+        /// <summary>
+        /// 删除菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<int> DeleteMenu(string menuId)
+        {
+            var list = await this._menuRepository.GetListAsync(item => item.FatherId == menuId);
+            // 删除的-1代表无法删除
+            return list == null || list.Count == 0 ? await this._menuRepository.DeleteAsync(menuId) : -1;
+        }
     }
 }

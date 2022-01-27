@@ -11,7 +11,8 @@ export default () => {
   const actionRef = useRef<ActionType>();
   const rootId ='1'
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const [editId, setEditId] = React.useState<number>()
+  const [editId, setEditId] = React.useState<string>()
+  const [fatherId, setFatherId] = React.useState<string>()
 
   const [dataSource, setDataSource] = useState<SYSTEM.MenuItem[]>(() =>[]);
 
@@ -38,16 +39,16 @@ export default () => {
     })
   }
 
-  useEffect(()=> {
-    console.log('getMenuList')
-    getMenuList().then((result: any) => {
-      const temp: SYSTEM.MenuItem | null = null
-      console.log(dataSource, 'dataSource')
-      listToTree<SYSTEM.MenuItem>(result.data, rootId, temp)
-      console.log(treeList, 'treeList')
-      setDataSource(treeList)
-    })
-  }, [])
+  // useEffect(()=> {
+  //   console.log('getMenuList')
+  //   getMenuList().then((result: any) => {
+  //     const temp: SYSTEM.MenuItem | null = null
+  //     console.log(dataSource, 'dataSource')
+  //     listToTree<SYSTEM.MenuItem>(result.data, rootId, temp)
+  //     console.log(treeList, 'treeList')
+  //     setDataSource(treeList)
+  //   })
+  // }, [])
 
   const editClick = (record: SYSTEM.MenuItem) => {
     console.log(record, '-------编辑-----------')
@@ -57,6 +58,7 @@ export default () => {
 
   const addChildClick = (record: SYSTEM.MenuItem) => {
     console.log(record, '-----添加-----')
+    setFatherId(record.id)
     setIsModalVisible(true)
   }
 
@@ -125,6 +127,7 @@ export default () => {
   ];
 
   const addRootMenuClick = () => {
+    setFatherId(rootId)
     setIsModalVisible(true)
   }
 
@@ -136,7 +139,19 @@ export default () => {
             // 使用 request 请求数据时无效
             defaultExpandAllRows: true,
           }}
-          value={dataSource}
+          request={async (params = {}, sort, filter) => {
+            console.log(sort, filter);
+            const result = await getMenuList()
+            const temp: SYSTEM.MenuItem | null = null
+            console.log(dataSource, 'dataSource')
+            listToTree<SYSTEM.MenuItem>(result?.data, rootId, temp)
+            console.log(treeList, 'treeList')
+            return {
+              data: treeList,
+              success: true
+            };
+          }}
+          // value={dataSource}
           actionRef={actionRef}
           rowKey="id"
           headerTitle="菜单树"
@@ -160,7 +175,7 @@ export default () => {
         />
         {
           !isModalVisible ? '' :
-          <MenuModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} editId ={editId} actionRef={actionRef}/>
+          <MenuModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} editId ={editId} actionRef={actionRef} fatherId={fatherId}/>
         }
       </PageContainer>
     </>

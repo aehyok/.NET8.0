@@ -141,6 +141,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.MenuController.DeleteMenu(System.String)">
+            <summary>
+            删除菜单
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.UserController">
             <summary>
             用户管理
