@@ -7,7 +7,7 @@ import ProForm, {
   ProFormTextArea,
   ProFormSelect
 } from '@ant-design/pro-form';
-import { getMenu } from '@/services/ant-design-pro/menu'
+import { getMenu, addMenu, updateMenu } from '@/services/ant-design-pro/menu'
 
 export default (props: any) => {
 
@@ -29,9 +29,10 @@ export default (props: any) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetch = async () => {
-      const result = await getMenu()
-      console.log(result, 'result')
-      setInitialValues(result.data)
+       await getMenu(editId).then((result: any) => {
+        console.log(result, 'result')
+        setInitialValues(result?.data)
+      })
       // initialValues = result.data
     }
     if(editId !== undefined) {
@@ -51,6 +52,32 @@ export default (props: any) => {
   const onSubmit = async(values: any) => {
     console.log(values, '保存结果')
     message.success('结果保存成功')
+    console.log(editId != undefined, 'editId')
+    if(editId != undefined) {
+      updateMenu({
+        ...values,
+        id: editId,
+      }).then((result: any) => {
+        if(result.code == 200) {
+          console.log(result, 'result')
+          handleCancel()
+          actionRef.current.reload()
+          message.success('修改菜单成功')
+        }
+      })
+    } else {
+      addMenu({
+        ...values,
+        fatherId: '1'
+      }).then((result: any) => {
+        if(result.code == 200) {
+          console.log(result, 'result')
+          handleCancel()
+          actionRef.current.reload()
+          message.success('新增菜单成功')
+        }
+      })
+    }
   }
 
   return (
@@ -58,51 +85,50 @@ export default (props: any) => {
       {
         initialValues === undefined && editId !== undefined ? <Skeleton /> :
         <ProForm
-        form={form}
-        {...formItemLayout}
-        layout={'horizontal'}
+          form={form}
+          {...formItemLayout}
+          layout={'horizontal'}
           submitter={false}
           initialValues={initialValues}
           onFinish={async (values) => onSubmit(values)}
       >
           <ProFormText
-            name="pp"
+            name="fatherId"
             label="上级菜单"
             disabled
           />
           <ProFormText
-            name="name"
+            name="menuName"
             label="菜单名称"
             rules={[{ required: true, message: '请输入菜单名称' }]}
             placeholder="请输入菜单名称"
           />
 
           <ProFormText
-            name="uiPath"
+            name="menuPath"
             label="菜单路由"
           />
           <ProFormText
-            name="sequence"
+            name="displayOrder"
             label="显示顺序"
             placeholder="请输入显示顺序"
           />
         <ProFormSelect
           options={[
             {
-              value: '6',
+              value: 0,
               label: '禁用',
             },
             {
-              value: '12',
+              value: 1,
               label: '启用',
             },
           ]}
-          initialValue="6"
           width="xs"
-          name="taxRate"
+          name="status"
           label="是否禁用"
         />
-        <ProFormTextArea label="参数" name="remark"/>
+        <ProFormTextArea label="参数" name="menuParameter"/>
         <ProForm.Group style={{ textAlign: 'right' }}>
           <Button htmlType="button" onClick={ handleCancel }>
             取消

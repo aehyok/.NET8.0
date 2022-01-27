@@ -15,10 +15,9 @@ export default () => {
 
   const [dataSource, setDataSource] = useState<SYSTEM.MenuItem[]>(() =>[]);
 
-
   let treeList: any = null
 
-  function listToTree<T extends COMMON.Recursion>(list: T[], fatherId: string|undefined,current: T | null){
+  function listToTree<T extends COMMON.Recursion>(list: T[], fatherId: string|undefined, current: T | null){
     // 先根据fatherId找出父节点列表
     // 第一次 通过fatherid =1,查找出2，3，4节点列表
     // 第二次 通过fatherid =2 ,查找出5，6，7
@@ -147,7 +146,7 @@ export default () => {
           onRow={(row) => {
             return {
               onClick: () => {
-                console.log('row', row)
+                // console.log('row', row)
               },
             }
           }}
