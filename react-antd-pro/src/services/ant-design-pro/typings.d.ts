@@ -1,4 +1,5 @@
 // @ts-ignore
+
 /* eslint-disable */
 declare namespace COMMON {
   type ResultModel<T> = {
@@ -6,6 +7,13 @@ declare namespace COMMON {
     message?: string;
     data: T;
   };
+
+  // 递归基础
+  interface Recursion {
+    fatherId: string;
+    id: string;
+    children: Recursion[];
+  }
 }
 
 declare namespace API {
@@ -139,14 +147,12 @@ declare namespace SYSTEM {
     typeCode?: number;
   };
 
-  type MenuItem = {
-    children: MenuItem[];
+
+  interface MenuItem extends COMMON.Recursion {
     code: string;
     menuParameter?: string;
-    id?: string;
     displayOrder?: number;
     menuName: string;
-    fatherId: string;
     menuPath: string;
     status: number;
   };
