@@ -5,7 +5,7 @@ import { Button, message, Modal } from 'antd';
 import MenuModal from './modal'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
-import { getMenuList } from '@/services/ant-design-pro/menu'
+import { getMenuList, deleteMenu } from '@/services/ant-design-pro/menu'
 
 export default () => {
   const actionRef = useRef<ActionType>();
@@ -70,8 +70,12 @@ export default () => {
       content: '请确认是否删除该菜单（以及该指标节点下的指标）?',
       okText: '确认',
       onOk:() => {
-        message.success('删除成功')
-        actionRef.current?.reload()
+        deleteMenu(record.id).then(result => {
+          if(result?.code ==200) {
+            message.success('删除成功')
+            actionRef.current?.reload()
+          }
+        })
       },
       onCancel : () => {console.log('取消')},
       cancelText: '取消',

@@ -26,3 +26,9 @@ export async function updateMenu(data: SYSTEM.MenuItem) {
     data: data,
   });
 }
+
+export async function deleteMenu(menuId: string) {
+  return request<any>(`/so/api/Menu/DeleteMenu?menuId=${menuId}`, {
+    method: 'POST',
+  });
+}
