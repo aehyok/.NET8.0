@@ -61,7 +61,6 @@ const MenuModal: React.FC<ModalProps> = (props) => {
 
   const onSubmit = async(values: any) => {
     console.log(values, '保存结果')
-    message.success('结果保存成功')
     console.log(editId != undefined, 'editId')
     if(editId != undefined) {
       updateMenu({
@@ -103,11 +102,11 @@ const MenuModal: React.FC<ModalProps> = (props) => {
           initialValues={initialValues}
           onFinish={async (values) => onSubmit(values)}
       >
-          <ProFormText
+          {/* <ProFormText
             name="fatherId"
             label="上级菜单"
             disabled
-          />
+          /> */}
           <ProFormText
             name="menuName"
             label="菜单名称"

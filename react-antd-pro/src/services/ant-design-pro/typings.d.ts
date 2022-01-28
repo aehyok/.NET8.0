@@ -12,7 +12,8 @@ declare namespace COMMON {
   interface Recursion {
     fatherId: string;
     id: string;
-    children: Recursion[];
+    children?: Recursion[];
+    displayOrder?: number;
   }
 }
 
@@ -151,7 +152,6 @@ declare namespace SYSTEM {
   interface MenuItem extends COMMON.Recursion {
     code: string;
     menuParameter?: string;
-    displayOrder?: number;
     menuName: string;
     menuPath: string;
     status: number;

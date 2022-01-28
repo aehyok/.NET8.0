@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import type { ActionType, ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
-import { Button, message, Modal } from 'antd';
+import { Button, message, Modal, Tag } from 'antd';
 import MenuModal from './modal'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-layout';
@@ -18,12 +18,12 @@ export default () => {
 
   let treeList: any = null
 
-  function listToTree<T extends COMMON.Recursion>(list: T[], fatherId: string|undefined, current: T | null){
+  function listToTree<T extends COMMON.Recursion>(list: T[], parentId: string|undefined, current: T | null){
     // 先根据fatherId找出父节点列表
     // 第一次 通过fatherid =1,查找出2，3，4节点列表
     // 第二次 通过fatherid =2 ,查找出5，6，7
 
-    const parentList = list.filter((item: T) => item.fatherId === fatherId)
+    const parentList = list.filter((item: T) => item.fatherId === parentId)
     console.log(parentList, 'parentList')
     // 第一次查找出来后将节点list放入到树中
     //
@@ -50,30 +50,46 @@ export default () => {
   //   })
   // }, [])
 
+  // 编辑当前菜单
   const editClick = (record: SYSTEM.MenuItem) => {
     console.log(record, '-------编辑-----------')
     setEditId(record.id)
+    setFatherId(record.fatherId)
     setIsModalVisible(true)
   }
 
+  // 添加根菜单
+  const addRootMenuClick = () => {
+    setFatherId(rootId)
+    setEditId(undefined)
+    setIsModalVisible(true)
+  }
+
+  // 添加子节点菜单
   const addChildClick = (record: SYSTEM.MenuItem) => {
     console.log(record, '-----添加-----')
     setFatherId(record.id)
+    setEditId(undefined)
     setIsModalVisible(true)
   }
 
+  // 删除当前菜单
   const deleteClick = (record: SYSTEM.MenuItem) => {
     console.log(record, '-----删除---')
     Modal.confirm({
       title: '系统提示',
       icon: <ExclamationCircleOutlined />,
-      content: '请确认是否删除该菜单（以及该指标节点下的指标）?',
+      content: '请确认是否删除该菜单?',
       okText: '确认',
       onOk:() => {
         deleteMenu(record.id).then(result => {
-          if(result?.code ==200) {
-            message.success('删除成功')
-            actionRef.current?.reload()
+          if(result?.data === -1) {
+            message.warn('删除失败，请先删除子菜单')
+          } else {
+            if(result?.code === 200) {
+              message.success('删除成功')
+              actionRef.current?.reload()
+            }
           }
         })
       },
@@ -102,6 +118,14 @@ export default () => {
       title: '状态',
       dataIndex: 'status',
       width: '30%',
+      render: text=> (
+        <>
+          {
+            text === 0 ? <Tag color='red'>禁用</Tag> :
+            text === 1 ? <Tag color='green'>启用</Tag> : ''
+          }
+        </>
+      )
     },
     {
       title: '操作',
@@ -129,11 +153,6 @@ export default () => {
       ],
     },
   ];
-
-  const addRootMenuClick = () => {
-    setFatherId(rootId)
-    setIsModalVisible(true)
-  }
 
   return (
     <>
