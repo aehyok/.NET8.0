@@ -496,6 +496,64 @@ namespace aehyok.Core.EntityFramework.MySql.Data
                 .HasColumnName("status");
             });
 
+            modelBuilder.Entity<SystemDictionaryType>(entity =>
+            {
+                entity.ToTable("SystemDictionaryType");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Code)
+                    .HasMaxLength(50)
+                    .HasColumnName("code");
+
+                entity.Property(e => e.Remark)
+                    .HasMaxLength(200)
+                    .HasColumnName("remark");
+
+                entity.Property(e => e.IsDelete)
+                .HasColumnType("int(1)")
+                .HasColumnName("isDelete");
+            });
+
+            modelBuilder.Entity<SystemDictionary>(entity =>
+            {
+                entity.ToTable("SystemDictionary");
+
+                entity.Property(e => e.Id)
+                    .HasMaxLength(50)
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+
+                entity.Property(e => e.Code)
+                    .HasMaxLength(50)
+                    .HasColumnName("code");
+
+                entity.Property(e => e.FatherCode)
+                    .HasMaxLength(50)
+                    .HasColumnName("fatherCode");
+
+                entity.Property(e => e.IsDelete)
+                    .HasMaxLength(1)
+                    .HasColumnName("isDelete");
+
+                entity.Property(e => e.Remark)
+                    .HasMaxLength(200)
+                    .HasColumnName("remark");
+
+                entity.Property(e => e.DisplayOrder)
+                .HasColumnType("int(11)")
+                .HasColumnName("dispalyOrder");
+            });
+
             modelBuilder.Entity<MdComputecolumn>(entity =>
             {
                 entity.ToTable("md_computecolumn");
