@@ -16,6 +16,8 @@ namespace aehyok.Core.EntityFramework.MySql.Models
 		public string? Remark { get; set; }
 
 		public int? IsDelete { get; set; }
+
+		public string? TypeCode { get; set; }
 	}
 }
 

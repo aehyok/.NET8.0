@@ -541,6 +541,9 @@ namespace aehyok.Core.EntityFramework.MySql.Data
                     .HasMaxLength(50)
                     .HasColumnName("fatherCode");
 
+                entity.Property(e => e.TypeCode)
+                    .HasMaxLength(50)
+                    .HasColumnName("typeCode");
                 entity.Property(e => e.IsDelete)
                     .HasMaxLength(1)
                     .HasColumnName("isDelete");

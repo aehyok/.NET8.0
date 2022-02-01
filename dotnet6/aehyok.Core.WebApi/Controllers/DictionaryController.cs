@@ -16,57 +16,61 @@ namespace aehyok.Core.WebApi.Controllers
     public class DictionaryController : BaseApiController
     {
         private readonly IRepository<SystemDictionaryType> _dictionaryTypeRepository;
-        public DictionaryController(IRepository<SystemDictionaryType> dictionaryTypeRepository)
+        private readonly IRepository<SystemDictionary> _dictionaryRepository;
+        public DictionaryController(IRepository<SystemDictionaryType> dictionaryTypeRepository, IRepository<SystemDictionary> dictionaryRepository)
         {
             this._dictionaryTypeRepository = dictionaryTypeRepository;
+            this._dictionaryRepository = dictionaryRepository;
         }
+
+        #region 字典类型
         /// <summary>
-        /// 获取所有菜单列表
+        /// 获取字典类型列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public List<SystemDictionaryType> GetMenuList()
+        public List<SystemDictionaryType> GetDictionaryTypeList()
         {
             var list = this._dictionaryTypeRepository.GetList();
             return list;
         }
 
         /// <summary>
-        /// 通过菜单Id获取菜单详情
+        /// 通过字典类型Id获取字典类型详情
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<SystemDictionaryType> GetMenu(string id)
+        public async Task<SystemDictionaryType> GetDictionaryType(string id)
         {
             return await this._dictionaryTypeRepository.GetAsync(id);
         }
 
         /// <summary>
-        /// 添加菜单
+        /// 添加字典
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<SystemDictionaryType> AddMenu(SystemDictionaryType systemDictionaryType)
+        public async Task<SystemDictionaryType> AddDictionaryType(SystemDictionaryType systemDictionaryType)
         {
             return await this._dictionaryTypeRepository.InsertAsync(systemDictionaryType);
         }
 
         /// <summary>
-        /// 修改菜单
+        /// 修改字典类型
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<int> UpdateMenu(SystemDictionaryType systemDictionaryType)
+        public async Task<int> UpdateDictionaryType(SystemDictionaryType systemDictionaryType)
         {
             return await this._dictionaryTypeRepository.UpdateAsync(systemDictionaryType);
         }
 
         /// <summary>
-        /// 删除菜单
+        /// 删除字典类型
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -76,6 +80,66 @@ namespace aehyok.Core.WebApi.Controllers
 
             return await this._dictionaryTypeRepository.DeleteAsync(dictionaryId);
         }
+        #endregion
+
+        #region 字典
+        /// <summary>
+        /// 获取字典列表通过字典类型
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public List<SystemDictionary> GetDictionaryList(string typeCode)
+        {
+            var list = this._dictionaryRepository.GetQueryable().Where(item => item.TypeCode == typeCode).ToList();
+            return list;
+        }
+
+        /// <summary>
+        /// 通过字典类型Id获取字典类型详情
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<SystemDictionary> GetDictionary(string id)
+        {
+            return await this._dictionaryRepository.GetAsync(id);
+        }
+
+        /// <summary>
+        /// 添加字典
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<SystemDictionary> AddDictionary(SystemDictionary systemDictionary)
+        {
+            return await this._dictionaryRepository.InsertAsync(systemDictionary);
+        }
+
+        /// <summary>
+        /// 修改字典
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<int> UpdateDictionary(SystemDictionary systemDictionary)
+        {
+            return await this._dictionaryRepository.UpdateAsync(systemDictionary);
+        }
+
+        /// <summary>
+        /// 删除字典
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<int> DeleteDictionary(string dictionaryId)
+        {
+
+            return await this._dictionaryRepository.DeleteAsync(dictionaryId);
+        }
+        #endregion
     }
 }
 

@@ -14,6 +14,66 @@
             Controller
             </summary>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.GetDictionaryTypeList">
+            <summary>
+            获取字典类型列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.GetDictionaryType(System.String)">
+            <summary>
+            通过字典类型Id获取字典类型详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.AddDictionaryType(aehyok.Core.EntityFramework.MySql.Models.SystemDictionaryType)">
+            <summary>
+            添加字典
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.UpdateDictionaryType(aehyok.Core.EntityFramework.MySql.Models.SystemDictionaryType)">
+            <summary>
+            修改字典类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.DeleteDictionaryType(System.String)">
+            <summary>
+            删除字典类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.GetDictionaryList(System.String)">
+            <summary>
+            获取字典列表通过字典类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.GetDictionary(System.String)">
+            <summary>
+            通过字典类型Id获取字典类型详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.AddDictionary(aehyok.Core.EntityFramework.MySql.Models.SystemDictionary)">
+            <summary>
+            添加字典
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.UpdateDictionary(aehyok.Core.EntityFramework.MySql.Models.SystemDictionary)">
+            <summary>
+            修改字典
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.DeleteDictionary(System.String)">
+            <summary>
+            删除字典
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.FlowController">
             <summary>
             流程引擎定义表
