@@ -1,30 +1,33 @@
 import React from 'react';
 import { Button } from 'antd';
-import { TableDropdown } from '@ant-design/pro-table';
+import { ProColumns, TableDropdown } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 // @ts-ignore
 import styles from './split.less';
 import { request } from 'umi';
 
 type TypeProps = {
-  typeCode: number | undefined;
+  dictionaryTypeCode: string;
   onChangeClick: (record: SYSTEM.DictionaryTypeItem) => void;
 };
 
 const DictionaryTypeList: React.FC<TypeProps> = (props) => {
-  const { onChangeClick, typeCode } = props;
+  const { onChangeClick, dictionaryTypeCode } = props;
 
+  const addDictionaryType = () => {
+
+  }
   const columns: ProColumns<SYSTEM.DictionaryTypeItem>[] = [
     {
-      title: '字典类目',
+      title: '字典类型',
       key: 'name',
       dataIndex: 'name',
     },
     {
-      title: 'typeCode',
-      key: 'typeCode',
-      dataIndex: 'typeCode',
-      hideInTable: true,
+      title: 'code',
+      key: 'code',
+      dataIndex: 'code',
+      hideInTable: false,
     },
     {
       title: '操作',
@@ -43,15 +46,15 @@ const DictionaryTypeList: React.FC<TypeProps> = (props) => {
   return (
     <ProTable<SYSTEM.DictionaryTypeItem>
       columns={columns}
-      showHeader={false}
+      // showHeader={false}
       request={(params, sorter, filter) => {
         // 表单搜索项会从 params 传入，传递给后端接口。
         console.log(params, sorter, filter);
-        return request<SYSTEM.DictionaryTypeList>('/api/getDictionaryTypeList');
+        return request<any>('/so/api/Dictionary/getDictionaryTypeList');
       }}
-      rowKey="typeCode"
+      rowKey="id"
       rowClassName={(record) => {
-        return record.typeCode === typeCode ? styles['split-row-select-active'] : '';
+        return record.code === dictionaryTypeCode ? styles['split-row-select-active'] : '';
       }}
       toolbar={{
         search: {
@@ -60,7 +63,7 @@ const DictionaryTypeList: React.FC<TypeProps> = (props) => {
           },
         },
         actions: [
-          <Button key="list" type="primary">
+          <Button key="list" type="primary" onClick={() => addDictionaryType()}>
             新建
           </Button>,
         ],

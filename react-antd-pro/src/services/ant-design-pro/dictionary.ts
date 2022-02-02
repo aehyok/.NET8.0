@@ -1,16 +1,63 @@
 import { request } from '@/utils/request';
 
-/** 通过字典类型获取字典项列表 GET /api/getUser */
-export async function getDictionaryList() {
-  //return request<SYSTEM.DictionaryList>('/api/getDictionaryList', {
-  return request<SYSTEM.DictionaryItem[]>('/api/getDictionaryList', {
+export async function getDictionaryTypeList() {
+  return request<SYSTEM.DictionaryTypeItem[]>('/so/api/Dictionary/getDictionaryTypeList', {
     method: 'GET',
   });
 }
 
-/** 通过菜单id获取菜单详情 GET /api/getMenu */
-export async function getDictionaryTypeList() {
-  return request<SYSTEM.DictionaryTypeItem[]>('/api/getDictionaryTypeList', {
+export async function getDictionaryType(id: string) {
+  return request<SYSTEM.DictionaryTypeItem>(`/so/api/Dictionary/getDictionaryType?dictionaryTypeId=${id}`, {
+    method: 'GET', });
+}
+
+export async function addDictionaryType(data: SYSTEM.DictionaryTypeItem) {
+  return request<any>('/so/api/Dictionary/AddDictionaryType', {
+    method: 'POST',
+    data: data,
+  });
+}
+
+export async function updateDictionaryType(data: SYSTEM.DictionaryTypeItem) {
+  return request<any>('/so/api/Dictionary/UpdateDictionaryType', {
+    method: 'POST',
+    data: data,
+  });
+}
+
+export async function deleteDictionaryType(dictionaryTypeId: string) {
+  return request<any>(`/so/api/Dictionary/DeleteDictionaryType?id=${dictionaryTypeId}`, {
+    method: 'POST',
+  });
+}
+
+export async function getDictionaryList(typeCode: string) {
+  return request<SYSTEM.DictionaryItem[]>(`/so/api/Dictionary/GetDictionaryList?typeCode=${typeCode}`, {
     method: 'GET',
+  });
+}
+
+export async function getDictionary(id: string) {
+  return request<SYSTEM.DictionaryItem>(`/so/api/Dictionary/GetDictionary?dictionaryId=${id}`, {
+    method: 'GET', });
+}
+
+export async function addDictionary(data: SYSTEM.DictionaryItem) {
+  return request<any>('/so/api/Dictionary/AddDictionary', {
+    method: 'POST',
+    data: data,
+  });
+}
+
+export async function updateDictionary(data: SYSTEM.DictionaryItem) {
+  return request<any>('/so/api/Dictionary/UpdateDictionary', {
+    method: 'POST',
+    data: data,
+  });
+}
+
+export async function deleteDictionary(dictionaryId: string) {
+  return request<any>(`/so/api/Dictionary/DeleteDictionary?id=${dictionaryId}`, {
+    method: 'POST',
   });
 }

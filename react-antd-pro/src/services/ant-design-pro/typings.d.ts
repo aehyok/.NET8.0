@@ -127,8 +127,9 @@ declare namespace SYSTEM {
    * 字典类型项
    */
   type DictionaryTypeItem = {
+    id?: string;
+    code?: string;
     name?: string;
-    typeCode?: number;
   };
 
   /**

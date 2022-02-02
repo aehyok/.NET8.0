@@ -42,9 +42,9 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<SystemDictionaryType> GetDictionaryType(string id)
+        public async Task<SystemDictionaryType> GetDictionaryType(string dictionaryTypeId)
         {
-            return await this._dictionaryTypeRepository.GetAsync(id);
+            return await this._dictionaryTypeRepository.GetAsync(dictionaryTypeId);
         }
 
         /// <summary>
@@ -75,10 +75,10 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<int> DeleteDictionaryType(string dictionaryId)
+        public async Task<int> DeleteDictionaryType(string dictionaryTypeId)
         {
 
-            return await this._dictionaryTypeRepository.DeleteAsync(dictionaryId);
+            return await this._dictionaryTypeRepository.DeleteAsync(dictionaryTypeId);
         }
         #endregion
 
@@ -101,9 +101,9 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<SystemDictionary> GetDictionary(string id)
+        public async Task<SystemDictionary> GetDictionary(string dictionaryId)
         {
-            return await this._dictionaryRepository.GetAsync(id);
+            return await this._dictionaryRepository.GetAsync(dictionaryId);
         }
 
         /// <summary>

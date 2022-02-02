@@ -7,11 +7,11 @@ import DictionaryList from './dictionaryList';
 
 
 const DictionaryManage: React.FC = () => {
-  const [typeCode, setTypeCode] = useState<number>()
+  const [typeCode, setDictionaryTypeCode] = useState<string>()
   const [title, setTitle] = useState<string>()
   const onChangeClick = (record: SYSTEM.DictionaryTypeItem) => {
     console.log('onChangeClick', record)
-    setTypeCode(record.typeCode)
+    setDictionaryTypeCode(record.code)
     setTitle(record.name)
   }
   return (

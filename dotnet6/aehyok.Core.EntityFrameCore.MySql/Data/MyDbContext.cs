@@ -554,7 +554,7 @@ namespace aehyok.Core.EntityFramework.MySql.Data
 
                 entity.Property(e => e.DisplayOrder)
                 .HasColumnType("int(11)")
-                .HasColumnName("dispalyOrder");
+                .HasColumnName("displayOrder");
             });
 
             modelBuilder.Entity<MdComputecolumn>(entity =>

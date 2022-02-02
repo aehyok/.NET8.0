@@ -6,7 +6,7 @@ import ProTable from '@ant-design/pro-table';
 import { getDictionaryList } from '@/services/ant-design-pro/dictionary'
 
 type ListProps = {
-  typeCode: number| undefined;
+  typeCode: string;
   title: string | undefined;
 };
 
@@ -80,9 +80,9 @@ const DictionaryList: React.FC<ListProps> = (props) => {
 
   useEffect(() => {
     const fetch = async() => {
-      const source = await getDictionaryList()
+      const source = await getDictionaryList(typeCode)
       console.log(source, 'source')
-      setTableListDataSource(source.data|| []);
+      setTableListDataSource(source.data);
     }
 
     fetch()

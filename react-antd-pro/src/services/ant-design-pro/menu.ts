@@ -1,5 +1,4 @@
 import { request } from '@/utils/request';
-import MenuItem from '../../pages/editor/flow/components/EditorContextMenu/MenuItem';
 
 /** 通过菜单id获取菜单详情 GET /api/getMenu */
 export async function getMenu(id: string) {
