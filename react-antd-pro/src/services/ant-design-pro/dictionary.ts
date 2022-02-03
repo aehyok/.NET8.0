@@ -26,7 +26,7 @@ export async function updateDictionaryType(data: SYSTEM.DictionaryTypeItem) {
 }
 
 export async function deleteDictionaryType(dictionaryTypeId: string) {
-  return request<any>(`/so/api/Dictionary/DeleteDictionaryType?id=${dictionaryTypeId}`, {
+  return request<any>(`/so/api/Dictionary/DeleteDictionaryType?dictionaryTypeId=${dictionaryTypeId}`, {
     method: 'POST',
   });
 }

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from 'antd';
-import { ProColumns } from '@ant-design/pro-table';
+import { ActionType, ProColumns } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 // @ts-ignore
 import { getDictionaryList } from '@/services/ant-design-pro/dictionary'
-
+import DictionaryModal from './modal'
 type ListProps = {
   typeCode: string;
   title: string | undefined;
@@ -14,6 +14,19 @@ const DictionaryList: React.FC<ListProps> = (props) => {
   const { typeCode, title } = props;
   console.log('--------DictionaryList--------',typeCode)
   const [tableListDataSource, setTableListDataSource] = useState<SYSTEM.DictionaryItem[]>([]);
+  const [isShowModal, setIsShowModal] = React.useState(false);
+  const [editId, setEditId]= React.useState(undefined)
+
+  const addDictionaryClick = () => {
+    setEditId(undefined)
+    setIsShowModal(true)
+  }
+
+  const hiddenModal = () => {
+    setIsShowModal(false)
+  }
+
+  const actionRef = useRef<ActionType>();
 
   const columns: ProColumns<SYSTEM.DictionaryItem>[] = [
     {
@@ -91,6 +104,7 @@ const DictionaryList: React.FC<ListProps> = (props) => {
   }, [typeCode]);
 
   return (
+    <>
     <ProTable<SYSTEM.DictionaryItem>
       columns={columns}
       dataSource={tableListDataSource}
@@ -104,12 +118,17 @@ const DictionaryList: React.FC<ListProps> = (props) => {
       search={false}
       toolbar={{
         actions: [
-          <Button key="lists" type="primary">
+          <Button key="lists" type="primary" onClick={() => { addDictionaryClick() }}>
             新建
           </Button>,
         ],
       }}
     />
+    {
+      isShowModal ? <DictionaryModal  modalVisible={isShowModal}  actionRef={actionRef} editId={editId} hiddenModal={hiddenModal}/> :
+      ''
+    }
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import ProForm, {
   ProFormTextArea,
   ProFormSelect
 } from '@ant-design/pro-form';
-import { getMenu, addMenu, updateMenu } from '@/services/ant-design-pro/menu'
+import { getDictionaryType, addDictionaryType, updateDictionaryType } from '@/services/ant-design-pro/dictionary'
 import { ActionType } from '@ant-design/pro-table';
 
 type ModalProps = {
@@ -18,15 +18,14 @@ type ModalProps = {
   fatherId: string;
 };
 
-const MenuModal: React.FC<ModalProps> = (props) => {
-// export default (props: any) => {
+const TypeModal: React.FC<ModalProps> = (props) => {
 
   const formItemLayout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 20 },
   }
 
-  const { modalVisible, hiddenModal, editId, actionRef, fatherId } = props
+  const { modalVisible, hiddenModal, editId, actionRef } = props
   console.log(props.modalVisible, editId, 'ssss----ss')
   console.log(actionRef, 'actionRef')
   const [form] = Form.useForm();
@@ -39,8 +38,8 @@ const MenuModal: React.FC<ModalProps> = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetch = async () => {
-       await getMenu(editId).then((result: any) => {
-        console.log(result, 'result')
+       await getDictionaryType(editId).then((result: any) => {
+        console.log(result, 'result----type')
         setInitialValues(result?.data)
       })
       // initialValues = result.data
@@ -52,8 +51,6 @@ const MenuModal: React.FC<ModalProps> = (props) => {
     console.log('---fetch---')
   }, [])
 
-  const formRef = useRef(null);
-
   const handleCancel = () => {
     form.resetFields()
     hiddenModal()
@@ -62,11 +59,10 @@ const MenuModal: React.FC<ModalProps> = (props) => {
   const onSubmit = async(values: any) => {
     console.log(values, '保存结果')
     console.log(editId != undefined, 'editId')
-    if(editId != undefined) {
-      updateMenu({
+    if(editId != '') {
+      updateDictionaryType({
         ...values,
         id: editId,
-        fatherId: fatherId
       }).then((result: any) => {
         if(result.code == 200) {
           console.log(result, 'result')
@@ -76,9 +72,8 @@ const MenuModal: React.FC<ModalProps> = (props) => {
         }
       })
     } else {
-      addMenu({
+      addDictionaryType({
         ...values,
-        fatherId: fatherId,
       }).then((result: any) => {
         if(result.code == 200) {
           console.log(result, 'result')
@@ -91,7 +86,7 @@ const MenuModal: React.FC<ModalProps> = (props) => {
   }
 
   return (
-    <Modal title="添加菜单" footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
+    <Modal title="添加字典类型" footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
       {
         initialValues === undefined && editId !== undefined ? <Skeleton /> :
         <ProForm
@@ -102,43 +97,20 @@ const MenuModal: React.FC<ModalProps> = (props) => {
           initialValues={initialValues}
           onFinish={async (values) => onSubmit(values)}
       >
-          {/* <ProFormText
-            name="fatherId"
-            label="上级菜单"
-            disabled
-          /> */}
           <ProFormText
-            name="menuName"
-            label="菜单名称"
-            rules={[{ required: true, message: '请输入菜单名称' }]}
-            placeholder="请输入菜单名称"
+            name="name"
+            label="类型名称"
+            rules={[{ required: true, message: '请输入字典类型名称' }]}
+            placeholder="请输入字典类型名称"
           />
 
           <ProFormText
-            name="menuPath"
-            label="菜单路由"
+            name="code"
+            label="类型代码"
+            rules={[{ required: true, message: '请输入字典类型代码' }]}
+            placeholder="请输入字典类型代码"
           />
-          <ProFormText
-            name="displayOrder"
-            label="显示顺序"
-            placeholder="请输入显示顺序"
-          />
-        <ProFormSelect
-          options={[
-            {
-              value: 0,
-              label: '禁用',
-            },
-            {
-              value: 1,
-              label: '启用',
-            },
-          ]}
-          width="xs"
-          name="status"
-          label="是否禁用"
-        />
-        <ProFormTextArea label="参数" name="menuParameter"/>
+        <ProFormTextArea label="备注" name="remark"/>
         <ProForm.Group style={{ textAlign: 'right' }}>
           <Button htmlType="button" onClick={ handleCancel }>
             取消
@@ -153,4 +125,4 @@ const MenuModal: React.FC<ModalProps> = (props) => {
   );
 };
 
-export default MenuModal;
+export default TypeModal;

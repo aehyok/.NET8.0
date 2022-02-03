@@ -13,8 +13,8 @@ import { ActionType } from '@ant-design/pro-table';
 type ModalProps = {
   modalVisible: boolean;
   hiddenModal: Function;
-  editId: string;
-  actionRef: ActionType;
+  editId?: string;
+  actionRef?: ActionType;
   fatherId: string;
 };
 
@@ -91,7 +91,7 @@ const MenuModal: React.FC<ModalProps> = (props) => {
   }
 
   return (
-    <Modal title="添加菜单" footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
+    <Modal title="添加字典" footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
       {
         initialValues === undefined && editId !== undefined ? <Skeleton /> :
         <ProForm
@@ -102,43 +102,31 @@ const MenuModal: React.FC<ModalProps> = (props) => {
           initialValues={initialValues}
           onFinish={async (values) => onSubmit(values)}
       >
-          {/* <ProFormText
-            name="fatherId"
-            label="上级菜单"
-            disabled
-          /> */}
+
           <ProFormText
-            name="menuName"
-            label="菜单名称"
-            rules={[{ required: true, message: '请输入菜单名称' }]}
-            placeholder="请输入菜单名称"
+            name="fatherCode"
+            label="字典父节点代码"
+            placeholder="请输入字典父节点代码"
+          />
+          <ProFormText
+            name="name"
+            label="字典名称"
+            rules={[{ required: true, message: '请输入字典名称' }]}
+            placeholder="请输入字典名称"
           />
 
           <ProFormText
-            name="menuPath"
-            label="菜单路由"
+            name="code"
+            label="字典代码"
+            rules={[{ required: true, message: '请输入字典代码' }]}
+            placeholder="请输入字典代码"
           />
           <ProFormText
             name="displayOrder"
             label="显示顺序"
             placeholder="请输入显示顺序"
           />
-        <ProFormSelect
-          options={[
-            {
-              value: 0,
-              label: '禁用',
-            },
-            {
-              value: 1,
-              label: '启用',
-            },
-          ]}
-          width="xs"
-          name="status"
-          label="是否禁用"
-        />
-        <ProFormTextArea label="参数" name="menuParameter"/>
+        <ProFormTextArea label="备注" name="remark"/>
         <ProForm.Group style={{ textAlign: 'right' }}>
           <Button htmlType="button" onClick={ handleCancel }>
             取消
