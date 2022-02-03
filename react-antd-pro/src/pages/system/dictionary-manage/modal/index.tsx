@@ -5,9 +5,10 @@ import ProForm, {
   ProFormText,
   ProFormDateRangePicker,
   ProFormTextArea,
-  ProFormSelect
+  ProFormSelect,
+  ProFormDigit
 } from '@ant-design/pro-form';
-import { getMenu, addMenu, updateMenu } from '@/services/ant-design-pro/menu'
+import { getDictionary, addDictionary, updateDictionary } from '@/services/ant-design-pro/dictionary'
 import { ActionType } from '@ant-design/pro-table';
 
 type ModalProps = {
@@ -15,7 +16,7 @@ type ModalProps = {
   hiddenModal: Function;
   editId?: string;
   actionRef?: ActionType;
-  fatherId: string;
+  typeCode?: string;
 };
 
 const MenuModal: React.FC<ModalProps> = (props) => {
@@ -26,7 +27,7 @@ const MenuModal: React.FC<ModalProps> = (props) => {
     wrapperCol: { span: 20 },
   }
 
-  const { modalVisible, hiddenModal, editId, actionRef, fatherId } = props
+  const { modalVisible, hiddenModal, editId, actionRef, typeCode } = props
   console.log(props.modalVisible, editId, 'ssss----ss')
   console.log(actionRef, 'actionRef')
   const [form] = Form.useForm();
@@ -39,7 +40,7 @@ const MenuModal: React.FC<ModalProps> = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetch = async () => {
-       await getMenu(editId).then((result: any) => {
+       await getDictionary(editId).then((result: any) => {
         console.log(result, 'result')
         setInitialValues(result?.data)
       })
@@ -60,31 +61,31 @@ const MenuModal: React.FC<ModalProps> = (props) => {
   }
 
   const onSubmit = async(values: any) => {
-    console.log(values, '保存结果')
+    console.log(values, '保存结果', typeCode, editId)
     console.log(editId != undefined, 'editId')
     if(editId != undefined) {
-      updateMenu({
+      updateDictionary({
         ...values,
         id: editId,
-        fatherId: fatherId
+        typeCode: typeCode
       }).then((result: any) => {
         if(result.code == 200) {
           console.log(result, 'result')
           handleCancel()
           actionRef?.current?.reload()
-          message.success('修改菜单成功')
+          message.success('修改字典成功')
         }
       })
     } else {
-      addMenu({
+      addDictionary({
         ...values,
-        fatherId: fatherId,
+        typeCode: typeCode,
       }).then((result: any) => {
         if(result.code == 200) {
           console.log(result, 'result')
           handleCancel()
           actionRef.current.reload()
-          message.success('新增菜单成功')
+          message.success('新增字典成功')
         }
       })
     }
@@ -105,7 +106,7 @@ const MenuModal: React.FC<ModalProps> = (props) => {
 
           <ProFormText
             name="fatherCode"
-            label="字典父节点代码"
+            label="父节点"
             placeholder="请输入字典父节点代码"
           />
           <ProFormText
@@ -121,7 +122,7 @@ const MenuModal: React.FC<ModalProps> = (props) => {
             rules={[{ required: true, message: '请输入字典代码' }]}
             placeholder="请输入字典代码"
           />
-          <ProFormText
+          <ProFormDigit
             name="displayOrder"
             label="显示顺序"
             placeholder="请输入显示顺序"

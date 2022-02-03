@@ -57,7 +57,7 @@ export async function updateDictionary(data: SYSTEM.DictionaryItem) {
 }
 
 export async function deleteDictionary(dictionaryId: string) {
-  return request<any>(`/so/api/Dictionary/DeleteDictionary?id=${dictionaryId}`, {
+  return request<any>(`/so/api/Dictionary/DeleteDictionary?dictionaryId=${dictionaryId}`, {
     method: 'POST',
   });
 }

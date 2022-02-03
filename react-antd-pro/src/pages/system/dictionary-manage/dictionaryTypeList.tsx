@@ -10,12 +10,12 @@ import TypeModal from './type-modal'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { deleteDictionaryType } from '@/services/ant-design-pro/dictionary'
 type TypeProps = {
-  dictionaryTypeCode: string;
+  typeCode: string;
   onChangeClick: (record: SYSTEM.DictionaryTypeItem) => void;
 };
 
 const DictionaryTypeList: React.FC<TypeProps> = (props) => {
-  const { onChangeClick, dictionaryTypeCode } = props;
+  const { onChangeClick, typeCode } = props;
   const [isShowModal, setIsShowModal] = React.useState(false);
   const [editId, setEditId]= React.useState('')
 
@@ -112,7 +112,7 @@ const DictionaryTypeList: React.FC<TypeProps> = (props) => {
         }}
         rowKey="id"
         rowClassName={(record) => {
-          return record.code === dictionaryTypeCode ? styles['split-row-select-active'] : '';
+          return record.code === typeCode ? styles['split-row-select-active'] : '';
         }}
         actionRef={actionRef}
         toolbar={{
