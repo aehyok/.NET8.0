@@ -30,7 +30,7 @@ namespace aehyok.Core.MySqlDataAccessor
         }
 
 
-        private const string SqlGetGuidelineDefine = @"select ID,ZBMC,ZBZT,ZBMETA,FID,JSMX_ZBMETA,XSXH,ZBSM from tj_zdyzbdyb where ID=@Id ";
+        private const string SqlGetGuidelineDefine = @"select ID,ZBMC,ZBZT,ZBMETA,FID,JSMX_ZBMETA,XSXH,ZBSM,ZBSF from tj_zdyzbdyb where ID=@Id ";
         /// <summary>
         /// 取指标定义
         /// </summary>
@@ -65,11 +65,13 @@ namespace aehyok.Core.MySqlDataAccessor
                                     int displayorder = dr.IsDBNull(6) ? 0 : Convert.ToInt32(dr.GetInt32(6));
                                     string descript = dr.IsDBNull(7) ? "" : dr.GetString(7);
                                     string fullMeta = zbmeta1 + zbmeta2;
+                                    string zbsf = dr.IsDBNull(8) ? "" : dr.GetString(8);
 
                                     define = new MD_GuideLine(id, name, groupname, fatherid, displayorder, descript);
                                     define.Parameters = MC_GuideLine.GetParametersFromMeta(fullMeta);
                                     define.ResultGroups = MC_GuideLine.GetFieldGroupsFromMeta(fullMeta);
                                     define.DetailDefines = MC_GuideLine.GetDetaiDefinelFromMeta(fullMeta);
+                                    define.GuideLineMethod = zbsf;
 
                                     GuidelineDefine.Add(guideLineId, define);
                                 }
