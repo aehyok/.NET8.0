@@ -26,22 +26,22 @@ type DataSourceType = {
   displayOrder?: number;
 };
 
-const defaultData: DataSourceType[] = [
-  {
-      "id": 1,
-      "parameterName": "p_nf",
-      "displayTitle": "统计年份",
-      "displayOrder": 1,
-      "parameterType": "数值型"
-  },
-  {
-      "id": 2,
-      "parameterName": "p_hy",
-      "displayTitle": "行业类型",
-      "displayOrder": 2,
-      "parameterType": "代码表"
-  }
-]
+// const defaultData: DataSourceType[] = [
+//   {
+//       "id": 1,
+//       "parameterName": "p_nf",
+//       "displayTitle": "统计年份",
+//       "displayOrder": 1,
+//       "parameterType": "数值型"
+//   },
+//   {
+//       "id": 2,
+//       "parameterName": "p_hy",
+//       "displayTitle": "行业类型",
+//       "displayOrder": 2,
+//       "parameterType": "代码表"
+//   }
+// ]
 
 const columns: ProColumns<DataSourceType>[] = [
   {
@@ -116,12 +116,12 @@ const columns: ProColumns<DataSourceType>[] = [
 
 const ParameterTable = () => {
 
-  const { resultColumns, changeParameters } = useModel("guidelineModels", (ret) => ({
-    resultColumns: ret.columns,
+  const { resultParameters, changeParameters } = useModel("guidelineModels", (ret) => ({
+    resultParameters: ret.parameters,
     changeParameters: ret.changeParameters
   }))
 
-  console.log(resultColumns, '-----参数---列表展示', changeParameters)
+  console.log(resultParameters, '-----参数---列表展示', changeParameters)
 
   // useEffect(()=> {
   //   console.log( '12345')
@@ -133,7 +133,6 @@ const ParameterTable = () => {
   // },[resultColumns])
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
-  const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
   const [form] = Form.useForm();
   return (
     <>
@@ -172,13 +171,8 @@ const ParameterTable = () => {
         // 关闭默认的新建按钮
         recordCreatorProps={false}
         columns={columns}
-        request={async () => ({
-          data: defaultData,
-          total: 3,
-          success: true,
-        })}
-        value={dataSource}
-        onChange={setDataSource}
+        value={resultParameters}
+        onChange={changeParameters}
         onRow={(row) => { return console.log(row);}}
         editable={{
           form,

@@ -108,8 +108,8 @@ export default (props: any) => {
       <EditableProTable<DataSourceType>
         columns={columns}
         rowKey="id"
-        value={dataSource}
-        onChange={setDataSource}
+        value={resultColumns}
+        onChange={changeColumns}
         onRow={(record) => {
           return {
             onClick: () => {
@@ -130,7 +130,7 @@ export default (props: any) => {
             return [defaultDoms.delete];
           },
           onValuesChange: (record, recordList) => {
-            setDataSource(recordList);
+            changeColumns(recordList);
           },
           onChange: setEditableRowKeys,
         }}
