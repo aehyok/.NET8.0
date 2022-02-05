@@ -2,21 +2,10 @@ import React, { useRef, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
 import type { ActionType } from '@ant-design/pro-table';
-import { Button, Input, Space, Tag, Form } from 'antd';
+import { Button, Form, Space } from 'antd';
 import styles from '../index.less'
-import { CheckCircleOutlined, CopyOutlined, DeleteOutlined, PlusOutlined, ScissorOutlined } from '@ant-design/icons';
+import { CopyOutlined, PlusOutlined, ScissorOutlined } from '@ant-design/icons';
 import { useModel } from 'umi';
-import {useEffect} from 'react';
-
-const waitTime = (time: number = 100, key: any, rows: any) => {
-  console.log(key, rows, 'values', )
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
-
 
 type DataSourceType = {
   id: React.Key;
@@ -26,26 +15,9 @@ type DataSourceType = {
   displayOrder?: number;
 };
 
-// const defaultData: DataSourceType[] = [
-//   {
-//       "id": 1,
-//       "parameterName": "p_nf",
-//       "displayTitle": "统计年份",
-//       "displayOrder": 1,
-//       "parameterType": "数值型"
-//   },
-//   {
-//       "id": 2,
-//       "parameterName": "p_hy",
-//       "displayTitle": "行业类型",
-//       "displayOrder": 2,
-//       "parameterType": "代码表"
-//   }
-// ]
-
 const columns: ProColumns<DataSourceType>[] = [
   {
-    key: '1',
+    key: 'parameterName',
     title: '参数名称',
     dataIndex: 'parameterName',
     formItemProps: {
@@ -59,31 +31,29 @@ const columns: ProColumns<DataSourceType>[] = [
     width: '22%',
   },
   {
-    key: '2',
+    key: 'displayTitle',
     title: '显示名称',
     dataIndex: 'displayTitle',
     width: '20%',
   },
   {
-    key: '3',
+    key: 'parameterType',
     title: '参数类型',
     dataIndex: 'parameterType',
     valueType: 'select',
     width: '20%',
     valueEnum: {
-      all: { text: '代码表', status: 'Default' },
+      all: { text: '代码表' },
       open: {
         text: '字符型',
-        status: 'Error',
       },
       closed: {
         text: '已解决',
-        status: 'Success',
       },
     },
   },
   {
-    key: '4',
+    key: 'displayOrder',
     title: '顺序',
     dataIndex: 'displayOrder',
     width: '20%',
@@ -121,6 +91,22 @@ const ParameterTable = () => {
     changeParameters: ret.changeParameters
   }))
 
+  const onSaveClick = (rows: any) => {
+    console.log(rows, 'onSaveClick')
+    const array: any = resultParameters
+    const current: number = array.findIndex((item: DataSourceType) => item.id === rows.id)
+    console.log(current, current, 'current');
+
+    if(current > -1 ) {
+      // current = rows
+      array[current] = rows
+      console.log(array, 'array-----update')
+      changeParameters([...array])
+    } else {
+      changeParameters([...resultParameters, rows])
+    }
+    console.log(current, resultParameters, 'sssss')
+  }
   console.log(resultParameters, '-----参数---列表展示', changeParameters)
 
   // useEffect(()=> {
@@ -172,13 +158,14 @@ const ParameterTable = () => {
         recordCreatorProps={false}
         columns={columns}
         value={resultParameters}
-        onChange={changeParameters}
-        onRow={(row) => { return console.log(row);}}
+        // onChange={changeParameters}
+        // onRow={(row) => { return console.log(row);}}
         editable={{
           form,
           editableKeys,
           onSave: async (key,rows) => {
-            await waitTime(2000,key, rows);
+            console.log('baocun', key, rows)
+            onSaveClick(rows)
           },
           onChange: setEditableRowKeys,
           actionRender: (row, config, dom) => [dom.save, dom.cancel],
