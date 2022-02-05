@@ -20,7 +20,8 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
     form.setFieldsValue({
       name: guidelineData.guideLineName,
       id: guidelineData.id,
-      displayOrder:guidelineData.displayOrder
+      displayOrder:guidelineData.displayOrder,
+      guideLineMethod: guidelineData.guideLineMethod
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[guidelineData]);
@@ -77,7 +78,7 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
           />
           <ProFormTextArea
             label="指标算法"
-            name="goal"
+            name="guideLineMethod"
             // autoSize={{minRows: 3, maxRows: 6}}
             placeholder="请输入指标算法"
           />

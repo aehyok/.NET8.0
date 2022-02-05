@@ -3,6 +3,7 @@ import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
 import { Button } from 'antd';
 import { ProFormField } from '@ant-design/pro-form';
+import { useModel } from 'umi'
 
 type DataSourceType = {
   id?: React.Key;
@@ -29,6 +30,13 @@ export default (props: any) => {
   const { resultGroups } = props
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const [dataSource, setDataSource] = useState<DataSourceType[]>(() => []);
+
+  const { resultColumns, changeColumns } = useModel("guidelineModels", (ret) => ({
+    resultColumns: ret.columns,
+    changeColumns: ret.changeColumns
+  }))
+
+  console.log(resultColumns, '-----字段列表---列表展示', changeColumns)
 
   useEffect(() => {
     console.log('props数据传递',resultGroups)

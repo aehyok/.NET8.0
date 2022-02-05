@@ -7,9 +7,15 @@ import GuidelineModal from './modal'
 import GuidelineTree from './tree'
 import { GetGuidelineDefine , DelGuideLine} from '@/services/guideline/api'
 import styles from './index.less'
-import { CheckCircleOutlined, CopyOutlined, DeleteOutlined, ExclamationCircleOutlined, ExportOutlined, FileAddOutlined, ImportOutlined, ScissorOutlined } from '@ant-design/icons';
-
+import { DeleteOutlined, ExclamationCircleOutlined, FileAddOutlined } from '@ant-design/icons';
+import { useModel } from 'umi'
 const GuidelineManage = () =>{
+
+  const { changeModel, changeParameters, changeColumns } = useModel('guidelineModels', (ret) => ({
+    changeModel: ret.changeModel,
+    changeParameters: ret.changeParameters,
+    changeColumns: ret.changeColumns
+  }));
 
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
@@ -22,6 +28,9 @@ const GuidelineManage = () =>{
     console.log(response, '--detail--response--')
     if(response.data) {
       setGuidelineData(response.data)
+      changeModel(response.data)
+      changeParameters(response.data.parameters)
+      changeColumns(response.data.resultGroups)
     }
   }
 

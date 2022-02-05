@@ -5,6 +5,8 @@ import type { ActionType } from '@ant-design/pro-table';
 import { Button, Input, Space, Tag, Form } from 'antd';
 import styles from '../index.less'
 import { CheckCircleOutlined, CopyOutlined, DeleteOutlined, PlusOutlined, ScissorOutlined } from '@ant-design/icons';
+import { useModel } from 'umi';
+import {useEffect} from 'react';
 
 const waitTime = (time: number = 100, key: any, rows: any) => {
   console.log(key, rows, 'values', )
@@ -113,6 +115,22 @@ const columns: ProColumns<DataSourceType>[] = [
 ];
 
 const ParameterTable = () => {
+
+  const { resultColumns, changeParameters } = useModel("guidelineModels", (ret) => ({
+    resultColumns: ret.columns,
+    changeParameters: ret.changeParameters
+  }))
+
+  console.log(resultColumns, '-----参数---列表展示', changeParameters)
+
+  // useEffect(()=> {
+  //   console.log( '12345')
+  // },[])
+
+  // useEffect(() => {
+  //   console.log(resultColumns, '----edffff----列表展示', changeColumns)
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // },[resultColumns])
   const actionRef = useRef<ActionType>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const [dataSource, setDataSource] = useState<DataSourceType[]>([]);

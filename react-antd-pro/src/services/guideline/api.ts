@@ -6,7 +6,7 @@ import { request } from 'umi';
  * @returns
  */
 export async function GetChildGuideLines(id: string) {
-  return request(`/so/api/mddefine/GetChildGuideLines?FatherGuildLineID=${id}`, {
+  return request(`/so/api/Guideline/GetChildGuideLines?FatherGuildLineID=${id}`, {
     method: 'POST',
   });
 }
@@ -17,7 +17,7 @@ export async function GetChildGuideLines(id: string) {
  * @returns
  */
 export async function GetGuidelineDefine(id: string) {
-  return request(`/so/api/mdquery/GetGuidelineDefine?guideLineId=${id}`, {
+  return request(`/so/api/Guideline/GetGuidelineDefine?guideLineId=${id}`, {
     method: 'POST',
   });
 }
@@ -28,7 +28,7 @@ export async function GetGuidelineDefine(id: string) {
  * @returns
  */
 export async function InsertNewGuideLine(data: any) {
-  return request(`/so/api/mddefine/InsertNewGuideLine`, {
+  return request(`/so/api/Guideline/InsertNewGuideLine`, {
     method: 'POST',
     data,
   });
@@ -40,7 +40,7 @@ export async function InsertNewGuideLine(data: any) {
  * @returns
  */
 export async function DelGuideLine(data: any) {
-  return request(`/so/api/mddefine/DelGuideLine?GuideLineID=${data}`, {
+  return request(`/so/api/Guideline/DelGuideLine?GuideLineID=${data}`, {
     method: 'POST',
     data,
   });
