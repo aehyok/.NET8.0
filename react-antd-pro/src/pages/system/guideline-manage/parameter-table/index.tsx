@@ -135,17 +135,17 @@ const ParameterTable = () => {
         >
           添加参数
         </Button>
-        <Button
+        {/* <Button
           key="rest"
           onClick={() => {
             form.resetFields();
           }}
         >
           重置表单
-        </Button>
+        </Button> */}
         {/* <Button type="dashed" icon={<DeleteOutlined />} className={styles.buttonmarginright}>删除参数</Button> */}
-        <Button type="dashed" icon={<CopyOutlined />} className={styles.buttonmarginright}>复制参数</Button>
-        <Button type='dashed' icon={<ScissorOutlined />} className={styles.buttonmarginright}>粘贴参数</Button>
+        {/* <Button type="dashed" icon={<CopyOutlined />} className={styles.buttonmarginright}>复制参数</Button>
+        <Button type='dashed' icon={<ScissorOutlined />} className={styles.buttonmarginright}>粘贴参数</Button> */}
         {/* <Button type="dashed" icon={<CheckCircleOutlined />} className={styles.buttonmarginright}>保存</Button> */}
         {/* <Button type='dashed' icon={<DeleteOutlined />}>取消</Button> */}
       </Space>
