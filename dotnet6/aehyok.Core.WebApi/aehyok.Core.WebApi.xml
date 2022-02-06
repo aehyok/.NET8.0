@@ -14,6 +14,11 @@
             Controller
             </summary>
         </member>
+        <member name="T:aehyok.Core.WebApi.Controllers.DictionaryController">
+            <summary>
+            字典管理
+            </summary>
+        </member>
         <member name="M:aehyok.Core.WebApi.Controllers.DictionaryController.GetDictionaryTypeList">
             <summary>
             获取字典类型列表
@@ -172,6 +177,11 @@
             Form表单通用保存
             </summary>
         </member>
+        <member name="T:aehyok.Core.WebApi.Controllers.GuidelineController">
+            <summary>
+            指标管理
+            </summary>
+        </member>
         <member name="M:aehyok.Core.WebApi.Controllers.GuidelineController.GetChildGuideLines(System.String)">
             <summary>
             取父指标下的所有子指标
@@ -272,23 +282,6 @@
             删除用户
              </summary>
              <returns></returns>
-        </member>
-        <member name="T:aehyok.Core.WebApi.Controllers.ValuesController">
-            <summary>
-            测试控制器
-            </summary>
-        </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.ValuesController.Get">
-            <summary>
-            获取列表数据get
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.ValuesController.GetTest">
-            <summary>
-            获取列表数据GetTest
-            </summary>
-            <returns></returns>
         </member>
         <member name="M:aehyok.Core.WebApi.Helpers.FormHelper.SaveInputDataToEntityByColumns(aehyok.Core.Data.Model.MD_InputModel_Column,aehyok.Core.Data.Model.MD_InputEntity,aehyok.Core.Data.Model.SinoRequestUser)">
             <summary>

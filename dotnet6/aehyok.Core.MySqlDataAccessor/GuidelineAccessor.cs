@@ -68,8 +68,8 @@ namespace aehyok.Core.MySqlDataAccessor
                                     string zbsf = dr.IsDBNull(8) ? "" : dr.GetString(8);
 
                                     define = new MD_GuideLine(id, name, groupname, fatherid, displayorder, descript);
-                                    define.Parameters = MC_GuideLine.GetParametersFromMeta(fullMeta);
-                                    define.ResultGroups = MC_GuideLine.GetFieldGroupsFromMeta(fullMeta);
+                                    define.Parameters = JsonConvert.DeserializeObject<List<MD_GuideLineParameter>>(zbmeta1); //MC_GuideLine.GetParametersFromMeta(fullMeta);
+                                    define.ResultGroups = JsonConvert.DeserializeObject<List<MD_GuideLineFieldName>>(zbmeta2);  //MC_GuideLine.GetFieldGroupsFromMeta(fullMeta);
                                     define.DetailDefines = MC_GuideLine.GetDetaiDefinelFromMeta(fullMeta);
                                     define.GuideLineMethod = zbsf;
 

@@ -33,7 +33,7 @@ const GuidelineManage = () =>{
       setGuidelineData(response.data)
       changeModel(response.data)
       changeParameters(response.data.parameters)
-      changeColumns(response.data.resultGroups[0].fields)
+      changeColumns(response.data.resultGroups)
     }
   }
 

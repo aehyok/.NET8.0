@@ -73,7 +73,8 @@ namespace aehyok.Lib.MetaData.Define
         /// 指标查询结果分组集合
         /// </summary>
         [DataMember]
-        public List<MD_GuideLineFieldGroup> ResultGroups { get; set; }
+        //public List<MD_GuideLineFieldGroup> ResultGroups { get; set; }
+        public List<MD_GuideLineFieldName> ResultGroups { get; set; }
         /// <summary>
         /// 详细信息链接
         /// </summary>

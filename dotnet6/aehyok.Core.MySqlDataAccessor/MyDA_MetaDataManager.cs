@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using aehyok.Core.MySql;
+using Newtonsoft.Json;
 
 namespace aehyok.Core.MySqlDataAccessor
 {
@@ -2433,12 +2434,13 @@ namespace aehyok.Core.MySqlDataAccessor
             //        _metaStr1 = _guideLine.GuideLineMeta;
             //        _metaStr2 = "";
             //}
-
+            var parametersJson = JsonConvert.SerializeObject(_guideLine.Parameters);
+            var resultJson = JsonConvert.SerializeObject(_guideLine.ResultGroups);
             _param[0].Value = _guideLine.GuideLineName;
             _param[1].Value = _guideLine.GuideLineMethod;
-            _param[2].Value = _guideLine.GuideLineMeta;
+            _param[2].Value = parametersJson; //_guideLine.GuideLineMeta;
             _param[3].Value = Convert.ToDecimal(_guideLine.DisplayOrder);
-            _param[4].Value = "";
+            _param[4].Value = resultJson;
             _param[5].Value = _guideLine.Description;
             _param[6].Value = decimal.Parse(_guideLine.ID);
 
