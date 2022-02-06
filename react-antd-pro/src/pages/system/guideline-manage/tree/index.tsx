@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Tree, Input } from 'antd';
 
 import { GetChildGuideLines } from '@/services/guideline/api'
@@ -31,10 +31,9 @@ function updateTreeData(list: DataNode[], key: React.Key, children: DataNode[]):
   });
 }
 
-const GuidelineTree= (props: any) => {
+const GuidelineTree= (props: any, ref: any) => {
   const {setDefault} = props
   const [treeData, setTreeData] = useState(initTreeData);
-
 
   const loadTreeList = async (id: any = "1", type: any ="one") => {
     console.log(id, 'id')
@@ -62,6 +61,15 @@ const GuidelineTree= (props: any) => {
   useEffect(() => {
     loadTreeList()
   },[])
+
+  const refreshTree = () => {
+    loadTreeList()
+  }
+  useImperativeHandle(ref, () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    refreshTree: refreshTree
+  })
+
   const onLoadData = async({ key, children }: any) => {
     console.log(key, children, 'onloaddata')
     new Promise<void>(resolve => {
@@ -89,6 +97,6 @@ const GuidelineTree= (props: any) => {
   )
 };
 
-export default GuidelineTree;
+export default forwardRef(GuidelineTree);
 
 

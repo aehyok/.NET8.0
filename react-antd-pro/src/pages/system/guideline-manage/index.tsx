@@ -1,6 +1,6 @@
 import { Row, Col, Button, message, Modal } from 'antd';
 import {PageContainer ,GridContent } from '@ant-design/pro-layout';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import GuidelineForm from './form'
 import GuidelineTab from './tab'
 import GuidelineModal from './modal'
@@ -9,6 +9,8 @@ import { GetGuidelineDefine , DelGuideLine, SaveGuideLine} from '@/services/guid
 import styles from './index.less'
 import { DeleteOutlined, ExclamationCircleOutlined, FileAddOutlined } from '@ant-design/icons';
 import { useModel } from 'umi'
+
+
 const GuidelineManage = () =>{
 
   const { models, parameters, columns, changeModel, changeParameters, changeColumns } = useModel('guidelineModels', (ret) => ({
@@ -20,6 +22,7 @@ const GuidelineManage = () =>{
     columns: ret.columns
   }));
 
+  const treeRef = useRef(null)
   const [isModalVisible, setIsModalVisible] = React.useState(false);
 
   const [selectGuidelineId, setSelectGuidelineId] = React.useState([])
@@ -51,6 +54,9 @@ const GuidelineManage = () =>{
     }
   };
 
+  const refresh = () => {
+    console.log('refresh',treeRef)
+  }
   const deleteSubmitCallBack = async() => {
     if(selectGuidelineId && selectGuidelineId.length === 1) {
       const response = await DelGuideLine(selectGuidelineId[0])
@@ -98,7 +104,7 @@ const GuidelineManage = () =>{
   }
   return (
     <PageContainer>
-      <GuidelineModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} selectGuidelineId={selectGuidelineId} />
+      <GuidelineModal modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} selectGuidelineId={selectGuidelineId} refresh={refresh}/>
       <GridContent>
         <Row justify={'space-between'}>
           <Col style={{margin: '5px 0'}} >
@@ -115,7 +121,7 @@ const GuidelineManage = () =>{
         <Row gutter={12}>
           <Col lg={7} md={24}>
             <div>
-              <GuidelineTree setDefault= {setSelectGuidelineId} />
+              <GuidelineTree setDefault= {setSelectGuidelineId} ref={treeRef} />
             </div>
           </Col>
           <Col lg={17} md={24}>

@@ -3,8 +3,8 @@ import { useRef } from 'react';
 import { InsertNewGuideLine } from '@/services/guideline/api'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-const GuidelineModal = (props: {modalVisible: boolean, hiddenModal: Function, selectGuidelineId: any}) => {
-  const { modalVisible, hiddenModal, selectGuidelineId } = props
+const GuidelineModal = (props: {modalVisible: boolean, hiddenModal: Function, refresh: Function,selectGuidelineId: any}) => {
+  const { modalVisible, hiddenModal, selectGuidelineId, refresh } = props
   console.log(props.modalVisible, modalVisible, 'ssss----ss')
 
   const handleOk = () => {
@@ -23,12 +23,12 @@ const GuidelineModal = (props: {modalVisible: boolean, hiddenModal: Function, se
     console.log('submit--abb', selectGuidelineId,values)
     const result = await InsertNewGuideLine({
       GuideLineName: values.GuideLineName,
-      FatherID: Number(selectGuidelineId[0]),
-      GroupName: 'ccc'
+      FatherID: selectGuidelineId[0],
     })
     if(result.code === 200) {
       message.success('新增指标成功')
       handleCancel()
+      refresh()
       // TODO 还没有刷新左侧树
     }
     console.log(result, '保存结果')

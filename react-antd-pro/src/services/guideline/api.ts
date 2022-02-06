@@ -28,7 +28,7 @@ export async function GetGuidelineDefine(id: string) {
  * @returns
  */
 export async function InsertNewGuideLine(data: any) {
-  return request(`/so/api/Guideline/InsertNewGuideLine`, {
+  return request(`/so/api/Guideline/InsertNewGuideLine?GuideLineName=${data.GuideLineName}&FatherID=${data.FatherID}`, {
     method: 'POST',
     data,
   });
