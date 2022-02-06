@@ -35,6 +35,18 @@ export async function InsertNewGuideLine(data: any) {
 }
 
 /**
+ * 保存新的指标定义，主要先保存名称
+ * @param data
+ * @returns
+ */
+ export async function SaveGuideLine(data: any) {
+  return request(`/so/api/Guideline/SaveGuideLine`, {
+    method: 'POST',
+    data,
+  });
+}
+
+/**
  * 通过id删除定义的指标
  * @param id
  * @returns

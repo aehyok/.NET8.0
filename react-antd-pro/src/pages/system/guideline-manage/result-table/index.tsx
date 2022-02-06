@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import type { ProColumns } from '@ant-design/pro-table';
+import React, { useEffect, useRef, useState } from 'react';
+import type { ActionType, ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
-import { Button } from 'antd';
+import { Button, Form, Space } from 'antd';
 import { ProFormField } from '@ant-design/pro-form';
 import { useModel } from 'umi'
+import { PlusOutlined } from '@ant-design/icons';
 
 type DataSourceType = {
   id?: React.Key;
@@ -27,33 +28,34 @@ type DataSourceType = {
 // });
 
 export default (props: any) => {
-  const { resultGroups } = props
+  console.log(props, 'props')
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
-  const [dataSource, setDataSource] = useState<DataSourceType[]>(() => []);
+  const actionRef = useRef<ActionType>();
+  const [form] = Form.useForm();
 
   const { resultColumns, changeColumns } = useModel("guidelineModels", (ret) => ({
     resultColumns: ret.columns,
     changeColumns: ret.changeColumns
   }))
 
-  console.log(resultColumns, '-----字段列表---列表展示', changeColumns)
+  const onSaveClick = (rows: any) => {
+    console.log(rows, 'onSaveClick')
+    const array: any = resultColumns
+    const current: number = array.findIndex((item: DataSourceType) => item.id === rows.id)
+    console.log(current, current, 'current');
 
-  useEffect(() => {
-    console.log('props数据传递',resultGroups)
-    if(resultGroups && resultGroups.length > 0) {
-      resultGroups[0].fields.forEach((item: { id: any; })=> {
-        item.id = (Math.random() * 1000000).toFixed(0)
-      })
-
-      console.log('props数据传递--1',resultGroups)
-      setDataSource(resultGroups[0].fields)
-      const keys = resultGroups[0].fields.map((item: { id: any; })=> {
-        return item.id
-      })
-      setEditableRowKeys(keys)
-      console.log('props数据传递--2',resultGroups[0].fields)
+    if(current > -1 ) {
+      // current = rows
+      array[current] = rows
+      console.log(array, 'array-----update')
+      changeColumns([...array])
+    } else {
+      changeColumns([...resultColumns, rows])
     }
-  },[])
+    console.log(current, resultColumns, 'sssss')
+  }
+
+  console.log(resultColumns, '-----字段列表---列表展示', changeColumns)
 
   const columns: ProColumns<DataSourceType>[] = [
     {
@@ -69,19 +71,23 @@ export default (props: any) => {
     {
       title: '显示顺序',
       dataIndex: 'displayOrder',
+      width: '20%',
     },
     {
       title: '显示宽度',
       dataIndex: 'displayWidth',
+      width: '15%',
     },
     {
       title: '可否隐藏',
       dataIndex: 'canHide',
+      width: '15%',
     },
     {
       title: '对齐方式',
       dataIndex: 'textAlign',
       valueType: 'select',
+      width: '15%',
       valueEnum: {
         CENTER: 'CENTER',
         LEFT: 'LEFT',
@@ -91,25 +97,57 @@ export default (props: any) => {
     {
       title: '显示格式',
       dataIndex: 'displayFormat',
+      width: '15%',
     },
     {
       title: '操作',
       valueType: 'option',
-      width: 250,
-      render: () => {
-        return null;
-      },
+      width: 120,
+      render: (text, record, _, action) => [
+        <a
+          key="editable"
+          onClick={() => {
+            action?.startEditable?.(record.id);
+          }}
+        >
+          编辑
+        </a>,
+        <EditableProTable.RecordCreator
+          key="copy"
+          record={{
+            ...record,
+            id: (Math.random() * 1000000).toFixed(0),
+          }}
+        >
+          <a>删除</a>
+        </EditableProTable.RecordCreator>,
+      ],
     },
   ];
 
 
   return (
     <>
+      <Space>
+        <Button
+          type="primary"
+          onClick={() => {
+            actionRef.current?.addEditRecord?.({
+              id: (Math.random() * 1000000).toFixed(0),
+            });
+          }}
+          icon={<PlusOutlined />}
+        >
+          添加字段
+        </Button>
+      </Space>
       <EditableProTable<DataSourceType>
         columns={columns}
         rowKey="id"
         value={resultColumns}
-        onChange={changeColumns}
+        // 关闭默认的新建按钮
+        recordCreatorProps={false}
+        actionRef={actionRef}
         onRow={(record) => {
           return {
             onClick: () => {
@@ -117,22 +155,15 @@ export default (props: any) => {
             },
           };
         }}
-        recordCreatorProps={{
-          newRecordType: 'dataSource',
-          record: () => ({
-            id: (Math.random() * 1000000).toFixed(0),
-          }),
-        }}
         editable={{
-          type: 'multiple',
+          form,
           editableKeys,
-          actionRender: (row, config, defaultDoms) => {
-            return [defaultDoms.delete];
-          },
-          onValuesChange: (record, recordList) => {
-            changeColumns(recordList);
+          onSave: async (key,rows) => {
+            console.log('baocun', key, rows)
+            onSaveClick(rows)
           },
           onChange: setEditableRowKeys,
+          actionRender: (row, config, dom) => [dom.save, dom.cancel],
         }}
       />
     </>
