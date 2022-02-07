@@ -18,7 +18,7 @@ namespace aehyok.Core.EntityFramework.MySql
         Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate);
 
 
-        Task<TEntity> InsertAsync(TEntity entity);
+        Task<int> InsertAsync(TEntity entity);
 
         Task<int> InsertRangeAsync(IEnumerable<TEntity> entities);
 

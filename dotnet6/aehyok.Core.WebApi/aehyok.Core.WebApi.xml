@@ -177,6 +177,40 @@
             Form表单通用保存
             </summary>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FormController.GetSystemFormList">
+            <summary>
+            获取表单列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FormController.GetSystemForm(System.String)">
+            <summary>
+            获取单个表单详情
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FormController.DeleteSystemForm(System.String)">
+            <summary>
+            通过id删除form表单
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FormController.InsertSystemForm(aehyok.Core.EntityFramework.MySql.Models.SystemForm)">
+            <summary>
+            插入新的form表单记录
+            </summary>
+            <param name="systemForm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.FormController.UpdateSystemForm(aehyok.Core.EntityFramework.MySql.Models.SystemForm)">
+            <summary>
+            更新form表单
+            </summary>
+            <param name="systemForm"></param>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.GuidelineController">
             <summary>
             指标管理

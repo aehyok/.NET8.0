@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using aehyok.Core.EntityFramework.MySql.Models;
+using aehyok.Core.EntityFramework.MySql.ModelBuildConfiguration;
 
 namespace aehyok.Core.EntityFramework.MySql.Data
 {
@@ -64,7 +65,6 @@ namespace aehyok.Core.EntityFramework.MySql.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseMySql("server=139.186.205.7;port=3306;uid=aehyok;pwd=M9y2512!;database=metadata;allowzerodatetime=True;convertzerodatetime=True;charset=utf8mb4;sslmode=none", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.2.32-mariadb"));
             }
         }
@@ -369,100 +369,8 @@ namespace aehyok.Core.EntityFramework.MySql.Data
                     .HasComment("小程序openid");
             });
 
-            modelBuilder.Entity<FlowEntityState>(entity =>
-            {
-                entity.ToTable("FlowEntityState");
-
-                entity.Property(e => e.Id)
-                    .HasMaxLength(50)
-                    .HasColumnName("id");
-
-                entity.Property(e => e.DisplayOrder)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("displayOrder");
-
-                entity.Property(e => e.FlowId)
-                    .HasMaxLength(50)
-                    .HasColumnName("flowId");
-
-                entity.Property(e => e.StateDescript)
-                    .HasMaxLength(1000)
-                    .HasColumnName("stateDescript");
-
-                entity.Property(e => e.StateDisplayName)
-                    .HasMaxLength(100)
-                    .HasColumnName("stateDisplayName");
-
-                entity.Property(e => e.StateName)
-                    .HasMaxLength(50)
-                    .HasColumnName("stateName");
-
-                entity.Property(e => e.StateType)
-                    .HasMaxLength(10)
-                    .HasColumnName("stateType");
-            });
-
-            modelBuilder.Entity<FlowEntityType>(entity =>
-            {
-                entity.ToTable("FlowEntityType");
-
-                entity.Property(e => e.Id)
-                    .HasMaxLength(50)
-                    .HasColumnName("id");
-
-                entity.Property(e => e.Description)
-                    .HasMaxLength(1000)
-                    .HasColumnName("description");
-
-                entity.Property(e => e.DisplayOrder)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("displayOrder");
-
-                entity.Property(e => e.FlowName)
-                    .HasMaxLength(100)
-                    .HasColumnName("flowName");
-            });
-
-            modelBuilder.Entity<FlowStateTransition>(entity =>
-            {
-                entity.ToTable("FlowStateTransition");
-
-                entity.Property(e => e.Id)
-                    .HasMaxLength(50)
-                    .HasColumnName("id");
-
-                entity.Property(e => e.ActionName)
-                    .HasMaxLength(50)
-                    .HasColumnName("actionName");
-
-                entity.Property(e => e.ActionParameter)
-                    .HasMaxLength(1000)
-                    .HasColumnName("actionParameter");
-
-                entity.Property(e => e.ActionTitle)
-                    .HasMaxLength(50)
-                    .HasColumnName("actionTitle");
-
-                entity.Property(e => e.ActionType)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("actionType");
-
-                entity.Property(e => e.DisplayOrder)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("displayOrder");
-
-                entity.Property(e => e.StateId)
-                    .HasMaxLength(50)
-                    .HasColumnName("stateId");
-
-                entity.Property(e => e.TargetStateId)
-                    .HasMaxLength(50)
-                    .HasColumnName("targetStateId");
-
-                entity.Property(e => e.UserType)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("userType");
-            });
+            modelBuilder.FlowInit();
+            modelBuilder.FormInit();
 
             modelBuilder.Entity<SystemMenu>(entity =>
             {

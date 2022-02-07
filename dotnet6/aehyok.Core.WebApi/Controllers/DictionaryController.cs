@@ -56,7 +56,7 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<SystemDictionaryType> AddDictionaryType(SystemDictionaryType systemDictionaryType)
+        public async Task<int> AddDictionaryType(SystemDictionaryType systemDictionaryType)
         {
             return await this._dictionaryTypeRepository.InsertAsync(systemDictionaryType);
         }
@@ -115,7 +115,7 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<SystemDictionary> AddDictionary(SystemDictionary systemDictionary)
+        public async Task<int> AddDictionary(SystemDictionary systemDictionary)
         {
             return await this._dictionaryRepository.InsertAsync(systemDictionary);
         }

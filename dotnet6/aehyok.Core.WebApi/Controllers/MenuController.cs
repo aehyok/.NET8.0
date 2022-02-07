@@ -49,7 +49,7 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<SystemMenu> AddMenu(SystemMenu systemMenu)
+        public async Task<int> AddMenu(SystemMenu systemMenu)
         {
             return await this._menuRepository.InsertAsync(systemMenu);
         }

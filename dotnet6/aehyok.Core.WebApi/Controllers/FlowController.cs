@@ -70,8 +70,8 @@ namespace aehyok.Core.WebApi.Controllers
                 }
                 else
                 {
-                    var result = await this._flowEntityTypeRepository.InsertAsync(flowEntityType);
-                    return (result.Id != null) ? 1 : 0;
+                    return await this._flowEntityTypeRepository.InsertAsync(flowEntityType);
+                    
                 }
             }
             catch(Exception error)
@@ -93,8 +93,7 @@ namespace aehyok.Core.WebApi.Controllers
             this._logger.Info(flowEntityType.FlowName);
             try
             {
-                var result = await this._flowEntityTypeRepository.InsertAsync(flowEntityType);
-                return (result.Id != null) ? 1 : 0;
+                return await this._flowEntityTypeRepository.InsertAsync(flowEntityType);
             }
             catch (Exception error)
             {
@@ -200,7 +199,7 @@ namespace aehyok.Core.WebApi.Controllers
             else
             {
                 var result = await this._flowEntityStateRepository.InsertAsync(flowEntityState);
-                return (result.Id != null) ? 1 : 0;
+                return result;
             }
         }
         #endregion
@@ -259,7 +258,7 @@ namespace aehyok.Core.WebApi.Controllers
             else
             {
                 var result = await this._flowEntityActionRepository.InsertAsync(flowStateTransition);
-                return (result.Id != null) ? 1 : 0;
+                return result;
             }
         }
         #endregion

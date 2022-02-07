@@ -56,7 +56,7 @@ namespace aehyok.Core.EntityFramework.MySql
             return await this.GetQueryable().Where(predicate).ToListAsync();
         }
 
-        public async Task<TEntity> InsertAsync(TEntity entity)
+        public async Task<int> InsertAsync(TEntity entity)
         {
             if (entity == null)
             {
@@ -66,9 +66,7 @@ namespace aehyok.Core.EntityFramework.MySql
             try
             {
                 await this.Table.AddAsync(entity);
-                await EF.SaveChangesAsync();
-
-                return entity;
+                return await EF.SaveChangesAsync();
             }
             catch (DbUpdateException ex)
             {
