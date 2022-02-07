@@ -13,6 +13,12 @@ namespace aehyok.Lib.MetaData.Define
     public class MD_GuideLineParameter
     {
         /// <summary>
+        /// 唯一ID
+        /// </summary>
+        [DataMember]
+        public string Id { get; set; }
+
+        /// <summary>
         /// 全部的代码
         /// </summary>
         /// 

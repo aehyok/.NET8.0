@@ -1,4 +1,3 @@
-// counter.ts
 import { useState } from 'react';
 
 export default () => {
@@ -6,19 +5,16 @@ export default () => {
   const [parameters, setParameters] = useState([]);
   const [columns, setColumns] = useState([]);
   const changeModel = (values: any) => {
-    // console.log('changeMOdel', values);
-    setModel(values)
-  }
+    setModel(values);
+  };
 
   const changeParameters = (values: any) => {
-    setParameters(values)
-    // console.log('changeParameters', values)
-  }
+    setParameters(values);
+  };
 
   const changeColumns = (values: any) => {
-    setColumns(values)
-    // console.log('changeColumns', values)
-  }
+    setColumns(values);
+  };
 
   return { model, changeModel, parameters, changeParameters, columns, changeColumns };
 };

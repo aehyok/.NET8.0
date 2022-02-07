@@ -90,6 +90,8 @@ const ParameterTable = () => {
     changeParameters: ret.changeParameters
   }))
 
+  console.log(resultParameters, '-----参数---列表展示', changeParameters)
+
   const onSaveClick = (rows: any) => {
     console.log(rows, 'onSaveClick')
     const array: any = resultParameters
@@ -106,7 +108,6 @@ const ParameterTable = () => {
     }
     console.log(current, resultParameters, 'sssss')
   }
-  console.log(resultParameters, '-----参数---列表展示', changeParameters)
 
   // useEffect(()=> {
   //   console.log( '12345')

@@ -35,8 +35,8 @@ const GuidelineManage = () =>{
     if(response.data) {
       setGuidelineData(response.data)
       changeModel(response.data)
-      changeParameters(response.data.parameters)
-      changeColumns(response.data.resultGroups)
+      changeParameters(response.data.parameters || [])
+      changeColumns(response.data.resultGroups || [])
     }
   }
 
@@ -59,7 +59,7 @@ const GuidelineManage = () =>{
   const refresh = () => {
     console.log('refresh', treeRef)
     // 添加后的刷新
-    treeRef?.current.refreshTree('add')
+    treeRef?.current?.refreshTree('add')
   }
 
   const deleteSubmitCallBack = async() => {
@@ -71,7 +71,7 @@ const GuidelineManage = () =>{
         message.success('删除指标成功')
         // TODO 待刷新左侧树
         // 删除后的刷新
-        treeRef?.current.refreshTree('delete')
+        treeRef?.current?.refreshTree('delete')
       }
     }
   }
@@ -93,12 +93,16 @@ const GuidelineManage = () =>{
   }
 
   const saveGuidelineClick = async() => {
+    console.log(columns,'-------columns--------')
     const result = await SaveGuideLine({
       ...models,
       parameters: parameters,
-      ResultGroup: columns
+      resultGroups: columns
     })
     console.log(result.code,'result', result)
+    if(result.code == 200) {
+      message.success('保存指标成功')
+    }
   }
   return (
     <PageContainer>
@@ -111,7 +115,7 @@ const GuidelineManage = () =>{
             {/* <Button type="dashed" icon={ <ExportOutlined />}>导入指标</Button>
             <Button type="dashed" icon={ <ImportOutlined />}>导出指标</Button> */}
            </Col>
-           <Col style={{margin: '5px 0'}} >
+           <Col style={{margin: '5px 0 5px'}} >
             <Button icon={<FileAddOutlined />} type="primary" className={styles.buttonmarginright} onClick={() => saveGuidelineClick()}>保存</Button>
 
           </Col>

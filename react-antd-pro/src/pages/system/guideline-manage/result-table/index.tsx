@@ -82,6 +82,10 @@ export default (props: any) => {
       title: '可否隐藏',
       dataIndex: 'canHide',
       width: '15%',
+      valueEnum: {
+        true: '可隐藏',
+        false: '不隐藏',
+      },
     },
     {
       title: '对齐方式',

@@ -12,12 +12,17 @@ namespace aehyok.Lib.MetaData.Define
     /// </summary>
     public class MD_GuideLineFieldName
     {
-        
+        /// <summary>
+        /// 唯一ID
+        /// </summary>
+        [DataMember]
+        public string Id { get; set; }
+
         /// <summary>
         /// 本字段是否可隐藏
         /// </summary>
         [DataMember]
-        public bool CanHide { get; set; }
+        public string CanHide { get; set; }
 
 
         /// <summary>
@@ -71,7 +76,7 @@ namespace aehyok.Lib.MetaData.Define
         {
         }
 
-        public MD_GuideLineFieldName(string _fname, string _title, int _order, int _width, string _align, string _format, bool _hide, string _groupName)
+        public MD_GuideLineFieldName(string _fname, string _title, int _order, int _width, string _align, string _format, string _hide, string _groupName)
         {
             FieldName = _fname;
             DisplayTitle = _title;
@@ -82,7 +87,7 @@ namespace aehyok.Lib.MetaData.Define
             CanHide = _hide;
             GroupName = _groupName;
         }
-        public MD_GuideLineFieldName(string _fname, string _title, int _order, int _width, string _align, string _format, bool _hide)
+        public MD_GuideLineFieldName(string _fname, string _title, int _order, int _width, string _align, string _format, string _hide)
         {
             FieldName = _fname;
             DisplayTitle = _title;

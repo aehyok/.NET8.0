@@ -80,7 +80,7 @@ namespace aehyok.Lib.MetaData.Common
                     string _display = (_s3.Length > 5) ? _s3[5] : "";
                     string _group = (_s3.Length > 6) ? _s3[6] : "DEFAULT";
                     bool _canHide = (_s3.Length > 7) ? ((_s3[7] == "0") ? false : true) : false;
-                    MD_GuideLineFieldName _gfn = new MD_GuideLineFieldName(_fname, _title, _order, _width, _center, _display, _canHide);
+                    MD_GuideLineFieldName _gfn = new MD_GuideLineFieldName(_fname, _title, _order, _width, _center, _display, "");
                     if (_dict.ContainsKey(_group))
                     {
                         MD_GuideLineFieldGroup _glg = _dict[_group];
@@ -121,7 +121,7 @@ namespace aehyok.Lib.MetaData.Common
                     string _display = (_s3.Length > 5) ? _s3[5] : "";
                     string _group = (_s3.Length > 6) ? _s3[6] : "DEFAULT";
                     bool _canHide = (_s3.Length > 7) ? ((_s3[7] == "0") ? false : true) : false;
-                    MD_GuideLineFieldName _gfn = new MD_GuideLineFieldName(_fname, _title, _order, _width, _center, _display, _canHide);
+                    MD_GuideLineFieldName _gfn = new MD_GuideLineFieldName(_fname, _title, _order, _width, _center, _display, "");
                     _ret.Add(_gfn);
                 }
 
@@ -226,7 +226,7 @@ namespace aehyok.Lib.MetaData.Common
                     _metastr.Append(string.Format("<FN>{0}:{1}:{2}:{3}:{4}:{5}:{6}:{7}</FN>\n", _fieldName.FieldName, _fieldName.DisplayTitle,
                             _fieldName.DisplayOrder.ToString(), _fieldName.DisplayWidth.ToString(),
                             _fieldName.TextAlign, _fieldName.DisplayFormat,
-                            _glf.GroupName, (_fieldName.CanHide ? 1 : 0)));
+                            _glf.GroupName, _fieldName.CanHide));
                 }
 
             }
