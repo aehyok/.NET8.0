@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { ActionType, ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
-import { Button, Form, Space } from 'antd';
+import { Button, Form, message, Space } from 'antd';
 import { ProFormField } from '@ant-design/pro-form';
 import { useModel } from 'umi'
 import { PlusOutlined } from '@ant-design/icons';
@@ -16,17 +16,6 @@ type DataSourceType = {
   textAlign?: string;
   displayFormat: string;
 };
-
-// const defaultData: DataSourceType[] = new Array(5).fill(1).map((_, index) => {
-//   return {
-//     id: (Date.now() + index).toString(),
-//     title: `活动名称${index}`,
-//     decs: '这个活动真好玩',
-//     state: 'open',
-//     created_at: '2020-05-26T09:42:56Z',
-//   };
-// });
-
 export default (props: any) => {
   console.log(props, 'props')
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
@@ -53,9 +42,17 @@ export default (props: any) => {
       changeColumns([...resultColumns, rows])
     }
     console.log(current, resultColumns, 'sssss')
+    message.warn('暂存后记的保存')
   }
 
   console.log(resultColumns, '-----字段列表---列表展示', changeColumns)
+
+  const removeColumnsClick = (id: any) => {
+    const array = resultColumns.filter((item: any) => item.id !== id)
+    console.log(array,'--array--')
+    changeColumns(array)
+    message.warn('移除后记的保存')
+  }
 
   const columns: ProColumns<DataSourceType>[] = [
     {
@@ -116,15 +113,12 @@ export default (props: any) => {
         >
           编辑
         </a>,
-        <EditableProTable.RecordCreator
-          key="copy"
-          record={{
-            ...record,
-            id: (Math.random() * 1000000).toFixed(0),
-          }}
+        <a
+          key="delete"
+          onClick={() => {removeColumnsClick(record.id)}}
         >
-          <a>删除</a>
-        </EditableProTable.RecordCreator>,
+          移除
+        </a>,
       ],
     },
   ];
@@ -162,6 +156,7 @@ export default (props: any) => {
         editable={{
           form,
           editableKeys,
+          saveText: '暂存',
           onSave: async (key,rows) => {
             console.log('baocun', key, rows)
             onSaveClick(rows)

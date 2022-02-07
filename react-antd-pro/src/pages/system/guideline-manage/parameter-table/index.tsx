@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
 import type { ActionType } from '@ant-design/pro-table';
-import { Button, Form, Space } from 'antd';
+import { Button, Form, Space, message } from 'antd';
 import {PlusOutlined } from '@ant-design/icons';
 import { useModel } from 'umi';
 
@@ -14,81 +14,86 @@ type DataSourceType = {
   displayOrder?: number;
 };
 
-const columns: ProColumns<DataSourceType>[] = [
-  {
-    key: 'parameterName',
-    title: '参数名称',
-    dataIndex: 'parameterName',
-    formItemProps: {
-      rules: [
-        {
-          required: true,
-          message: '请输入参数名称',
-        },
-      ],
-    },
-    width: '22%',
-  },
-  {
-    key: 'displayTitle',
-    title: '显示名称',
-    dataIndex: 'displayTitle',
-    width: '20%',
-  },
-  {
-    key: 'parameterType',
-    title: '参数类型',
-    dataIndex: 'parameterType',
-    valueType: 'select',
-    width: '20%',
-    valueEnum: {
-      all: { text: '代码表' },
-      open: {
-        text: '字符型',
-      },
-      closed: {
-        text: '已解决',
-      },
-    },
-  },
-  {
-    key: 'displayOrder',
-    title: '顺序',
-    dataIndex: 'displayOrder',
-    width: '20%',
-  },
-  {
-    title: '操作',
-    valueType: 'option',
-    width: 120,
-    render: (text, record, _, action) => [
-      <a
-        key="editable"
-        onClick={() => {
-          action?.startEditable?.(record.id);
-        }}
-      >
-        编辑
-      </a>,
-      <EditableProTable.RecordCreator
-        key="copy"
-        record={{
-          ...record,
-          id: (Math.random() * 1000000).toFixed(0),
-        }}
-      >
-        <a>删除</a>
-      </EditableProTable.RecordCreator>,
-    ],
-  },
-];
-
 const ParameterTable = () => {
-
-  const { resultParameters, changeParameters } = useModel("guidelineModels", (ret) => ({
+  const { resultParameters, changeParameters } = useModel("guidelineModels", (ret: { parameters: any; changeParameters: any; }) => ({
     resultParameters: ret.parameters,
     changeParameters: ret.changeParameters
   }))
+
+  const removeParameterClick = (id: any) => {
+    const array = resultParameters.filter((item: any) => item.id !== id)
+    console.log(array,'--array--')
+    changeParameters(array)
+    message.warn('移除后记的保存')
+  }
+
+  const columns: ProColumns<DataSourceType>[] = [
+    {
+      key: 'parameterName',
+      title: '参数名称',
+      dataIndex: 'parameterName',
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '请输入参数名称',
+          },
+        ],
+      },
+      width: '22%',
+    },
+    {
+      key: 'displayTitle',
+      title: '显示名称',
+      dataIndex: 'displayTitle',
+      width: '20%',
+    },
+    {
+      key: 'parameterType',
+      title: '参数类型',
+      dataIndex: 'parameterType',
+      valueType: 'select',
+      width: '20%',
+      valueEnum: {
+        all: { text: '代码表' },
+        open: {
+          text: '字符型',
+        },
+        closed: {
+          text: '已解决',
+        },
+      },
+    },
+    {
+      key: 'displayOrder',
+      title: '顺序',
+      dataIndex: 'displayOrder',
+      width: '20%',
+    },
+    {
+      title: '操作',
+      valueType: 'option',
+      width: 120,
+      render: (text, record, _, action) => [
+        <a
+          key="editable"
+          onClick={() => {
+            action?.startEditable?.(record.id);
+          }}
+        >
+          编辑
+        </a>,
+        <a
+          key="delete"
+          onClick={() => {
+            removeParameterClick(record.id)
+          }}
+        >
+          移除
+        </a>,
+      ],
+    },
+  ];
 
   console.log(resultParameters, '-----参数---列表展示', changeParameters)
 
@@ -106,6 +111,7 @@ const ParameterTable = () => {
     } else {
       changeParameters([...resultParameters, rows])
     }
+    message.warn('暂存后记的保存')
     console.log(current, resultParameters, 'sssss')
   }
 
@@ -162,6 +168,7 @@ const ParameterTable = () => {
         // onRow={(row) => { return console.log(row);}}
         editable={{
           form,
+          saveText: '暂存',
           editableKeys,
           onSave: async (key,rows) => {
             console.log('baocun', key, rows)
