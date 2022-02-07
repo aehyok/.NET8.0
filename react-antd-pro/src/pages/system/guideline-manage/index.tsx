@@ -29,7 +29,7 @@ const GuidelineManage = () =>{
   const [guidelineData, setGuidelineData] = React.useState({})
 
   const loadTreeList = async (id: any = "1") => {
-    console.log(id, 'id')
+    console.log(id, 'id-guidelineDefine')
     const response = await GetGuidelineDefine(id)
     console.log(response, '--detail--response--')
     if(response.data) {
@@ -42,7 +42,9 @@ const GuidelineManage = () =>{
 
   useEffect(()=> {
     console.log(selectGuidelineId, '12345')
-    loadTreeList(selectGuidelineId)
+    if(selectGuidelineId && selectGuidelineId.length > 0) {
+      loadTreeList(selectGuidelineId)
+    }
   },[selectGuidelineId])
 
   const showModal = () => {
@@ -94,16 +96,7 @@ const GuidelineManage = () =>{
     const result = await SaveGuideLine({
       ...models,
       parameters: parameters,
-      ResultGroup: [
-        {
-          defaultStatus: "SHOW",
-          displayOrder: 1,
-          displayTitle: '默认组',
-          groupName: 'DEFAULT',
-          textAlign: 'CENTER',
-          fields:[...columns]
-        }
-      ]
+      ResultGroup: columns
     })
     console.log(result.code,'result', result)
   }
@@ -132,7 +125,7 @@ const GuidelineManage = () =>{
           <Col lg={17} md={24}>
             <Row gutter={24}>
               <Col span={24} >
-                <GuidelineForm  guidelineData= {guidelineData} />
+                <GuidelineForm  guidelineData= {models} />
               </Col>
               <Col span={24}>
                 <GuidelineTab  guidelineData= {guidelineData} />

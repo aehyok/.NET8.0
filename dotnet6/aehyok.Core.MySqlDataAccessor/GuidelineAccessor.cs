@@ -41,9 +41,9 @@ namespace aehyok.Core.MySqlDataAccessor
             MD_GuideLine define = null;
             if (!string.IsNullOrEmpty(guideLineId))
             {
-                if (GuidelineDefine.ContainsKey(guideLineId))
-                    define = GuidelineDefine[guideLineId];
-                else
+                //if (GuidelineDefine.ContainsKey(guideLineId))
+                //    define = GuidelineDefine[guideLineId];
+                //else
                 {
                     using (MySqlConnection cn = MysqlDBHelper.OpenConnection())
                     {

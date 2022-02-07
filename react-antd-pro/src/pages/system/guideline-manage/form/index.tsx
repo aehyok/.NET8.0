@@ -1,24 +1,29 @@
-import { message, Form, Card } from 'antd';
+import { Form, Card } from 'antd';
 import {
   ProFormDigit,
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-form';
-import { useRequest } from 'umi';
 import type { FC } from 'react';
 import { useRef, useEffect } from 'react';
-import { fakeSubmitForm } from './service';
-
+import {  useModel } from 'umi'
 const GuidelineForm: FC<Record<string, any>> = (props: any) => {
   const { guidelineData } = props
 
   const formRef = useRef(null);
   const [form] = Form.useForm();
 
+  const {} = useModel('guidelineModels',)
+
+  const { models, changeModel } = useModel('guidelineModels', (ret) => ({
+    changeModel: ret.changeModel,
+    models: ret.model,
+  }));
+
   useEffect(() => {
-    console.log('form-表单', guidelineData)
+    console.log('form-表单', models)
     form.setFieldsValue({
-      name: guidelineData.guideLineName,
+      guideLineName: guidelineData.guideLineName,
       id: guidelineData.id,
       displayOrder:guidelineData.displayOrder,
       guideLineMethod: guidelineData.guideLineMethod
@@ -26,18 +31,14 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[guidelineData]);
 
-  const { run } = useRequest(fakeSubmitForm, {
-    manual: true,
-    onSuccess: () => {
-      message.success('提交成功');
-    },
-  });
+  const onChangeText = (e: any) => {
+    changeModel({
+      ...guidelineData,
+      ...e
+    })
+    console.log(e,'sssss')
 
-
-  const onFinish = async (values: Record<string, any>) => {
-    run(values);
-  };
-
+  }
   return (
     <Card bordered={false}>
         <Form
@@ -49,8 +50,7 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
           layout="horizontal"
           labelCol={{ span: 4 }}
           wrapperCol={{span: 20}}
-          initialValues={{ public: '1' }}
-          onFinish={onFinish}
+          onValuesChange ={(e: any) => { onChangeText(e)}}
         >
           <ProFormText
             width="md"
@@ -61,7 +61,7 @@ const GuidelineForm: FC<Record<string, any>> = (props: any) => {
           <ProFormText
             width="md"
             label="指标名称"
-            name="name"
+            name="guideLineName"
             rules={[
               {
                 required: true,

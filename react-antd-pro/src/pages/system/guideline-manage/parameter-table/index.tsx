@@ -3,8 +3,7 @@ import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
 import type { ActionType } from '@ant-design/pro-table';
 import { Button, Form, Space } from 'antd';
-import styles from '../index.less'
-import { CopyOutlined, PlusOutlined, ScissorOutlined } from '@ant-design/icons';
+import {PlusOutlined } from '@ant-design/icons';
 import { useModel } from 'umi';
 
 type DataSourceType = {
