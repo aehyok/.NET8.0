@@ -55,8 +55,11 @@ const GuidelineManage = () =>{
   };
 
   const refresh = () => {
-    console.log('refresh',treeRef)
+    console.log('refresh', treeRef)
+    // 添加后的刷新
+    treeRef?.current.refreshTree('add')
   }
+
   const deleteSubmitCallBack = async() => {
     if(selectGuidelineId && selectGuidelineId.length === 1) {
       const response = await DelGuideLine(selectGuidelineId[0])
@@ -65,6 +68,8 @@ const GuidelineManage = () =>{
         setSelectGuidelineId([])
         message.success('删除指标成功')
         // TODO 待刷新左侧树
+        // 删除后的刷新
+        treeRef?.current.refreshTree('delete')
       }
     }
   }

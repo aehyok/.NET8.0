@@ -35,20 +35,23 @@ const GuidelineTree= (props: any, ref: any) => {
   const {setDefault} = props
   const [treeData, setTreeData] = useState(initTreeData);
 
+  const [selectNode, setSelectNode] = useState()
   const loadTreeList = async (id: any = "1", type: any ="one") => {
     console.log(id, 'id')
     const response = await GetChildGuideLines(id)
-    const list: DataNode[] = response.data.map((item: { id: any; guideLineName: any; }) => {
+
+    const list: DataNode[] = response.data.map((item: { id: any; guideLineName: any; fatherID: any; }) => {
       return {
         key: item.id,
         title: item.guideLineName,
+        fatherId: item.fatherID
       }
     })
     console.log(list, '--list--')
-    if(type === 'one') {
+    if(type === 'one') {  // 初始化时加载
       setTreeData(list)
       // setDefault([list[0].key])
-    } else {
+    } else {  // 点击节点虚拟加载
       setTreeData(origin => {
         console.log(origin, '原始的数据')
         return updateTreeData(origin, id, [
@@ -62,13 +65,19 @@ const GuidelineTree= (props: any, ref: any) => {
     loadTreeList()
   },[])
 
-  const refreshTree = () => {
-    loadTreeList()
+  const refreshTree = (type: string) => {
+    console.log(selectNode, type, 'type----')
+    if(type == 'add') { // 添加后的刷新
+      loadTreeList(selectNode?.key, "two")
+    }
+    if(type === 'delete') {
+      loadTreeList(selectNode?.fatherId, "two")
+    }
   }
-  useImperativeHandle(ref, () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+
+  useImperativeHandle(ref, () => ({
     refreshTree: refreshTree
-  })
+  }))
 
   const onLoadData = async({ key, children }: any) => {
     console.log(key, children, 'onloaddata')
@@ -84,15 +93,16 @@ const GuidelineTree= (props: any, ref: any) => {
     });
   }
 
-  const onSelectClick = (selectedKeys: any) => {
-    console.log(selectedKeys, 'selectedKeys-info--')
+  const onSelectClick = (selectedKeys: any, e: any) => {
+    console.log(selectedKeys, e, 'selectedKeys-info--')
+    setSelectNode(e.node)
     setDefault(selectedKeys)
   }
 
   return (
     <>
       <Search style={{ marginBottom: 8 }} placeholder="请输入指标id或名称" />
-      <Tree loadData={onLoadData} treeData={treeData} onSelect = { (selectedKeys)=> { onSelectClick(selectedKeys)} } />
+      <Tree loadData={onLoadData} treeData={treeData} onSelect = { (selectedKeys, e)=> { onSelectClick(selectedKeys, e)} } />
     </>
   )
 };
