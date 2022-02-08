@@ -82,6 +82,13 @@ const ColumnList = () => {
         static: '只读文本',
         text: '文本框',
         textarea: '文本域',
+        select: '下拉列表',
+        editor: '富文本',
+        number: '数值框',
+        image: '上传图片',
+        video: '上传视频',
+        date: '日期',
+        daterange: '日期范围'
       },
     },
     {
@@ -99,7 +106,7 @@ const ColumnList = () => {
     {
       title: '操作',
       valueType: 'option',
-      width: 200,
+      width: 150,
       render: (text, record, _, action) => [
         <a
           key="editable"
