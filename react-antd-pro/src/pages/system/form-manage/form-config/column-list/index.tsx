@@ -1,6 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import ProCard from '@ant-design/pro-card';
-import ProTable, { ActionType, EditableProTable, ProColumns } from '@ant-design/pro-table';
+import ProTable, { ActionType, EditableProTable, ProColumns, TableDropdown } from '@ant-design/pro-table';
 import { Button, Form, message, Space } from 'antd';
 import React, { useRef, useState } from 'react';
 import { useModel } from 'umi';
@@ -47,6 +47,25 @@ const ColumnList = () => {
     message.warn('暂存后记的保存')
   }
 
+  const updateOtherClick = (record: any) => {
+    console.log(record, 'record')
+  }
+
+  const regularClick = (record: any) => {
+    console.log('regular')
+  }
+
+  const operationClick = (type: string, record: any) => {
+    if(type === 'regular') {
+      regularClick(record)
+    }
+    if(type === 'other') {
+      updateOtherClick(record)
+    }
+    if(type === 'remove') {
+      removeClick(record.id)
+    }
+  }
   const columns: ProColumns<DataSource>[]= [
     {
       title: '接口字段名称',
@@ -80,7 +99,7 @@ const ColumnList = () => {
     {
       title: '操作',
       valueType: 'option',
-      width: 160,
+      width: 200,
       render: (text, record, _, action) => [
         <a
           key="editable"
@@ -90,18 +109,15 @@ const ColumnList = () => {
         >
           编辑
         </a>,
-      //   <a
-      //   key="regular"
-      //   onClick={() => {removeClick(record.id)}}
-      // >
-      //   正则
-      // </a>,
-        <a
-          key="delete"
-          onClick={() => {removeClick(record.id)}}
-        >
-          移除
-        </a>,
+        <TableDropdown
+        key="actionGroup"
+        onSelect={(type: any) => { operationClick(type,record)}}
+        menus={[
+          { key: 'regular', name: '编辑正则' },
+          { key: 'other', name: '编辑其他属性' },
+          { key: 'remove', name: '移除' },
+        ]}
+      />,
       ],
     },
   ];
