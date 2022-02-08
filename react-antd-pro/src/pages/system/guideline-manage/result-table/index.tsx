@@ -126,7 +126,7 @@ export default (props: any) => {
 
   return (
     <>
-      <Space>
+      <Space style={{marginLeft: "25px", marginBottom:"10px"}}>
         <Button
           type="primary"
           onClick={() => {

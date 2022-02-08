@@ -115,8 +115,8 @@ const GuidelineManage = () =>{
             {/* <Button type="dashed" icon={ <ExportOutlined />}>导入指标</Button>
             <Button type="dashed" icon={ <ImportOutlined />}>导出指标</Button> */}
            </Col>
-           <Col style={{margin: '5px 0 5px'}} >
-            <Button icon={<FileAddOutlined />} type="primary" className={styles.buttonmarginright} onClick={() => saveGuidelineClick()}>保存</Button>
+           <Col >
+            <Button icon={<FileAddOutlined />} type="primary" onClick={() => saveGuidelineClick()}>保存</Button>
 
           </Col>
         </Row>
