@@ -10,7 +10,6 @@ import styles from './index.less'
 import { DeleteOutlined, ExclamationCircleOutlined, FileAddOutlined } from '@ant-design/icons';
 import { useModel } from 'umi'
 
-
 const GuidelineManage = () =>{
 
   const { models, parameters, columns, changeModel, changeParameters, changeColumns } = useModel('guidelineModels', (ret) => ({
