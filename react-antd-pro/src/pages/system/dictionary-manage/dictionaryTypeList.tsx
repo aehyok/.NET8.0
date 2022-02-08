@@ -111,7 +111,7 @@ const DictionaryTypeList: React.FC<TypeProps> = (props) => {
         }}
         rowKey="id"
         rowClassName={(record) => {
-          return record.code === typeCode ? styles['split-row-select-active'] : '';
+          return record.code === typeCode ? 'clickRowStyle' : '';
         }}
         actionRef={actionRef}
         toolbar={{

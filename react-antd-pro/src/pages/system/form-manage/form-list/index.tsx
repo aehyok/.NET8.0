@@ -5,11 +5,13 @@ import React, { useRef } from 'react';
 import { request, useModel } from 'umi';
 import { deleteSystemForm } from '@/services/ant-design-pro/form'
 import FormModel from '../modal'
+
 const FormList = (props: any) => {
   console.log(props)
 
-  const { setEditId } = useModel("formModels", (ret: { editId: any; setEditId: any; }) => ({
-    setEditId: ret.setEditId
+  const {  editId, setEditId } = useModel("formModels", (ret: { editId: any; setEditId: any; }) => ({
+    setEditId: ret.setEditId,
+    editId: ret.editId
   }))
   const [isModalVisible, setIsModalVisible] = React.useState(false);
   const actionRef = useRef<ActionType>();
@@ -61,6 +63,9 @@ const FormList = (props: any) => {
     },
   ];
 
+  const setRowClassName = (record: any) => {
+    return record.id === editId ? 'clickRowStyle' : '';
+  }
   return <>
     <FormModel modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} refresh={refresh}/>
     <ProTable<SYSTEM.FormItem>
@@ -70,6 +75,7 @@ const FormList = (props: any) => {
       options={false}
       pagination={false}
       search={false}
+      rowClassName={(record: any)=> {return setRowClassName(record)}}
       toolbar={{
         // search: {
         //   onSearch: (value) => {
