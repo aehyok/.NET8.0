@@ -123,6 +123,10 @@ declare namespace API {
  * 系统管理
  */
 declare namespace SYSTEM {
+  type FormItem = {
+    id?: string;
+    formName?: string;
+  };
   /**
    * 字典类型项
    */
@@ -149,14 +153,13 @@ declare namespace SYSTEM {
     typeCode?: number;
   };
 
-
   interface MenuItem extends COMMON.Recursion {
     code: string;
     menuParameter?: string;
     menuName: string;
     menuPath: string;
     status: number;
-  };
+  }
 
   /**
    * 用户角色

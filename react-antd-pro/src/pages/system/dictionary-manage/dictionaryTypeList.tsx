@@ -30,7 +30,6 @@ const DictionaryTypeList: React.FC<TypeProps> = (props) => {
     setIsShowModal(false)
   }
 
-
   // 删除当前字典类型
   const deleteClick = () => {
     console.log(editId, '-----删除---')
