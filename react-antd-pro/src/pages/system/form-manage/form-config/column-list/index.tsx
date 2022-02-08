@@ -1,32 +1,50 @@
 import { PlusOutlined } from '@ant-design/icons';
 import ProCard from '@ant-design/pro-card';
 import ProTable, { ActionType, EditableProTable, ProColumns } from '@ant-design/pro-table';
-import { Button, Form, Space } from 'antd';
+import { Button, Form, message, Space } from 'antd';
 import React, { useRef, useState } from 'react';
+import { useModel } from 'umi';
 
 type DataSource = {
   id?: string,
   name?: string,
-  code?: string
-}
-const ColumnList = () => {
-  const [editId, setEditId] = React.useState('')
-  console.log('1111')
-  const [columnsList, setColumnsList] = React.useState([
-    {
-      id: '1',
-      name: 'code',
-      title: '代码',
-    },
-    {
-      id: '2',
-      name: 'title',
-      title: '标题',
-    }
-  ])
+  title?: string,
+  type?: string,
+  required?: boolean,
+  placeholder?: string,
 
-  const removeColumnsClick =(id: any) => {
-    console.log(id, 'delete')
+}
+
+const ColumnList = () => {
+  const { columnsList,setColumnsList} = useModel('formModels', (ret)=>({
+    setColumnsList: ret.changeColumns,
+    columnsList: ret.columns
+  }))
+  console.log(columnsList, 'columnsList0000000000000000000')
+  const removeClick = (id: any) => {
+    const array = columnsList.filter((item: any) => item.id !== id)
+    console.log(array,'--array--')
+    setColumnsList(array)
+    message.warn('移除后记的保存')
+  }
+
+  const onSaveClick = (rows: any) => {
+    console.log(rows, 'onSaveClick')
+    const array: any = columnsList
+    const current: number = array.findIndex((item: any) => item.id === rows.id)
+    console.log(current, current, 'current');
+
+    if(current > -1 ) {
+      // current = rows
+      array[current] = rows
+      console.log(array, 'array-----update')
+      setColumnsList([...array])
+    } else {
+      console.log(columnsList, rows,'rows-clist')
+      setColumnsList([...columnsList, rows])
+    }
+    console.log(current, columnsList, 'sssss')
+    message.warn('暂存后记的保存')
   }
 
   const columns: ProColumns<DataSource>[]= [
@@ -72,15 +90,15 @@ const ColumnList = () => {
         >
           编辑
         </a>,
-        <a
-        key="regular"
-        onClick={() => {removeColumnsClick(record.id)}}
-      >
-        正则
-      </a>,
+      //   <a
+      //   key="regular"
+      //   onClick={() => {removeClick(record.id)}}
+      // >
+      //   正则
+      // </a>,
         <a
           key="delete"
-          onClick={() => {removeColumnsClick(record.id)}}
+          onClick={() => {removeClick(record.id)}}
         >
           移除
         </a>,
@@ -106,7 +124,7 @@ const ColumnList = () => {
           添加字段
         </Button>
     </Space>
-    <EditableProTable<DataSource>
+    <EditableProTable
         rowKey="id"
         actionRef={actionRef}
         maxLength={5}
@@ -114,7 +132,7 @@ const ColumnList = () => {
         recordCreatorProps={false}
         columns={columns}
         value={columnsList}
-        // onChange={changeParameters}
+        onChange={setColumnsList}
         // onRow={(row) => { return console.log(row);}}
         editable={{
           form,

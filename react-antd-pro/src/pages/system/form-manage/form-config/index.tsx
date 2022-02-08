@@ -1,15 +1,63 @@
 import { FileAddOutlined } from '@ant-design/icons';
 import TabPane from '@ant-design/pro-card/lib/components/TabPane';
 import { ProFormDigit, ProFormText, ProFormTextArea } from '@ant-design/pro-form';
-import { Button, Card, Col, Form, Row, Tabs } from 'antd';
-import React, { useRef } from 'react';
+import { Button, Card, Col, Form, message, Row, Tabs } from 'antd';
+import React, { useEffect, useRef } from 'react';
 import ColumnList from './column-list'
+import { useModel } from 'umi';
+import { getSystemForm, updateSystemForm } from '@/services/ant-design-pro/form'
 const FormConfig = () => {
   const formRef = useRef(null);
   const [form] = Form.useForm();
 
-  const saveFormClick = () => {
+  const { editId,model, changeModel,changeColumns,columns} = useModel('formModels', (ret)=>({
+    editId: ret.editId,
+    model: ret.model,
+    changeModel: ret.changeModel,
+    changeColumns: ret.changeColumns,
+    columns: ret.columns
+  }))
 
+  useEffect(()=> {
+    if(editId) {
+      getSystemForm(editId).then((result)=> {
+        console.log(result, 'result----')
+        form.setFieldsValue({
+          formName: result.data.formName,
+          id: result.data.id,
+          displayOrder:result.data.displayOrder,
+          remark: result.data.remark
+        });
+        changeModel(result.data)
+        if(result.data.columnList && result.data.columnList.length> 0) {
+          changeColumns( JSON.parse(result.data.columnList) || [])
+        } else {
+          changeColumns([])
+        }
+      })
+    } else {
+      changeModel({})
+      changeColumns([])
+    }
+  }, [editId])
+
+
+  const saveFormClick = async() => {
+    const result = await updateSystemForm({
+      ...model,
+      columnList: JSON.stringify(columns)
+    })
+    console.log(result.code,'result', result)
+    if(result.code == 200) {
+      message.success('保存指标成功')
+    }
+  }
+  const onChangeText = (e: any) => {
+    changeModel({
+      ...model,
+      ...e
+    })
+    console.log(e,'sssss')
   }
   return <>
         <Row justify={'space-between'}>
@@ -28,12 +76,12 @@ const FormConfig = () => {
           layout="horizontal"
           labelCol={{ span: 4 }}
           wrapperCol={{span: 20}}
-          // onValuesChange ={(e: any) => { onChangeText(e)}}
+          onValuesChange ={(e: any) => { onChangeText(e)}}
         >
           <ProFormText
             width="md"
             label="表单名称"
-            name="guideLineName"
+            name="formName"
             rules={[
               {
                 required: true,

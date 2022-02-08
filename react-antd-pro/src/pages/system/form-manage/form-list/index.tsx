@@ -1,18 +1,49 @@
-import ProTable, { ProColumns, TableDropdown } from '@ant-design/pro-table';
-import { Button } from 'antd';
-import React from 'react';
-import { request } from 'umi';
-
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import ProTable, { ActionType, ProColumns, TableDropdown } from '@ant-design/pro-table';
+import { Button, message, Modal } from 'antd';
+import React, { useRef } from 'react';
+import { request, useModel } from 'umi';
+import { deleteSystemForm } from '@/services/ant-design-pro/form'
+import FormModel from '../modal'
 const FormList = (props: any) => {
   console.log(props)
 
-  const [editId, setEditId] = React.useState('')
+  const { setEditId } = useModel("formModels", (ret: { editId: any; setEditId: any; }) => ({
+    setEditId: ret.setEditId
+  }))
+  const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const actionRef = useRef<ActionType>();
   const addFormClick = () => {
     console.log('添加表单')
+    setIsModalVisible(true)
   }
 
   const deleteFormClick = (record: any) => {
     console.log('删除表单', record)
+    Modal.confirm({
+      title: '系统提示',
+      icon: <ExclamationCircleOutlined />,
+      content: '请确认是否删除该菜单?',
+      okText: '确认',
+      onOk:() => {
+        deleteSystemForm(record.id).then(result => {
+          if(result?.data === -1) {
+            message.warn('删除失败，请先删除子菜单')
+          } else {
+            if(result?.code === 200) {
+              message.success('删除成功')
+              actionRef.current?.reload()
+            }
+          }
+        })
+      },
+      onCancel : () => {console.log('取消')},
+      cancelText: '取消',
+    });
+  }
+
+  const refresh = () => {
+    actionRef.current?.reload()
   }
 
   const columns: ProColumns<SYSTEM.FormItem>[] = [
@@ -31,9 +62,11 @@ const FormList = (props: any) => {
   ];
 
   return <>
+    <FormModel modalVisible = {isModalVisible} hiddenModal = {setIsModalVisible} refresh={refresh}/>
     <ProTable<SYSTEM.FormItem>
       rowKey="id"
       columns={columns}
+      actionRef={actionRef}
       options={false}
       pagination={false}
       search={false}

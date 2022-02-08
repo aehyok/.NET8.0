@@ -2,7 +2,9 @@ import { useState } from 'react';
 
 export default () => {
   const [model, setModel] = useState({});
-  const [columns, setColumns] = useState([]);
+  const [editId, setEditId] = useState('');
+  const [columns, setColumns] = useState<any>([]);
+
   const changeModel = (values: any) => {
     setModel(values);
   };
@@ -10,6 +12,5 @@ export default () => {
   const changeColumns = (values: any) => {
     setColumns(values);
   };
-
-  return { model, changeModel, columns, changeColumns };
+  return { model, changeModel, editId, setEditId, columns, changeColumns };
 };
