@@ -31,7 +31,7 @@ namespace aehyok.Core.WebApi.Controllers
         /// </summary>
         /// <param name="FatherGuildLineID"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         public async Task<IList<MD_GuideLine>> GetChildGuideLines(string FatherGuildLineID)
         {
             var ret = await this.mdService.GetChildGuideLines(FatherGuildLineID);
@@ -43,7 +43,7 @@ namespace aehyok.Core.WebApi.Controllers
         /// </summary>
         /// <param name="guideLineId"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<MD_GuideLine> GetGuidelineDefine(string guideLineId)
         {
