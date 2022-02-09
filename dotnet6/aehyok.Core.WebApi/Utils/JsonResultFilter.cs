@@ -9,6 +9,13 @@ using X.PagedList;
 
 namespace aehyok.Core.WebApi.Utils
 {
+    public class DvsResult : JsonResult
+    {
+        public DvsResult(object value)
+            : base(value)
+        { }
+    }
+
     public class JsonResultFilter : IAsyncAlwaysRunResultFilter
     {
         public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
@@ -49,7 +56,7 @@ namespace aehyok.Core.WebApi.Utils
                 jsonResult.Data = null;
             }
 
-            context.Result = new JsonResult(jsonResult);
+            context.Result = new DvsResult(jsonResult);
 
             await next();
         }

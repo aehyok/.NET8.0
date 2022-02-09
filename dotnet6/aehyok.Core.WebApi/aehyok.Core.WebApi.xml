@@ -258,12 +258,6 @@
             菜单管理
             </summary>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.MenuController.GetMenuList">
-            <summary>
-            获取所有菜单列表
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:aehyok.Core.WebApi.Controllers.MenuController.GetMenu(System.String)">
             <summary>
             通过菜单Id获取菜单详情
@@ -335,6 +329,32 @@
             <summary>
             控制器构造函数之后，接口方法调用之前
             </summary>
+        </member>
+        <member name="T:aehyok.Base.Controllers.MdGuidelineController">
+            <summary>
+            指标查询方法
+            </summary>
+        </member>
+        <member name="M:aehyok.Base.Controllers.MdGuidelineController.GetGuidelineDefine(System.String)">
+            <summary>
+            获取指标定义
+            </summary>
+            <param name="guideLineId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Base.Controllers.MdGuidelineController.GetGuidelineData(aehyok.Base.Models.QueryGuidelineModel)">
+            <summary>
+            取指标全部数据 1438771804981694464
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Base.Controllers.MdGuidelineController.GetGuidelineDataPaged(aehyok.Base.Models.QueryGuidelinePageModel)">
+            <summary>
+            分页取指标数据
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
         </member>
         <member name="T:aehyok.Base.Models.JsonResultModel">
             <summary>

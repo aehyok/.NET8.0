@@ -8,12 +8,12 @@ import { PlusOutlined } from '@ant-design/icons';
 
 type DataSourceType = {
   id?: React.Key;
-  fieldName?: string;
-  displayTitle?: string;
+  prop?: string;
+  label?: string;
   displayOrder?: number;
   displayWidth?: number;
   canHide: boolean;
-  textAlign?: string;
+  align?: string;
   displayFormat: string;
 };
 export default () => {
@@ -56,14 +56,43 @@ export default () => {
 
   const columns: ProColumns<DataSourceType>[] = [
     {
-      title: '名称',
-      dataIndex: 'fieldName',
+      title: '字段Name',
+      dataIndex: 'prop',
       width: '15%',
     },
     {
       title: '显示名称',
-      dataIndex: 'displayTitle',
+      dataIndex: 'label',
       width: '20%',
+    },
+    {
+      title: '类型',
+      dataIndex: 'type',
+      width: '20%',
+      valueType:'select',
+      fieldProps: {
+        options:[
+        {
+          label: '多选框',
+          value: 'checkbox',
+        },
+        {
+          label: '索引',
+          value: 'index'
+        },
+        {
+          label: '日期',
+          value: 'date'
+        },
+        {
+          label: '时间',
+          value: 'time'
+        },
+        {
+          label: '图片',
+          value: 'image'
+        }
+      ]},
     },
     {
       title: '显示顺序',
@@ -86,13 +115,13 @@ export default () => {
     },
     {
       title: '对齐方式',
-      dataIndex: 'textAlign',
+      dataIndex: 'align',
       valueType: 'select',
       width: '15%',
       valueEnum: {
-        CENTER: 'CENTER',
-        LEFT: 'LEFT',
-        RIGHT: 'RIGHT'
+        center: 'CENTER',
+        left: 'LEFT',
+        right: 'RIGHT'
       },
     },
     {

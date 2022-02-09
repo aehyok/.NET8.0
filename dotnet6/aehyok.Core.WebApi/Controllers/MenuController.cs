@@ -21,18 +21,6 @@ namespace aehyok.Core.WebApi.Controllers
             this._menuRepository = menuRepository;
         }
         /// <summary>
-        /// 获取所有菜单列表
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [AllowAnonymous]
-        public List<SystemMenu> GetMenuList()
-        {
-            var list = this._menuRepository.GetList();
-            return list;
-        }
-
-        /// <summary>
         /// 通过菜单Id获取菜单详情
         /// </summary>
         /// <returns></returns>

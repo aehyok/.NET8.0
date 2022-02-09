@@ -29,6 +29,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace aehyok.Core.WebApi
 {
@@ -69,6 +70,11 @@ namespace aehyok.Core.WebApi
 
             services.AddScoped<IMetaDataQuery, MyDA_MetaDataQuery>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+            });
             services.AddControllers(options =>
             {
                 options.Filters.Add<JsonResultFilter>();
