@@ -7,7 +7,7 @@ import { request } from 'umi';
  */
 export async function GetChildGuideLines(id: string) {
   return request(`/so/api/Guideline/GetChildGuideLines?FatherGuildLineID=${id}`, {
-    method: 'POST',
+    method: 'GET',
   });
 }
 
@@ -18,7 +18,7 @@ export async function GetChildGuideLines(id: string) {
  */
 export async function GetGuidelineDefine(id: string) {
   return request(`/so/api/Guideline/GetGuidelineDefine?guideLineId=${id}`, {
-    method: 'POST',
+    method: 'GET',
   });
 }
 

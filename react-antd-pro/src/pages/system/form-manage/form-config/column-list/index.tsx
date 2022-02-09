@@ -12,6 +12,7 @@ type DataSource = {
   type?: string,
   required?: boolean,
   placeholder?: string,
+  displayOrder: number,
 
 }
 
@@ -68,7 +69,7 @@ const ColumnList = () => {
   }
   const columns: ProColumns<DataSource>[]= [
     {
-      title: '接口字段名称',
+      title: '字段名称',
       dataIndex: 'name',
     },
     {
@@ -94,14 +95,31 @@ const ColumnList = () => {
     {
       title: '是否必填',
       dataIndex: 'required',
-      valueEnum: {
-        true: '必填',
-        false: '非必填',
-      },
+      // valueEnum: {
+      //   true: '必填',
+      //   false: '非必填',
+      // },
+      valueType:'select',
+      fieldProps: {
+        options:[
+        {
+          label: '必填项',
+          value: true,
+        },
+        {
+          label: '非必填项',
+          value: false
+        }
+      ]},
     },
     {
-      title: '占位符提示',
+      title: '占位符',
       dataIndex: 'placeholder',
+    },
+    {
+      title: '顺序',
+      dataIndex: 'displayOrder',
+      valueType: 'digit',
     },
     {
       title: '操作',
