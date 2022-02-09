@@ -29,7 +29,7 @@ const ParameterTable = () => {
 
   const columns: ProColumns<DataSourceType>[] = [
     {
-      key: 'parameterName',
+      // key: 'parameterName',
       title: '参数名称',
       dataIndex: 'parameterName',
       formItemProps: {
@@ -43,13 +43,13 @@ const ParameterTable = () => {
       width: '22%',
     },
     {
-      key: 'displayTitle',
+      // key: 'displayTitle',
       title: '显示名称',
       dataIndex: 'displayTitle',
       width: '20%',
     },
     {
-      key: 'parameterType',
+      // key: 'parameterType',
       title: '参数类型',
       dataIndex: 'parameterType',
       valueType: 'select',
@@ -65,7 +65,7 @@ const ParameterTable = () => {
       },
     },
     {
-      key: 'displayOrder',
+      // key: 'displayOrder',
       title: '顺序',
       dataIndex: 'displayOrder',
       width: '20%',
@@ -95,7 +95,7 @@ const ParameterTable = () => {
     },
   ];
 
-  console.log(resultParameters, '-----参数---列表展示', changeParameters)
+  console.log(resultParameters, '-----参数---列表展示')
 
   const onSaveClick = (rows: any) => {
     console.log(rows, 'onSaveClick')
@@ -164,7 +164,7 @@ const ParameterTable = () => {
         recordCreatorProps={false}
         columns={columns}
         value={resultParameters}
-        // onChange={changeParameters}
+        onChange={changeParameters}
         // onRow={(row) => { return console.log(row);}}
         editable={{
           form,

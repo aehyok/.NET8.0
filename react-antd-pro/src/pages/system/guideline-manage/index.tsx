@@ -34,8 +34,19 @@ const GuidelineManage = () =>{
     if(response.data) {
       setGuidelineData(response.data)
       changeModel(response.data)
-      changeParameters(response.data.parameters || [])
-      changeColumns(response.data.resultGroups || [])
+      if(response.data.parameters) {
+        changeParameters(JSON.parse(response.data.parameters))
+      } else {
+        changeParameters([])
+      }
+
+      if(response.data.resultColumns) {
+        changeColumns(JSON.parse(response.data.resultColumns))
+      } else {
+        changeColumns([])
+      }
+      // changeParameters(response.data.parameters || [])
+      // changeColumns(response.data.resultColumns || [])
     }
   }
 
@@ -95,8 +106,8 @@ const GuidelineManage = () =>{
     console.log(columns,'-------columns--------')
     const result = await SaveGuideLine({
       ...models,
-      parameters: parameters,
-      resultGroups: columns
+      parameters: JSON.stringify(parameters),
+      resultColumns: JSON.stringify(columns)
     })
     console.log(result.code,'result', result)
     if(result.code == 200) {

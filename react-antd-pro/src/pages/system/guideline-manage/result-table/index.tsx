@@ -16,8 +16,8 @@ type DataSourceType = {
   textAlign?: string;
   displayFormat: string;
 };
-export default (props: any) => {
-  console.log(props, 'props')
+export default () => {
+  // console.log(props, 'props')
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const actionRef = useRef<ActionType>();
   const [form] = Form.useForm();

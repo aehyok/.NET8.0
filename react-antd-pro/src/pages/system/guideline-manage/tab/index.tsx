@@ -3,13 +3,7 @@ import { Card, Tabs } from 'antd';
 import ParameterTable from '../parameter-table';
 import ResultTable from '../result-table';
 const { TabPane } = Tabs;
-const GuidelineTable = (props: any) => {
-  const { guidelineData } = props
-
-  useEffect(()=> {
-    console.log('table-列表',guidelineData)
-  },[guidelineData])
-
+const GuidelineTable = () => {
   return (
     <Card bordered={false} style={{marginTop: '15px'}}>
       <Tabs defaultActiveKey="1">
@@ -17,7 +11,7 @@ const GuidelineTable = (props: any) => {
           <ParameterTable />
         </TabPane>
         <TabPane tab="显示结果字段定义" key="2">
-          <ResultTable resultGroups={guidelineData.resultGroups}  />
+          <ResultTable />
         </TabPane>
       </Tabs>
     </Card>

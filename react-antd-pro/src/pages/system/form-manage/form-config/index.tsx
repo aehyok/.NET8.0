@@ -78,6 +78,12 @@ const FormConfig = () => {
           wrapperCol={{span: 20}}
           onValuesChange ={(e: any) => { onChangeText(e)}}
         >
+        <ProFormText
+            width="md"
+            label="表单ID"
+            name="id"
+            disabled={true}
+          />
           <ProFormText
             width="md"
             label="表单名称"

@@ -1772,7 +1772,7 @@ namespace aehyok.Core.MySqlDataAccessor
             _param[0].Value = _refTableName;
             using (MySqlConnection cn = MysqlDBHelper.OpenConnection(MysqlDBHelper.queryString))
             {
-                _metadata = await MysqlDBHelper.FillDataTable(cn,null, CommandType.Text, SQL_Get_RefTableColumn, _param);
+                _metadata = await MysqlDBHelper.FillDataTable(cn, null, CommandType.Text, SQL_Get_RefTableColumn, _param);
                 _metadata.TableName = "RefTable";
                 _metadata.CaseSensitive = true;
                 cn.Close();
@@ -2434,13 +2434,11 @@ namespace aehyok.Core.MySqlDataAccessor
             //        _metaStr1 = _guideLine.GuideLineMeta;
             //        _metaStr2 = "";
             //}
-            var parametersJson = JsonConvert.SerializeObject(_guideLine.Parameters);
-            var resultJson = JsonConvert.SerializeObject(_guideLine.ResultGroups);
             _param[0].Value = _guideLine.GuideLineName;
             _param[1].Value = _guideLine.GuideLineMethod;
-            _param[2].Value = parametersJson; //_guideLine.GuideLineMeta;
+            _param[2].Value = _guideLine.Parameters; //_guideLine.GuideLineMeta;
             _param[3].Value = Convert.ToDecimal(_guideLine.DisplayOrder);
-            _param[4].Value = resultJson;
+            _param[4].Value = _guideLine.ResultColumns;
             _param[5].Value = _guideLine.Description;
             _param[6].Value = decimal.Parse(_guideLine.ID);
 
@@ -2868,7 +2866,7 @@ namespace aehyok.Core.MySqlDataAccessor
                             MySqlCommand _cmd = new MySqlCommand(SQL_SaveRefTable_Clear, cn);
                             _cmd.Parameters.Add(new MySqlParameter("@type", _refTable.RefTableName));
                             await _cmd.ExecuteNonQueryAsync();
-                           
+
                             // 清除原记录后再进行插入
                             foreach (DataRow _dr in _refData.Rows)
                             {

@@ -68,8 +68,8 @@ namespace aehyok.Core.MySqlDataAccessor
                                     string zbsf = dr.IsDBNull(8) ? "" : dr.GetString(8);
 
                                     define = new MD_GuideLine(id, name, groupname, fatherid, displayorder, descript);
-                                    define.Parameters = JsonConvert.DeserializeObject<List<MD_GuideLineParameter>>(zbmeta1); //MC_GuideLine.GetParametersFromMeta(fullMeta);
-                                    define.ResultGroups = JsonConvert.DeserializeObject<List<MD_GuideLineFieldName>>(zbmeta2);  //MC_GuideLine.GetFieldGroupsFromMeta(fullMeta);
+                                    define.Parameters = zbmeta1; // JsonConvert.DeserializeObject<List<MD_GuideLineParameter>>(zbmeta1); //MC_GuideLine.GetParametersFromMeta(fullMeta);
+                                    define.ResultColumns = zbmeta2; // JsonConvert.DeserializeObject<List<MD_GuideLineFieldName>>(zbmeta2);  //MC_GuideLine.GetFieldGroupsFromMeta(fullMeta);
                                     define.DetailDefines = MC_GuideLine.GetDetaiDefinelFromMeta(fullMeta);
                                     define.GuideLineMethod = zbsf;
 
@@ -91,7 +91,7 @@ namespace aehyok.Core.MySqlDataAccessor
 
         public async static Task<DataTable> QueryGuideline(string guideLineId, Dictionary<string, object> param, string filterWord)
         {
-            int getQueryStartTime = Environment.TickCount;           
+            int getQueryStartTime = Environment.TickCount;
             DataTable tb = new DataTable("ResultTable");
             MD_GuideLine define = await GetGuidelineDefine(guideLineId);
             if (define != null)
@@ -103,7 +103,7 @@ namespace aehyok.Core.MySqlDataAccessor
                 {
                     foreach (var p in param)
                     {
-                        MD_GuideLineParameter md_pa = define.Parameters.Find(pa => pa.ParameterName == p.Key);
+                        MD_GuideLineParameter md_pa = null; //define.Parameters.Find(pa => pa.ParameterName == p.Key);
                         if (md_pa != null)
                         {
                             glPara.Add(new MDQuery_GuideLineParameter(md_pa, p.Value));
@@ -152,7 +152,7 @@ namespace aehyok.Core.MySqlDataAccessor
                 {
                     foreach (var p in param)
                     {
-                        MD_GuideLineParameter md_pa = define.Parameters.Find(pa => pa.ParameterName == p.Key);
+                        MD_GuideLineParameter md_pa = null; //define.Parameters.Find(pa => pa.ParameterName == p.Key);
                         if (md_pa != null)
                         {
                             glPara.Add(new MDQuery_GuideLineParameter(md_pa, p.Value));
@@ -182,11 +182,11 @@ namespace aehyok.Core.MySqlDataAccessor
                 queryStr = StrUtils.BuildPagingSQL22(queryStr, pageIndex, pageSize, sortBy, sortDirection);
                 tb = await FillResultData(queryStr, "ResultTable");
                 MysqlLogWriter.WriteQueryLog(queryStr, Environment.TickCount - getQueryStartTime, "2");
-            }          
+            }
             var list = new List<DataTable>();
-            list.Add(tb);         
+            list.Add(tb);
             var ret = new StaticPagedList<DataTable>(list, pageIndex, pageSize, recordCount);
-        
+
             return ret;
         }
 

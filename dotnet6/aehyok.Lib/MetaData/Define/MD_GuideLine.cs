@@ -67,14 +67,16 @@ namespace aehyok.Lib.MetaData.Define
         /// 指标查询参数集合
         /// </summary>
         [DataMember]
-        public List<MD_GuideLineParameter> Parameters { get; set; }
+        // public List<MD_GuideLineParameter> Parameters { get; set; }
+        public string Parameters { get; set; }
 
         /// <summary>
         /// 指标查询结果分组集合
         /// </summary>
         [DataMember]
         //public List<MD_GuideLineFieldGroup> ResultGroups { get; set; }
-        public List<MD_GuideLineFieldName> ResultGroups { get; set; }
+        // public List<MD_GuideLineFieldName> ResultGroups { get; set; }
+        public string ResultColumns { get; set; }
         /// <summary>
         /// 详细信息链接
         /// </summary>
