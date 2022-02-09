@@ -91,6 +91,10 @@ export default () => {
         {
           label: '图片',
           value: 'image'
+        },
+        {
+          label: '自定义',
+          value: 'html'
         }
       ]},
     },
