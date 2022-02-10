@@ -130,7 +130,7 @@ export default () => {
     },
     {
       title: '显示格式',
-      dataIndex: 'displayFormat',
+      dataIndex: 'html',
       width: '15%',
     },
     {
