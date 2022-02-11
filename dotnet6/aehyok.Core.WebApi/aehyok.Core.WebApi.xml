@@ -258,6 +258,12 @@
             菜单管理
             </summary>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.MenuController.GetMenuList">
+            <summary>
+            获取所有菜单列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:aehyok.Core.WebApi.Controllers.MenuController.GetMenu(System.String)">
             <summary>
             通过菜单Id获取菜单详情
