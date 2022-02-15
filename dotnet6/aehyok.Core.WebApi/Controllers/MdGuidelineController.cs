@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using aehyok.Core.MySqlDataAccessor;
+using aehyok.Core.WebApi.Controllers;
 
 namespace aehyok.Base.Controllers
 {
@@ -18,7 +19,7 @@ namespace aehyok.Base.Controllers
     /// 指标查询方法
     /// </summary>
     [Route("/api/mdquery")]
-    public class MdGuidelineController //: MDControllerBase
+    public class MdGuidelineController : BaseApiController
     {
         //private readonly IEncryptionService encryptionService;
         //private readonly IMetaDataQuery mdService;

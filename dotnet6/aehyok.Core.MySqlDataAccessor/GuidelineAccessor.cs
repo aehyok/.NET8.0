@@ -103,7 +103,7 @@ namespace aehyok.Core.MySqlDataAccessor
                 {
                     foreach (var p in param)
                     {
-                        MD_GuideLineParameter md_pa = null; //define.Parameters.Find(pa => pa.ParameterName == p.Key);
+                        MD_GuideLineParameter md_pa = JsonConvert.DeserializeObject<List<MD_GuideLineParameter>>(define.Parameters).Find(item=> item.ParameterName == p.Key);  //define.Parameters.Find(pa => pa.ParameterName == p.Key);
                         if (md_pa != null)
                         {
                             glPara.Add(new MDQuery_GuideLineParameter(md_pa, p.Value));
