@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import ProCard from '@ant-design/pro-card';
+import RegularModal from './regular-modal'
 import ProTable, { ActionType, EditableProTable, ProColumns, TableDropdown } from '@ant-design/pro-table';
 import { Button, Form, message, Space } from 'antd';
 import React, { useRef, useState } from 'react';
@@ -21,6 +21,8 @@ const ColumnList = () => {
     setColumnsList: ret.changeColumns,
     columnsList: ret.columns
   }))
+
+  const [isShowRegularModal,setIsShowRegularModal] = useState(false)
   console.log(columnsList, 'columnsList0000000000000000000')
   const removeClick = (id: any) => {
     const array = columnsList.filter((item: any) => item.id !== id)
@@ -54,6 +56,7 @@ const ColumnList = () => {
 
   const regularClick = (record: any) => {
     console.log('regular')
+    setIsShowRegularModal(true)
   }
 
   const operationClick = (type: string, record: any) => {
@@ -152,6 +155,7 @@ const ColumnList = () => {
   const [form] = Form.useForm();
 
   return <>
+    <RegularModal modalVisible ={isShowRegularModal} hiddenModal= {setIsShowRegularModal} refresh= {setIsShowRegularModal} />
     <Space style={{marginLeft: "25px", marginBottom:"10px"}}>
         <Button
           type="primary"
