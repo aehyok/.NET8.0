@@ -9,7 +9,7 @@ const RulesModel = (props: {modalVisible: boolean, hiddenModal: Function, refres
   const { modalVisible, hiddenModal, refresh } = props
   console.log(props.modalVisible, modalVisible, 'ssss----ss')
 
-  
+
   const [columnsList, setColumnsList] = useState<RuleModel[]>([])
   const actionRef = useRef<ActionType>();
 
@@ -25,7 +25,7 @@ const RulesModel = (props: {modalVisible: boolean, hiddenModal: Function, refres
   }
 
   const onSaveClick = () => {
-
+    
   }
 
   type RuleModel = {

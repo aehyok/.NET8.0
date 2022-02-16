@@ -1,5 +1,6 @@
 import { PlusOutlined } from '@ant-design/icons';
 import RegularModal from './regular-modal'
+import AttributeModel from './attribute-modal';
 import ProTable, { ActionType, EditableProTable, ProColumns, TableDropdown } from '@ant-design/pro-table';
 import { Button, Form, message, Space } from 'antd';
 import React, { useRef, useState } from 'react';
@@ -23,6 +24,8 @@ const ColumnList = () => {
   }))
 
   const [isShowRegularModal,setIsShowRegularModal] = useState(false)
+  const [isShowAttributeModal,setIsShowAttributeModal] = useState(false)
+  const [currentRecord, setCurrentRecord] = useState({})
   console.log(columnsList, 'columnsList0000000000000000000')
   const removeClick = (id: any) => {
     const array = columnsList.filter((item: any) => item.id !== id)
@@ -52,11 +55,14 @@ const ColumnList = () => {
 
   const updateOtherClick = (record: any) => {
     console.log(record, 'record')
+    setIsShowAttributeModal(true)
+    setCurrentRecord(record)
   }
 
   const regularClick = (record: any) => {
     console.log('regular')
     setIsShowRegularModal(true)
+    
   }
 
   const operationClick = (type: string, record: any) => {
@@ -155,6 +161,7 @@ const ColumnList = () => {
   const [form] = Form.useForm();
 
   return <>
+    <AttributeModel modalVisible ={isShowAttributeModal} hiddenModal= {setIsShowAttributeModal} refresh= {setIsShowAttributeModal}  currentRecord={currentRecord}/>
     <RegularModal modalVisible ={isShowRegularModal} hiddenModal= {setIsShowRegularModal} refresh= {setIsShowRegularModal} />
     <Space style={{marginLeft: "25px", marginBottom:"10px"}}>
         <Button
