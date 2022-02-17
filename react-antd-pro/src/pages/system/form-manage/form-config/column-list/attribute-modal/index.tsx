@@ -1,7 +1,7 @@
 import { Modal, Form,Input, Button, message } from 'antd';
 import { useRef } from 'react';
 import { insertSystemForm } from '@/services/ant-design-pro/form'
-
+import  { ColumnType } from '@/services/ant-design-pro/typings.d.ts'
 // eslint-disable-next-line @typescript-eslint/ban-types
 const AttributeModel = (props: {modalVisible: boolean, hiddenModal: Function, refresh: Function, currentRecord: any}) => {
   const { modalVisible, hiddenModal, refresh, currentRecord } = props
@@ -13,15 +13,20 @@ const AttributeModel = (props: {modalVisible: boolean, hiddenModal: Function, re
     hiddenModal()
   }
 
-  const loadTypeComponent = () => {
-    const name = currentRecord.type
-    switch (name) {
-      case 'Course':
-        return <Course/>
-      default:
-        break;
-    }
+  const columnType = ColumnType[currentRecord.type]
+  for (const [key, value] of Object.entries(ColumnType)) {
+    console.log(key, value, 'key-value')
   }
+
+//   const loadTypeComponent = () => {
+//     const name = currentRecord.type
+//     switch (name) {
+//       case 'Course':
+//         return <Course/>
+//       default:
+//         break;
+//     }
+//   }
 
   const formRef = useRef(null);
   const [form] = Form.useForm();
@@ -44,7 +49,7 @@ const AttributeModel = (props: {modalVisible: boolean, hiddenModal: Function, re
     console.log(result, '保存结果')
   }
   return (
-    <Modal title={currentRecord.title+ '特殊属性的维护'} footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
+    <Modal title={currentRecord.title+ '-' + columnType} footer={null} visible={modalVisible} onOk={handleOk} onCancel={handleCancel}>
       <Form form={form} onFinish={(values: any)=> onSubmit(values) } ref={formRef}>
         <Form.Item
           label="表单名称"

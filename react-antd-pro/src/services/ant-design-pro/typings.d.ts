@@ -221,3 +221,16 @@ declare namespace FLOW {
     updated_at: string; // 修改时间
   };
 }
+
+export enum ColumnType {
+  static = '只读文本',
+  text= '文本框',
+  textarea= '文本域',
+  select= '下拉列表',
+  editor= '富文本',
+  number= '数值框',
+  image='上传图片',
+  video= '上传视频',
+  date= '日期',
+  daterange = '日期范围'
+}

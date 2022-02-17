@@ -5,6 +5,7 @@ import ProTable, { ActionType, EditableProTable, ProColumns, TableDropdown } fro
 import { Button, Form, message, Space } from 'antd';
 import React, { useRef, useState } from 'react';
 import { useModel } from 'umi';
+import { ColumnType } from '@/services/ant-design-pro/typings.d.ts'
 
 type DataSource = {
   id?: string,
@@ -54,7 +55,7 @@ const ColumnList = () => {
   }
 
   const updateOtherClick = (record: any) => {
-    console.log(record, 'record')
+    console.log(record, 'record--==update')
     setIsShowAttributeModal(true)
     setCurrentRecord(record)
   }
@@ -70,12 +71,23 @@ const ColumnList = () => {
       regularClick(record)
     }
     if(type === 'other') {
-      updateOtherClick(record)
+      if(record.type) {
+        updateOtherClick(record)
+      } else {
+        message.warn('请先选择字段类型')
+      }
     }
     if(type === 'remove') {
       removeClick(record.id)
     }
   }
+
+  const columnList = {}
+  for (const [key, value] of Object.entries(ColumnType)) {
+    console.log(key, value, 'key-value')
+    columnList[key] =value
+  }
+
   const columns: ProColumns<DataSource>[]= [
     {
       title: '字段名称',
@@ -88,18 +100,19 @@ const ColumnList = () => {
     {
       title: '字段类型',
       dataIndex: 'type',
-      valueEnum: {
-        static: '只读文本',
-        text: '文本框',
-        textarea: '文本域',
-        select: '下拉列表',
-        editor: '富文本',
-        number: '数值框',
-        image: '上传图片',
-        video: '上传视频',
-        date: '日期',
-        daterange: '日期范围'
-      },
+      valueEnum: columnList,
+      // valueEnum: {
+      //   static: '只读文本',
+      //   text: '文本框',
+      //   textarea: '文本域',
+      //   select: '下拉列表',
+      //   editor: '富文本',
+      //   number: '数值框',
+      //   image: '上传图片',
+      //   video: '上传视频',
+      //   date: '日期',
+      //   daterange: '日期范围'
+      // },
     },
     {
       title: '是否必填',
