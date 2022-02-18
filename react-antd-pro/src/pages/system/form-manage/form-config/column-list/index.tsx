@@ -15,7 +15,7 @@ type DataSource = {
   required?: boolean,
   placeholder?: string,
   displayOrder: number,
-
+  ifshow: string
 }
 
 const ColumnList = () => {
@@ -133,6 +133,10 @@ const ColumnList = () => {
           value: false
         }
       ]},
+    },
+    {
+      title: '显示条件',
+      dataIndex: 'ifshow'
     },
     {
       title: '占位符',

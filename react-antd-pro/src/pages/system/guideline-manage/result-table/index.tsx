@@ -14,7 +14,7 @@ type DataSourceType = {
   displayWidth?: number;
   canHide: boolean;
   align?: string;
-  displayFormat: string;
+  html?: string;
 };
 export default () => {
   // console.log(props, 'props')
