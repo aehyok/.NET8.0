@@ -19,7 +19,7 @@ type DataSource = {
 }
 
 const ColumnList = () => {
-  const { columnsList,setColumnsList} = useModel('formModels', (ret)=>({
+  const { columnsList,setColumnsList} = useModel('formModels', (ret: any)=>({
     setColumnsList: ret.changeColumns,
     columnsList: ret.columns
   }))
@@ -63,10 +63,10 @@ const ColumnList = () => {
   const regularClick = (record: any) => {
     console.log('regular')
     setIsShowRegularModal(true)
-    
   }
 
   const operationClick = (type: string, record: any) => {
+    setCurrentRecord(record)
     if(type === 'regular') {
       regularClick(record)
     }
@@ -178,8 +178,14 @@ const ColumnList = () => {
   const [form] = Form.useForm();
 
   return <>
-    <AttributeModel modalVisible ={isShowAttributeModal} hiddenModal= {setIsShowAttributeModal} refresh= {setIsShowAttributeModal}  currentRecord={currentRecord}/>
-    <RegularModal modalVisible ={isShowRegularModal} hiddenModal= {setIsShowRegularModal} refresh= {setIsShowRegularModal} />
+    {
+      !isShowAttributeModal? '' : 
+      <AttributeModel modalVisible ={isShowAttributeModal} hiddenModal= {setIsShowAttributeModal} refresh= {setIsShowAttributeModal}  currentRecord={currentRecord}/>
+    }
+    {
+      !isShowRegularModal? '' :
+      <RegularModal modalVisible ={isShowRegularModal} hiddenModal= {setIsShowRegularModal} refresh= {setIsShowRegularModal} currentRecord = {currentRecord} />
+    }
     <Space style={{marginLeft: "25px", marginBottom:"10px"}}>
         <Button
           type="primary"
@@ -201,8 +207,7 @@ const ColumnList = () => {
         recordCreatorProps={false}
         columns={columns}
         value={columnsList}
-        onChange={setColumnsList}
-        // onRow={(row) => { return console.log(row);}}
+        onChange={ setColumnsList }
         editable={{
           form,
           saveText: '暂存',
