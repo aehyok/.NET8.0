@@ -211,6 +211,24 @@
             <param name="systemForm"></param>
             <returns></returns>
         </member>
+        <member name="T:aehyok.Core.WebApi.Controllers.GeekController">
+            <summary>
+            极客
+            </summary>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetArticle">
+            <summary>
+            获取
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetArticleContent">
+            <summary>
+            获取指标定义
+            </summary>
+            <param name="guideLineId"></param>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.GuidelineController">
             <summary>
             指标管理
