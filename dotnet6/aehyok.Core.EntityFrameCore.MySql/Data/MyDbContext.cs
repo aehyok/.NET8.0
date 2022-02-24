@@ -71,7 +71,7 @@ namespace aehyok.Core.EntityFramework.MySql.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseMySql("server=139.186.205.7;port=3306;uid=aehyok;pwd=M9y2512!;database=metadata;allowzerodatetime=True;convertzerodatetime=True;charset=utf8mb4;sslmode=none", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.2.32-mariadb"));
+                optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseMySql("server=139.159.245.209;port=3306;uid=aehyok;pwd=M9y2512!;database=metadata;allowzerodatetime=True;convertzerodatetime=True;charset=utf8mb4;sslmode=none", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.2.32-mariadb"));
             }
         }
 

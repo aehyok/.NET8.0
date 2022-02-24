@@ -19,5 +19,7 @@ namespace aehyok.Core.EntityFramework.MySql.Models
         public string? ProductId { get; set; }
 
         public string? Title { get; set; }
+
+        public string? AuthorName { get; set; }
     }
 }

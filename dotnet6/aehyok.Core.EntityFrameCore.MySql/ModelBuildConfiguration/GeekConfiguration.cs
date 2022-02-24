@@ -31,9 +31,13 @@ namespace aehyok.Core.EntityFramework.MySql.ModelBuildConfiguration
                 entity.Property(e => e.ProductId)
                 .HasMaxLength(50)
                 .HasColumnName("productId");
+
                 entity.Property(e => e.Title)
                 .HasMaxLength(50)
                 .HasColumnName("title");
+                entity.Property(e => e.AuthorName)
+                .HasMaxLength(50)
+                .HasColumnName("authorName");
             });
 
             modelBuilder.Entity<GeekProduct>(entity =>
