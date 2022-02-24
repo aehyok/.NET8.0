@@ -22,8 +22,6 @@ namespace aehyok.Core.WebApi.Controllers
     /// <summary>
     /// 极客
     /// </summary>
-    [Route("api/[controller]/[action]")]
-    [ApiController]
     public class GeekController : BaseApiController
     {
         private readonly IRepository<GeekArticle> _geekArticleRepository;

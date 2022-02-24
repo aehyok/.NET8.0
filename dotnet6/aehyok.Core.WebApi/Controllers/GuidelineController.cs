@@ -14,8 +14,6 @@ namespace aehyok.Core.WebApi.Controllers
     /// <summary>
     /// 指标管理
     /// </summary>
-    [Route("api/[controller]/[action]")]
-    [ApiController]
     public class GuidelineController : BaseApiController
     {
         private readonly IMetaDataManager mdService;

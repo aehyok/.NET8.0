@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.WebApi.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : BaseApiController
     {
         private static readonly string[] Summaries = new[]
         {

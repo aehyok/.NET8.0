@@ -14,8 +14,6 @@ namespace aehyok.Core.WebApi.Controllers
     /// <summary>
     /// 字典管理
     /// </summary>
-    [Route("api/[controller]/[action]")]
-    [ApiController]
     public class DictionaryController : BaseApiController
     {
         private readonly IRepository<SystemDictionaryType> _dictionaryTypeRepository;

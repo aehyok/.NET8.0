@@ -1,4 +1,5 @@
-﻿using aehyok.Core.EntityFramework.MySql.Data;
+﻿using aehyok.Core.EntityFramework.MySql;
+using aehyok.Core.EntityFramework.MySql.Data;
 using aehyok.Core.EntityFramework.MySql.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,10 +14,21 @@ namespace aehyok.Core.WebApi.Controllers
     /// <summary>
     /// 用户管理
     /// </summary>
-    [Route("api/[controller]/[action]")]
-    [ApiController]
     public class UserController : BaseApiController
     {
+        //private readonly IFlowRepository _flowRepository;
+        private readonly IRepository<BaseUser> _baseRepository;
+
+        public UserController(
+            IRepository<BaseUser> baseRepository
+            )
+        {
+            this._baseRepository = baseRepository;
+        }
+        public UserController()
+        {
+
+        }
         /// <summary>
         /// 获取用户列表
         /// </summary>
@@ -29,7 +41,7 @@ namespace aehyok.Core.WebApi.Controllers
             {
                 var context = new MyDbContext();
                 int pagesize = 10; 
-                var list = context.BaseUsers.Where(item=> item.IsDeleted==false).OrderByDescending(item => item.CreatedAt).Skip(pagesize * pageIndex).Take(pagesize).ToList();
+                var list = this._baseRepository.GetQueryable().Where(item => item.IsDeleted == false).OrderByDescending(item => item.CreatedAt).Skip(pagesize * pageIndex).Take(pagesize).ToList();
                 this._logger.Info(list.Count);
                 return list;
             }
@@ -46,12 +58,12 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public async Task<BaseUser> GetUser(int id)
+        public async Task<BaseUser> GetUser(string id)
         {
             try
             {
                 var context = new MyDbContext();
-                var user = await context.BaseUsers.FindAsync(id);
+                var user = await this._baseRepository.GetByKey(id);
                 return user;
             }
             catch (Exception error)
@@ -72,7 +84,7 @@ namespace aehyok.Core.WebApi.Controllers
             try
             {
                 this._logger.Info(user.Id);
-                if(user!=null  && user.Id > 0)
+                if(user!=null  && user.Id !=null)
                 {
                     var context = new MyDbContext();
                     user.CreatedAt = DateTime.Now;
@@ -89,7 +101,7 @@ namespace aehyok.Core.WebApi.Controllers
                     user.IsDeleted = false;
                     user.CreatedAt= DateTime.Now;
                     user.UpdatedAt = DateTime.Now;
-                    var result = await context.BaseUsers.AddAsync(user);
+                    var result = await this._baseRepository.InsertAsync(user);
                     await context.SaveChangesAsync();
                     return true;
                 }
@@ -109,10 +121,10 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<bool> DeleteUser(int id)
+        public async Task<bool> DeleteUser(string id)
         {
             var context = new MyDbContext();
-            var user = await context.BaseUsers.FindAsync(id);
+            var user = await this._baseRepository.GetByKey(id);
             user.IsDeleted = true;
             context.Update(user);
             context.SaveChanges();

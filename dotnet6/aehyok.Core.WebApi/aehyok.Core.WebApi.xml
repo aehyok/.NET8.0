@@ -334,7 +334,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.UserController.GetUser(System.Int32)">
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.GetUser(System.String)">
             <summary>
             获取用户详情
             </summary>
@@ -346,7 +346,7 @@
              </summary>
              <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.UserController.DeleteUser(System.Int32)">
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.DeleteUser(System.String)">
              <summary>
             删除用户
              </summary>

@@ -11,8 +11,6 @@ namespace aehyok.Core.WebApi.Controllers
     /// <summary>
     /// 菜单管理
     /// </summary>
-    [Route("api/[controller]/[action]")]
-    [ApiController]
     public class MenuController : BaseApiController
     {
         private readonly IRepository<SystemMenu> _menuRepository;

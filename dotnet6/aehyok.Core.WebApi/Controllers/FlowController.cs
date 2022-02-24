@@ -15,8 +15,6 @@ namespace aehyok.Core.WebApi.Controllers
     /// <summary>
     /// 流程引擎定义表
     /// </summary>
-    [Route("api/[controller]/[action]")]
-    [ApiController]
     public class FlowController : BaseApiController
     {
         //private readonly IFlowRepository _flowRepository;

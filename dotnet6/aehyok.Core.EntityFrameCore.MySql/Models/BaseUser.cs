@@ -1,4 +1,5 @@
-﻿using System;
+﻿using aehyok.Base;
+using System;
 using System.Collections.Generic;
 
 namespace aehyok.Core.EntityFramework.MySql.Models
@@ -6,9 +7,9 @@ namespace aehyok.Core.EntityFramework.MySql.Models
     /// <summary>
     /// 用户
     /// </summary>
-    public partial class BaseUser
+    public partial class BaseUser: EntityBase
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         /// <summary>
         /// 用户账号，兼容微信id
         /// </summary>

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using aehyok.Core.EntityFramework.MySql.Models;
 using aehyok.Core.EntityFramework.MySql.ModelBuildConfiguration;
+using Microsoft.Extensions.Logging;
 
 namespace aehyok.Core.EntityFramework.MySql.Data
 {
@@ -21,7 +22,7 @@ namespace aehyok.Core.EntityFramework.MySql.Data
         //public virtual DbSet<GeekArticle> GeekArticles { get; set; } = null!;
         //public virtual DbSet<GeekProduct> GeekProducts { get; set; } = null!;
 
-        public virtual DbSet<BaseUser> BaseUsers { get; set; } = null!;
+        //public virtual DbSet<BaseUser> BaseUsers { get; set; } = null!;
         //public virtual DbSet<BasicUser> BasicUsers { get; set; } = null!;
         ////public virtual DbSet<SystemMenu> SystemMenus { get; set; } = null!;
         ////public virtual DbSet<FlowEntityState> FlowEntityStates { get; set; } = null!;
@@ -64,11 +65,13 @@ namespace aehyok.Core.EntityFramework.MySql.Data
         //public virtual DbSet<XtUserlog> XtUserlogs { get; set; } = null!;
         //public virtual DbSet<XtUsertoken> XtUsertokens { get; set; } = null!;
 
+        public static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder => { builder.AddConsole(); });
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseMySql("server=139.186.205.7;port=3306;uid=aehyok;pwd=M9y2512!;database=metadata;allowzerodatetime=True;convertzerodatetime=True;charset=utf8mb4;sslmode=none", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.2.32-mariadb"));
+                optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseMySql("server=139.186.205.7;port=3306;uid=aehyok;pwd=M9y2512!;database=metadata;allowzerodatetime=True;convertzerodatetime=True;charset=utf8mb4;sslmode=none", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.2.32-mariadb"));
             }
         }
 
@@ -89,7 +92,7 @@ namespace aehyok.Core.EntityFramework.MySql.Data
                     .IsUnique();
 
                 entity.Property(e => e.Id)
-                    .HasColumnType("int(10)")
+                    .HasMaxLength(50)
                     .HasColumnName("id");
 
                 entity.Property(e => e.Account)

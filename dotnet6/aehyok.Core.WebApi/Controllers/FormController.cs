@@ -13,7 +13,6 @@ namespace aehyok.Core.WebApi.Controllers
     /// <summary>
     /// Form表单通用保存
     /// </summary>
-    [Route("api/[controller]/[action]")]
     public class FormController : BaseApiController
     {
         private readonly IRepository<SystemForm> _formRepository;
