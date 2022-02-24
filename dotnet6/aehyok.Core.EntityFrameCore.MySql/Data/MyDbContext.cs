@@ -18,48 +18,51 @@ namespace aehyok.Core.EntityFramework.MySql.Data
         {
         }
 
+        //public virtual DbSet<GeekArticle> GeekArticles { get; set; } = null!;
+        //public virtual DbSet<GeekProduct> GeekProducts { get; set; } = null!;
+
         public virtual DbSet<BaseUser> BaseUsers { get; set; } = null!;
-        public virtual DbSet<BasicUser> BasicUsers { get; set; } = null!;
-        //public virtual DbSet<SystemMenu> SystemMenus { get; set; } = null!;
-        //public virtual DbSet<FlowEntityState> FlowEntityStates { get; set; } = null!;
-        //public virtual DbSet<FlowEntityType> FlowEntityTypes { get; set; } = null!;
-        //public virtual DbSet<FlowStateTransition> FlowStateTransitions { get; set; } = null!;
-        public virtual DbSet<MdComputecolumn> MdComputecolumns { get; set; } = null!;
-        public virtual DbSet<MdFunction> MdFunctions { get; set; } = null!;
-        public virtual DbSet<MdInputgroup> MdInputgroups { get; set; } = null!;
-        public virtual DbSet<MdInputtable> MdInputtables { get; set; } = null!;
-        public virtual DbSet<MdInputview> MdInputviews { get; set; } = null!;
-        public virtual DbSet<MdInputviewchild> MdInputviewchildren { get; set; } = null!;
-        public virtual DbSet<MdInputviewcolumn> MdInputviewcolumns { get; set; } = null!;
-        public virtual DbSet<MdNode> MdNodes { get; set; } = null!;
-        public virtual DbSet<MdPageset> MdPagesets { get; set; } = null!;
-        public virtual DbSet<MdPagesetgroup> MdPagesetgroups { get; set; } = null!;
-        public virtual DbSet<MdParameter> MdParameters { get; set; } = null!;
-        public virtual DbSet<MdQuerylog> MdQuerylogs { get; set; } = null!;
-        public virtual DbSet<MdReftablelist> MdReftablelists { get; set; } = null!;
-        public virtual DbSet<MdSavequery> MdSavequeries { get; set; } = null!;
-        public virtual DbSet<MdTable> MdTables { get; set; } = null!;
-        public virtual DbSet<MdTable2view> MdTable2views { get; set; } = null!;
-        public virtual DbSet<MdTablecolumn> MdTablecolumns { get; set; } = null!;
-        public virtual DbSet<MdTargetanalysis> MdTargetanalyses { get; set; } = null!;
-        public virtual DbSet<MdTbnamespace> MdTbnamespaces { get; set; } = null!;
-        public virtual DbSet<MdView> MdViews { get; set; } = null!;
-        public virtual DbSet<MdView2app> MdView2apps { get; set; } = null!;
-        public virtual DbSet<MdView2gl> MdView2gls { get; set; } = null!;
-        public virtual DbSet<MdView2view> MdView2views { get; set; } = null!;
-        public virtual DbSet<MdView2viewgroup> MdView2viewgroups { get; set; } = null!;
-        public virtual DbSet<MdViewExright> MdViewExrights { get; set; } = null!;
-        public virtual DbSet<MdViewgroup> MdViewgroups { get; set; } = null!;
-        public virtual DbSet<MdViewgroupitem> MdViewgroupitems { get; set; } = null!;
-        public virtual DbSet<MdViewtable> MdViewtables { get; set; } = null!;
-        public virtual DbSet<MdViewtablecolumn> MdViewtablecolumns { get; set; } = null!;
-        public virtual DbSet<MdZbdisplayitem> MdZbdisplayitems { get; set; } = null!;
-        public virtual DbSet<TjZbztmcdyb> TjZbztmcdybs { get; set; } = null!;
-        public virtual DbSet<TjZdyzbdyb> TjZdyzbdybs { get; set; } = null!;
-        public virtual DbSet<TjZdyzbdybC> TjZdyzbdybCs { get; set; } = null!;
-        public virtual DbSet<XtSystemlog> XtSystemlogs { get; set; } = null!;
-        public virtual DbSet<XtUserlog> XtUserlogs { get; set; } = null!;
-        public virtual DbSet<XtUsertoken> XtUsertokens { get; set; } = null!;
+        //public virtual DbSet<BasicUser> BasicUsers { get; set; } = null!;
+        ////public virtual DbSet<SystemMenu> SystemMenus { get; set; } = null!;
+        ////public virtual DbSet<FlowEntityState> FlowEntityStates { get; set; } = null!;
+        ////public virtual DbSet<FlowEntityType> FlowEntityTypes { get; set; } = null!;
+        ////public virtual DbSet<FlowStateTransition> FlowStateTransitions { get; set; } = null!;
+        //public virtual DbSet<MdComputecolumn> MdComputecolumns { get; set; } = null!;
+        //public virtual DbSet<MdFunction> MdFunctions { get; set; } = null!;
+        //public virtual DbSet<MdInputgroup> MdInputgroups { get; set; } = null!;
+        //public virtual DbSet<MdInputtable> MdInputtables { get; set; } = null!;
+        //public virtual DbSet<MdInputview> MdInputviews { get; set; } = null!;
+        //public virtual DbSet<MdInputviewchild> MdInputviewchildren { get; set; } = null!;
+        //public virtual DbSet<MdInputviewcolumn> MdInputviewcolumns { get; set; } = null!;
+        //public virtual DbSet<MdNode> MdNodes { get; set; } = null!;
+        //public virtual DbSet<MdPageset> MdPagesets { get; set; } = null!;
+        //public virtual DbSet<MdPagesetgroup> MdPagesetgroups { get; set; } = null!;
+        //public virtual DbSet<MdParameter> MdParameters { get; set; } = null!;
+        //public virtual DbSet<MdQuerylog> MdQuerylogs { get; set; } = null!;
+        //public virtual DbSet<MdReftablelist> MdReftablelists { get; set; } = null!;
+        //public virtual DbSet<MdSavequery> MdSavequeries { get; set; } = null!;
+        //public virtual DbSet<MdTable> MdTables { get; set; } = null!;
+        //public virtual DbSet<MdTable2view> MdTable2views { get; set; } = null!;
+        //public virtual DbSet<MdTablecolumn> MdTablecolumns { get; set; } = null!;
+        //public virtual DbSet<MdTargetanalysis> MdTargetanalyses { get; set; } = null!;
+        //public virtual DbSet<MdTbnamespace> MdTbnamespaces { get; set; } = null!;
+        //public virtual DbSet<MdView> MdViews { get; set; } = null!;
+        //public virtual DbSet<MdView2app> MdView2apps { get; set; } = null!;
+        //public virtual DbSet<MdView2gl> MdView2gls { get; set; } = null!;
+        //public virtual DbSet<MdView2view> MdView2views { get; set; } = null!;
+        //public virtual DbSet<MdView2viewgroup> MdView2viewgroups { get; set; } = null!;
+        //public virtual DbSet<MdViewExright> MdViewExrights { get; set; } = null!;
+        //public virtual DbSet<MdViewgroup> MdViewgroups { get; set; } = null!;
+        //public virtual DbSet<MdViewgroupitem> MdViewgroupitems { get; set; } = null!;
+        //public virtual DbSet<MdViewtable> MdViewtables { get; set; } = null!;
+        //public virtual DbSet<MdViewtablecolumn> MdViewtablecolumns { get; set; } = null!;
+        //public virtual DbSet<MdZbdisplayitem> MdZbdisplayitems { get; set; } = null!;
+        //public virtual DbSet<TjZbztmcdyb> TjZbztmcdybs { get; set; } = null!;
+        //public virtual DbSet<TjZdyzbdyb> TjZdyzbdybs { get; set; } = null!;
+        //public virtual DbSet<TjZdyzbdybC> TjZdyzbdybCs { get; set; } = null!;
+        //public virtual DbSet<XtSystemlog> XtSystemlogs { get; set; } = null!;
+        //public virtual DbSet<XtUserlog> XtUserlogs { get; set; } = null!;
+        //public virtual DbSet<XtUsertoken> XtUsertokens { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -371,6 +374,7 @@ namespace aehyok.Core.EntityFramework.MySql.Data
 
             modelBuilder.FlowInit();
             modelBuilder.FormInit();
+            modelBuilder.GeekInit();
 
             modelBuilder.Entity<SystemMenu>(entity =>
             {

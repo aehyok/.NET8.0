@@ -216,17 +216,34 @@
             极客
             </summary>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetArticle">
+        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetProductList">
             <summary>
-            获取
+            获取课程列表
             </summary>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetArticleContent">
+        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetProduct(System.String)">
             <summary>
-            获取指标定义
+            获取课程详情
             </summary>
-            <param name="guideLineId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetArticle(System.String)">
+            <summary>
+            获取文章详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetArticleList(System.String)">
+            <summary>
+            获取文章列表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.SetArticle">
+            <summary>
+            获取
+            </summary>
             <returns></returns>
         </member>
         <member name="T:aehyok.Core.WebApi.Controllers.GuidelineController">

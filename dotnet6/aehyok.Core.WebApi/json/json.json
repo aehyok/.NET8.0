@@ -1,0 +1,1763 @@
+﻿{
+  "list": [
+    {
+      "video_id": "",
+      "article_sharetitle": "如何学习谷歌高性能 JavaScript 引擎V8？",
+      "audio_size": 9071362,
+      "article_cover": "https://static001.geekbang.org/resource/image/01/fd/010a4d14444c1be2c69fb3bd750305fd.jpg",
+      "subtitles": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/ef/b1/ef76d1d1048d55598e0b0b8b761891b1/ld/ld.m3u8",
+      "chapter_id": "1294",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "is_finished": false,
+      "audio_time": "00:09:26",
+      "rate_percent": 87,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 1645492560,
+          "max_rate": 31,
+          "cur_rate": 31,
+          "is_finished": false,
+          "total_rate": 36,
+          "learned_seconds": 175
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 11584349080,
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/ef/b1/ef76d1d1048d55598e0b0b8b761891b1.mp3",
+      "id": 211673,
+      "had_viewed": true,
+      "article_title": "开篇词 | 如何学习谷歌高性能 JavaScript 引擎V8？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "V8之所以拥有如此庞大的生态圈，也和它许多革命性的设计是分不开的。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-开篇",
+      "audio_time_arr": {
+        "m": "09",
+        "s": "26",
+        "h": "00"
+      },
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "include_audio": true,
+      "author_name": "李兵",
+      "article_could_preview": true,
+      "audio_md5": "ef76d1d1048d55598e0b0b8b761891b1",
+      "article_ctime": 1584349080,
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "V8是如何执行一段JavaScript代码的？",
+      "audio_size": 16861774,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/1f/d5/1fa9a6c625f9bc7a440b7ddd655338d5/ld/ld.m3u8",
+      "chapter_id": "1294",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:17:33",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 11584349140,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/1f/d5/1fa9a6c625f9bc7a440b7ddd655338d5.mp3",
+      "id": 211682,
+      "had_viewed": false,
+      "article_title": "01 | V8是如何执行一段JavaScript代码的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "V8，目前用在Chrome浏览器和Node.js中，其核心功能是执行易于人类理解的JavaScript代码。",
+      "column_id": 296,
+      "audio_title": "3.25 修改 【定】改介绍李兵-01_01",
+      "audio_time_arr": {
+        "m": "17",
+        "s": "33",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "1fa9a6c625f9bc7a440b7ddd655338d5",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1584349140,
+      "article_cover": "https://static001.geekbang.org/resource/image/e8/24/e87f9381b7ce9ed2f4caca62860d3924.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "函数即对象：一篇文章彻底搞懂JavaScript的函数特点",
+      "audio_size": 13219716,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/19/6f/199ab3bc83790a513f0e8a57359b5f6f/ld/ld.m3u8",
+      "chapter_id": "1295",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:13:45",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 21584349260,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/19/6f/199ab3bc83790a513f0e8a57359b5f6f.mp3",
+      "id": 212123,
+      "had_viewed": false,
+      "article_title": "02 | 函数即对象：一篇文章彻底搞懂JavaScript的函数特点",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "JavaScript中的函数非常灵活，既可以被调用，还可以作为变量、参数和返回值。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-02",
+      "audio_time_arr": {
+        "m": "13",
+        "s": "45",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "199ab3bc83790a513f0e8a57359b5f6f",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1584349260,
+      "article_cover": "https://static001.geekbang.org/resource/image/5c/23/5cbfce3af3211c4855e1f354efb9bb23.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "快属性和慢属性：V8是怎样提升对象属性访问速度的？",
+      "audio_size": 12842440,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/fb/bb/fb3e7b801528c255e041f54249c75cbb/ld/ld.m3u8",
+      "chapter_id": "1295",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:13:22",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 21584720000,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/fb/bb/fb3e7b801528c255e041f54249c75cbb.mp3",
+      "id": 213250,
+      "had_viewed": false,
+      "article_title": "03 | 快属性和慢属性：V8是怎样提升对象属性访问速度的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "为了提升查找效率，V8在对象中添加了两个隐藏属性，排序属性和常规属性。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-03",
+      "audio_time_arr": {
+        "m": "13",
+        "s": "22",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "fb3e7b801528c255e041f54249c75cbb",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1584720000,
+      "article_cover": "https://static001.geekbang.org/resource/image/7b/32/7b650fcb3ba9f3e7e2a42040ffb68d32.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "涉及大量概念，函数表达式到底该怎么学？",
+      "audio_size": 14978260,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/c6/18/c6fc2973e24ba918316f707b783c4e18/ld/ld.m3u8",
+      "chapter_id": "1295",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:15:35",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 21584979200,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/c6/18/c6fc2973e24ba918316f707b783c4e18.mp3",
+      "id": 215248,
+      "had_viewed": false,
+      "article_title": "04 | 函数表达式：涉及大量概念，函数表达式到底该怎么学？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "函数声明和变量声明类似，V8在编译阶段，都会对其执行变量提升的操作，将它们提升到作用域中。",
+      "column_id": 296,
+      "audio_title": "3.20 李兵-04 (1)_L",
+      "audio_time_arr": {
+        "m": "15",
+        "s": "35",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "c6fc2973e24ba918316f707b783c4e18",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1584979200,
+      "article_cover": "https://static001.geekbang.org/resource/image/4e/bb/4ea1e71a6bfa1cf99505eb29b72bebbb.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "原型链：V8是如何实现对象继承的？",
+      "audio_size": 12398344,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/26/85/268824a5ccb33a5e0d1a27c31369e485/ld/ld.m3u8",
+      "chapter_id": "1295",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:17:12",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 21585152000,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/26/85/268824a5ccb33a5e0d1a27c31369e485.mp3",
+      "id": 215425,
+      "had_viewed": false,
+      "article_title": "05｜原型链：V8是如何实现对象继承的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "JavaScript仅仅在对象中引入了一个原型的属性，就实现了语言的继承机制，省去了很多基于类时的繁文缛节，简洁而优美。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-05",
+      "audio_time_arr": {
+        "m": "17",
+        "s": "12",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "268824a5ccb33a5e0d1a27c31369e485",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1585152000,
+      "article_cover": "https://static001.geekbang.org/resource/image/f4/51/f463f7ded9e00d4c5e9a82849e84fc51.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "作用域链：V8是如何查找变量的？",
+      "audio_size": 8722024,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/49/24/4928edb48a30bde6ab96cab327763824/ld/ld.m3u8",
+      "chapter_id": "1295",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:12:06",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 21585324800,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/49/24/4928edb48a30bde6ab96cab327763824.mp3",
+      "id": 217027,
+      "had_viewed": false,
+      "article_title": "06｜作用域链：V8是如何查找变量的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "JavaScript所采用的作用域机制就是词法作用域，作用域链的路径就是按照词法作用域来实现的。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-06",
+      "audio_time_arr": {
+        "m": "12",
+        "s": "06",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "4928edb48a30bde6ab96cab327763824",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1585324800,
+      "article_cover": "https://static001.geekbang.org/resource/image/e6/6a/e6b6f4b7c99f43f004324ef8613f736a.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "类型转换：V8是怎么实现1+“2”的？",
+      "audio_size": 10896240,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/90/5c/90577bbf77f238c7a7ac2a56bb048a5c/ld/ld.m3u8",
+      "chapter_id": "1295",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:11:20",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 21585584000,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/90/5c/90577bbf77f238c7a7ac2a56bb048a5c.mp3",
+      "id": 218499,
+      "had_viewed": false,
+      "article_title": "07｜类型转换：V8是怎么实现1+“2”的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "在JavaScript中，类型系统是依据ECMAScript标准来实现的，V8会严格根据ECMAScript标准来执行。",
+      "column_id": 296,
+      "audio_title": "4.7 修改  李兵 07-yes_01_01",
+      "audio_time_arr": {
+        "m": "11",
+        "s": "20",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "90577bbf77f238c7a7ac2a56bb048a5c",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1585584000,
+      "article_cover": "https://static001.geekbang.org/resource/image/53/57/533577981e5110f6e2d7dcace5c9e157.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "如何构建和使用V8的调试工具d8？",
+      "audio_size": 19088688,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/b3/22/b37372984fef17e8f13b8313b43eff22/ld/ld.m3u8",
+      "chapter_id": "1295",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:19:52",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 21585793040,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/b3/22/b37372984fef17e8f13b8313b43eff22.mp3",
+      "id": 219418,
+      "had_viewed": false,
+      "article_title": "08｜答疑：如何构建和使用V8的调试工具d8？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "d8是非常有用的调试工具，帮助我们发现代码是否可以被V8高效地执行。",
+      "column_id": 296,
+      "audio_title": "4.2 修改2 李兵-08_01_01",
+      "audio_time_arr": {
+        "m": "19",
+        "s": "52",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "b37372984fef17e8f13b8313b43eff22",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1585793040,
+      "article_cover": "https://static001.geekbang.org/resource/image/ea/dd/eac11b2dd0557af8ce03d76dd22dd2dd.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "运行时环境：运行JavaScript代码的基石",
+      "audio_size": 14296264,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/15/29/15eb6d774122be87b49b2f6ab7e1af29/ld/ld.m3u8",
+      "chapter_id": "1321",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:14:53",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 31585929600,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/15/29/15eb6d774122be87b49b2f6ab7e1af29.mp3",
+      "id": 219066,
+      "had_viewed": false,
+      "article_title": "09 | 运行时环境：运行JavaScript代码的基石",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "在执行JavaScript代码之前，V8就已经准备好了代码的运行时环境。",
+      "column_id": 296,
+      "audio_title": "3.31 修改  李兵-09_L_01",
+      "audio_time_arr": {
+        "m": "14",
+        "s": "53",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "15eb6d774122be87b49b2f6ab7e1af29",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1585929600,
+      "article_cover": "https://static001.geekbang.org/resource/image/bf/74/bf63edced753890e6112758f807ee374.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "二进制机器码究竟是如何被CPU执行的？",
+      "audio_size": 17531656,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/cc/5c/cce2322ca3e0f357f0e66c3a5fb05f5c/ld/ld.m3u8",
+      "chapter_id": "1321",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:18:15",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 31586188800,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/cc/5c/cce2322ca3e0f357f0e66c3a5fb05f5c.mp3",
+      "id": 221211,
+      "had_viewed": false,
+      "article_title": "10 | 机器代码：二进制机器码究竟是如何被CPU执行的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "CPU执行机器代码的逻辑非常简单，首先编译之后的二进制代码被加载进内存，然后CPU就按照指令的顺序，一行一行地执行。",
+      "column_id": 296,
+      "audio_title": "4.3 李兵-10_L",
+      "audio_time_arr": {
+        "m": "18",
+        "s": "15",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "cce2322ca3e0f357f0e66c3a5fb05f5c",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1586188800,
+      "article_cover": "https://static001.geekbang.org/resource/image/58/16/581abbf2569e59c7861a7e479bcaec16.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "堆和栈：函数调用是如何影响到内存布局的？",
+      "audio_size": 16740232,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/e7/f0/e7d1a7bf75dc5d4fed322581b806c2f0/ld/ld.m3u8",
+      "chapter_id": "1321",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:17:25",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 31586361600,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/e7/f0/e7d1a7bf75dc5d4fed322581b806c2f0.mp3",
+      "id": 221928,
+      "had_viewed": false,
+      "article_title": "11 | 堆和栈：函数调用是如何影响到内存布局的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "我们使用栈这种数据结构来管理函数的调用过程，把管理函数调用过程的栈结构称之为调用栈。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-11",
+      "audio_time_arr": {
+        "m": "17",
+        "s": "25",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "e7d1a7bf75dc5d4fed322581b806c2f0",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1586361600,
+      "article_cover": "https://static001.geekbang.org/resource/image/c7/0b/c7712898a93f09e056ed70d1878b4e0b.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "延迟解析：V8是如何实现闭包的？",
+      "audio_size": 13314288,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/65/b1/654fab4d8962acd19f11d4bc98f906b1/ld/ld.m3u8",
+      "chapter_id": "1321",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:13:51",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 31586534400,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/65/b1/654fab4d8962acd19f11d4bc98f906b1.mp3",
+      "id": 223168,
+      "had_viewed": false,
+      "article_title": "12 | 延迟解析：V8是如何实现闭包的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "利用惰性解析可以加速JavaScript代码的启动速度，如果要将所有的代码一次性解析编译完成，会大大增加用户的等待时间。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-12",
+      "audio_time_arr": {
+        "m": "13",
+        "s": "51",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "654fab4d8962acd19f11d4bc98f906b1",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1586534400,
+      "article_cover": "https://static001.geekbang.org/resource/image/9c/08/9cc9020ef2d03553ed53a33bb6456b08.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "字节码（一）：V8为什么又重新引入字节码？",
+      "audio_size": 12632304,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/3f/d6/3f438efc1ee81b61819805366e7e64d6/ld/ld.m3u8",
+      "chapter_id": "1321",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:13:09",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 31586793600,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/3f/d6/3f438efc1ee81b61819805366e7e64d6.mp3",
+      "id": 224206,
+      "had_viewed": false,
+      "article_title": "13 | 字节码（一）：V8为什么又重新引入字节码？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "在早期，V8团队采取了非常激进的策略，直接将JavaScript代码编译成机器代码。",
+      "column_id": 296,
+      "audio_title": "4.13 修改李兵-13_01",
+      "audio_time_arr": {
+        "m": "13",
+        "s": "09",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "3f438efc1ee81b61819805366e7e64d6",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1586793600,
+      "article_cover": "https://static001.geekbang.org/resource/image/ce/da/ce7cc9aeba0c1637de1a33db407607da.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "字节码（二）：解释器是如何解释执行字节码的？",
+      "audio_size": 15404016,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/01/78/018ece453e505462a059b8dfaf8fd278/ld/ld.m3u8",
+      "chapter_id": "1321",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:16:02",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 31586966400,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/01/78/018ece453e505462a059b8dfaf8fd278.mp3",
+      "id": 224908,
+      "had_viewed": false,
+      "article_title": "14｜字节码（二）：解释器是如何解释执行字节码的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "AST和作用域信息被输入到Ignition 解释器中，并将其转化为字节码，再由Ignition解释器来解释执行。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-14",
+      "audio_time_arr": {
+        "m": "16",
+        "s": "02",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "018ece453e505462a059b8dfaf8fd278",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1586966400,
+      "article_cover": "https://static001.geekbang.org/resource/image/da/4a/da06e684d16417dc54f9659271e0b84a.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "隐藏类：如何在内存中快速查找对象属性？",
+      "audio_size": 16989732,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/2f/49/2f8a8e9e76f408a7a87b75bcd514b749/ld/ld.m3u8",
+      "chapter_id": "1321",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:17:41",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 31587139200,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/2f/49/2f8a8e9e76f408a7a87b75bcd514b749.mp3",
+      "id": 226417,
+      "had_viewed": false,
+      "article_title": "15 | 隐藏类：如何在内存中快速查找对象属性？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "为了加速查找对象属性的速度，V8在背后为每个对象提供了一个隐藏类，隐藏类描述了该对象的具体形状。",
+      "column_id": 296,
+      "audio_title": "4.17 李兵-15_01",
+      "audio_time_arr": {
+        "m": "17",
+        "s": "41",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "2f8a8e9e76f408a7a87b75bcd514b749",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1587139200,
+      "article_cover": "https://static001.geekbang.org/resource/image/fe/d2/fe45dfd0e3c2dbe1c064f17be82e5dd2.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "V8是怎么通过内联缓存来提升函数执行效率的？",
+      "audio_size": 14906284,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/8c/a0/8c152cd55281ca40e5b31fa62aa8fda0/ld/ld.m3u8",
+      "chapter_id": "1321",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:15:31",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 31587398400,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/8c/a0/8c152cd55281ca40e5b31fa62aa8fda0.mp3",
+      "id": 226984,
+      "had_viewed": false,
+      "article_title": "16 | 答疑： V8是怎么通过内联缓存来提升函数执行效率的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "内联缓存会监听每个函数的执行过程，并在一些关键的地方埋下监听点。",
+      "column_id": 296,
+      "audio_title": "新 李兵-16",
+      "audio_time_arr": {
+        "m": "15",
+        "s": "31",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "8c152cd55281ca40e5b31fa62aa8fda0",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1587398400,
+      "article_cover": "https://static001.geekbang.org/resource/image/e9/a2/e94c0801dfa29e38ce1a7fe41d0c3ba2.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "消息队列：V8是怎么实现回调函数的？",
+      "audio_size": 10988280,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/f5/b1/f50b4a477b5853ab436f287c0004b5b1/ld/ld.m3u8",
+      "chapter_id": "1359",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:11:26",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 41587571200,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/f5/b1/f50b4a477b5853ab436f287c0004b5b1.mp3",
+      "id": 227926,
+      "had_viewed": false,
+      "article_title": "17 | 消息队列：V8是怎么实现回调函数的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "回调函数有两种类型：同步回调和异步回调，同步回调函数是在执行函数内部被执行的，而异步回调函数是在执行函数外部被执行的。",
+      "column_id": 296,
+      "audio_title": "4.22 修改 李兵17-0_L",
+      "audio_time_arr": {
+        "m": "11",
+        "s": "26",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "f50b4a477b5853ab436f287c0004b5b1",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1587571200,
+      "article_cover": "https://static001.geekbang.org/resource/image/81/cf/81d39135c8bb5bd208b7505039f622cf.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "异步编程（一）：V8是如何实现微任务的？",
+      "audio_size": 15790512,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/c0/f0/c02adb1ab8eaf240c9ba53d0ee3ac0f0/ld/ld.m3u8",
+      "chapter_id": "1359",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:16:26",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 41587744000,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/c0/f0/c02adb1ab8eaf240c9ba53d0ee3ac0f0.mp3",
+      "id": 229532,
+      "had_viewed": false,
+      "article_title": "18 | 异步编程（一）：V8是如何实现微任务的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "微任务其实是一个需要异步执行的函数，执行时机是在主函数执行结束之后、当前宏任务结束之前。",
+      "column_id": 296,
+      "audio_title": "4.24 修改 李兵-18_01",
+      "audio_time_arr": {
+        "m": "16",
+        "s": "26",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "c02adb1ab8eaf240c9ba53d0ee3ac0f0",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1587744000,
+      "article_cover": "https://static001.geekbang.org/resource/image/30/79/302202f0e63bf5a30c94557d21f6e879.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "异步编程（二）：V8是如何实现async/await的？",
+      "audio_size": 14478960,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/5e/06/5e6dd6ed7516d84fee3f623c993b4a06/ld/ld.m3u8",
+      "chapter_id": "1359",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:15:04",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 41588003200,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/5e/06/5e6dd6ed7516d84fee3f623c993b4a06.mp3",
+      "id": 230117,
+      "had_viewed": false,
+      "article_title": "19｜异步编程（二）：V8是如何实现async/await的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "使用async/await，可以实现以同步的方式编写异步代码这一目标。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-19",
+      "audio_time_arr": {
+        "m": "15",
+        "s": "04",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "5e6dd6ed7516d84fee3f623c993b4a06",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1588003200,
+      "article_cover": "https://static001.geekbang.org/resource/image/68/a7/688f8c8894d3ff3a1fcb1dc8321779a7.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "垃圾回收（一）：V8的两个垃圾回收器是如何工作的？",
+      "audio_size": 11207280,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/ac/39/ac072bce8fe9e80e256d4046121a9039/ld/ld.m3u8",
+      "chapter_id": "1359",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:11:39",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 41588176000,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/ac/39/ac072bce8fe9e80e256d4046121a9039.mp3",
+      "id": 230845,
+      "had_viewed": false,
+      "article_title": "20 | 垃圾回收（一）：V8的两个垃圾回收器是如何工作的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "V8为了更高效地回收垃圾，引入了两个垃圾回收器，它们分别针对不同的场景。",
+      "column_id": 296,
+      "audio_title": "【定】李兵-20",
+      "audio_time_arr": {
+        "m": "11",
+        "s": "39",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "ac072bce8fe9e80e256d4046121a9039",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1588176000,
+      "article_cover": "https://static001.geekbang.org/resource/image/d0/06/d0f99c7dd7c328debd7cdf9ec6270b06.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "垃圾回收（二）：V8是如何优化垃圾回收器执行效率的？",
+      "audio_size": 13372916,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/dc/af/dc484dc76531ba44b271fc5a20b286af/ld/ld.m3u8",
+      "chapter_id": "1359",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:13:55",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 41588348800,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/dc/af/dc484dc76531ba44b271fc5a20b286af.mp3",
+      "id": 232138,
+      "had_viewed": false,
+      "article_title": "21 | 垃圾回收（二）：V8是如何优化垃圾回收器执行效率的？",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "为了解决全停顿而造成的用户体验的问题，V8团经过了很多年的努力，向现有的垃圾回收器添加了并行、并发和增量等垃圾回收技术。",
+      "column_id": 296,
+      "audio_title": "【定】李兵21",
+      "audio_time_arr": {
+        "m": "13",
+        "s": "55",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "dc484dc76531ba44b271fc5a20b286af",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1588348800,
+      "article_cover": "https://static001.geekbang.org/resource/image/81/ca/81d8b7db632eebb300f2e1df89a256ca.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "答疑：几种常见内存问题的解决策略",
+      "audio_size": 12328176,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/0a/ba/0a69f4cac554d7a6b6700137566247ba/ld/ld.m3u8",
+      "chapter_id": "1359",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:12:50",
+      "rate_percent": 0,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 41588608000,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/0a/ba/0a69f4cac554d7a6b6700137566247ba.mp3",
+      "id": 232492,
+      "had_viewed": false,
+      "article_title": "22｜答疑：几种常见内存问题的解决策略",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "通常有三种内存问题：内存泄漏(Memory leak)、内存膨胀(Memory bloat)、频繁垃圾回收。",
+      "column_id": 296,
+      "audio_title": "5.4 修改李兵 22_01",
+      "audio_time_arr": {
+        "m": "12",
+        "s": "50",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": false,
+      "audio_md5": "0a69f4cac554d7a6b6700137566247ba",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1588608000,
+      "article_cover": "https://static001.geekbang.org/resource/image/30/49/30f7efc5672b324dd516ea89dc082d49.jpg"
+    },
+    {
+      "video_id": "",
+      "article_sharetitle": "结束语 | 我的前端学习踩坑史",
+      "audio_size": 5621808,
+      "include_audio": true,
+      "video_media_map": [],
+      "audio_url": "https://res001.geekbang.org//media/audio/9e/20/9e138217ad214b84c021ca32fc860a20/ld/ld.m3u8",
+      "chapter_id": "1382",
+      "column_had_sub": true,
+      "audio_dubber": "李兵",
+      "column_cover": "https://static001.geekbang.org/resource/image/1f/67/1f8c5db94c2a525ca63e3828560ca367.jpg",
+      "audio_time": "00:05:50",
+      "rate_percent": 100,
+      "column_sku": 100048001,
+      "is_required": true,
+      "rate": {
+        "1": {
+          "cur_version": 1645232121,
+          "max_rate": 1,
+          "cur_rate": 1,
+          "is_finished": false,
+          "total_rate": 21,
+          "learned_seconds": 21
+        },
+        "2": {
+          "cur_version": 1645186627,
+          "max_rate": 350,
+          "cur_rate": 350,
+          "is_finished": true,
+          "total_rate": 350,
+          "learned_seconds": 360
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 51588780800,
+      "video_media": "",
+      "article_subtitle": "无",
+      "audio_download_url": "https://static001.geekbang.org/resource/audio/9e/20/9e138217ad214b84c021ca32fc860a20.mp3",
+      "id": 233249,
+      "had_viewed": true,
+      "article_title": "结束语 | 我的前端学习踩坑史",
+      "column_bgcolor": "#F6F7FB",
+      "is_video_preview": false,
+      "article_summary": "这世界上最值钱的就是我们的专注力和时间，花三年干成一件事和花十年干成一件事的代价是不一样的。",
+      "column_id": 296,
+      "audio_title": "5.6 李兵 结束语 _01",
+      "audio_time_arr": {
+        "m": "05",
+        "s": "50",
+        "h": "00"
+      },
+      "subtitles": [],
+      "author_intro": "前盛大创新院高级研究员",
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_finished": true,
+      "audio_md5": "9e138217ad214b84c021ca32fc860a20",
+      "author_name": "李兵",
+      "article_could_preview": false,
+      "article_ctime": 1588780800,
+      "article_cover": "https://static001.geekbang.org/resource/image/24/14/24f1f9110364b2f259b8ff58c3229914.jpg"
+    },
+    {
+      "video_id": "",
+      "article_subtitle": "无",
+      "id": 253657,
+      "had_viewed": false,
+      "article_title": "结课测试 | 这些V8的知识你都掌握了吗？",
+      "article_cover": "https://static001.geekbang.org/resource/image/0e/05/0ee00d588edd9d0ac63a62cff2e49905.jpg",
+      "video_media_map": [],
+      "is_video_preview": false,
+      "chapter_id": "1382",
+      "column_had_sub": true,
+      "is_finished": false,
+      "subtitles": [],
+      "rate_percent": 0,
+      "article_summary": "《图解Google V8》结课了，来做一下测试吧！",
+      "video_media": "",
+      "article_could_preview": false,
+      "column_sku": 100048001,
+      "offline": {
+        "file_name": "",
+        "download_url": ""
+      },
+      "is_required": false,
+      "rate": {
+        "1": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "2": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        },
+        "3": {
+          "cur_version": 0,
+          "max_rate": 0,
+          "cur_rate": 0,
+          "is_finished": false,
+          "total_rate": 0,
+          "learned_seconds": 0
+        }
+      },
+      "score": 51593326280,
+      "article_ctime": 1593326280,
+      "include_audio": false
+    }
+  ],
+  "page": {
+    "count": 25,
+    "more": false
+  }
+}
