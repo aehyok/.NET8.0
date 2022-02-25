@@ -216,7 +216,7 @@
             极客
             </summary>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetProductList">
+        <member name="M:aehyok.Core.WebApi.Controllers.GeekController.GetProductList(System.String)">
             <summary>
             获取课程列表
             </summary>

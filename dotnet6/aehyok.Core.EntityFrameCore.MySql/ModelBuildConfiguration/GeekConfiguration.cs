@@ -55,6 +55,9 @@ namespace aehyok.Core.EntityFramework.MySql.ModelBuildConfiguration
                 entity.Property(e => e.Title)
                     .HasMaxLength(100)
                     .HasColumnName("title");
+                entity.Property(e => e.Type)
+                    .HasMaxLength(50)
+                    .HasColumnName("type");
             });
         }
     }

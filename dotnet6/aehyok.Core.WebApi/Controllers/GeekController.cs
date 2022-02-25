@@ -16,6 +16,7 @@ using aehyok.Core.EntityFramework.MySql.Models;
 using System;
 using aehyok.Core.EntityFramework.MySql.Data;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace aehyok.Core.WebApi.Controllers
 {
@@ -54,14 +55,27 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
-        public dynamic GetProductList()
+        public dynamic GetProductList(string type)
         {
-            var list  = this._geekProductRepository.GetQueryable().Select(item => new
+            if(type !=null)
             {
-                item.Id,
-                item.Title,
-            });
-            return list;
+                Expression<Func<GeekProduct, bool>> predicate = item => item.Type == type;
+                var list = this._geekProductRepository.GetQueryable().Where(predicate).Select(item => new
+                {
+                    item.Id,
+                    item.Title,
+                });
+                return list;
+            } else
+            {
+                var list = this._geekProductRepository.GetQueryable().Select(item => new
+                {
+                    item.Id,
+                    item.Title,
+                });
+                return list;
+            }
+
         }
 
         /// <summary>
