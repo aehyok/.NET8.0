@@ -149,17 +149,32 @@ namespace aehyok.Core.WebApi.Controllers
                     //list.Add(response);
                     var jsonString = JsonConvert.SerializeObject(response, Formatting.Indented);
                     JObject obj = JsonConvert.DeserializeObject<JObject>(jsonString);
+                    var article = this._geekArticleRepository.GetByKey(itemId);
 
-                    await this._geekArticleRepository.InsertAsync(new GeekArticle
+                    if(article.Result == null)
                     {
-                        Id = itemId,
-                        Json = JsonConvert.SerializeObject(response, Formatting.Indented),
-                        Title = (string)obj.GetValue("data")["article_title"],
-                        AuthorName = (string)obj.GetValue("data")["author_name"],
-                        CreateTime = DateTime.Now
-                    }); ;
-                    Thread.Sleep(1000 * 60 * 2);
-                }catch
+                        await this._geekArticleRepository.InsertAsync(new GeekArticle
+                        {
+                            Id = itemId,
+                            Json = JsonConvert.SerializeObject(response, Formatting.Indented),
+                            Title = (string)obj.GetValue("data")["article_title"],
+                            AuthorName = (string)obj.GetValue("data")["author_name"],
+                            CreateTime = DateTime.Now
+                        });
+                    } else
+                    {
+                        await this._geekArticleRepository.UpdateAsync(new GeekArticle
+                        {
+                            Id = itemId,
+                            Json = JsonConvert.SerializeObject(response, Formatting.Indented),
+                            Title = (string)obj.GetValue("data")["article_title"],
+                            AuthorName = (string)obj.GetValue("data")["author_name"],
+                            CreateTime = DateTime.Now
+                        });
+                    }
+
+                    Thread.Sleep(1000 * 60 * 1);
+                }catch (Exception e)
                 {
 
                 } 
