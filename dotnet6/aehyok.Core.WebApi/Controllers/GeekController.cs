@@ -170,6 +170,7 @@ namespace aehyok.Core.WebApi.Controllers
                         await this._geekArticleRepository.InsertAsync(new GeekArticle
                         {
                             Id = itemId,
+                            ProductId = "9",
                             Json = JsonConvert.SerializeObject(response, Formatting.Indented),
                             Title = (string)obj.GetValue("data")["article_title"],
                             AuthorName = (string)obj.GetValue("data")["author_name"],
@@ -181,6 +182,7 @@ namespace aehyok.Core.WebApi.Controllers
                         {
                             Id = itemId,
                             Json = JsonConvert.SerializeObject(response, Formatting.Indented),
+                            ProductId = "9",
                             Title = (string)obj.GetValue("data")["article_title"],
                             AuthorName = (string)obj.GetValue("data")["author_name"],
                             CreateTime = DateTime.Now

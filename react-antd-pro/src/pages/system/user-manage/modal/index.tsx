@@ -1,7 +1,7 @@
 import { Modal, Form,Input, Button, message, Select, Skeleton } from 'antd';
 import { useRef, useEffect, useState } from 'react';
 const { Option } = Select;
-import { saveUser, getUser } from '@/services/ant-design-pro/user'
+import { addUser, updateUser, getUser } from '@/services/ant-design-pro/user'
 
 export default (props: any) => {
   const { modalVisible, hiddenModal, editId, actionRef } = props
@@ -42,22 +42,32 @@ export default (props: any) => {
   }
 
   const onSubmit = async(values: any) => {
-    console.log(values, '保存结果')
+    console.log(values, editId, '保存结果')
     let user = values
     if(editId !== undefined) {
       user= {
         ...values,
         id: editId
       }
+      const result = await updateUser(user)
+      if(result?.code === 200) {
+        message.success('结果保存成功')
+        actionRef.current.reload()
+        hiddenModal()
+        form.resetFields()
+      }
+      console.log(result, 'result-saveUser----')
+    } else {
+      const result = await addUser(user)
+      if(result?.code === 200) {
+        message.success('结果保存成功')
+        actionRef.current.reload()
+        hiddenModal()
+        form.resetFields()
+      }
+      console.log(result, 'result-saveUser----')
     }
-    const result = await saveUser(user)
-    if(result?.code === 200) {
-      message.success('结果保存成功')
-      actionRef.current.reload()
-      hiddenModal()
-      form.resetFields()
-    }
-    console.log(result, 'result-saveUser----')
+
   }
 
   const onChange = () => {}

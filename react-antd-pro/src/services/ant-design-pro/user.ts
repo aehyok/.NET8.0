@@ -1,7 +1,15 @@
 import { request } from 'umi';
 /** 用户信息保存 POST */
-export async function saveUser(options: any) {
-  return request('/so/api/User/SaveUser', {
+export async function addUser(options: any) {
+  return request('/so/api/User/AddUser', {
+    method: 'POST',
+    data: options,
+  });
+}
+
+/** 用户信息保存 POST */
+export async function updateUser(options: any) {
+  return request('/so/api/User/UpdateUser', {
     method: 'POST',
     data: options,
   });

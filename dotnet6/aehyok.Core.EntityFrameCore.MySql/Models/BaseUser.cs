@@ -19,7 +19,7 @@ namespace aehyok.Core.EntityFramework.MySql.Models
         /// <summary>
         /// 男性1，女性2，未知0
         /// </summary>
-        public bool? Sex { get; set; }
+        public int? Sex { get; set; }
         public string? Mobile { get; set; }
         public string? Email { get; set; }
         /// <summary>

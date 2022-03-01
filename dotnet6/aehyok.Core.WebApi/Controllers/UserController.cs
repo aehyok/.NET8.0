@@ -39,7 +39,6 @@ namespace aehyok.Core.WebApi.Controllers
         {
             try
             {
-                var context = new MyDbContext();
                 int pagesize = 10; 
                 var list = this._baseRepository.GetQueryable().Where(item => item.IsDeleted == false).OrderByDescending(item => item.CreatedAt).Skip(pagesize * pageIndex).Take(pagesize).ToList();
                 this._logger.Info(list.Count);
@@ -62,7 +61,6 @@ namespace aehyok.Core.WebApi.Controllers
         {
             try
             {
-                var context = new MyDbContext();
                 var user = await this._baseRepository.GetByKey(id);
                 return user;
             }
@@ -74,46 +72,32 @@ namespace aehyok.Core.WebApi.Controllers
         }
 
         /// <summary>
-        ///保存用户
+        ///添加新用户
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public async Task<bool> SaveUser(BaseUser user)
+        public async Task<int> AddUser(BaseUser user)
         {
-            try
+            if (user == null)
             {
-                this._logger.Info(user.Id);
-                if(user!=null  && user.Id !=null)
-                {
-                    var context = new MyDbContext();
-                    user.CreatedAt = DateTime.Now;
-                    user.IsDeleted = false;
-                    user.UpdatedAt = DateTime.Now;
-                    context.Update(user);
-                    await context.SaveChangesAsync();
-                    return true;
-                } 
-                else
-                {
-                    this._logger.Info(user);
-                    var context = new MyDbContext();
-                    user.IsDeleted = false;
-                    user.CreatedAt= DateTime.Now;
-                    user.UpdatedAt = DateTime.Now;
-                    var result = await this._baseRepository.InsertAsync(user);
-                    await context.SaveChangesAsync();
-                    return true;
-                }
-                
-            }catch(Exception error)
-            {
-                this._logger.Error(error);
-                return false;
+                return -1;
             }
+            user.IsDeleted = false;
+            return await this._baseRepository.InsertAsync(user);
         }
 
-
+        /// <summary>
+        ///修改用户
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<int> UpdateUser(BaseUser user)
+        {
+            user.IsDeleted = false;
+            return await this._baseRepository.UpdateAsync(user);
+        }
 
         /// <summary>
         ///删除用户

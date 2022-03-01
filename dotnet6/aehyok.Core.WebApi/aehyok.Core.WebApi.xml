@@ -340,9 +340,15 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.UserController.SaveUser(aehyok.Core.EntityFramework.MySql.Models.BaseUser)">
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.AddUser(aehyok.Core.EntityFramework.MySql.Models.BaseUser)">
              <summary>
-            保存用户
+            添加新用户
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.UpdateUser(aehyok.Core.EntityFramework.MySql.Models.BaseUser)">
+             <summary>
+            修改用户
              </summary>
              <returns></returns>
         </member>
