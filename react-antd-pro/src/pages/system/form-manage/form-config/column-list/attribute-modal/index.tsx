@@ -19,7 +19,6 @@ const AttributeModel = (props: { modalVisible: boolean, hiddenModal: Function, r
 
     console.log(currentRecord, 'currentRecord')
 
-
     const handleOk = () => {
         hiddenModal()
     }

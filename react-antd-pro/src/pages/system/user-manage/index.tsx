@@ -87,7 +87,7 @@ export default () => {
     },
     {
       title: '角色',
-      dataIndex: 'roleInfo',
+      dataIndex: 'roleIds',
       valueType: 'select',
       valueEnum: {
         1: '管理员',

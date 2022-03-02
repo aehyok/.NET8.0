@@ -2,6 +2,7 @@ import { Modal, Form,Input, Button, message, Select, Skeleton } from 'antd';
 import { useRef, useEffect, useState } from 'react';
 const { Option } = Select;
 import { addUser, updateUser, getUser } from '@/services/ant-design-pro/user'
+import { ProFormSelect, ProFormText } from '@ant-design/pro-form';
 
 export default (props: any) => {
   const { modalVisible, hiddenModal, editId, actionRef } = props
@@ -79,51 +80,52 @@ export default (props: any) => {
         initialValues === undefined && editId !== undefined ? <Skeleton /> :
 
       <Form form={form} onFinish={(values: any)=> onSubmit(values) } ref={formRef} {...layout}  initialValues={initialValues}>
-        <Form.Item
-          label="姓名"
-          name="nickName"
-          rules={[{ required: true, message: '请输入姓名' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="账号"
-          name="account"
-          rules={[{ required: true, message: '请输入账号' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="性别"
+        <ProFormText
+            name="nickName"
+            label="姓名"
+            rules={[{ required: true, message: '请输入姓名' }]}
+          />
+        <ProFormText
+            name="account"
+            label="账号"
+            rules={[{ required: true, message: '请输入账号' }]}
+          />
+        <ProFormSelect
+          options={[
+            {
+              value: 0,
+              label: '未知',
+            },
+            {
+              value: 1,
+              label: '男',
+            },
+            {
+              value: 2,
+              label: '女',
+            },
+          ]}
+          width="xs"
           name="sex"
-        >
-          <Select
-            showSearch
-            placeholder="请选择性别"
-            optionFilterProp="children"
-            onChange={onChange}
-            onSearch={onSearch}
-          >
-            <Option value="0">未知</Option>
-            <Option value="1">男</Option>
-            <Option value="2">女</Option>
-          </Select>
-        </Form.Item>
-        <Form.Item
+          label="性别"
+          placeholder="请选择性别"
+        /> 
+        <ProFormSelect
+          options={[
+            {
+              value: '1',
+              label: '管理员',
+            },
+            {
+              value: '2',
+              label: '普通用户',
+            },
+          ]}
+          width="xs"
+          name="roleIds"
           label="用户角色"
-          name="roleInfo"
-        >
-        <Select
-            showSearch
-            placeholder="请选择用户角色"
-            optionFilterProp="children"
-            onChange={onChange}
-            onSearch={onSearch}
-          >
-            <Option value="1">管理员</Option>
-            <Option value="2">普通用户</Option>
-          </Select>
-        </Form.Item>
+          placeholder="请选择用户角色"
+        /> 
         <Form.Item style={{textAlign:'right'}}>
           <Button type="primary" htmlType="submit" style={{ marginRight :'20px'}} >
             保存

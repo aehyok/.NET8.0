@@ -328,7 +328,7 @@
             用户管理
             </summary>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.UserController.GetUserList(System.Int32)">
+        <member name="M:aehyok.Core.WebApi.Controllers.UserController.GetUserList">
             <summary>
             获取用户列表
             </summary>

@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\aehyok.Base\aehyok.Base.csproj" />
     <ProjectReference Include="..\aehyok.Core.EntityFrameCore.MySql\aehyok.Core.EntityFramework.MySql.csproj" />
     <ProjectReference Include="..\aehyok.Core.MySqlDataAccessor\aehyok.Core.MySqlDataAccessor.csproj" />
     <ProjectReference Include="..\aehyok.Core.Repository\aehyok.Core.Repository.csproj" />

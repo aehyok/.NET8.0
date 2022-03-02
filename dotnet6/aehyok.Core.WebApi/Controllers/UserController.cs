@@ -1,4 +1,5 @@
-﻿using aehyok.Core.EntityFramework.MySql;
+﻿using aehyok.Base.Utils;
+using aehyok.Core.EntityFramework.MySql;
 using aehyok.Core.EntityFramework.MySql.Data;
 using aehyok.Core.EntityFramework.MySql.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -35,12 +36,11 @@ namespace aehyok.Core.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public List<BaseUser> GetUserList(int pageIndex =0 )
+        public List<BaseUser> GetUserList()
         {
             try
             {
-                int pagesize = 10; 
-                var list = this._baseRepository.GetQueryable().Where(item => item.IsDeleted == false).OrderByDescending(item => item.CreatedAt).Skip(pagesize * pageIndex).Take(pagesize).ToList();
+                var list = this._baseRepository.GetQueryable().Where(item => item.IsDeleted == false).ToList();
                 this._logger.Info(list.Count);
                 return list;
             }
@@ -84,6 +84,8 @@ namespace aehyok.Core.WebApi.Controllers
                 return -1;
             }
             user.IsDeleted = false;
+            user.Password = MD5Helper.MD5Encrypt32("123456" + "aehyok");  //默认密码
+            user.CreatedAt = DateTime.Now;
             return await this._baseRepository.InsertAsync(user);
         }
 
@@ -95,7 +97,16 @@ namespace aehyok.Core.WebApi.Controllers
         [AllowAnonymous]
         public async Task<int> UpdateUser(BaseUser user)
         {
+            var updateUser = await this._baseRepository.GetByKey(user.Id);
+            if (updateUser == null)
+            {
+                return -1;
+            }
             user.IsDeleted = false;
+            user.CreatedAt = updateUser.CreatedAt;
+            user.Password = updateUser.Password;
+            user.UpdatedAt = DateTime.Now;
+
             return await this._baseRepository.UpdateAsync(user);
         }
 
@@ -110,6 +121,7 @@ namespace aehyok.Core.WebApi.Controllers
             var context = new MyDbContext();
             var user = await this._baseRepository.GetByKey(id);
             user.IsDeleted = true;
+
             context.Update(user);
             context.SaveChanges();
             return true;
