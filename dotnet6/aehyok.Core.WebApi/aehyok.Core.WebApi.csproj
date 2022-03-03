@@ -18,6 +18,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="json\**" />
+    <Content Remove="json\**" />
+    <EmbeddedResource Remove="json\**" />
+    <None Remove="json\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\GeekController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
     <PackageReference Include="Flurl" Version="3.0.4" />
     <PackageReference Include="Flurl.Http" Version="3.2.2" />
