@@ -9,6 +9,7 @@ import ProForm, {
 } from '@ant-design/pro-form';
 import { getDictionaryType, addDictionaryType, updateDictionaryType } from '@/services/ant-design-pro/dictionary'
 import { ActionType } from '@ant-design/pro-table';
+import type { SYSTEM } from '@/services/ant-design-pro/typings'
 
 type ModalProps = {
   modalVisible: boolean;
@@ -38,10 +39,10 @@ const TypeModal: React.FC<ModalProps> = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetch = async () => {
-       await getDictionaryType(editId).then((result: any) => {
+      // SYSTEM.DictionaryTypeItem
+       const result = await getDictionaryType<SYSTEM.DictionaryTypeItem>(editId)
         console.log(result, 'result----type')
         setInitialValues(result?.data)
-      })
       // initialValues = result.data
     }
     if(editId !== undefined) {

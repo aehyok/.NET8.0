@@ -1,4 +1,5 @@
 import { request } from '@/utils/request';
+import type { SYSTEM } from '@/services/ant-design-pro/typings'
 
 export async function getDictionaryTypeList() {
   return request<SYSTEM.DictionaryTypeItem[]>('/so/api/Dictionary/getDictionaryTypeList', {
@@ -6,8 +7,8 @@ export async function getDictionaryTypeList() {
   });
 }
 
-export async function getDictionaryType(id: string) {
-  return request<SYSTEM.DictionaryTypeItem>(`/so/api/Dictionary/getDictionaryType?dictionaryTypeId=${id}`, {
+export async function getDictionaryType<T>(id: string) {
+  return request<T>(`/so/api/Dictionary/getDictionaryType?dictionaryTypeId=${id}`, {
     method: 'GET', });
 }
 
