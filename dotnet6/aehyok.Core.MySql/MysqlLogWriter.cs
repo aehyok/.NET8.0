@@ -33,7 +33,7 @@ namespace aehyok.Core.MySql
             return true;
         }
 
-        private const string SQL_WriteQueryLog = @"insert into metadata.md_querylog (ID,SJ,USETIME,QUERY_STR,LX,YHID)
+        private const string SQL_WriteQueryLog = @"insert into md_querylog (ID,SJ,USETIME,QUERY_STR,LX,YHID)
                                                    values (@ID,now(),@USETIME,@QUERY_STR,@LX,@YHID)";
         public static bool WriteQueryLog(string _sqlStr, int _userTime,string _lx)
         {
