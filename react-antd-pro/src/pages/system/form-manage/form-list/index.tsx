@@ -5,6 +5,7 @@ import React, { useRef } from 'react';
 import { request, useModel } from 'umi';
 import { deleteSystemForm } from '@/services/ant-design-pro/form'
 import FormModel from '../modal'
+import { SYSTEM } from '@/services/ant-design-pro/typings';
 
 const FormList = (props: any) => {
   console.log(props)

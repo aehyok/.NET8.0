@@ -4,6 +4,7 @@ import { ProFormDigit, ProFormText, ProFormTextArea } from '@ant-design/pro-form
 import { Button, Card, Col, Form, message, Row, Tabs } from 'antd';
 import React, { useEffect, useRef } from 'react';
 import ColumnList from './column-list'
+import TableList from './table-list'
 import { useModel } from 'umi';
 import { getSystemForm, updateSystemForm } from '@/services/ant-design-pro/form'
 const FormConfig = () => {
@@ -113,6 +114,9 @@ const FormConfig = () => {
           <Tabs defaultActiveKey="1">
             <TabPane tab="表单字段列定义" key="1">
             <ColumnList />
+            </TabPane>
+            <TabPane tab="写入表定义" key="2">
+            <TableList />
             </TabPane>
           </Tabs>
         </Card>
