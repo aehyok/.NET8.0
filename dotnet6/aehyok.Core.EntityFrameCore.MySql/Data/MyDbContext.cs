@@ -255,6 +255,7 @@ namespace aehyok.Core.EntityFramework.MySql.Data
             modelBuilder.FlowInit();
             modelBuilder.FormInit();
             modelBuilder.GeekInit();
+            modelBuilder.LogInit();
 
             modelBuilder.Entity<SystemMenu>(entity =>
             {

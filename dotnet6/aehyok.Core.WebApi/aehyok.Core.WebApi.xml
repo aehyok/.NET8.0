@@ -253,6 +253,12 @@
             <param name="GuideLineID"></param>
             <returns></returns>
         </member>
+        <member name="M:aehyok.Core.WebApi.Controllers.LogController.GetLogList">
+            <summary>
+            获取日志列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:aehyok.Core.WebApi.Controllers.MenuController">
             <summary>
             菜单管理

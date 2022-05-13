@@ -21,6 +21,8 @@ namespace aehyok.Core.WebApi.Controllers
         public GuidelineController(
              IMetaDataManager mdService)
         {
+            int? count = null;
+
             this.mdService = mdService;
         }
 
