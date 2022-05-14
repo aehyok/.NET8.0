@@ -3,7 +3,12 @@ using aehyok.Core.EntityFramework.MySql.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using X.PagedList;
 
 namespace aehyok.Core.WebApi.Controllers
 {
@@ -26,9 +31,12 @@ namespace aehyok.Core.WebApi.Controllers
         [HttpGet]
         [AllowAnonymous]
 
-        public List<CiCdLog> GetLogList()
+        public async Task<IPagedList<CiCdLog>> GetLogList(int page, int limit)
         {
-            var list = _logRepository.GetList();
+            //var list = _logRepository.GetQueryable().OrderByDescending(item => item.CreateTime).ToList();
+            Expression<Func<CiCdLog, bool>> filter = item => !string.IsNullOrEmpty(item.Id);
+            var list = await _logRepository.GetPagedListAsync(filter, page, limit);
+
             return list;
         }
     }

@@ -253,7 +253,7 @@
             <param name="GuideLineID"></param>
             <returns></returns>
         </member>
-        <member name="M:aehyok.Core.WebApi.Controllers.LogController.GetLogList">
+        <member name="M:aehyok.Core.WebApi.Controllers.LogController.GetLogList(System.Int32,System.Int32)">
             <summary>
             获取日志列表
             </summary>
