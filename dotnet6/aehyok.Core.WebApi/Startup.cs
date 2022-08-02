@@ -40,6 +40,8 @@ namespace aehyok.Core.WebApi
             Configuration = configuration;
         }
 
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -80,6 +82,17 @@ namespace aehyok.Core.WebApi
                 options.Filters.Add<JsonResultFilter>();
                 options.Filters.Add<AuthorizationFilter>();
             }).AddControllersAsServices();
+
+            services.AddCors(options => {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.AllowAnyMethod()
+                        .SetIsOriginAllowed(_ => true)
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                    });
+            });
         }
 
         /// <summary>
@@ -97,6 +110,7 @@ namespace aehyok.Core.WebApi
 
             ////var list = AppDomain.CurrentDomain.GetAssemblies().OrderBy(item => item.FullName).ToList();
             ////var list= AssemblyLoadContext.Default.Assemblies.OrderBy(item => item.FullName).ToList();
+
 
             var dlls = DependencyContext.Default.CompileLibraries
             .SelectMany(x => x.ResolveReferencePaths())
@@ -131,7 +145,10 @@ namespace aehyok.Core.WebApi
 
             app.UseHttpsRedirection();
 
+
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
