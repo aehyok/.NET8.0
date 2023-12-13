@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.NCDP.Api", "aehyok.N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.EntityFramework", "aehyok.EntityFramework\aehyok.EntityFramework.csproj", "{B1B36DB3-22C9-43F1-8977-9428B823916C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.NCDP", "aehyok.NCDP\aehyok.NCDP.csproj", "{92C83319-2286-4AA9-BA36-791DE0498296}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.NCDP", "aehyok.NCDP\aehyok.NCDP.csproj", "{92C83319-2286-4AA9-BA36-791DE0498296}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core", "aehyok.Core\aehyok.Core.csproj", "{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{92C83319-2286-4AA9-BA36-791DE0498296}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92C83319-2286-4AA9-BA36-791DE0498296}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92C83319-2286-4AA9-BA36-791DE0498296}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

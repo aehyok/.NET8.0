@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Mapping;
+﻿using aehyok.Core.Mapping;
 using aehyok.Infrastructure.TypeFinders;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Utils
+namespace aehyok.Core.Extensions
 {
     public static class ModelBuilderExtensions
     {

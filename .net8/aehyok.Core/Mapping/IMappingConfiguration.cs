@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Entities;
+﻿using aehyok.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Mapping
+namespace aehyok.Core.Mapping
 {
     public interface IMappingConfiguration
     {

@@ -11,7 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Utils
+namespace aehyok.EntityFramework
 {
     /// <summary>
     /// internal只能在同一个程序集中访问

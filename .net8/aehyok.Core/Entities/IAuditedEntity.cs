@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Entities
+namespace aehyok.Core.Entities
 {
     /// <summary>
     /// 数据实体基础接口（创建时间、创建人、修改时间、修改人）

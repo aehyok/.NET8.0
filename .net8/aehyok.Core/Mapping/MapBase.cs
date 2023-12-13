@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Entities;
+﻿using aehyok.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Mapping
+namespace aehyok.Core.Mapping
 {
     /// <summary>
     /// EFCore实体映射到数据库表结构的基类
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public abstract class MapBase<TEntity>: MapBase<TEntity, long>, IMappingConfiguration<TEntity> where TEntity : Entity<long>
+    public abstract class MapBase<TEntity> : MapBase<TEntity, long>, IMappingConfiguration<TEntity> where TEntity : Entity<long>
     {
 
     }
@@ -36,3 +36,4 @@ namespace aehyok.EntityFramework.Mapping
         }
     }
 }
+
