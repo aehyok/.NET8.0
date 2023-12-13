@@ -20,6 +20,10 @@ namespace aehyok.Schedules
         /// </summary>
         protected abstract string Expression { get; }
 
+        /// <summary>
+        /// 获取下一次任务执行时间
+        /// </summary>
+        /// <returns></returns>
         public DateTime? GetNextTime()
         {
             return  CronExpression.Parse(Expression, CronFormat.IncludeSeconds).GetNextOccurrence(DateTime.UtcNow, TimeZoneInfo.Local);
