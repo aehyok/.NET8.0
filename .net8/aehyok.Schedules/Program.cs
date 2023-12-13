@@ -9,7 +9,7 @@ using aehyok.RabbitMQ.EventBus;
 using aehyok.Schedules.Event;
 using System.Runtime.Loader;
 using aehyok.NCDP.Services;
-
+using aehyok.Infrastructure.Extensions;
 Console.WriteLine("Hello, World!");
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +20,7 @@ var env = builder.Environment;
 Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll").Select(AssemblyLoadContext.Default.LoadFromAssemblyPath).ToList();
 
 Thread.CurrentThread.Name = "aehyok.Schedules";
-//builder.Host.InitHost("aehyok.Schedules");
+builder.Host.InitHost("aehyok.Schedules");
 
 builder.Services.AddMysql(builder.Configuration);
 
