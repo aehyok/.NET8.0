@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using aehyok.EntityFramework.DbContexts;
+using aehyok.Core.DbContexts;
 
 #nullable disable
 

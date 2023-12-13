@@ -7,17 +7,8 @@ using Microsoft.Extensions.Hosting;
 using aehyok.RabbitMQ;
 using aehyok.RabbitMQ.EventBus;
 using aehyok.Schedules.Event;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Http;
-using aehyok.EntityFramework.DbContexts;
-using Microsoft.Graph.Models.ExternalConnectors;
-using Microsoft.Extensions.Configuration;
-using aehyok.Infrastructure.TypeFinders;
-using aehyok.EntityFramework.Entities;
 using System.Runtime.Loader;
 using aehyok.NCDP.Services;
-using Microsoft.Graph.Groups.Item.Sites.Item.GetApplicableContentTypesForListWithListId;
 
 Console.WriteLine("Hello, World!");
 
@@ -31,12 +22,12 @@ Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll").Select(AssemblyLoad
 Thread.CurrentThread.Name = "aehyok.Schedules";
 //builder.Host.InitHost("aehyok.Schedules");
 
-
 builder.Services.AddMysql(builder.Configuration);
 
 builder.Services.AddServices();
 
 builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddRabbitMQ(builder.Configuration);
 
 builder.Services.AddCronServices();

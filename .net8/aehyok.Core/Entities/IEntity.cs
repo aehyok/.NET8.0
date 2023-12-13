@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Entities
+namespace aehyok.Core.Entities
 {
     /// <summary>
     /// 创建数据表实体的基础接口
@@ -13,7 +13,7 @@ namespace aehyok.EntityFramework.Entities
     {
     }
 
-    public interface IEntity<TKey>: IEntity
+    public interface IEntity<TKey> : IEntity
     {
         /// <summary>
         /// 表实体的主键统一为Id（类型可自定义）

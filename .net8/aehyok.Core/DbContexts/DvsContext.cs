@@ -1,5 +1,5 @@
-﻿using aehyok.EntityFramework.Entities;
-using aehyok.EntityFramework.Utils;
+﻿using aehyok.Core.Entities;
+using aehyok.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,9 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.DbContexts
+namespace aehyok.Core.DbContexts
 {
-    public partial class DvsContext:DbContext
+    /// <summary>
+    /// 基础的数据库上下文DvsContext
+    /// </summary>
+    public partial class DvsContext : DbContext
     {
         public DvsContext(DbContextOptions<DvsContext> options) : base(options)
         {

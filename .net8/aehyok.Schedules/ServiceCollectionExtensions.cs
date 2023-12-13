@@ -8,11 +8,12 @@ using System.Runtime;
 using System.Reflection;
 using Microsoft.Extensions.Hosting;
 using aehyok.Infrastructure.TypeFinders;
-using aehyok.EntityFramework.DbContexts;
+using aehyok.Core.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using aehyok.EntityFramework.Repository;
 using aehyok.EntityFramework;
+using aehyok.Core.Repository;
 namespace aehyok.Schedules
 {
     public static class ServiceCollectionExtensions
