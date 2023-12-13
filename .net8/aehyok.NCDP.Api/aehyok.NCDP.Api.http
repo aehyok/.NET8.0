@@ -1,0 +1,6 @@
+@aehyok.NCDP.Api_HostAddress = http://localhost:5093
+
+GET {{aehyok.NCDP.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

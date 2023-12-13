@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using aehyok.Core.EntityFramework.MySql.Models;
 using aehyok.Core.EntityFramework.MySql.ModelBuildConfiguration;
 using Microsoft.Extensions.Logging;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace aehyok.Core.EntityFramework.MySql.Data
 {
@@ -26,7 +28,7 @@ namespace aehyok.Core.EntityFramework.MySql.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseMySql("server=139.159.245.209;port=3306;uid=meta;pwd=meta;database=meta;allowzerodatetime=True;convertzerodatetime=True;charset=utf8mb4;sslmode=none", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.2.32-mariadb"));
+                optionsBuilder.UseLoggerFactory(MyLoggerFactory).UseMySql("server=101.35.211.235;port=3306;uid=aehyok;pwd=M9y2512!;database=course;allowzerodatetime=True;convertzerodatetime=True;charset=utf8mb4;sslmode=none;", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.33-MySQL"));
             }
         }
 

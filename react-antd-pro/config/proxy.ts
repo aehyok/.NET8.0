@@ -24,7 +24,7 @@ export default {
   pre: {
     '/so/': {
       // target: 'https://dvs-dev.sunlight-tech.com',
-      target: 'http://139.159.245.209:5000',
+      target: 'http://101.35.211.235:3001',
       changeOrigin: true,
       pathRewrite: { '^/so': '' },
     },
