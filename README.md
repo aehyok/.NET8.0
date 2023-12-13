@@ -1,36 +1,42 @@
-# dotnetCore3.1
-netCore3.1 、Mysql、Dapper、Vue3.2 Element-plus
+## .net 8
 
->>>UI展示 https://element-plus.gitee.io/
+- **1、定时任务**
 
->>>数据库使用 MySql 
+- **2、RabbitMQ**
 
->>> Dapper访问数据库 https://github.com/StackExchange/Dapper
+- **3、Redis持久化缓存**
 
+- **4、Mysql数据库**
 
----
+- **5、Z.EntityFramework.Extensions.EFCore不开源**
+ - https://entityframework-extensions.net
+ - https://github.com/zzzprojects/EntityFramework-Extensions
 
+- **6、EFCore更新数据库**
+  ```
+   在aehyok.Schedules项目下
 
+   dotnet-ef migrations add InitTask -c DvsContext --framework net8.0 -v
+   
+   dotnet-ef database update -c DvsContext --framework net8.0 -v
+  ```  
 
-- **1、IText7生成PDF**
->>>https://github.com/itext/itext7-dotnet
+## 使用的开源库
 
-- **2、Swagger Web Api**
->>>https://www.cnblogs.com/yilezhu/p/9241261.html
-
-- **3、AutoFac IOC**
->>>https://www.cnblogs.com/diwu0510/p/11562248.html
-
-- **4、Nlog写日志（本地文件和数据库）**
->>>https://www.cnblogs.com/inday/p/asp-net-core-use-nlog-for-mysql-some-issues.html
-
-- **5、AutoMapper组件**
->>>https://www.cnblogs.com/danvic712/p/11628523.html
-
-- **6、RabbitMQ组件**
->>>Centos7下安装RabbitMQ  https://www.jianshu.com/p/ed07a5a913c6
-
->>>Github下载安装慢的问题 https://www.cnblogs.com/wlwl/p/10982507.html
-
->>>添加RabbitMQ用户并授权 https://www.cnblogs.com/mingaixin/p/4134920.html
-
+```
+- DDD 
+    - https://github.com/ntxinh/AspNetCore-DDD
+- EFCore查询 
+    - https://github.com/ardalis/Specification
+    - https://specification.ardalis.com/getting-started
+- EFCore QueryRepository RepositoryBase
+    - https://github.com/TanvirArjel/EFCore.GenericRepository
+- PaginatedList 数据分页
+    - https://github.com/dncuug/X.PagedList    
+- LinqKit 
+    - https://github.com/scottksmith95/LINQKit
+- AutoMapper
+    - https://automapper.org
+    - https://github.com/AutoMapper/AutoMapper    
+- RabbitMQ 
+```
