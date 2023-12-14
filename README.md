@@ -4,6 +4,7 @@
   ```
     Cronos
     IHostedService
+    可参考 https://github.com/HangfireIO/Hangfire
   ```
 
 - **2、RabbitMQ**
