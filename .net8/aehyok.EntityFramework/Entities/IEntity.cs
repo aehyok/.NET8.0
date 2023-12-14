@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Core.Entities
+namespace aehyok.EntityFramework.Entities
 {
     /// <summary>
     /// 创建数据表实体的基础接口

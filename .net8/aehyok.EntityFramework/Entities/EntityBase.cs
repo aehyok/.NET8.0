@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using aehyok.Core.Utils;
+using aehyok.Infrastructure;
 
-namespace aehyok.Core.Entities
+namespace aehyok.EntityFramework.Entities
 {
     /// <summary>
     /// 抽象化数据默认实体基类，设置主键以及软删除

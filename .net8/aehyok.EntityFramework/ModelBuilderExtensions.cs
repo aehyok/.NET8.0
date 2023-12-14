@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Core.Extensions
+namespace aehyok.EntityFramework.Extensions
 {
     public static class ModelBuilderExtensions
     {

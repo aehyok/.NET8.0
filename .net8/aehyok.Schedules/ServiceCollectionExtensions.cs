@@ -1,19 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime;
-using System.Reflection;
 using Microsoft.Extensions.Hosting;
 using aehyok.Infrastructure.TypeFinders;
-using aehyok.Core.DbContexts;
+using aehyok.EntityFramework.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using aehyok.EntityFramework.Repository;
 using aehyok.EntityFramework;
-using aehyok.Core.Repository;
 namespace aehyok.Schedules
 {
     public static class ServiceCollectionExtensions

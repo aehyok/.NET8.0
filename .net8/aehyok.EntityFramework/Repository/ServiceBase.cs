@@ -1,18 +1,18 @@
-﻿using aehyok.Core.Entities;
+﻿using aehyok.EntityFramework.Entities;
 using aehyok.EntityFramework.Repository.AutoMapper;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Common;
+using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Core.Repository
+namespace aehyok.EntityFramework.Repository
 {
     public partial class ServiceBase<TEntity, TKey> : AutoMapperRepository<TEntity, TKey>, IServiceBase<TEntity, TKey> where TEntity : class, IEntity<TKey>
     {
