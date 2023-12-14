@@ -1,11 +1,11 @@
-﻿using System;
+﻿using aehyok.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using aehyok.Core.Utils;
 
-namespace aehyok.Core.Entities
+namespace aehyok.EntityFramework.Entities
 {
     /// <summary>
     /// 抽象化接口实体基础类（可用于默认初始化 相当于只有主键Key）

@@ -1,5 +1,4 @@
-﻿using aehyok.Core.Repository;
-using aehyok.EntityFramework.Repository;
+﻿using aehyok.EntityFramework.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
