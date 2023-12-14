@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace aehyok.NCDP.Domains
 {
-    public class Task: AuditedEntity
+    /// <summary>
+    /// 系统租户表
+    /// </summary>
+    public class Tenant: AuditedEntity
     {
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public string Name { get; set; }
+
     }
 }
