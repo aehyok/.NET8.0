@@ -1,23 +1,5 @@
 ## .net 8
 
-- **1、定时任务**
-  ```
-    Cronos
-    IHostedService
-    可参考 https://github.com/HangfireIO/Hangfire
-  ```
-
-- **2、RabbitMQ**
-
-- **3、Redis持久化缓存**
-
-- **4、Mysql数据库**
-
-- **5、Z.EntityFramework.Extensions.EFCore不开源**
- - https://entityframework-extensions.net
- - https://github.com/zzzprojects/EntityFramework-Extensions
-
-- **6、EFCore更新数据库**
   ```
    在aehyok.Schedules项目下
 
@@ -36,6 +18,10 @@
     - https://specification.ardalis.com/getting-started
 - EFCore QueryRepository RepositoryBase
     - https://github.com/TanvirArjel/EFCore.GenericRepository
+- EFCore批量操作
+ - Z.EntityFramework.Extensions.EFCore不开源
+ - https://entityframework-extensions.net
+ - https://github.com/zzzprojects/EntityFramework-Extensions
 - PaginatedList 数据分页
     - https://github.com/dncuug/X.PagedList    
 - LinqKit 表达式查询
@@ -61,5 +47,20 @@
   - https://github.com/serilog/serilog
 - 定时任务表达式
   - Cronos
-  - https://github.com/HangfireIO/Cronos  
+  - https://github.com/HangfireIO/Cronos
+  - 可参考 https://github.com/HangfireIO/Hangfire
+- Excel 操作
+  - https://github.com/EPPlusSoftware/EPPlus
+  - https://github.com/nissl-lab/npoi
+- 二维码
+  - https://github.com/manuelbl/QrCodeGenerator
+  - https://github.com/mono/SkiaSharp
+- SSE
+  - https://github.com/tpeczek/Lib.AspNetCore.ServerSentEvents
+- 请求接口
+  - https://github.com/tmenier/Flurl
+- 编辑图像中的exif数据
+  - https://github.com/oozcitak/exiflibrary
+- itext
+  - https://github.com/itext/itext7-dotnet
 ```
