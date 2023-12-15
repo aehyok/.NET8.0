@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
-    <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

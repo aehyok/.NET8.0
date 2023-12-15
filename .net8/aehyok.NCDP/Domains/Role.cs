@@ -1,4 +1,5 @@
-﻿using aehyok.EntityFramework.Entities;
+﻿using aehyok.Core.Enums;
+using aehyok.EntityFramework.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,6 +28,12 @@ namespace aehyok.NCDP.Domains
         /// </summary>
         [MaxLength(64)]
         public string Name { get; set; }
+
+
+        /// <summary>
+        /// 所属平台类型
+        /// </summary>
+        public PlatformType PlatformType { get; set; }
 
         /// <summary>
         /// 别名
@@ -68,5 +75,10 @@ namespace aehyok.NCDP.Domains
         /// 角色权限
         /// </summary>
         public virtual List<Permission> Permissions { get; set; }
+
+        /// <summary>
+        /// 所属系统Id
+        /// </summary>
+        public long SystemId { get; set; } = 0;
     }
 }

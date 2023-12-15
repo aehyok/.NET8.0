@@ -39,5 +39,10 @@ namespace aehyok.NCDP.Domains
         /// 字典项
         /// </summary>
         public virtual List<DictionaryItem> Items { get; set; }
+
+        /// <summary>
+        /// 所属系统Id
+        /// </summary>
+        public long SystemId { get; set; } = 0;
     }
 }

@@ -51,7 +51,7 @@ namespace aehyok.NCDP.Domains
         public long TenantId { get; set; }
 
         /// <summary>
-        /// 租户
+        /// 所属租户
         /// </summary>
         public virtual Tenant Tenant { get; set; }
     }

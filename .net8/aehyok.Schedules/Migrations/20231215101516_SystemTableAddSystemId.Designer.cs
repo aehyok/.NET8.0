@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using aehyok.EntityFramework.DbContexts;
 
@@ -10,9 +11,11 @@ using aehyok.EntityFramework.DbContexts;
 namespace aehyok.Schedules.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    partial class DvsContextModelSnapshot : ModelSnapshot
+    [Migration("20231215101516_SystemTableAddSystemId")]
+    partial class SystemTableAddSystemId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,8 +115,8 @@ namespace aehyok.Schedules.Migrations
                     b.Property<string>("Remark")
                         .HasColumnType("longtext");
 
-                    b.Property<long>("SystemId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("SystemId")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
@@ -248,8 +251,8 @@ namespace aehyok.Schedules.Migrations
                     b.Property<string>("Remark")
                         .HasColumnType("longtext");
 
-                    b.Property<long>("SystemId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("SystemId")
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -308,9 +311,6 @@ namespace aehyok.Schedules.Migrations
                     b.Property<string>("Remark")
                         .HasMaxLength(1024)
                         .HasColumnType("varchar(1024)");
-
-                    b.Property<long>("SystemId")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("TenantId")
                         .HasColumnType("bigint");
@@ -469,6 +469,9 @@ namespace aehyok.Schedules.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("varchar(64)");
 
+                    b.Property<string>("SystemId")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -518,9 +521,6 @@ namespace aehyok.Schedules.Migrations
                     b.Property<string>("Remark")
                         .HasColumnType("longtext");
 
-                    b.Property<long>("SystemId")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("TotalUsers")
                         .HasColumnType("int");
 
@@ -533,38 +533,6 @@ namespace aehyok.Schedules.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
-                });
-
-            modelBuilder.Entity("aehyok.NCDP.Domains.System", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("System");
                 });
 
             modelBuilder.Entity("aehyok.NCDP.Domains.Task", b =>
@@ -628,8 +596,8 @@ namespace aehyok.Schedules.Migrations
                     b.Property<string>("Remark")
                         .HasColumnType("longtext");
 
-                    b.Property<long>("SystemId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("SystemId")
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");

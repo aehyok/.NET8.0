@@ -20,7 +20,10 @@
   // 在insert update delete 时同时写入操作日志
   // 根据映射获取操作的表名也就是业务表 即可写入什么操作
 
-  
+  // 通过action方法上添加Attribute进行日志声明
+  // 类似于EFCore封装了统一的事务（TransactionAsyncInterceptor）
+  https://juejin.cn/post/7009116644031070244?searchId=2023121513462817BCA1D45D34D690B014
+
   ```
 ## 使用的开源库
 

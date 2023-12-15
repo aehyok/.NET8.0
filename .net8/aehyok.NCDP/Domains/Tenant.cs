@@ -27,7 +27,9 @@ namespace aehyok.NCDP.Domains
         /// </summary>
         public string AppSecret { get; set; }
 
+        /// <summary>
+        /// 所属系统Id
+        /// </summary>
+        public long SystemId { get; set; } = 0;
     }
-
-
 }
