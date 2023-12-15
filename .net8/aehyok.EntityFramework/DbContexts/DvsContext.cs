@@ -1,5 +1,4 @@
 ﻿using aehyok.EntityFramework.Entities;
-using aehyok.EntityFramework.Extensions;
 using Ardalis.Specification;
 using Microsoft.EntityFrameworkCore;
 using System;

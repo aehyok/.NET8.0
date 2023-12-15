@@ -13,13 +13,16 @@ namespace aehyok.Infrastructure.Extensions
     public static class HostingHostBuilderExtensions
     {
         /// <summary>
-        /// 初始化 Host
+        /// 初始化 Host，加载配置文件
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="moduleKey"></param>
         /// <returns></returns>
-        public static IHostBuilder InitHost(this IHostBuilder builder, string moduleKey)
+        public static IHostBuilder InitHostAndConfig(this IHostBuilder builder, string moduleKey)
         {
+            // 例如 aehyok.NCDP 最开始代码中没有使用到，是不会加载到内存中的，所以需要手动加载
+            Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll").Select(AssemblyLoadContext.Default.LoadFromAssemblyPath).ToList();
+
             Thread.CurrentThread.Name = moduleKey;
 
             // 例如 aehyok.NCDP 最开始代码中没有使用到，是不会加载到内存中的，所以需要手动加载

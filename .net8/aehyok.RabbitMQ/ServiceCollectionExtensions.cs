@@ -14,7 +14,7 @@ namespace aehyok.RabbitMQ
     public static partial class ServiceCollectionExtensions
     {
         /// <summary>
-        /// 读取RabbitMQ配置
+        /// 读取RabbitMQ配置，以及注入RabbitMQ的发布者和订阅者
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
@@ -30,30 +30,14 @@ namespace aehyok.RabbitMQ
             return services;
         }
 
+        /// <summary>
+        /// 初始化RabbitMQ事件订阅
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
         public static IApplicationBuilder AddRabbitMQEventBus(this IApplicationBuilder app)
         {
             var subscriber = app.ApplicationServices.GetRequiredService<IEventSubscriber>();
-            
-            //var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(item => item.FullName.StartsWith("aehyok.")).ToList();
-            //try
-            //{
-            //    foreach (var assembly in assemblies)
-            //    {
-            //        foreach (var handleType in assembly.GetTypes())
-            //        { 
-            //            if (IsAssignableToGenericInterface(handleType, typeof(IEventHandler<>)))
-            //            {
-            //                var eventType = handleType.GetInterfaces().Where(item => item.IsGenericType).SingleOrDefault().GetGenericArguments().SingleOrDefault();
-            //                subscriber.Subscribe(eventType, handleType);
-            //            }
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
-
             TypeFinders.SearchTypes(typeof(IEventHandler<>), TypeFinders.TypeClassification.GenericInterface).ForEach(item =>
             {
                 var eventType = item.GetInterfaces().Where(item => item.IsGenericType).SingleOrDefault().GetGenericArguments().SingleOrDefault();
@@ -61,19 +45,6 @@ namespace aehyok.RabbitMQ
             });
 
             return app;
-        }
-
-        public static bool IsAssignableToGenericInterface(Type givenType, Type genericInterfaceType)
-        {
-            var interfaceTypes = givenType.GetInterfaces();
-            foreach (var it in interfaceTypes)
-            {
-                if (it.IsGenericType && it.GetGenericTypeDefinition() == genericInterfaceType)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

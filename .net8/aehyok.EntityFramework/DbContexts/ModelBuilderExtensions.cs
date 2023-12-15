@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Extensions
+namespace aehyok.EntityFramework.DbContexts
 {
     public static class ModelBuilderExtensions
     {

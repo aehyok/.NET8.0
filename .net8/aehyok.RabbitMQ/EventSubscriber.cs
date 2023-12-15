@@ -1,4 +1,5 @@
-﻿using aehyok.RabbitMQ.EventBus;
+﻿using aehyok.Infrastructure.TypeFinders;
+using aehyok.RabbitMQ.EventBus;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -114,7 +115,7 @@ namespace aehyok.RabbitMQ
                     foreach (var type in assembly.GetTypes())
                     {
                         //判断type是否继承了CronScheduleService类
-                        if (ServiceCollectionExtensions.IsAssignableToGenericInterface(type, typeof(IEventHandler<>)))
+                        if(TypeFinders.IsAssignableToGenericInterface(type, typeof(IEventHandler<>)))
                         {
                             //var handler = (IEventHandler)this.scopeFactory.CreateScope().ServiceProvider.GetRequiredService(type);
                             var handler = (IEventHandler)Activator.CreateInstance(type);
