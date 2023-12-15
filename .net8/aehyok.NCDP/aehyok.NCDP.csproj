@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
+    <ProjectReference Include="..\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace aehyok.NCDP.Domains
 {
     /// <summary>
-    /// 配置项
+    /// 系统配置参数项
     /// </summary>
     public class Options : Entity
     {
@@ -31,5 +31,22 @@ namespace aehyok.NCDP.Domains
         /// </summary>
         [MaxLength(1024)]
         public string Remark { get; set; }
+        
+        /// <summary>
+        /// 租户Id
+        /// </summary>
+        public long TenantId { get; set; }
+
+        /// <summary>
+        /// 所属租户
+        /// </summary>
+        public virtual Tenant Tenant { get; set; }
+
+        /// <summary>
+        /// 所属系统Id
+        /// </summary>
+        public long SystemId { get; set; } = 0;
+
+
     }
 }

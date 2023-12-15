@@ -1,4 +1,5 @@
-﻿using aehyok.EntityFramework.Entities;
+﻿using aehyok.Core.Enums;
+using aehyok.EntityFramework.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,6 +35,11 @@ namespace aehyok.NCDP.Domains
         /// 菜单类型
         /// </summary>
         public MenuType Type { get; set; }
+
+        /// <summary>
+        /// 所属平台类型
+        /// </summary>
+        public PlatformType PlatformType { get; set; }
 
         /// <summary>
         /// 图标
@@ -97,8 +103,14 @@ namespace aehyok.NCDP.Domains
         /// <summary>
         /// 菜单接口
         /// </summary>
-        //public virtual IEnumerable<MenuResource> Resources { get; set; }
+        public virtual IEnumerable<MenuResource> Resources { get; set; }
+
+        /// <summary>
+        /// 所属系统Id
+        /// </summary>
+        public long SystemId { get; set; } = 0;
     }
+
 
     /// <summary>
     /// 菜单类型
