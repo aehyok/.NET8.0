@@ -8,16 +8,6 @@ namespace aehyok.Schedules
 {
     public class QuestionSchedule2 : CronScheduleService
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        //protected override string Expression
-        //{
-        //    get
-        //    {
-        //        return "";
-        //    }
-        //}
         protected override string Expression => "* 50 * * * ?";
 
         protected override Task ProcessAsync(CancellationToken cancellationToken)
