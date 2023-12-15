@@ -1,5 +1,6 @@
 ## .net 8
 
+- **1、EFCore更新数据库**
   ```
    在aehyok.Schedules项目下
 
@@ -8,6 +9,19 @@
    dotnet-ef database update -c DvsContext --framework net8.0 -v
   ```
 
+- **2、接口安全性**
+  ```
+  IActionDescriptorCollectionProvider 
+  ```  
+
+- **3、操作日志**
+  ```
+  https://www.cnblogs.com/hooray/archive/2012/09/05/2672133.html
+  // 在insert update delete 时同时写入操作日志
+  // 根据映射获取操作的表名也就是业务表 即可写入什么操作
+
+  
+  ```
 ## 使用的开源库
 
 ```

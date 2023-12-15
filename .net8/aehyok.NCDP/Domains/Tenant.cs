@@ -12,6 +12,22 @@ namespace aehyok.NCDP.Domains
     /// </summary>
     public class Tenant: AuditedEntity
     {
+        /// <summary>
+        /// 租户名称
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// AppId
+        /// </summary>
+        public string AppId { get; set; }
+
+        /// <summary>
+        /// App秘钥
+        /// </summary>
+        public string AppSecret { get; set; }
 
     }
+
+
 }
