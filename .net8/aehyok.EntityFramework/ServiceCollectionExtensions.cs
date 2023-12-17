@@ -15,7 +15,7 @@ namespace aehyok.EntityFramework
     public static partial class ServiceCollectionExtensions
     {
         /// <summary>
-        /// 初始化Mysql配置,将EFCoreDvsContext注入到容器中,
+        /// 初始化Mysql配置,将EFCore、DvsContext注入到容器中,
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
