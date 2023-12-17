@@ -24,6 +24,7 @@
     <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
     <ProjectReference Include="..\aehyok.NCDP\aehyok.NCDP.csproj" />
     <ProjectReference Include="..\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
+    <ProjectReference Include="..\aehyok.Redis\aehyok.Redis.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
