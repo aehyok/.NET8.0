@@ -8,7 +8,7 @@ using aehyok.EntityFramework.DbContexts;
 
 #nullable disable
 
-namespace aehyok.Schedules.Migrations
+namespace aehyok.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
     [Migration("20231215101516_SystemTableAddSystemId")]

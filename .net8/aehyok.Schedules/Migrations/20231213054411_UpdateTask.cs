@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace aehyok.Schedules.Migrations
+namespace aehyok.SystemService.Migrations
 {
     /// <inheritdoc />
     public partial class UpdateTask : Migration

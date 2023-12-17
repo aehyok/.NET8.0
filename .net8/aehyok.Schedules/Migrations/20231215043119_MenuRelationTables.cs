@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace aehyok.Schedules.Migrations
+namespace aehyok.SystemService.Migrations
 {
     /// <inheritdoc />
     public partial class MenuRelationTables : Migration

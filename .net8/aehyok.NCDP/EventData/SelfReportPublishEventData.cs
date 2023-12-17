@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Schedules.Event
+namespace aehyok.NCDP.EventData
 {
-    public class SelfReportPublishEvent : EventBase
+    public class SelfReportPublishEventData : EventDataBase
     {
-
         public long TaskId { get; set; }
     }
 }

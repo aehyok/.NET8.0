@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using aehyok.Infrastructure.TypeFinders;
+using aehyok.CronTask;
+
 namespace aehyok.Schedules
 {
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         /// <summary>
         /// 初始化定时任务
