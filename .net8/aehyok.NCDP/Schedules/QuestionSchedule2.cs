@@ -1,10 +1,11 @@
-﻿using System;
+﻿using aehyok.CronTask;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Schedules
+namespace aehyok.NCDP.Schedules
 {
     public class QuestionSchedule2 : CronScheduleService
     {

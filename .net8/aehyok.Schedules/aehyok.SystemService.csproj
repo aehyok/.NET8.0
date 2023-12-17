@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\aehyok.CronTask\aehyok.CronTask.csproj" />
     <ProjectReference Include="..\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
     <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
     <ProjectReference Include="..\aehyok.NCDP\aehyok.NCDP.csproj" />

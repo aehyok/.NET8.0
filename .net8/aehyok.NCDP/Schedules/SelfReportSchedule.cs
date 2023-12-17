@@ -1,23 +1,14 @@
-﻿using System;
+﻿using aehyok.CronTask;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Schedules
+namespace aehyok.NCDP.Schedules
 {
     public class SelfReportSchedule : CronScheduleService
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        //protected override string Expression
-        //{
-        //    get
-        //    {
-        //        return "";
-        //    }
-        //}
         protected override string Expression => "0 50 * * * ?";
 
         protected override Task ProcessAsync(CancellationToken cancellationToken)

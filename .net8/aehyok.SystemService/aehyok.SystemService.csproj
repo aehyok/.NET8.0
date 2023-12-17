@@ -1,16 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
-    <ProjectReference Include="..\aehyok.CronTask\aehyok.CronTask.csproj" />
-    <ProjectReference Include="..\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
+    <ProjectReference Include="..\aehyok.Schedules\aehyok.Schedules.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Schedules", "aehyok.Schedules\aehyok.Schedules.csproj", "{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.SystemService", "aehyok.Schedules\aehyok.SystemService.csproj", "{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.RabbitMQ", "aehyok.RabbitMQ\aehyok.RabbitMQ.csproj", "{9F797E1A-4D68-41E4-8DDF-FC16946EB05F}"
 EndProject
@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.EntityFramework", "a
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.NCDP", "aehyok.NCDP\aehyok.NCDP.csproj", "{92C83319-2286-4AA9-BA36-791DE0498296}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Core", "aehyok.Core\aehyok.Core.csproj", "{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core", "aehyok.Core\aehyok.Core.csproj", "{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.CronTask", "aehyok.CronTask\aehyok.CronTask.csproj", "{B2AA95E3-48AF-4E72-B625-90983398B617}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2AA95E3-48AF-4E72-B625-90983398B617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2AA95E3-48AF-4E72-B625-90983398B617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2AA95E3-48AF-4E72-B625-90983398B617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2AA95E3-48AF-4E72-B625-90983398B617}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
