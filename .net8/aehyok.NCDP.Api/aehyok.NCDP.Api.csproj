@@ -20,11 +20,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
-    <ProjectReference Include="..\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
     <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
     <ProjectReference Include="..\aehyok.NCDP\aehyok.NCDP.csproj" />
-    <ProjectReference Include="..\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
-    <ProjectReference Include="..\aehyok.Redis\aehyok.Redis.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.Redis\aehyok.Redis.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

@@ -5,21 +5,23 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.SystemService", "aehyok.SystemService\aehyok.SystemService.csproj", "{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.RabbitMQ", "aehyok.RabbitMQ\aehyok.RabbitMQ.csproj", "{9F797E1A-4D68-41E4-8DDF-FC16946EB05F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.RabbitMQ", "Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj", "{9F797E1A-4D68-41E4-8DDF-FC16946EB05F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Infrastructure", "aehyok.Infrastructure\aehyok.Infrastructure.csproj", "{5C1256DA-06DC-45C2-85DE-B17B9B692B88}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.NCDP.Api", "aehyok.NCDP.Api\aehyok.NCDP.Api.csproj", "{96319AF9-119E-4E7C-A47C-0A5C3DD4F485}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.EntityFramework", "aehyok.EntityFramework\aehyok.EntityFramework.csproj", "{B1B36DB3-22C9-43F1-8977-9428B823916C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.EntityFramework", "Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj", "{B1B36DB3-22C9-43F1-8977-9428B823916C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.NCDP", "aehyok.NCDP\aehyok.NCDP.csproj", "{92C83319-2286-4AA9-BA36-791DE0498296}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core", "aehyok.Core\aehyok.Core.csproj", "{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.CronTask", "aehyok.CronTask\aehyok.CronTask.csproj", "{B2AA95E3-48AF-4E72-B625-90983398B617}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.CronTask", "Libraries\aehyok.CronTask\aehyok.CronTask.csproj", "{B2AA95E3-48AF-4E72-B625-90983398B617}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Redis", "aehyok.Redis\aehyok.Redis.csproj", "{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Redis", "Libraries\aehyok.Redis\aehyok.Redis.csproj", "{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9F797E1A-4D68-41E4-8DDF-FC16946EB05F} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
+		{B1B36DB3-22C9-43F1-8977-9428B823916C} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
+		{B2AA95E3-48AF-4E72-B625-90983398B617} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
+		{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E8973E0-B073-4ED5-9BB9-57329D47A91C}
