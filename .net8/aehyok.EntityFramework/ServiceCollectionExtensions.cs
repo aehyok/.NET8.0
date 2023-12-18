@@ -1,4 +1,5 @@
-﻿using aehyok.EntityFramework.DbContexts;
+﻿using aehyok.Core;
+using aehyok.EntityFramework.DbContexts;
 using aehyok.EntityFramework.Repository;
 using aehyok.Infrastructure.TypeFinders;
 using Microsoft.EntityFrameworkCore;

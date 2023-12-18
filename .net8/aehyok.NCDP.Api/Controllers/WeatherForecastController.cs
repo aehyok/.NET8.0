@@ -2,6 +2,7 @@ using aehyok.NCDP;
 using aehyok.NCDP.EventData;
 using aehyok.NCDP.Services;
 using aehyok.RabbitMQ.EventBus;
+using aehyok.Redis;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aehyok.NCDP.Api.Controllers
@@ -17,11 +18,13 @@ namespace aehyok.NCDP.Api.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IServiceScopeFactory scopeFactory;
+        private readonly IRedisService redisService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IServiceScopeFactory scopeFactory)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IServiceScopeFactory scopeFactory, IRedisService redisService)
         {
             _logger = logger;
             this.scopeFactory = scopeFactory;
+            this.redisService = redisService;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -29,7 +32,10 @@ namespace aehyok.NCDP.Api.Controllers
         {
             using var scope = this.scopeFactory.CreateScope();
 
+            var result = await redisService.GetAsync<string>("ak");
+
             var taskService = scope.ServiceProvider.GetRequiredService<ITaskService>();
+
             var list = await taskService.GetListAsync();
 
             foreach (var item in list)

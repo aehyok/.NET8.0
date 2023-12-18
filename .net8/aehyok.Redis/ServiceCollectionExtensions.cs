@@ -22,7 +22,7 @@ namespace aehyok.Redis
         {
             app.AddRedis(options =>
             {
-                options.ConnectionString = configuration.GetConnectionString("Redis");
+                options.ConnectionString = configuration.GetSection("Redis:ConnectionString").Value;
             });
 
             return app;
@@ -44,7 +44,8 @@ namespace aehyok.Redis
             }
             var csredis = new CSRedisClient(redisConnectionString);
             RedisHelper.Initialization(csredis);
-
+            var value = RedisHelper.Get("ak");
+            Console.WriteLine(value);
             return app;
         }
     }
