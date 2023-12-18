@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.SystemService", "aehyok.Schedules\aehyok.SystemService.csproj", "{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.SystemService", "aehyok.SystemService\aehyok.SystemService.csproj", "{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.RabbitMQ", "aehyok.RabbitMQ\aehyok.RabbitMQ.csproj", "{9F797E1A-4D68-41E4-8DDF-FC16946EB05F}"
 EndProject
@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core", "aehyok.Core\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.CronTask", "aehyok.CronTask\aehyok.CronTask.csproj", "{B2AA95E3-48AF-4E72-B625-90983398B617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Redis", "aehyok.Redis\aehyok.Redis.csproj", "{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Redis", "aehyok.Redis\aehyok.Redis.csproj", "{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
