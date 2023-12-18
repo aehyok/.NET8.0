@@ -17,7 +17,12 @@ namespace aehyok.Redis
 
     public static partial  class ServiceCollectionExtensions
     {
-
+        /// <summary>
+        /// 初始化Redis配置
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IApplicationBuilder AddRedis(this IApplicationBuilder app, IConfiguration configuration)
         {
             app.AddRedis(options =>
@@ -29,11 +34,11 @@ namespace aehyok.Redis
         }
 
         /// <summary>
-        /// 初始化RabbitMQ事件订阅
+        /// 初始化Redis配置
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
-        public static IApplicationBuilder AddRedis(this IApplicationBuilder app, Action<RedisOption> configure)
+        private static IApplicationBuilder AddRedis(this IApplicationBuilder app, Action<RedisOption> configure)
         {
             RedisOption options = new RedisOption();
             configure(options);
@@ -44,8 +49,6 @@ namespace aehyok.Redis
             }
             var csredis = new CSRedisClient(redisConnectionString);
             RedisHelper.Initialization(csredis);
-            var value = RedisHelper.Get("ak");
-            Console.WriteLine(value);
             return app;
         }
     }
