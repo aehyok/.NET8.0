@@ -8,9 +8,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
-    <ProjectReference Include="..\aehyok.CronTask\aehyok.CronTask.csproj" />
-    <ProjectReference Include="..\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
-    <ProjectReference Include="..\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.CronTask\aehyok.CronTask.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.Redis\aehyok.Redis.csproj" />
   </ItemGroup>
 
 </Project>
