@@ -49,7 +49,7 @@ namespace aehyok.EntityFramework
                 options.UseMySql(connectionString, server, mysqlOptions =>
                 {
                     // 设置数据迁移的程序集名称
-                    mysqlOptions.MigrationsAssembly("aehyok.Schedules");
+                    mysqlOptions.MigrationsAssembly("aehyok.SystemService");
                     //if (moduleKey == AppConstants.SYSTEM_MIGRATIONS_MODULE_KEY)
                     //{
                     //    mysqlOptions.MigrationsAssembly("DVS.SystemService");
