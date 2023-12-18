@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Host.InitHostAndConfig("aehyok.Schedules");
+builder.Host.InitHostAndConfig("aehyok.NCDP.Api");
 
 builder.Services.AddEFCoreAndMySql(builder.Configuration);
 

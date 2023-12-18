@@ -28,11 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\aehyok.CronTask\aehyok.CronTask.csproj" />
-    <ProjectReference Include="..\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
     <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
     <ProjectReference Include="..\aehyok.NCDP\aehyok.NCDP.csproj" />
-    <ProjectReference Include="..\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.CronTask\aehyok.CronTask.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
   </ItemGroup>
 
   <ItemGroup>

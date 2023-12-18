@@ -5,15 +5,14 @@ using Microsoft.Extensions.DependencyInjection;
 using aehyok.RabbitMQ;
 using aehyok.Infrastructure.Extensions;
 using aehyok.EntityFramework;
-
-
-Console.WriteLine("Hello, World!");
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var env = builder.Environment;
+// 判断环境
+var env = builder.Environment.IsDevelopment;
 
-builder.Host.InitHostAndConfig("aehyok.Schedules");
+builder.Host.InitHostAndConfig("aehyok.SystemService");
 
 builder.Services.AddEFCoreAndMySql(builder.Configuration);
 
