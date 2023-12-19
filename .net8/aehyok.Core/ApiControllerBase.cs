@@ -10,10 +10,16 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core
 {
+    /// <summary>
+    /// 项目中所有控制器的基类
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public abstract class ApiControllerBase : ControllerBase
     {
+        /// <summary>
+        /// 可直接使用AutoMapper
+        /// </summary>
         public IMapper Mapper
         {
             get

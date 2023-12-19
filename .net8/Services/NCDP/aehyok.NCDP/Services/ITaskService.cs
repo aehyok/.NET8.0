@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Task = aehyok.NCDP.Domains.Task;
+using AutoTask = aehyok.NCDP.Domains.AutoTask;
 
 namespace aehyok.NCDP.Services
 {
-    public interface ITaskService: IServiceBase<Task>
+    public interface ITaskService: IServiceBase<AutoTask>
     {
 
     }
