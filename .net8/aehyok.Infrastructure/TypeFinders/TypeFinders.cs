@@ -108,7 +108,7 @@ namespace aehyok.Infrastructure.TypeFinders
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.Message);
             }
             return types;
         }
