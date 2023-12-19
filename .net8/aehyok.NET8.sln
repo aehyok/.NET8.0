@@ -35,6 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Basic", "Services\Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Basic.Api", "Services\Basic\aehyok.Basic.Api\aehyok.Basic.Api.csproj", "{03F8D3F0-31E3-4149-AF8C-F571A69A453E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{8D102B9A-B984-498B-83BE-8A01CAE00695}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\README.md = Docs\README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Swagger", "aehyok.Swagger\aehyok.Swagger.csproj", "{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +96,10 @@ Global
 		{03F8D3F0-31E3-4149-AF8C-F571A69A453E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03F8D3F0-31E3-4149-AF8C-F571A69A453E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03F8D3F0-31E3-4149-AF8C-F571A69A453E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +116,7 @@ Global
 		{76B8975A-9C72-43F1-926F-7F22D04E93C8} = {863D372F-CD5B-4E75-B2D9-7A9F0D4BF8DA}
 		{CBC19F99-523D-4E21-A2E8-29251B9BB37F} = {ED65DDD8-F1A3-4497-A7A3-33978E61C83A}
 		{03F8D3F0-31E3-4149-AF8C-F571A69A453E} = {ED65DDD8-F1A3-4497-A7A3-33978E61C83A}
+		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E8973E0-B073-4ED5-9BB9-57329D47A91C}

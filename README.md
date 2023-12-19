@@ -9,6 +9,13 @@
    dotnet-ef database update -c DvsContext --framework net8.0 -v
   ```
 
+ ## 有些文件需要设置为 嵌入的资源
+ ```
+ CSS 文件
+ JavaScript文件
+ Html文件
+ ``` 
+
 - **2、接口安全性**
   ```
   IActionDescriptorCollectionProvider 
