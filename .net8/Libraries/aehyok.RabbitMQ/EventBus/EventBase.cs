@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace aehyok.RabbitMQ.EventBus
 {
-    public class EventDataBase : IEvent
+    /// <summary>
+    /// 事件传递数据基类
+    /// </summary>
+    public class EventBase : IEvent
     {
         public object Id { get; set; } = Guid.NewGuid();
 

@@ -32,6 +32,7 @@
     <ProjectReference Include="..\Libraries\aehyok.CronTask\aehyok.CronTask.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
+    <ProjectReference Include="..\Services\Basic\aehyok.Basic\aehyok.Basic.csproj" />
     <ProjectReference Include="..\Services\NCDP\aehyok.NCDP\aehyok.NCDP.csproj" />
   </ItemGroup>
 

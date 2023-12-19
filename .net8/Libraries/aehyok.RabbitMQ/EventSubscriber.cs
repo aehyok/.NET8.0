@@ -124,7 +124,7 @@ namespace aehyok.RabbitMQ
 
                             using var scope = this.logger.BeginScope(new Dictionary<string, object>
                             {
-                                ["EventBusId"] = ((EventDataBase)eventData).Id,
+                                ["EventBusId"] = ((EventBase)eventData).Id,
                                 ["Handler"] = handler.GetType().FullName,
                             });
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.NCDP.EventData
 {
-    public class SelfReportPublishEventData : EventDataBase
+    public class SelfReportPublishEventData : EventBase
     {
         public long TaskId { get; set; }
     }

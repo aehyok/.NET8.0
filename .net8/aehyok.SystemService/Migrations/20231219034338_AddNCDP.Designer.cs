@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using aehyok.EntityFramework.DbContexts;
 
@@ -10,9 +11,11 @@ using aehyok.EntityFramework.DbContexts;
 namespace aehyok.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    partial class DvsContextModelSnapshot : ModelSnapshot
+    [Migration("20231219034338_AddNCDP")]
+    partial class AddNCDP
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1026,20 +1029,6 @@ namespace aehyok.SystemService.Migrations
                     b.HasIndex("UpdatedBy");
 
                     b.ToTable("AutoTaskRelation");
-                });
-
-            modelBuilder.Entity("aehyok.SystemService.Domains.CronTask", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CronTask");
                 });
 
             modelBuilder.Entity("RoleUser", b =>

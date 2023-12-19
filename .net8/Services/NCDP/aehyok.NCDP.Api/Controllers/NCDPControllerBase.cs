@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace aehyok.NCDP.Api.Controllers
 {
-    [Route("api/NCDP/[controller]")]
+    [Route("api/ncdp/[controller]")]
     public class NCDPControllerBase : ApiControllerBase
     {
 

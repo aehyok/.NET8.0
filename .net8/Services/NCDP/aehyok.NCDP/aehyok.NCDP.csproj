@@ -12,6 +12,7 @@
     <ProjectReference Include="..\..\..\Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
     <ProjectReference Include="..\..\..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
     <ProjectReference Include="..\..\..\Libraries\aehyok.Redis\aehyok.Redis.csproj" />
+    <ProjectReference Include="..\..\Basic\aehyok.Basic\aehyok.Basic.csproj" />
   </ItemGroup>
 
 </Project>
