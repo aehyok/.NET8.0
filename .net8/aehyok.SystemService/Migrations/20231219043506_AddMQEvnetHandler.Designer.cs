@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using aehyok.EntityFramework.DbContexts;
 
@@ -10,9 +11,11 @@ using aehyok.EntityFramework.DbContexts;
 namespace aehyok.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    partial class DvsContextModelSnapshot : ModelSnapshot
+    [Migration("20231219043506_AddMQEvnetHandler")]
+    partial class AddMQEvnetHandler
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,39 +190,6 @@ namespace aehyok.SystemService.Migrations
                     b.HasIndex("UpdatedBy");
 
                     b.ToTable("DictionaryItem");
-                });
-
-            modelBuilder.Entity("aehyok.Basic.Domains.File", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedBy");
-
-                    b.HasIndex("UpdatedBy");
-
-                    b.ToTable("File");
                 });
 
             modelBuilder.Entity("aehyok.Basic.Domains.Menu", b =>
@@ -1133,21 +1103,6 @@ namespace aehyok.SystemService.Migrations
                     b.Navigation("Modifier");
 
                     b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("aehyok.Basic.Domains.File", b =>
-                {
-                    b.HasOne("aehyok.Basic.Domains.User", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatedBy");
-
-                    b.HasOne("aehyok.Basic.Domains.User", "Modifier")
-                        .WithMany()
-                        .HasForeignKey("UpdatedBy");
-
-                    b.Navigation("Creator");
-
-                    b.Navigation("Modifier");
                 });
 
             modelBuilder.Entity("aehyok.Basic.Domains.Menu", b =>
