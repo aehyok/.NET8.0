@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Redis", "Libraries\a
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Serilog", "aehyok.Serilog\aehyok.Serilog.csproj", "{744E4063-3A09-4AB3-8B6C-FC528BD61522}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{744E4063-3A09-4AB3-8B6C-FC528BD61522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{744E4063-3A09-4AB3-8B6C-FC528BD61522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{744E4063-3A09-4AB3-8B6C-FC528BD61522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{744E4063-3A09-4AB3-8B6C-FC528BD61522}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{B1B36DB3-22C9-43F1-8977-9428B823916C} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
 		{B2AA95E3-48AF-4E72-B625-90983398B617} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
 		{27EDB534-DCB3-4AF4-B5ED-A11F0BE53BBE} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
+		{744E4063-3A09-4AB3-8B6C-FC528BD61522} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E8973E0-B073-4ED5-9BB9-57329D47A91C}
