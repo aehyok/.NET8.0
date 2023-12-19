@@ -152,7 +152,7 @@ namespace aehyok.RabbitMQ
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
             return true;
         }
