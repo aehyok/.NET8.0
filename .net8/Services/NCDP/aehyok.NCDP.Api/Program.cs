@@ -1,8 +1,9 @@
 using aehyok.RabbitMQ;
 using aehyok.EntityFramework;
-using AutoMapper;
 using aehyok.Infrastructure.Extensions;
 using aehyok.Redis;
+using aehyok.Swagger;
+using aehyok.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-builder.Host.InitHostAndConfig("aehyok.NCDP.Api");
+builder.Services.AddSwaggerGen("aehyok-ncdp", "无代码开放平台");
+
+builder.Host.InitHostAndConfig("aehyok-ncdp");
 
 builder.Services.AddEFCoreAndMySql(builder.Configuration);
 
@@ -23,11 +25,13 @@ builder.Services.AddRabbitMQ(builder.Configuration);
 
 var app = builder.Build();
 
+
+app.UseSetStartDefaultRoute();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger("aehyok-ncdp", "无代码开放平台");
 }
 
 app.AddRedis(app.Configuration);
