@@ -39,10 +39,4 @@
     <ProjectReference Include="..\..\NCDP\aehyok.NCDP\aehyok.NCDP.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings11.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

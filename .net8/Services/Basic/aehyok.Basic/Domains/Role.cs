@@ -1,5 +1,5 @@
-﻿using aehyok.Core.Enums;
-using aehyok.EntityFramework.Entities;
+﻿using aehyok.EntityFramework.Entities;
+using aehyok.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

@@ -1,5 +1,4 @@
-﻿using aehyok.Core.Options;
-using aehyok.Infrastructure.TypeFinders;
+﻿using aehyok.Infrastructure.TypeFinders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
@@ -7,17 +6,89 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using aehyok.RabbitMQ;
+using aehyok.EntityFramework;
+using aehyok.Swagger;
+using aehyok.Redis;
+using System.Runtime.Loader;
+using aehyok.Infrastructure.Options;
 
 namespace aehyok.Core
 {
     public static partial class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// 应用程序启动时初始化
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="moduleKey"></param>
+        /// <param name="moduleTitle"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static WebApplicationBuilder AddBuilderServices(this WebApplicationBuilder builder, string moduleKey, string moduleTitle)
+        {
+            builder.Services.AddControllers();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+
+            builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddSwaggerGen(moduleKey, moduleTitle);
+
+            builder.Host.InitHostAndConfig(moduleKey) ;
+
+            builder.Services.AddEFCoreAndMySql(builder.Configuration);
+
+            builder.Services.AddAutoMapper(typeof(ServiceCollectionExtensions));
+
+            builder.Services.AddRabbitMQ(builder.Configuration);
+            return builder;
+        }
+
+        /// <summary>
+        /// 应用程序启动时 注册中间件
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseApp(this WebApplication app, string moduleKey, string moduleTitle)
+        {
+            app.UseSetStartDefaultRoute();
+
+            app.UseSwagger(moduleKey, moduleTitle);
+
+            app.AddRedis(app.Configuration);
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthorization();
+
+            app.MapControllers();
+            return app;
+        }
+
+        /// <summary>
+        /// 初始化 Host，加载配置文件
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="moduleKey"></param>
+        /// <returns></returns>
+        public static IHostBuilder InitHostAndConfig(this IHostBuilder builder, string moduleKey)
+        {
+            Thread.CurrentThread.Name = moduleKey;
+
+            // 例如 aehyok.NCDP 最开始代码中没有使用到，是不会加载到内存中的，所以需要手动加载
+            Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll").Select(AssemblyLoadContext.Default.LoadFromAssemblyPath).ToList();
+
+            builder.ConfigureAppConfiguration((context, options) =>
+            {
+                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/appsettings.json"), true, true);
+                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/{moduleKey}-appsettings.json"), true, true);
+            });
+
+            return builder;
+        }
+
         /// <summary>
         /// 设置开发环境项目启动后的默认启动路由
         /// </summary>

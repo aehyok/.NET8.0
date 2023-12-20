@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.Options;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Core.Options
+namespace aehyok.Infrastructure.Options
 {
     /// <summary>
     /// AppSettings.json 中所有根节点配置信息

@@ -1,10 +1,8 @@
 ﻿using aehyok.EntityFramework.Repository;
-using aehyok.EntityFramework;
 using aehyok.NCDP.Domains;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using AutoTask = aehyok.NCDP.Domains.AutoTask;
-using aehyok.Core;
+using aehyok.Infrastructure;
 
 namespace aehyok.NCDP.Services
 {
