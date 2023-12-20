@@ -9,6 +9,12 @@ namespace aehyok.Basic.Api.Controllers
     /// </summary>
     public class DictionaryController : BasicControllerBase
     {
+        private readonly  ILogger<DictionaryController> logger;
+
+        public DictionaryController(ILogger<DictionaryController> logger)
+        {
+            this.logger = logger;
+        }
         /// <summary>
         /// 测试接口
         /// </summary>
@@ -16,6 +22,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpGet]
         public Task Test()
         {
+            this.logger.LogError("测试方法报错");
             return Task.CompletedTask;
         }
     }

@@ -23,7 +23,7 @@ namespace aehyok.Redis
         /// <param name="app"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IApplicationBuilder AddRedis(this IApplicationBuilder app, IConfiguration configuration)
+        public static IApplicationBuilder UseRedis(this IApplicationBuilder app, IConfiguration configuration)
         {
             app.AddRedis(options =>
             {

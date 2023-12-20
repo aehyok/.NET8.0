@@ -11,26 +11,46 @@ using aehyok.RabbitMQ;
 using aehyok.EntityFramework;
 using aehyok.Swagger;
 using aehyok.Redis;
+using aehyok.CronTask;
 using System.Runtime.Loader;
 using aehyok.Infrastructure.Options;
+using aehyok.Infrastructure;
+using aehyok.Serilog;
 
 namespace aehyok.Core
 {
     public static partial class ServiceCollectionExtensions
     {
         /// <summary>
+        /// 项目初始化函数
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="moduleKey"></param>
+        /// <param name="moduleTitle"></param>
+        /// <param name="isSystemService">是否是SystemService这个服务</param>
+        /// <returns></returns>
+        public static async Task InitAppliation(this WebApplicationBuilder builder, string moduleKey, string moduleTitle, bool isSystemService = false)
+        {
+            builder.AddBuilderServices(moduleKey, moduleTitle, isSystemService);
+
+            var app = builder.Build();
+
+            app.UseApp(moduleKey, moduleTitle, isSystemService);
+
+            await app.RunAsync();
+        }
+
+        /// <summary>
         /// 应用程序启动时初始化
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="moduleKey"></param>
         /// <param name="moduleTitle"></param>
-        /// <param name="configuration"></param>
+        /// <param name="isSystemService">是否是SystemService这个服务</param>
         /// <returns></returns>
-        public static WebApplicationBuilder AddBuilderServices(this WebApplicationBuilder builder, string moduleKey, string moduleTitle)
+        public static WebApplicationBuilder AddBuilderServices(this WebApplicationBuilder builder, string moduleKey, string moduleTitle, bool isSystemService = false)
         {
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
 
             builder.Services.AddEndpointsApiExplorer();
 
@@ -38,11 +58,22 @@ namespace aehyok.Core
 
             builder.Host.InitHostAndConfig(moduleKey) ;
 
+            builder.Services.ConfigureOptions(builder.Configuration);
+
+            ///
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddEFCoreAndMySql(builder.Configuration);
 
             builder.Services.AddAutoMapper(typeof(ServiceCollectionExtensions));
 
             builder.Services.AddRabbitMQ(builder.Configuration);
+
+            if (isSystemService) 
+            {
+                builder.Services.AddCronTask();
+            }
+
             return builder;
         }
 
@@ -51,19 +82,27 @@ namespace aehyok.Core
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
-        public static IApplicationBuilder UseApp(this WebApplication app, string moduleKey, string moduleTitle)
+        public static IApplicationBuilder UseApp(this WebApplication app, string moduleKey, string moduleTitle, bool isSystemService = false)
         {
             app.UseSetStartDefaultRoute();
 
             app.UseSwagger(moduleKey, moduleTitle);
 
-            app.AddRedis(app.Configuration);
+            app.UseRedis(app.Configuration);
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
             app.MapControllers();
+
+            App.Init(app.Services);
+
+            if(isSystemService)
+            {
+                app.AddRabbitMQEventBus();
+            }
+
             return app;
         }
 
@@ -85,6 +124,8 @@ namespace aehyok.Core
                 options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/appsettings.json"), true, true);
                 options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/{moduleKey}-appsettings.json"), true, true);
             });
+
+            builder.UseLog();
 
             return builder;
         }
@@ -117,7 +158,7 @@ namespace aehyok.Core
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection ConfigureOptions(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection ConfigureOptions(this IServiceCollection services, IConfiguration configuration)
         {
             PrintConfigurationProvider(configuration);
 
@@ -150,7 +191,7 @@ namespace aehyok.Core
         /// 程序启动时打印配置文件地址
         /// </summary>
         /// <param name="configuration"></param>
-        public static void PrintConfigurationProvider(IConfiguration configuration)
+        private static void PrintConfigurationProvider(IConfiguration configuration)
         {
             var root = (IConfigurationBuilder)configuration;
 
