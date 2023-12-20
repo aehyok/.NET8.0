@@ -1,0 +1,17 @@
+{
+	"Swagger": {
+        "Enable": true,
+        "SwaggerGen": true,
+        "SwaggerUI": true,
+        "Endpoints": [
+            {
+                "Url": "/api/basic/swagger.json",
+                "Name": "基础服务子系统"
+            },
+            {
+                "Url": "/api/ncdp/swagger.json",
+                "Name": "无代码开放子系统"
+            }
+        ]
+    }
+}

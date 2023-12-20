@@ -100,11 +100,11 @@ namespace aehyok.Swagger
 
                     options.Interceptors.RequestInterceptorFunction = "function(request){return dvs.auth.requestInterceptor(request);}";
 
-                    if (app.Environment.IsDevelopment())
-                    {
-                        options.SwaggerEndpoint($"/api/{name.Replace("aehyok-", "")}/swagger.json", title);
-                    }
-                    else
+                    //if (app.Environment.IsDevelopment())
+                    //{
+                    //    options.SwaggerEndpoint($"/api/{name.Replace("aehyok-", "")}/swagger.json", title);
+                    //}
+                    //else
                     {
                         swaggerOptions.Value?.Endpoints?.ForEach(a => options.SwaggerEndpoint(a.Url, a.Name));
                     }

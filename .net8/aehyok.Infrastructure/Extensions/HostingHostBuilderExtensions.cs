@@ -27,7 +27,8 @@ namespace aehyok.Infrastructure.Extensions
 
             builder.ConfigureAppConfiguration((context, options) =>
             {
-                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, "../../../../../../etc/appsettings.json"), true, true);
+                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/appsettings.json"), true, true);
+                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/{moduleKey}-appsettings.json"), true, true);
             });
 
             return builder;
