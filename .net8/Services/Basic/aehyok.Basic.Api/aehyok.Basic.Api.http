@@ -1,4 +1,4 @@
-@aehyok.Basic.Api_HostAddress = http://localhost:5194
+@aehyok.Basic.Api_HostAddress = http://localhost:11001
 
 GET {{aehyok.Basic.Api_HostAddress}}/weatherforecast/
 Accept: application/json

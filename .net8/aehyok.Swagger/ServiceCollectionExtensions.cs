@@ -116,8 +116,6 @@ namespace aehyok.Swagger
                     options.InjectStylesheet("/docs/static/dvs-swagger.css");
 
                     //此处需要将文件设置为嵌入的资源
-                    var assenbly = Assembly.GetExecutingAssembly().GetManifestResourceStream("aehyok.Swagger.Resources.dvs-swagger.html");
-
                     options.IndexStream = () => Assembly.GetExecutingAssembly().GetManifestResourceStream("aehyok.Swagger.Resources.dvs-swagger.html");
                 });
 

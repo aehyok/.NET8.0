@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\aehyok.Core\aehyok.Core.csproj" />
-    <ProjectReference Include="..\..\..\aehyok.Swagger\aehyok.Swagger.csproj" />
   </ItemGroup>
 
 </Project>
