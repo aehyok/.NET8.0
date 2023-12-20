@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,16 +28,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
-    <ProjectReference Include="..\Libraries\aehyok.CronTask\aehyok.CronTask.csproj" />
-    <ProjectReference Include="..\Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
-    <ProjectReference Include="..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
-    <ProjectReference Include="..\Services\Basic\aehyok.Basic\aehyok.Basic.csproj" />
-    <ProjectReference Include="..\Services\NCDP\aehyok.NCDP\aehyok.NCDP.csproj" />
+    <ProjectReference Include="..\..\..\aehyok.Core\aehyok.Core.csproj" />
+    <ProjectReference Include="..\..\..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\aehyok.Swagger\aehyok.Swagger.csproj" />
+    <ProjectReference Include="..\..\..\Libraries\aehyok.CronTask\aehyok.CronTask.csproj" />
+    <ProjectReference Include="..\..\..\Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\..\Libraries\aehyok.Redis\aehyok.Redis.csproj" />
+    <ProjectReference Include="..\..\Basic\aehyok.Basic\aehyok.Basic.csproj" />
+    <ProjectReference Include="..\..\NCDP\aehyok.NCDP\aehyok.NCDP.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="appsettings.json">
+    <None Update="appsettings11.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

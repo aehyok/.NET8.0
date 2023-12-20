@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.SystemService", "aehyok.SystemService\aehyok.SystemService.csproj", "{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.RabbitMQ", "Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj", "{9F797E1A-4D68-41E4-8DDF-FC16946EB05F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Infrastructure", "aehyok.Infrastructure\aehyok.Infrastructure.csproj", "{5C1256DA-06DC-45C2-85DE-B17B9B692B88}"
@@ -40,7 +38,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{8D102B9A-B
 		Docs\README.md = Docs\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aehyok.Swagger", "aehyok.Swagger\aehyok.Swagger.csproj", "{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Swagger", "aehyok.Swagger\aehyok.Swagger.csproj", "{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemService", "SystemService", "{E7BC258F-CB76-4061-AD59-6527E289A92F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.SystemService", "Services\SystemService\aehyok.SystemService\aehyok.SystemService.csproj", "{8E540789-BACB-4047-9C8C-21A4509F819F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +50,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD2F5ED2-06D4-4BA6-8CF2-A77E08408EB0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F797E1A-4D68-41E4-8DDF-FC16946EB05F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F797E1A-4D68-41E4-8DDF-FC16946EB05F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F797E1A-4D68-41E4-8DDF-FC16946EB05F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -100,6 +98,10 @@ Global
 		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E540789-BACB-4047-9C8C-21A4509F819F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E540789-BACB-4047-9C8C-21A4509F819F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E540789-BACB-4047-9C8C-21A4509F819F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E540789-BACB-4047-9C8C-21A4509F819F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +119,8 @@ Global
 		{CBC19F99-523D-4E21-A2E8-29251B9BB37F} = {ED65DDD8-F1A3-4497-A7A3-33978E61C83A}
 		{03F8D3F0-31E3-4149-AF8C-F571A69A453E} = {ED65DDD8-F1A3-4497-A7A3-33978E61C83A}
 		{90A91E03-6CC6-488D-8AF9-6E5E4B4657E7} = {49AADDBB-8F4E-4996-A5A1-C5624A7E4E9C}
+		{E7BC258F-CB76-4061-AD59-6527E289A92F} = {6F5755B4-B580-4480-A44D-891032C29691}
+		{8E540789-BACB-4047-9C8C-21A4509F819F} = {E7BC258F-CB76-4061-AD59-6527E289A92F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E8973E0-B073-4ED5-9BB9-57329D47A91C}
