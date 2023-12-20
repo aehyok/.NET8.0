@@ -1,15 +1,11 @@
 ﻿using aehyok.Core;
 using aehyok.EntityFramework.DbContexts;
 using aehyok.EntityFramework.Repository;
+using aehyok.Infrastructure;
 using aehyok.Infrastructure.TypeFinders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aehyok.EntityFramework
 {

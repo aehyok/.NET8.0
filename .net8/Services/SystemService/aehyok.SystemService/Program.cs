@@ -3,7 +3,6 @@ using aehyok.Schedules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using aehyok.RabbitMQ;
-using aehyok.Infrastructure.Extensions;
 using aehyok.EntityFramework;
 using Microsoft.Extensions.Hosting;
 using aehyok.Swagger;

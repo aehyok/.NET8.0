@@ -1,11 +1,6 @@
-﻿using aehyok.Core.Enums;
+﻿using aehyok.Infrastructure.Enums;
 using aehyok.EntityFramework.Entities;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aehyok.Basic.Domains
 {

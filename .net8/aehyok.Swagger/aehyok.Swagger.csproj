@@ -32,11 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\aehyok.Core\aehyok.Core.csproj" />
+    <EmbeddedResource Include="Resources\dvs-swagger.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\dvs-swagger.html" />
+    <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

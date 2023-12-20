@@ -1,5 +1,4 @@
-﻿using aehyok.Core;
-using aehyok.Core.Options;
+﻿using aehyok.Infrastructure.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -100,11 +99,11 @@ namespace aehyok.Swagger
 
                     options.Interceptors.RequestInterceptorFunction = "function(request){return dvs.auth.requestInterceptor(request);}";
 
-                    //if (app.Environment.IsDevelopment())
-                    //{
-                    //    options.SwaggerEndpoint($"/api/{name.Replace("aehyok-", "")}/swagger.json", title);
-                    //}
-                    //else
+                    if (app.Environment.IsDevelopment())
+                    {
+                        options.SwaggerEndpoint($"/api/{name.Replace("aehyok-", "")}/swagger.json", title);
+                    }
+                    else
                     {
                         swaggerOptions.Value?.Endpoints?.ForEach(a => options.SwaggerEndpoint(a.Url, a.Name));
                     }
@@ -142,8 +141,8 @@ namespace aehyok.Swagger
 
                 app.MapGet("/docs/static/dvs-swagger.css", async () =>
                 {
-                    var fileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly());
-
+                    var fileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly());    
+                    
                     var file = fileProvider.GetFileInfo("Resources/dvs-swagger.css");
 
                     if (file.Exists)

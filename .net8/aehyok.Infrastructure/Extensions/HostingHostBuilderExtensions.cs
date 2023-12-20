@@ -12,26 +12,5 @@ namespace aehyok.Infrastructure.Extensions
 {
     public static class HostingHostBuilderExtensions
     {
-        /// <summary>
-        /// 初始化 Host，加载配置文件
-        /// </summary>
-        /// <param name="builder"></param>
-        /// <param name="moduleKey"></param>
-        /// <returns></returns>
-        public static IHostBuilder InitHostAndConfig(this IHostBuilder builder, string moduleKey)
-        {
-            Thread.CurrentThread.Name = moduleKey;
-
-            // 例如 aehyok.NCDP 最开始代码中没有使用到，是不会加载到内存中的，所以需要手动加载
-            Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll").Select(AssemblyLoadContext.Default.LoadFromAssemblyPath).ToList();
-
-            builder.ConfigureAppConfiguration((context, options) =>
-            {
-                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/appsettings.json"), true, true);
-                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/{moduleKey}-appsettings.json"), true, true);
-            });
-
-            return builder;
-        }
     }
 }

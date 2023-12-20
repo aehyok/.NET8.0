@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Core.Enums
+namespace aehyok.Infrastructure.Enums
 {
     /// <summary>
     /// 菜单属于哪个平台
