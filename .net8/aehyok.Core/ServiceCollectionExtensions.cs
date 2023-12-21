@@ -16,6 +16,7 @@ using System.Runtime.Loader;
 using aehyok.Infrastructure.Options;
 using aehyok.Infrastructure;
 using aehyok.Serilog;
+using AutoMapper;
 
 namespace aehyok.Core
 {
@@ -65,7 +66,7 @@ namespace aehyok.Core
 
             builder.Services.AddEFCoreAndMySql(builder.Configuration);
 
-            builder.Services.AddAutoMapper(typeof(ServiceCollectionExtensions));
+            builder.Services.AddAllAutoMapper();
 
             builder.Services.AddRabbitMQ(builder.Configuration);
 
@@ -150,6 +151,19 @@ namespace aehyok.Core
                 });
             }
             return app;
+        }
+
+        /// <summary>
+        /// 注册所有 AutoMapper 配置信息
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddAllAutoMapper(this IServiceCollection services)
+        {
+            var types = TypeFinders.SearchTypes(typeof(Profile), TypeFinders.TypeClassification.Class) .ToArray();
+            services.AddAutoMapper(types);
+
+            return services;
         }
 
         /// <summary>
