@@ -1,4 +1,5 @@
-﻿using Snowflake.Core;
+﻿using aehyok.Infrastructure.Options;
+using Snowflake.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace aehyok.Infrastructure
     {
         private static readonly Lazy<IdWorker> _instance = new(() =>
         {
-            //var commonOptions = App.Options<CommonOptions>();
+            var commonOptions = App.Options<CommonOptions>();
 
             long WorkerId = 1;
             long DatacenterId = 0;
