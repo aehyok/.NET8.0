@@ -20,9 +20,9 @@ namespace aehyok.Redis
             return RedisHelper.SetAsync(key, value);
         }
 
-        public Task<bool> SetAsync(string key, object value, TimeSpan expire, RedisExistence? exists = null)
+        public async Task<bool> SetAsync(string key, object value, TimeSpan expire, RedisExistence? exists = null)
         {
-            return RedisHelper.SetAsync(key, value, expire, exists);
+            return await RedisHelper.SetAsync(key, value, expire, exists);
         }
 
         public Task<bool> SetAsync(string key, object value, int expireSeconds = -1, RedisExistence? exists = null)

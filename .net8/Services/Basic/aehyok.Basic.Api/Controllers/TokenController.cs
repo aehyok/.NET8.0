@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using aehyok.Basic.Dtos;
+using aehyok.Basic.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aehyok.Basic.Api.Controllers
@@ -9,14 +12,21 @@ namespace aehyok.Basic.Api.Controllers
     /// </summary>
     public class TokenController : BasicControllerBase
     {
+        public IUserTokenService userTokenService;
+
+        public TokenController(IUserTokenService userTokenService)
+        {
+            this.userTokenService = userTokenService;
+        }
         /// <summary>
-        /// 测试接口
+        /// 获取图片验证码
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public Task Test()
+        [HttpGet("captcha")]
+        [AllowAnonymous]
+        public Task<CaptchaDto> GetCaptchaAsync()
         {
-            return Task.CompletedTask;
+            return this.userTokenService.GenerateCaptchaAsync();
         }
     }
 }

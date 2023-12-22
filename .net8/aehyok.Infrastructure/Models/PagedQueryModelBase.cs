@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace aehyok.Infrastructure.Models
 {
+    /// <summary>
+    /// 接口分页参数基类，可直接使用，以及参数不够可被继承
+    /// </summary>
     public class PagedQueryModelBase
     {
         /// <summary>
