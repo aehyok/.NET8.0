@@ -31,4 +31,15 @@ namespace aehyok.Infrastructure.Enums
         /// </summary>
         Client = 4,
     }
+
+    /// <summary>
+    /// 登陆方式
+    /// </summary>
+    public enum LoginMethodType
+    {
+        账号密码 = 0,
+        短信验证码 = 1,
+        小程序登录 = 2,
+        扫码登录 = 3
+    }
 }
