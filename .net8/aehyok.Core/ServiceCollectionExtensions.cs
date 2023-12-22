@@ -17,6 +17,7 @@ using aehyok.Infrastructure.Options;
 using aehyok.Infrastructure;
 using aehyok.Serilog;
 using AutoMapper;
+using aehyok.Infrastructure.Filters;
 
 namespace aehyok.Core
 {
@@ -51,7 +52,11 @@ namespace aehyok.Core
         /// <returns></returns>
         public static WebApplicationBuilder AddBuilderServices(this WebApplicationBuilder builder, string moduleKey, string moduleTitle, bool isSystemService = false)
         {
-            builder.Services.AddControllers();
+            builder.Services.AddControllers( options =>
+            {
+                //统一接口返回的处理
+                options.Filters.Add<RequestAsyncResultFilter>();
+            });
 
             builder.Services.AddEndpointsApiExplorer();
 
