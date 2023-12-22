@@ -1,4 +1,5 @@
 ﻿using aehyok.Basic.Domains;
+using aehyok.Basic.Dtos;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace aehyok.Basic.MapProfiles
         public AutoMapperProfile()
         {
             CreateMap<DictionaryGroup, DictionaryGroupDto>();
+
+            CreateMap<CreateDictionaryGroupModel, DictionaryGroup>();
         }
     }
 }
