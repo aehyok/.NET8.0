@@ -106,7 +106,7 @@ namespace aehyok.Basic.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("group/{id}")]
+        [HttpDelete("group/{id}")]  
         public async Task<StatusCodeResult> DeleteGroupAsync(long id)
         {
             var entity = await this.dictionaryGroupService.GetByIdAsync(id);
