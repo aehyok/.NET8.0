@@ -79,7 +79,7 @@ var dvs = dvs || {};
             <div class="modal-dialog-ux">
                 <div class="modal-ux-inner">
                     <div class="modal-ux-header">
-                        <h3>登录</h3>
+                        <h3>接口授权登录</h3>
                         <button type="button" class="close-modal">
                             <svg width="20" height="20">
                                 <use href="#close" xlink:href="#close"></use>
