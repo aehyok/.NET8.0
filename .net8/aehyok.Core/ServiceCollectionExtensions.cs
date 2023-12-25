@@ -56,6 +56,9 @@ namespace aehyok.Core
             {
                 //统一接口返回的处理
                 options.Filters.Add<RequestAsyncResultFilter>();
+
+                //接口异常统一处理
+                options.Filters.Add<ApiAsyncExceptionFilter>();
             });
 
             builder.Services.AddEndpointsApiExplorer();
