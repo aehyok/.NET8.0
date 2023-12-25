@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace aehyok.Infrastructure.Filters
 {
+    /// <summary>
+    /// 还需要用户、菜单权限等等的处理
+    /// </summary>
     public class RequestAuthorizeFilter : IAsyncAuthorizationFilter
     {
         public Task OnAuthorizationAsync(AuthorizationFilterContext context)

@@ -1,4 +1,11 @@
 ## .net 8
+- 1、初始化aehyok.EFCore
+- 2、初始化了定时任务CronTask
+- 3、初始化了消息队列RabbitMQ
+- 4、初始化了持久化缓存Redis
+- 5、初始化了记录日志Serilog
+- 6、初始化了接口文档Swagger
+- 7、
 
 - **1、EFCore更新数据库**
   ```
