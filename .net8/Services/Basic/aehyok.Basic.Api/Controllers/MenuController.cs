@@ -16,7 +16,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpGet]
         public Task Test()
         {
-            return Task.CompletedTask;
+            throw new Exception("测试异常");
         }
     }
 }
