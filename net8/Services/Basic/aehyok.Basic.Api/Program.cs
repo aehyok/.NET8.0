@@ -1,7 +1,7 @@
 using aehyok.Core;
 
 var moduleKey = "aehyok-basic";
-var moduleTitle = "»ù´¡·şÎñ";
+var moduleTitle = "åŸºç¡€æœåŠ¡";
 
 var builder = WebApplication.CreateBuilder(args);
 
