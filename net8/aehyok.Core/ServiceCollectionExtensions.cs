@@ -130,6 +130,11 @@ namespace aehyok.Core
 
             builder.ConfigureAppConfiguration((context, options) =>
             {
+                // 正式环境配置文件路径
+                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, "appsettings.json"), true, true);
+                options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"{moduleKey}-appsettings.json"), true, true);
+
+                // 本地开发环境配置文件路径
                 options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/appsettings.json"), true, true);
                 options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/{moduleKey}-appsettings.json"), true, true);
             });
