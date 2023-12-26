@@ -33,10 +33,12 @@ namespace aehyok.Infrastructure.Filters
 
             if(context.Result is BadRequestObjectResult badRequestObjectResult)
             {
-                var resultModel = new RequestResultModel();
-                resultModel.Code = badRequestObjectResult.StatusCode ?? StatusCodes.Status400BadRequest;
-                resultModel.Message = "请求参数验证错误";
-                resultModel.Data = badRequestObjectResult.Value;
+                var resultModel = new RequestResultModel
+                {
+                    Code = badRequestObjectResult.StatusCode ?? StatusCodes.Status400BadRequest,
+                    Message = "请求参数验证错误",
+                    Data = badRequestObjectResult.Value
+                };
 
                 context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Result = new RequestJsonResult(resultModel);
@@ -44,10 +46,12 @@ namespace aehyok.Infrastructure.Filters
             // 比如直接return Ok();
             else if(context.Result is StatusCodeResult statusCodeResult)
             {
-                var resultModel = new RequestResultModel();
-                resultModel.Code = statusCodeResult.StatusCode;
-                resultModel.Message = statusCodeResult.StatusCode == 200 ? "Success" : "请求发生错误";
-                resultModel.Data = statusCodeResult.StatusCode == 200;
+                var resultModel = new RequestResultModel
+                {
+                    Code = statusCodeResult.StatusCode,
+                    Message = statusCodeResult.StatusCode == 200 ? "Success" : "请求发生错误",
+                    Data = statusCodeResult.StatusCode == 200
+                };
 
                 context.Result = new RequestJsonResult(resultModel);
             }
@@ -55,32 +59,38 @@ namespace aehyok.Infrastructure.Filters
             {
                 if(result.Value is null)
                 {
-                    var resultModel = new RequestResultModel();
-                    resultModel.Code = result.StatusCode ?? context.HttpContext.Response.StatusCode;
-                    resultModel.Message = "未请求到数据";
+                    var resultModel = new RequestResultModel
+                    {
+                        Code = result.StatusCode ?? context.HttpContext.Response.StatusCode,
+                        Message = "未请求到数据"
+                    };
                     context.Result = new RequestJsonResult(resultModel);
                 }
                 else if(result.Value is not RequestJsonResult)
                 {
                     if (result.Value is IPagedList pagedList)
                     {
-                        var resultModel = new RequestPagedResultModel();
-                        resultModel.Message = "Success";
-                        resultModel.Data = result.Value;
-                        resultModel.Total = pagedList.TotalItemCount;
-                        resultModel.Page = pagedList.PageNumber;
-                        resultModel.TotalPage = pagedList.PageCount;
-                        resultModel.Limit = pagedList.PageSize;
-                        resultModel.Code = result.StatusCode ?? context.HttpContext.Response.StatusCode;
+                        var resultModel = new RequestPagedResultModel
+                        {
+                            Message = "Success",
+                            Data = result.Value,
+                            Total = pagedList.TotalItemCount,
+                            Page = pagedList.PageNumber,
+                            TotalPage = pagedList.PageCount,
+                            Limit = pagedList.PageSize,
+                            Code = result.StatusCode ?? context.HttpContext.Response.StatusCode
+                        };
 
                         context.Result = new RequestJsonResult(resultModel);
                     }
                     else
                     {
-                        var resultModel = new RequestResultModel();
-                        resultModel.Code = result.StatusCode ?? context.HttpContext.Response.StatusCode;
-                        resultModel.Message = "Success";
-                        resultModel.Data = result.Value;
+                        var resultModel = new RequestResultModel
+                        {
+                            Code = result.StatusCode ?? context.HttpContext.Response.StatusCode,
+                            Message = "Success",
+                            Data = result.Value
+                        };
 
                         context.Result = new RequestJsonResult(resultModel);
                     }

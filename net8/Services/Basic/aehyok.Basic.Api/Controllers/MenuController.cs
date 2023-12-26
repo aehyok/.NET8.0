@@ -15,14 +15,10 @@ namespace aehyok.Basic.Api.Controllers
     /// <summary>
     /// 菜单管理
     /// </summary>
-    public class MenuController : BasicControllerBase
+    public class MenuController(IMenuService menuService) : BasicControllerBase
     {
-        private readonly IMenuService menuService;
+        private readonly IMenuService menuService = menuService;
 
-        public MenuController(IMenuService menuService)
-        {
-            this.menuService = menuService;
-        }
         /// <summary>
         /// 获取菜单树
         /// </summary>

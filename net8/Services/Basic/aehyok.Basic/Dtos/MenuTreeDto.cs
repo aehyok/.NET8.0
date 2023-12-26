@@ -11,6 +11,6 @@ namespace aehyok.Basic.Dtos
         /// <summary>
         /// 下级菜单
         /// </summary>
-        public List<MenuTreeDto> Children { get; set; } = new List<MenuTreeDto>();
+        public List<MenuTreeDto> Children { get; set; } = [];
     }
 }

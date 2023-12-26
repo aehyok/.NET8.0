@@ -132,7 +132,7 @@ namespace aehyok.Swagger
                         using var stream = file.CreateReadStream();
 
                         var bytes = new byte[stream.Length];
-                        await stream.ReadAsync(bytes, 0, bytes.Length);
+                        await stream.ReadAsync(bytes);
 
                         return Results.File(bytes, contentType: "application/javascript");
                     }
@@ -150,7 +150,7 @@ namespace aehyok.Swagger
                         using var stream = file.CreateReadStream();
 
                         var bytes = new byte[stream.Length];
-                        await stream.ReadAsync(bytes, 0, bytes.Length);
+                        await stream.ReadAsync(bytes);
 
                         return Results.File(bytes, contentType: "text/css");
                     }

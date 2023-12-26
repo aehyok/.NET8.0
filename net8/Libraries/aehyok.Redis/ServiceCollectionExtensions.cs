@@ -40,7 +40,7 @@ namespace aehyok.Redis
         /// <returns></returns>
         private static IApplicationBuilder AddRedis(this IApplicationBuilder app, Action<RedisOption> configure)
         {
-            RedisOption options = new RedisOption();
+            RedisOption options = new();
             configure(options);
             string redisConnectionString = options.ConnectionString;
             if (string.IsNullOrWhiteSpace(redisConnectionString))

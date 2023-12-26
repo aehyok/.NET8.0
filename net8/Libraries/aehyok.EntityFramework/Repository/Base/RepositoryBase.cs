@@ -12,16 +12,14 @@ using aehyok.EntityFramework.Repository.Query;
 
 namespace aehyok.EntityFramework.Repository.Base
 {
-    public abstract class RepositoryBase<TEntity, TKey> : QueryRepository<TEntity, TKey>, IRepositoryBase<TEntity, TKey> where TEntity : class
+    public abstract class RepositoryBase<TEntity, TKey>(
+        DbContext dbContext, 
+        ISpecificationEvaluator specificationEvaluator) : QueryRepository<TEntity, TKey>(dbContext, specificationEvaluator), IRepositoryBase<TEntity, TKey> where TEntity : class
     {
         public RepositoryBase(DbContext dbContext)
             : this(dbContext, SpecificationEvaluator.Default)
         {
         }
-
-        public RepositoryBase(DbContext dbContext, ISpecificationEvaluator specificationEvaluator)
-            : base(dbContext, specificationEvaluator)
-        { }
 
         public virtual async Task<IDbContextTransaction> BeginTransactionAsync(IsolationLevel isolationLevel = IsolationLevel.Unspecified, CancellationToken cancellationToken = default)
         {
@@ -51,7 +49,7 @@ namespace aehyok.EntityFramework.Repository.Base
         {
             ArgumentNullException.ThrowIfNull(nameof(entity));
 
-            var entityEntry = Entities.Update(entity);
+            Entities.Update(entity);
             return DbContext.SaveChangesAsync(cancellationToken);
         }
 
