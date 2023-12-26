@@ -78,11 +78,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpPut("group/{id}")]
         public async Task<StatusCodeResult> PutGroupAsync(long id, CreateDictionaryGroupModel model)
         {
-            var entity = await this.dictionaryGroupService.GetAsync(a => a.Id == id);
-            if (entity is null)
-            {
-                throw new Exception("你要修改的数据不存在");
-            }
+            var entity = await this.dictionaryGroupService.GetAsync(a => a.Id == id) ?? throw new Exception("你要修改的数据不存在");
 
             // 修改分组的时候禁止修改分组 Code
             model.Code = entity.Code;
