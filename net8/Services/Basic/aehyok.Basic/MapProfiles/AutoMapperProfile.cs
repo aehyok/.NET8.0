@@ -15,7 +15,12 @@ namespace aehyok.Basic.MapProfiles
         {
             CreateMap<DictionaryGroup, DictionaryGroupDto>();
 
-            CreateMap<CreateDictionaryGroupModel, DictionaryGroup>();
+            CreateMap<Menu, MenuDto>()
+    .ForMember(a => a.IsLeaf, a => a.MapFrom(c => c.Children.Count == 0));
+            CreateMap<Menu, MenuTreeDto>()
+                .ForMember(a => a.Children, a => a.Ignore());
+
+            CreateMap<MenuDto, MenuTreeDto>();
         }
     }
 }

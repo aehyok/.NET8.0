@@ -21,15 +21,15 @@ namespace aehyok.Infrastructure.Enums
         /// </summary>
         Mini = 2,
 
-        /// <summary>
-        /// App
-        /// </summary>
-        App = 3,
+        ///// <summary>
+        ///// App
+        ///// </summary>
+        //App = 3,
 
-        /// <summary>
-        /// 本地客户端
-        /// </summary>
-        Client = 4,
+        ///// <summary>
+        ///// 本地客户端
+        ///// </summary>
+        //Client = 4,
     }
 
     /// <summary>

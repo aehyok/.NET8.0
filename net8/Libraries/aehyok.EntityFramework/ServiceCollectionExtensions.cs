@@ -4,6 +4,7 @@ using aehyok.EntityFramework.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.TypeFinders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -35,7 +36,7 @@ namespace aehyok.EntityFramework
                 //}
 
                 // 移除外键
-                //options.UseRemoveForeignKeys();
+                options.UseRemoveForeignKeys();
 
                 // 禁止跟踪
                 options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
@@ -51,7 +52,7 @@ namespace aehyok.EntityFramework
                     //    mysqlOptions.MigrationsAssembly("DVS.SystemService");
                     //}
 
-                    //mysqlOptions.UseNetTopologySuite();
+                    mysqlOptions.UseNetTopologySuite();
                 }).EnableSensitiveDataLogging().EnableDetailedErrors();
             }, poolSize: 1024);
             services.AddScoped(typeof(IServiceBase<,>), typeof(ServiceBase<,>));
@@ -84,6 +85,17 @@ namespace aehyok.EntityFramework
             services.Add(new ServiceDescriptor(interfaceType, implementationType, lifetime));
 
             return services;
+        }
+
+        /// <summary>
+        /// 移除表结构中的外键约束
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static DbContextOptionsBuilder UseRemoveForeignKeys(this DbContextOptionsBuilder builder)
+        {
+            builder.ReplaceService<IMigrationsSqlGenerator, MigrationsSqlGenerator>();
+            return builder;
         }
     }
 }
