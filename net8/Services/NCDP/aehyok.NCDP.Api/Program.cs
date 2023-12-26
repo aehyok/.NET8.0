@@ -1,7 +1,7 @@
 using aehyok.Core;
 
 var moduleKey = "aehyok-ncdp";
-var moduleTitle = "�޴��뿪��ƽ̨";
+var moduleTitle = "无代码开放平台";
 
 var builder = WebApplication.CreateBuilder(args);
 
