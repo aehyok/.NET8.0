@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
+using Unchase.Swashbuckle.AspNetCore.Extensions.Options;
 
 namespace aehyok.Swagger
 {
@@ -65,13 +67,13 @@ namespace aehyok.Swagger
                     Description = "Token"
                 });
 
-                //var action = new Action<FixEnumsOptions>(o =>
-                //{
-                //    o.IncludeDescriptions = true;
-                //    o.IncludeXEnumRemarks = true;
-                //    o.DescriptionSource = DescriptionSources.DescriptionAttributesThenXmlComments;
-                //});
-                //options.AddEnumsWithValuesFixFilters(action);
+                var action = new Action<FixEnumsOptions>(o =>
+                {
+                    o.IncludeDescriptions = true;
+                    o.IncludeXEnumRemarks = true;
+                    o.DescriptionSource = DescriptionSources.DescriptionAttributesThenXmlComments;
+                });
+                options.AddEnumsWithValuesFixFilters(action);
 
                 // 加载程序运行目录下的所有 xml 注释文档
                 Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(comment => options.IncludeXmlComments(comment, true));
