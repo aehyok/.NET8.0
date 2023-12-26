@@ -4,10 +4,16 @@ using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
 using aehyok.EntityFramework.Repository;
+using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using Ardalis.Specification;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 
 namespace aehyok.Basic.Api.Controllers
 {
@@ -15,9 +21,11 @@ namespace aehyok.Basic.Api.Controllers
     /// <summary>
     /// 菜单管理
     /// </summary>
-    public class MenuController(IMenuService menuService) : BasicControllerBase
+    public class MenuController(IMenuService menuService,
+        IServiceProvider services) : BasicControllerBase
     {
         private readonly IMenuService menuService = menuService;
+        private readonly IServiceProvider services = services;
 
         /// <summary>
         /// 获取菜单树
@@ -68,6 +76,60 @@ namespace aehyok.Basic.Api.Controllers
         {
             await this.menuService.DeleteAsync(id);
 
+            return Ok();
+        }
+
+        /// <summary>
+        /// api 资源同步
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("set")]
+        public async Task<StatusCodeResult> Set()
+        {
+            using var scope = services.CreateScope();
+            var actionDescriptorProvider = scope.ServiceProvider.GetRequiredService<IActionDescriptorCollectionProvider>();
+            var actions = actionDescriptorProvider.ActionDescriptors.Items;
+
+            var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            var apiResourceService = scope.ServiceProvider.GetRequiredService<IApiResrouceService>();
+
+            var mapper = scope.ServiceProvider.GetService<IMapper>();
+
+            foreach (ControllerActionDescriptor descriptor in actions)
+            {
+                var resource = new ApiResource
+                {
+                    NameSpace = descriptor.ControllerTypeInfo.Namespace,
+                    ActionName = descriptor.ActionName,
+                    ControllerName = descriptor.ControllerName,
+                    RoutePattern = descriptor.AttributeRouteInfo.Template
+                };
+
+                // 获取 Action 注释
+                resource.Name = DocsHelper.GetMethodComments(assemblyName, descriptor.MethodInfo);
+                if (resource.Name.IsNullOrEmpty())
+                {
+                    resource.Name = descriptor.ActionName;
+                }
+
+                // 获取 Controller 注释
+                resource.GroupName = DocsHelper.GetTypeComments(assemblyName, descriptor.ControllerTypeInfo);
+                if (resource.GroupName.IsNullOrEmpty())
+                {
+                    resource.GroupName = descriptor.ControllerName;
+                }
+
+                var httpMethod = descriptor.EndpointMetadata.FirstOrDefault(a => a.GetType() == typeof(HttpMethodMetadata));
+                if (httpMethod != null && httpMethod is HttpMethodMetadata metadata)
+                {
+                    resource.RequestMethod = metadata.HttpMethods.FirstOrDefault();
+                }
+
+                // 生成接口 API 唯一 Code
+                resource.Code = $"{resource.NameSpace}.{resource.ControllerName}.{resource.ActionName}";
+
+                await apiResourceService.InsertOrUpdateAsync(resource, a => a.Code == resource.Code);
+            }
             return Ok();
         }
     }
