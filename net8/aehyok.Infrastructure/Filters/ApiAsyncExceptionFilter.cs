@@ -10,14 +10,9 @@ namespace aehyok.Infrastructure.Filters
     /// <summary>
     /// 错误异常处理过滤器（控制器构造函数、执行Action接口方法、执行ResultFilter结果过滤器）
     /// </summary>
-    public class ApiAsyncExceptionFilter : IAsyncExceptionFilter
+    public class ApiAsyncExceptionFilter(ILogger<ApiAsyncExceptionFilter> logger) : IAsyncExceptionFilter
     {
-        private readonly ILogger<ApiAsyncExceptionFilter> logger;
-
-        public ApiAsyncExceptionFilter(ILogger<ApiAsyncExceptionFilter> logger)
-        {
-            this.logger = logger;
-        }
+        private readonly ILogger<ApiAsyncExceptionFilter> logger = logger;
 
         public async Task OnExceptionAsync(ExceptionContext context)
         {
@@ -50,7 +45,9 @@ namespace aehyok.Infrastructure.Filters
             //所有接口如果包含异常，都返回500
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            this.logger.LogError(exception, exception.Message);
+            var message = exception.Message;
+
+            logger.LogError(exception, message);
             await Task.CompletedTask;
         }
     }

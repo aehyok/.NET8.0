@@ -16,21 +16,14 @@ namespace aehyok.Basic.Api.Controllers
     /// <summary>
     /// 字典管理
     /// </summary>
-    public class DictionaryController : BasicControllerBase
+    public class DictionaryController(
+        ILogger<DictionaryController> logger,
+        IDictionaryGroupService dictionaryGroupService,
+        IDictionaryItemService dictionaryItemService) : BasicControllerBase
     {
-        private readonly  ILogger<DictionaryController> logger;
-        private readonly IDictionaryGroupService dictionaryGroupService;
-        private readonly IDictionaryItemService dictionaryItemService;
-
-        public DictionaryController(
-            ILogger<DictionaryController> logger,
-            IDictionaryGroupService dictionaryGroupService,
-            IDictionaryItemService dictionaryItemService)
-        {
-            this.logger = logger;
-            this.dictionaryGroupService = dictionaryGroupService;
-            this.dictionaryItemService = dictionaryItemService;
-        }
+        private readonly  ILogger<DictionaryController> logger = logger;
+        private readonly IDictionaryGroupService dictionaryGroupService = dictionaryGroupService;
+        private readonly IDictionaryItemService dictionaryItemService = dictionaryItemService;
 
         /// <summary>
         /// 获取字典分组
@@ -109,12 +102,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpDelete("group/{id}")]  
         public async Task<StatusCodeResult> DeleteGroupAsync(long id)
         {
-            var entity = await this.dictionaryGroupService.GetByIdAsync(id);
-            if (entity is null)
-            {
-                throw new ErrorCodeException(-1, "你要删除的数据不存在");
-            }
-
+            var entity = await this.dictionaryGroupService.GetByIdAsync(id) ?? throw new ErrorCodeException(-1, "你要删除的数据不存在");
             await this.dictionaryGroupService.DeleteAsync(entity);
 
             return Ok();

@@ -65,11 +65,11 @@ namespace aehyok.Core
 
             builder.Services.AddSwaggerGen(moduleKey, moduleTitle);
 
-            builder.Host.InitHostAndConfig(moduleKey) ;
+            builder.Host.InitHostAndConfig(moduleKey);
 
             builder.Services.ConfigureOptions(builder.Configuration);
 
-            ///
+            // 注册IHttpContextAccessor
             builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddEFCoreAndMySql(builder.Configuration);
@@ -126,7 +126,7 @@ namespace aehyok.Core
             Thread.CurrentThread.Name = moduleKey;
 
             // 例如 aehyok.NCDP 最开始代码中没有使用到，是不会加载到内存中的，所以需要手动加载
-            Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll").Select(AssemblyLoadContext.Default.LoadFromAssemblyPath).ToList();
+            Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll");
 
             builder.ConfigureAppConfiguration((context, options) =>
             {
@@ -198,7 +198,7 @@ namespace aehyok.Core
             //using reflection to invoke the Configure<TOption> extension
             Type extensionClass = typeof(OptionsConfigurationServiceCollectionExtensions);
             //get the desired extension method by name and using the expected arguments
-            Type[] parameterTypes = new[] { typeof(IServiceCollection), typeof(IConfiguration) };
+            Type[] parameterTypes = [typeof(IServiceCollection), typeof(IConfiguration)];
             string extensionName = nameof(OptionsConfigurationServiceCollectionExtensions.Configure);
             MethodInfo configureExtension = extensionClass.GetMethod(extensionName, parameterTypes);
 
@@ -222,7 +222,7 @@ namespace aehyok.Core
         {
             var root = (IConfigurationBuilder)configuration;
 
-            foreach (JsonConfigurationSource source in root.Sources.Where(a => a.GetType() == typeof(JsonConfigurationSource)))
+            foreach (JsonConfigurationSource source in root.Sources.Where(a => a.GetType() == typeof(JsonConfigurationSource)).Cast<JsonConfigurationSource>())
             {
                 var path = Path.Combine(((PhysicalFileProvider)source.FileProvider).Root, source.Path);
                 //Log.Information($"配置文件({(File.Exists(path) ? "有效" : "无效")}):{path}");
