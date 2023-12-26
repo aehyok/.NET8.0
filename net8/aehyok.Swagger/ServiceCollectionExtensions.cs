@@ -99,7 +99,7 @@ namespace aehyok.Swagger
 
                     options.Interceptors.RequestInterceptorFunction = "function(request){return dvs.auth.requestInterceptor(request);}";
 
-                    if (app.Environment.IsDevelopment())
+                    if (app.Environment.IsDevelopment() || swaggerOptions.Value.SwaggerUI)
                     {
                         options.SwaggerEndpoint($"/api/{name.Replace("aehyok-", "")}/swagger.json", title);
                     }
