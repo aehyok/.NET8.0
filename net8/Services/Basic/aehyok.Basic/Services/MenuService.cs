@@ -26,13 +26,7 @@ namespace aehyok.Basic.Services
         {
             if (entity.ParentId != 0)
             {
-                var parent = await this.GetByIdAsync(entity.ParentId);
-
-                if (parent == null)
-                {
-                    throw new Exception("父级菜单不存在");
-                }
-
+                var parent = await this.GetByIdAsync(entity.ParentId) ?? throw new Exception("父级菜单不存在");
                 entity.IdSequences = $"{parent.IdSequences}{entity.Id}.";
             }
             else

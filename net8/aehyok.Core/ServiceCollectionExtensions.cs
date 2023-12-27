@@ -18,6 +18,7 @@ using aehyok.Infrastructure;
 using aehyok.Serilog;
 using AutoMapper;
 using aehyok.Infrastructure.Filters;
+using Microsoft.AspNetCore.StaticFiles;
 
 namespace aehyok.Core
 {
@@ -78,6 +79,9 @@ namespace aehyok.Core
 
             builder.Services.AddRabbitMQ(builder.Configuration);
 
+
+            builder.Services.AddSingleton<IContentTypeProvider, FileExtensionContentTypeProvider>();
+
             if (isSystemService) 
             {
                 builder.Services.AddCronTask();
@@ -126,7 +130,7 @@ namespace aehyok.Core
             Thread.CurrentThread.Name = moduleKey;
 
             // 例如 aehyok.NCDP 最开始代码中没有使用到，是不会加载到内存中的，所以需要手动加载
-            Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll");
+            Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll").Select(AssemblyLoadContext.Default.LoadFromAssemblyPath).ToList();
 
             builder.ConfigureAppConfiguration((context, options) =>
             {

@@ -12,10 +12,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
-    public class DictionaryGroupService : ServiceBase<DictionaryGroup>, IDictionaryGroupService, IScopedDependency
+    public class DictionaryGroupService(DbContext dbContext, IMapper mapper) : ServiceBase<DictionaryGroup>(dbContext, mapper), IDictionaryGroupService, IScopedDependency
     {
-        public DictionaryGroupService(DbContext dbContext, IMapper mapper) : base(dbContext, mapper)
-        {
-        }
     }
 }
