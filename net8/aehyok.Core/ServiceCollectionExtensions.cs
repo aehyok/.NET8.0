@@ -192,7 +192,6 @@ namespace aehyok.Core
             services.AddOptions();
 
             // 注册所有 Options
-
             var types = TypeFinders.SearchTypes(typeof(IOptions), TypeFinders.TypeClassification.Interface);
 
             //using reflection to invoke the Configure<TOption> extension

@@ -11,14 +11,14 @@ namespace aehyok.Infrastructure
 {
     public class DocsHelper
     {
-        private static List<string> Docs { get; set; } = new List<string>();
+        private static List<string> Docs { get; set; } = [];
 
         private static void LoadDocs()
         {
             if (Docs.Count == 0)
             {
                 // 获取程序执行目录下所有 xml 文档
-                Docs = Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList();
+                Docs = [.. Directory.GetFiles(AppContext.BaseDirectory, "*.xml")];
             }
         }
 
