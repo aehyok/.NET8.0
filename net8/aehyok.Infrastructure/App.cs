@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using aehyok.Infrastructure.Options;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,23 @@ namespace aehyok.Infrastructure
             using var scope = ServiceProvider.CreateScope();
             //IOptionsSnapshot 可以获取到最新的配置
             return scope.ServiceProvider.GetService<IOptionsSnapshot<TOptions>>().Value;
+        }
+
+        /// <summary>
+        /// 获取系统临时文件夹路径
+        /// </summary>
+        /// <returns></returns>
+        public static string GetTempPath()
+        {
+            var tempPath = Options<StorageOptions>().TempPath;
+            if (tempPath.IsNullOrEmpty())
+            {
+                tempPath = Path.Combine(AppContext.BaseDirectory, "temp");
+            }
+
+            Directory.CreateDirectory(tempPath);
+
+            return tempPath;
         }
     }
 }

@@ -21,9 +21,6 @@ namespace aehyok.Basic.Api.Controllers
         IDictionaryGroupService dictionaryGroupService,
         IDictionaryItemService dictionaryItemService) : BasicControllerBase
     {
-        private readonly  ILogger<DictionaryController> logger = logger;
-        private readonly IDictionaryGroupService dictionaryGroupService = dictionaryGroupService;
-        private readonly IDictionaryItemService dictionaryItemService = dictionaryItemService;
 
         /// <summary>
         /// 获取字典分组
@@ -42,7 +39,7 @@ namespace aehyok.Basic.Api.Controllers
                 spec.Query.Search(a => a.Name, $"%{model.Keyword}%");
             }
 
-            return await this.dictionaryGroupService.GetPagedListAsync<DictionaryGroupDto>(spec, model.Page, model.Limit);
+            return await dictionaryGroupService.GetPagedListAsync<DictionaryGroupDto>(spec, model.Page, model.Limit);
         }
 
         /// <summary>
@@ -53,7 +50,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpGet("group/{id}")]
         public Task<DictionaryGroupDto> GetGroupByIdAsync(long id)
         {
-            return this.dictionaryGroupService.GetAsync<DictionaryGroupDto>(a => a.Id == id);
+            return dictionaryGroupService.GetAsync<DictionaryGroupDto>(a => a.Id == id);
         }
 
         /// <summary>
@@ -65,7 +62,7 @@ namespace aehyok.Basic.Api.Controllers
         public async Task<long> PostGroupAsync(CreateDictionaryGroupModel model)
         {
             var entity = this.Mapper.Map<DictionaryGroup>(model);
-            await this.dictionaryGroupService.InsertAsync(entity);
+            await dictionaryGroupService.InsertAsync(entity);
             return entity.Id;
         }
 
@@ -78,14 +75,14 @@ namespace aehyok.Basic.Api.Controllers
         [HttpPut("group/{id}")]
         public async Task<StatusCodeResult> PutGroupAsync(long id, CreateDictionaryGroupModel model)
         {
-            var entity = await this.dictionaryGroupService.GetAsync(a => a.Id == id) ?? throw new Exception("你要修改的数据不存在");
+            var entity = await dictionaryGroupService.GetAsync(a => a.Id == id) ?? throw new Exception("你要修改的数据不存在");
 
             // 修改分组的时候禁止修改分组 Code
             model.Code = entity.Code;
 
             entity = this.Mapper.Map(model, entity);
 
-            await this.dictionaryGroupService.UpdateAsync(entity);
+            await dictionaryGroupService.UpdateAsync(entity);
 
             return Ok();
         }
@@ -98,8 +95,8 @@ namespace aehyok.Basic.Api.Controllers
         [HttpDelete("group/{id}")]  
         public async Task<StatusCodeResult> DeleteGroupAsync(long id)
         {
-            var entity = await this.dictionaryGroupService.GetByIdAsync(id) ?? throw new ErrorCodeException(-1, "你要删除的数据不存在");
-            await this.dictionaryGroupService.DeleteAsync(entity);
+            var entity = await dictionaryGroupService.GetByIdAsync(id) ?? throw new ErrorCodeException(-1, "你要删除的数据不存在");
+            await dictionaryGroupService.DeleteAsync(entity);
 
             return Ok();
         }

@@ -24,8 +24,6 @@ namespace aehyok.Basic.Api.Controllers
     public class MenuController(IMenuService menuService,
         IServiceProvider services) : BasicControllerBase
     {
-        private readonly IMenuService menuService = menuService;
-        private readonly IServiceProvider services = services;
 
         /// <summary>
         /// 获取菜单树
@@ -36,7 +34,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpGet("tree/{platformType}")]
         public async Task<List<MenuTreeDto>> GetTreeAsync(PlatformType platformType, [FromQuery] MenuTreeQueryModel model)
         {
-            return await this.menuService.GetTreeListAsync(platformType, model);
+            return await menuService.GetTreeListAsync(platformType, model);
         }
 
         /// <summary>
@@ -47,7 +45,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpPost]
         public async Task<long> PostAsync(CreateMenuModel model)
         {
-            return await this.menuService.PostAsync(model);
+            return await menuService.PostAsync(model);
         }
 
         /// <summary>
@@ -58,7 +56,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpGet("{id}")]
         public Task<MenuDto> GetByIdAsync(long id)
         {
-            return this.menuService.GetByIdAsync<MenuDto>(id);
+            return menuService.GetByIdAsync<MenuDto>(id);
         }
 
         /// <summary>
@@ -71,7 +69,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpPut("{id}")]
         public async Task<StatusCodeResult> PutAsync(long id, CreateMenuModel model)
         {
-            await this.menuService.PutAsync(id, model);
+            await menuService.PutAsync(id, model);
 
             return Ok();
         }
@@ -85,7 +83,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<StatusCodeResult> DeleteAsync(long id)
         {
-            await this.menuService.DeleteAsync(id);
+            await menuService.DeleteAsync(id);
 
             return Ok();
         }

@@ -52,7 +52,7 @@ namespace aehyok.EntityFramework
                     //    mysqlOptions.MigrationsAssembly("DVS.SystemService");
                     //}
 
-                    mysqlOptions.UseNetTopologySuite();
+                    //mysqlOptions.UseNetTopologySuite();  // 操作GEO空间数据的时候需要开启
                 }).EnableSensitiveDataLogging().EnableDetailedErrors();
             }, poolSize: 1024);
             services.AddScoped(typeof(IServiceBase<,>), typeof(ServiceBase<,>));
