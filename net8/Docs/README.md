@@ -1,93 +1,99 @@
 ## .net 8
-- 1¡¢³õÊ¼»¯aehyok.EFCore
-- 2¡¢³õÊ¼»¯ÁË¶¨Ê±ÈÎÎñCronTask
-- 3¡¢³õÊ¼»¯ÁËÏûÏ¢¶ÓÁĞRabbitMQ
-- 4¡¢³õÊ¼»¯ÁË³Ö¾Ã»¯»º´æRedis
-- 5¡¢³õÊ¼»¯ÁË¼ÇÂ¼ÈÕÖ¾Serilog
-- 6¡¢³õÊ¼»¯ÁË½Ó¿ÚÎÄµµSwagger
-- 7¡¢
+- 1ã€åˆå§‹åŒ–aehyok.EFCore
+- 2ã€åˆå§‹åŒ–äº†å®šæ—¶ä»»åŠ¡CronTask
+- 3ã€åˆå§‹åŒ–äº†æ¶ˆæ¯é˜Ÿåˆ—RabbitMQ
+- 4ã€åˆå§‹åŒ–äº†æŒä¹…åŒ–ç¼“å­˜Redis
+- 5ã€åˆå§‹åŒ–äº†è®°å½•æ—¥å¿—Serilog
+- 6ã€åˆå§‹åŒ–äº†æ¥å£æ–‡æ¡£Swagger
+    ```
 
-- **1¡¢EFCore¸üĞÂÊı¾İ¿â**
+- **1ã€EFCoreæ›´æ–°æ•°æ®åº“**
   ```
-   ÔÚaehyok.SchedulesÏîÄ¿ÏÂ
+   åœ¨aehyok.Schedulesé¡¹ç›®ä¸‹
 
    dotnet-ef migrations add InitTask -c DvsContext --framework net8.0 -v
    
    dotnet-ef database update -c DvsContext --framework net8.0 -v
   ```
 
-- **2¡¢½Ó¿Ú°²È«ĞÔ**
+- **2ã€æ¥å£å®‰å…¨æ€§**
   ```
-  IActionDescriptorCollectionProvider 
+   Menu èœå•å®šä¹‰è¡¨ï¼ˆæ‰‹åŠ¨ç»´æŠ¤ï¼‰
+   
+   ApiResource æ¥å£åˆ—è¡¨ï¼ˆç›¸å½“äºé€šè¿‡åå°„å°†æ‰€æœ‰æ§åˆ¶å™¨å’Œæ–¹æ³•éƒ½æå–å‡ºæ¥è¿›è¡Œä¿å­˜ï¼‰
+   
+   MenuResource èœå•å’Œæ¥å£å…³è”è¡¨
+   
+   æ¯ä¸ªæ“ä½œ
   ```
 
-- **3¡¢²Ù×÷ÈÕÖ¾**
+- **3ã€æ“ä½œæ—¥å¿—**
   ```
   https://www.cnblogs.com/hooray/archive/2012/09/05/2672133.html
-  // ÔÚinsert update delete Ê±Í¬Ê±Ğ´Èë²Ù×÷ÈÕÖ¾
-  // ¸ù¾İÓ³Éä»ñÈ¡²Ù×÷µÄ±íÃûÒ²¾ÍÊÇÒµÎñ±í ¼´¿ÉĞ´ÈëÊ²Ã´²Ù×÷
+  // åœ¨insert update delete æ—¶åŒæ—¶å†™å…¥æ“ä½œæ—¥å¿—
+  // æ ¹æ®æ˜ å°„è·å–æ“ä½œçš„è¡¨åä¹Ÿå°±æ˜¯ä¸šåŠ¡è¡¨ å³å¯å†™å…¥ä»€ä¹ˆæ“ä½œ
 
-  // Í¨¹ıaction·½·¨ÉÏÌí¼ÓAttribute½øĞĞÈÕÖ¾ÉùÃ÷
-  // ÀàËÆÓÚEFCore·â×°ÁËÍ³Ò»µÄÊÂÎñ£¨TransactionAsyncInterceptor£©
+  // é€šè¿‡actionæ–¹æ³•ä¸Šæ·»åŠ Attributeè¿›è¡Œæ—¥å¿—å£°æ˜
+  // ç±»ä¼¼äºEFCoreå°è£…äº†ç»Ÿä¸€çš„äº‹åŠ¡ï¼ˆTransactionAsyncInterceptorï¼‰
   https://juejin.cn/post/7009116644031070244?searchId=2023121513462817BCA1D45D34D690B014
 
   ```
-## Ê¹ÓÃµÄ¿ªÔ´¿â
+## ä½¿ç”¨çš„å¼€æºåº“
 
 ```
 - DDD 
     - https://github.com/ntxinh/AspNetCore-DDD
-- EFCore²éÑ¯ 
+- EFCoreæŸ¥è¯¢ 
     - https://github.com/ardalis/Specification
     - https://specification.ardalis.com/getting-started
 - EFCore QueryRepository RepositoryBase
     - https://github.com/TanvirArjel/EFCore.GenericRepository
-- EFCoreÅúÁ¿²Ù×÷
- - Z.EntityFramework.Extensions.EFCore²»¿ªÔ´
+- EFCoreæ‰¹é‡æ“ä½œ
+ - Z.EntityFramework.Extensions.EFCoreä¸å¼€æº
  - https://entityframework-extensions.net
  - https://github.com/zzzprojects/EntityFramework-Extensions
-- PaginatedList Êı¾İ·ÖÒ³
+- PaginatedList æ•°æ®åˆ†é¡µ
     - https://github.com/dncuug/X.PagedList    
-- LinqKit ±í´ïÊ½²éÑ¯
+- LinqKit è¡¨è¾¾å¼æŸ¥è¯¢
     - https://github.com/scottksmith95/LINQKit
-- AutoMapper dtoÓ³Éä
+- AutoMapper dtoæ˜ å°„
     - https://automapper.org
     - https://github.com/AutoMapper/AutoMapper    
-- RabbitMQ ÏûÏ¢¶ÓÁĞ
-  - ¿ÉÊ¹ÓÃdocker´î½¨»·¾³
+- RabbitMQ æ¶ˆæ¯é˜Ÿåˆ—
+  - å¯ä½¿ç”¨dockeræ­å»ºç¯å¢ƒ
   - https://github.com/rabbitmq/rabbitmq-dotnet-client
-- Redis³Ö¾Ã»¯»º´æ
-  - redis¹ÙÍø https://redis.io/docs/
-  - ÖĞÎÄ¹ÙÍø https://www.redis.net.cn/order/3552.html
+- RedisæŒä¹…åŒ–ç¼“å­˜
+  - rediså®˜ç½‘ https://redis.io/docs/
+  - ä¸­æ–‡å®˜ç½‘ https://www.redis.net.cn/order/3552.html
 
-  - ¿ÉÊ¹ÓÃdocker´î½¨»·¾³
+  - å¯ä½¿ç”¨dockeræ­å»ºç¯å¢ƒ
   - https://github.com/dotnetcore/EasyCaching
   - https://easycaching.readthedocs.io/en/latest/
   - https://github.com/StackExchange/StackExchange.Redis
   - https://stackexchange.github.io/StackExchange.Redis/
   - https://github.com/2881099/csredis
-- ¼ÇÂ¼ÈÕÖ¾
-  - ¿ÉÊ¹ÓÃdocker´î½¨»·¾³
+- è®°å½•æ—¥å¿—
+  - å¯ä½¿ç”¨dockeræ­å»ºç¯å¢ƒ
   - https://github.com/serilog/serilog
-- ¶¨Ê±ÈÎÎñ±í´ïÊ½
+- å®šæ—¶ä»»åŠ¡è¡¨è¾¾å¼
   - Cronos
   - https://github.com/HangfireIO/Cronos
-  - ¿É²Î¿¼ https://github.com/HangfireIO/Hangfire
-- Excel ²Ù×÷
+  - å¯å‚è€ƒ https://github.com/HangfireIO/Hangfire
+- Excel æ“ä½œ
   - https://github.com/EPPlusSoftware/EPPlus
   - https://github.com/nissl-lab/npoi
-- ¶şÎ¬Âë
+- äºŒç»´ç 
   - https://github.com/manuelbl/QrCodeGenerator
   - https://github.com/mono/SkiaSharp
 - SSE
   - https://github.com/tpeczek/Lib.AspNetCore.ServerSentEvents
-- ÇëÇó½Ó¿Ú
+- è¯·æ±‚æ¥å£
   - https://github.com/tmenier/Flurl
-- ±à¼­Í¼ÏñÖĞµÄexifÊı¾İ
+- ç¼–è¾‘å›¾åƒä¸­çš„exifæ•°æ®
   - https://github.com/oozcitak/exiflibrary
 - itext
   - https://github.com/itext/itext7-dotnet
-- ¹¤×÷Á÷
+- å·¥ä½œæµ
   - https://github.com/elsa-workflows/elsa-core 
 - swagger 
   - https://github.com/domaindrivendev/Swashbuckle.AspNetCore

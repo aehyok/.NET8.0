@@ -22,6 +22,38 @@ namespace aehyok.Basic.Services
             return entity is null ? throw new Exception("你要删除的数据不存在") : await this.DeleteAsync(entity);
         }
 
+        public override async Task<Menu> InsertAsync(Menu entity, CancellationToken cancellationToken = default)
+        {
+            if (entity.ParentId != 0)
+            {
+                var parent = await this.GetByIdAsync(entity.ParentId);
+
+                if (parent == null)
+                {
+                    throw new Exception("父级菜单不存在");
+                }
+
+                entity.IdSequences = $"{parent.IdSequences}{entity.Id}.";
+            }
+            else
+            {
+                entity.IdSequences = $".{entity.Id}.";
+            }
+
+            var exists = await this.GetAsync(a => a.Code == entity.Code);
+            if (exists != null && exists.Id != entity.Id)
+            {
+                throw new ErrorCodeException(-1, "菜单代码已存在");
+            }
+
+            if (entity.Id == entity.ParentId)
+            {
+                throw new ErrorCodeException(-1, "菜单的父级菜单不能是自己");
+            }
+
+            return await base.InsertAsync(entity, cancellationToken);
+        }
+
         public async Task<List<MenuTreeDto>> GetTreeListAsync(PlatformType platformType, MenuTreeQueryModel model)
         {
             if (!model.ParentCode.IsNullOrEmpty())

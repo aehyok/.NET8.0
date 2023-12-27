@@ -97,10 +97,18 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}/Resources")]
-        public Task<List<MenuResource>> GetResourcesAsync([FromServices] IServiceBase<MenuResource> menuResourceService, long id)
+        public async Task<List<MenuResource>> GetResourcesAsync([FromServices] IServiceBase<MenuResource> menuResourceService, long id)
         {
-            return menuResourceService.GetListAsync(a => a.MenuId == id);
+            using var scope = services.CreateScope();
+
+            var apiResourceService = scope.ServiceProvider.GetRequiredService<IApiResrouceService>();
+
+            var list = await apiResourceService.GetListAsync();
+
+            return await menuResourceService.GetListAsync(a => a.MenuId == id);
         }
+
+
 
         /// <summary>
         /// api 资源同步
