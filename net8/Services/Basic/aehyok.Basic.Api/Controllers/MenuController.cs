@@ -101,7 +101,7 @@ namespace aehyok.Basic.Api.Controllers
             var actionDescriptorProvider = scope.ServiceProvider.GetRequiredService<IActionDescriptorCollectionProvider>();
             var actions = actionDescriptorProvider.ActionDescriptors.Items;
 
-            var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            var assemblyName = Assembly.GetEntryAssembly()?.GetName().Name;
             var apiResourceService = scope.ServiceProvider.GetRequiredService<IApiResrouceService>();
 
             var mapper = scope.ServiceProvider.GetService<IMapper>();
@@ -113,11 +113,10 @@ namespace aehyok.Basic.Api.Controllers
                     NameSpace = descriptor.ControllerTypeInfo.Namespace,
                     ActionName = descriptor.ActionName,
                     ControllerName = descriptor.ControllerName,
-                    RoutePattern = descriptor.AttributeRouteInfo.Template
+                    RoutePattern = descriptor.AttributeRouteInfo?.Template,
+                    // 获取 Action 注释
+                    Name = DocsHelper.GetMethodComments(assemblyName, descriptor.MethodInfo)
                 };
-
-                // 获取 Action 注释
-                resource.Name = DocsHelper.GetMethodComments(assemblyName, descriptor.MethodInfo);
                 if (resource.Name.IsNullOrEmpty())
                 {
                     resource.Name = descriptor.ActionName;
