@@ -91,6 +91,18 @@ namespace aehyok.Basic.Api.Controllers
         }
 
         /// <summary>
+        /// 获取菜单绑定接口
+        /// </summary>
+        /// <param name="menuResourceService"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/Resources")]
+        public Task<List<MenuResource>> GetResourcesAsync([FromServices] IServiceBase<MenuResource> menuResourceService, long id)
+        {
+            return menuResourceService.GetListAsync(a => a.MenuId == id);
+        }
+
+        /// <summary>
         /// api 资源同步
         /// </summary>
         /// <returns></returns>
