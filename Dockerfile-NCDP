@@ -13,7 +13,7 @@ COPY  net8/.  .
 # 设置当前工作目录
 WORKDIR Services/NCDP/aehyok.NCDP.Api
 # 编译当前项目
-RUN dotnet publish "aehyok.NCDP.Api.csproj" -o /app -f net8.0docke
+RUN dotnet publish "aehyok.NCDP.Api.csproj" -o /app -f net8.0
 
 
 # Enable globalization and time zones:
