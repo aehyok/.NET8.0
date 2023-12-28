@@ -22,12 +22,12 @@ done
 
 docker build -t aehyok-basic -f Dockerfile-Basic .
 
-docker run --restart always -itd --name aehyok-basic -p 11001:8080 aehyok-basic
+docker run --restart always -itd --name aehyok-basic -p 11001:11001 aehyok-basic
 
 docker build -t aehyok-systemservice -f Dockerfile-SystemService .
 
-docker run --restart always -itd --name aehyok-systemservice -p 11000:8080 aehyok-systemservice
+docker run --restart always -itd --name aehyok-systemservice -p 11000:11000 aehyok-systemservice
 
 docker build -t aehyok-ncdp -f Dockerfile-NCDP .
 
-docker run --restart always -itd --name aehyok-ncdp -p 11002:8080 aehyok-ncdp
+docker run --restart always -itd --name aehyok-ncdp -p 11002:11002 aehyok-ncdp
