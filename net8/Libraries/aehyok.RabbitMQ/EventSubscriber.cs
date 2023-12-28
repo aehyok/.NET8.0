@@ -41,7 +41,8 @@ namespace aehyok.RabbitMQ
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            this.logger.LogInformation($"IEventSubscriber Dispose");
+            this.consumerChannel?.Dispose();
         }
 
         public void Subscribe(Type eventType, Type eventHandlerType)
