@@ -1,8 +1,4 @@
 {
 	"WorkerId": 2,
-	"Swagger": {
-        "Enable": true,
-        "SwaggerGen": true,
-        "SwaggerUI": true
-    }
+	"Urls": "http://*:11001"
 }

@@ -84,7 +84,7 @@ namespace aehyok.Core
             builder.Services.AddSingleton<IContentTypeProvider, FileExtensionContentTypeProvider>();
 
             //开发环境就不每次执行了，因为会重复执行，部署后每次执行问题不大
-            if(!builder.Environment.IsDevelopment())
+            if(!builder.Environment.IsDevelopment() )
             {
                 builder.Services.AddHostedService<InitApiResourceService>();
             }
@@ -104,6 +104,8 @@ namespace aehyok.Core
         /// <returns></returns>
         public static IApplicationBuilder UseApp(this WebApplication app, string moduleKey, string moduleTitle, bool isSystemService = false)
         {
+            App.Init(app.Services);
+
             app.UseSetStartDefaultRoute();
 
             app.UseSwagger(moduleKey, moduleTitle);
@@ -115,8 +117,6 @@ namespace aehyok.Core
             app.UseAuthorization();
 
             app.MapControllers();
-
-            App.Init(app.Services);
 
             if(isSystemService)
             {
