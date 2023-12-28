@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Basic.Domains
+namespace aehyok.Core.Domains
 {
     /// <summary>
     /// 接口资源
     /// </summary>
-    public class ApiResource : EntityBase
+    public class ApiResource : AuditedEntity
     {
         /// <summary>
         /// 接口名称

@@ -19,6 +19,7 @@ using aehyok.Serilog;
 using AutoMapper;
 using aehyok.Infrastructure.Filters;
 using Microsoft.AspNetCore.StaticFiles;
+using aehyok.Core.HostedServices;
 
 namespace aehyok.Core
 {
@@ -81,6 +82,12 @@ namespace aehyok.Core
 
 
             builder.Services.AddSingleton<IContentTypeProvider, FileExtensionContentTypeProvider>();
+
+            //开发环境就不每次执行了，因为会重复执行，部署后每次执行问题不大
+            if(!builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddHostedService<InitApiResourceService>();
+            }
 
             if (isSystemService) 
             {
