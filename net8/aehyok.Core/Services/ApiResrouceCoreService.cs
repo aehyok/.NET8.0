@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.Services
 {
-    public class ApiResrouceService(DbContext dbContext, IMapper mapper) : ServiceBase<ApiResource>(dbContext, mapper), IApiResrouceService, IScopedDependency
+    public class ApiResrouceCoreService(DbContext dbContext, IMapper mapper) : ServiceBase<ApiResource>(dbContext, mapper), IApiResrouceCoreService, IScopedDependency
     {
 
     }

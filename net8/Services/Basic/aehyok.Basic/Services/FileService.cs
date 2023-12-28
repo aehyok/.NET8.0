@@ -181,7 +181,7 @@ namespace aehyok.Basic.Services
             throw new NotImplementedException();
         }
 
-        private string GetFileTypeString(FileType type)
+        private static string GetFileTypeString(FileType type)
         {
             return type switch
             {

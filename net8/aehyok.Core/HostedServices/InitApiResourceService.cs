@@ -10,33 +10,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aehyok.Core.HostedServices
 {
     /// <summary>
     /// 程序启动后通过后台任务初始化 API 接口资源
     /// </summary>
-    public class InitApiResourceService : BackgroundService
+    public class InitApiResourceService(IServiceProvider services, ILogger<InitApiResourceService> logger) : BackgroundService
     {
-        private readonly IServiceProvider services;
-        private readonly ILogger<InitApiResourceService> logger;
-
-        public InitApiResourceService(IServiceProvider services, ILogger<InitApiResourceService> logger)
-        {
-            this.services = services;
-            this.logger = logger;
-        }
-
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            this.logger.LogInformation($"开始执行{nameof(InitApiResourceService)}后台任务");
+            logger.LogInformation($"开始执行{nameof(InitApiResourceService)}后台任务");
             var watch = new Stopwatch();
             watch.Start();
 
@@ -53,7 +39,7 @@ namespace aehyok.Core.HostedServices
                 var actions = actionDescriptorProvider.ActionDescriptors.Items;
 
                 var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
-                var apiResourceService = scope.ServiceProvider.GetRequiredService<IApiResrouceService>();
+                var apiResourceService = scope.ServiceProvider.GetRequiredService<IApiResrouceCoreService>();
 
                 var mapper = scope.ServiceProvider.GetService<IMapper>();
 
@@ -64,11 +50,10 @@ namespace aehyok.Core.HostedServices
                         NameSpace = descriptor.ControllerTypeInfo.Namespace,
                         ActionName = descriptor.ActionName,
                         ControllerName = descriptor.ControllerName,
-                        RoutePattern = descriptor.AttributeRouteInfo.Template
+                        RoutePattern = descriptor.AttributeRouteInfo.Template,
+                        // 获取 Action 注释
+                        Name = DocsHelper.GetMethodComments(assemblyName, descriptor.MethodInfo)
                     };
-
-                    // 获取 Action 注释
-                    resource.Name = DocsHelper.GetMethodComments(assemblyName, descriptor.MethodInfo);
                     if (resource.Name.IsNullOrEmpty())
                     {
                         resource.Name = descriptor.ActionName;
@@ -94,7 +79,7 @@ namespace aehyok.Core.HostedServices
                 }
 
                 watch.Stop();
-                this.logger.LogInformation($"后台任务{nameof(InitApiResourceService)}执行完成，耗时:{watch.ElapsedMilliseconds}ms");
+                logger.LogInformation($"后台任务{nameof(InitApiResourceService)}执行完成，耗时:{watch.ElapsedMilliseconds}ms");
             }
         }
     }

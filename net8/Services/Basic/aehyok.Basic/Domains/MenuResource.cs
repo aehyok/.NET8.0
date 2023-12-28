@@ -11,7 +11,7 @@ namespace aehyok.Basic.Domains
     /// <summary>
     /// 菜单与接口关联数据
     /// </summary>
-    public class MenuResource : EntityBase
+    public class MenuResource : AuditedEntity
     {
         /// <summary>
         /// 菜单编号
