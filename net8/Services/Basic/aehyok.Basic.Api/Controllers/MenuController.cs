@@ -3,6 +3,8 @@ using aehyok.Basic.Dtos;
 using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
+using aehyok.Core.Domains;
+using aehyok.Core.Services;
 using aehyok.EntityFramework.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;

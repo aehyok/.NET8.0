@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using aehyok.Infrastructure.TypeFinders;
+using System;
 
 namespace aehyok.CronTask
 {
@@ -20,6 +21,7 @@ namespace aehyok.CronTask
                 services.Add(new ServiceDescriptor(typeof(IHostedService), type, ServiceLifetime.Singleton));
             }
             return services;
+
         }
     }
 }
