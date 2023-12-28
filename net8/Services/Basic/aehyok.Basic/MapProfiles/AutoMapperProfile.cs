@@ -1,5 +1,6 @@
 ﻿using aehyok.Basic.Domains;
 using aehyok.Basic.Dtos;
+using aehyok.Core.Domains;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ namespace aehyok.Basic.MapProfiles
                 .ForMember(a => a.Children, a => a.Ignore());
 
             CreateMap<MenuDto, MenuTreeDto>();
+
+            CreateMap<ApiResource, ApiResourceDto>();
+            CreateMap<ApiResourceDto, MenuResourceDto>();
         }
     }
 }

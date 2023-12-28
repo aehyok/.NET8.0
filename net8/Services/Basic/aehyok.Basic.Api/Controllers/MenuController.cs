@@ -24,6 +24,7 @@ namespace aehyok.Basic.Api.Controllers
     /// 菜单管理
     /// </summary>
     public class MenuController(IMenuService menuService,
+        IApiResourceService apiResourceService,
         IServiceProvider services) : BasicControllerBase
     {
 
@@ -97,69 +98,57 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}/Resources")]
-        public async Task<List<MenuResource>> GetResourcesAsync([FromServices] IServiceBase<MenuResource> menuResourceService, long id)
+        public async Task<List<MenuResourceDto>> GetResourcesAsync([FromServices] IServiceBase<MenuResource> menuResourceService, long id)
         {
-            using var scope = services.CreateScope();
+            var resources = await apiResourceService.GetListAsync<ApiResourceDto>();
 
-            var apiResourceService = scope.ServiceProvider.GetRequiredService<IApiResrouceService>();
+            var checkedList = await menuResourceService.GetListAsync(a => a.MenuId == id);
 
-            var list = await apiResourceService.GetListAsync();
+            var array = checkedList.Select(item => item.ApiResourceId);
 
-            return await menuResourceService.GetListAsync(a => a.MenuId == id);
+            resources.ForEach(item => {
+                if(array.Contains(item.Id))
+                {
+                    item.IsChecked = true;
+                }
+            });
+
+
+            return resources.GroupBy(a => new { a.NameSpace, a.ControllerName, a.GroupName }).OrderBy(a => a.Key.NameSpace).Select(a =>
+            {
+                var resource = new MenuResourceDto
+                {
+                    Name = a.Key.GroupName,
+                    Code = $"{a.Key.NameSpace}.{a.Key.ControllerName}",
+                };
+
+                resource.Operations = a.Select(c => this.Mapper.Map<MenuResourceDto>(c)).ToList();
+
+                return resource;
+            }).ToList();
         }
 
-
-
         /// <summary>
-        /// api 资源同步
+        /// 绑定接口
         /// </summary>
+        /// <param name="menuResourceService"></param>
+        /// <param name="id">菜单Id</param>
+        /// <param name="resources">接口资源id数组</param>
         /// <returns></returns>
-        [HttpPost("set")]
-        public async Task<StatusCodeResult> Set()
+        [HttpPut("{id}/bind")]
+        public async Task<StatusCodeResult> BindResourceAsync([FromServices] IServiceBase<MenuResource> menuResourceService, long id, long[] resources)
         {
-            using var scope = services.CreateScope();
-            var actionDescriptorProvider = scope.ServiceProvider.GetRequiredService<IActionDescriptorCollectionProvider>();
-            var actions = actionDescriptorProvider.ActionDescriptors.Items;
+            var existLists = await menuResourceService.GetListAsync(a => a.MenuId == id);
+            await menuResourceService.DeleteAsync(existLists);
 
-            var assemblyName = Assembly.GetEntryAssembly()?.GetName().Name;
-            var apiResourceService = scope.ServiceProvider.GetRequiredService<IApiResrouceService>();
-
-            var mapper = scope.ServiceProvider.GetService<IMapper>();
-
-            foreach (ControllerActionDescriptor descriptor in actions)
+            var newResources = resources.Select(a => new MenuResource
             {
-                var resource = new ApiResource
-                {
-                    NameSpace = descriptor.ControllerTypeInfo.Namespace,
-                    ActionName = descriptor.ActionName,
-                    ControllerName = descriptor.ControllerName,
-                    RoutePattern = descriptor.AttributeRouteInfo?.Template,
-                    // 获取 Action 注释
-                    Name = DocsHelper.GetMethodComments(assemblyName, descriptor.MethodInfo)
-                };
-                if (resource.Name.IsNullOrEmpty())
-                {
-                    resource.Name = descriptor.ActionName;
-                }
+                MenuId = id,
+                ApiResourceId = a
+            });
 
-                // 获取 Controller 注释
-                resource.GroupName = DocsHelper.GetTypeComments(assemblyName, descriptor.ControllerTypeInfo);
-                if (resource.GroupName.IsNullOrEmpty())
-                {
-                    resource.GroupName = descriptor.ControllerName;
-                }
+            await menuResourceService.InsertAsync(newResources);
 
-                var httpMethod = descriptor.EndpointMetadata.FirstOrDefault(a => a.GetType() == typeof(HttpMethodMetadata));
-                if (httpMethod != null && httpMethod is HttpMethodMetadata metadata)
-                {
-                    resource.RequestMethod = metadata.HttpMethods.FirstOrDefault();
-                }
-
-                // 生成接口 API 唯一 Code
-                resource.Code = $"{resource.NameSpace}.{resource.ControllerName}.{resource.ActionName}";
-
-                await apiResourceService.InsertOrUpdateAsync(resource, a => a.Code == resource.Code);
-            }
             return Ok();
         }
     }

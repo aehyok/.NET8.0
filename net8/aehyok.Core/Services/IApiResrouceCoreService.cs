@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.Services
 {
-    public interface IApiResrouceService : IServiceBase<ApiResource>
+    public interface IApiResrouceCoreService : IServiceBase<ApiResource>
     {
     }
 }
