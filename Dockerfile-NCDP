@@ -13,7 +13,7 @@ COPY  net8/.  .
 # 设置当前工作目录
 WORKDIR Services/NCDP/aehyok.NCDP.Api
 # 编译当前项目
-RUN dotnet publish "aehyok.NCDP.Api.csproj" -o /app -f net8.0
+RUN dotnet publish "aehyok.NCDP.Api.csproj" -o /app -f net8.0docke
 
 
 # Enable globalization and time zones:
@@ -21,7 +21,7 @@ RUN dotnet publish "aehyok.NCDP.Api.csproj" -o /app -f net8.0
 # final stage/image
 # 第二阶段只关注运行（产物是第一阶段编译的）
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
-EXPOSE 8080
+EXPOSE 11002
 
 WORKDIR /app
 COPY net8/etc/.  .

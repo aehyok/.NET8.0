@@ -1,5 +1,6 @@
 {
     "WorkerId": 1,
+	"Urls": "http://*:11000",
 	"Swagger": {
         "Enable": true,
         "SwaggerGen": true,
