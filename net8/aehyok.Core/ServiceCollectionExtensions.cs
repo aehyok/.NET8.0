@@ -20,6 +20,7 @@ using AutoMapper;
 using aehyok.Infrastructure.Filters;
 using Microsoft.AspNetCore.StaticFiles;
 using aehyok.Core.HostedServices;
+using System.Text.Json;
 
 namespace aehyok.Core
 {
@@ -61,6 +62,10 @@ namespace aehyok.Core
 
                 //接口异常统一处理
                 options.Filters.Add<ApiAsyncExceptionFilter>();
+            }).AddJsonOptions(options =>
+            {
+                // 针对字段 long 类型，序列化时转换为字符串
+                options.JsonSerializerOptions.Converters.Add(new JsonLongConverter());
             });
 
             builder.Services.AddEndpointsApiExplorer();

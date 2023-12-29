@@ -3,9 +3,14 @@ using aehyok.Basic.Dtos;
 using aehyok.EntityFramework.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Captcha;
+using aehyok.Infrastructure.Enums;
+using aehyok.Infrastructure.Exceptions;
 using aehyok.Redis;
+using aehyok.Serilog;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +19,8 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
-    public class UserTokenService : ServiceBase<UserToken>, IUserTokenService, IScopedDependency
+    public class UserTokenService(DbContext dbContext, IMapper mapper, IRedisService redisService,IUserService userService, IHttpContextAccessor httpContextAccessor) : ServiceBase<UserToken>(dbContext, mapper), IUserTokenService, IScopedDependency
     {
-        private readonly IRedisService redisService;
-        public UserTokenService(DbContext dbContext, IMapper mapper,IRedisService redisService) : base(dbContext, mapper)
-        {
-            this.redisService = redisService;
-        }
-
         public async Task<CaptchaDto> GenerateCaptchaAsync()
         {
             // 生成验证码字符
@@ -38,9 +37,127 @@ namespace aehyok.Basic.Services
             };
 
             // 将验证码存储到缓存中，有效期 10 分钟
-            await this.redisService.SetAsync(BasicRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captcha.Key), captchaCode.ToLower(), TimeSpan.FromMinutes(10));
+            await redisService.SetAsync(BasicRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captcha.Key), captchaCode.ToLower(), TimeSpan.FromMinutes(10));
 
             return captcha;
+        }
+
+        public async Task<bool> ValidateCaptchaAsync(string captchaCode, string captchaKey)
+        {
+
+            var cachedCaptcha = await redisService.GetAsync<string>(BasicRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captchaKey));
+
+            // 删除缓存
+            await redisService.DeleteAsync(BasicRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captchaKey));
+
+            // 因为验证码存入缓存时转为了小写，所以这里转小写后对比
+            return !cachedCaptcha.IsNullOrEmpty() && cachedCaptcha == captchaCode.ToLower();
+        }
+
+        /// <summary>
+        /// 账号密码登录
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="platform"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<UserTokenDto> LoginWithPasswordAsync(string userName, string password, PlatformType platform)
+        {
+            var user = await userService.GetAsync(a => a.UserName == userName);
+
+            // 如果根据用户名没有查找到数据，并且用户名是一个手机号码，则使用用户名匹配手机号码
+            if (user is null && userName.IsMobile())
+            {
+                user = await userService.GetAsync(a => a.Mobile == userName);
+            }
+
+            if (user == null)
+            {
+                throw new ErrorCodeException(100002, "账号或密码错误");
+            }
+
+            if (user.PasswordSalt.IsNullOrEmpty())
+            {
+                throw new ErrorCodeException(100003, "该用户还未设置密码");
+            }
+
+            //// 如果密码是以 BPSE 开头的，则表示密码明文已经被 Base64 加密
+            //if (password.StartsWith("BPSE"))
+            //{
+            //    password = SecurityHelper.Base64ToString(password[4..]);
+            //}
+
+            if (!user.Password.Equals(password.EncodePassword(user.PasswordSalt)))
+            {
+                throw new ErrorCodeException(100002, "账号或密码错误");
+            }
+
+            return await GenerateUserTokenAsync(user, platform);
+        }
+
+        /// <summary>
+        /// 生成用户 Token
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="platform"></param>
+        /// <returns></returns>
+        private async Task<UserTokenDto> GenerateUserTokenAsync(User user, PlatformType platform)
+        {
+            if (!user.IsEnable)
+            {
+                throw new ErrorCodeException(100001, "该账号已禁用");
+            }
+
+            // 更新最后登录时间
+            await userService.UpdateFromQueryAsync(a => a.Id == user.Id, a => new User
+            {
+                LastLoginTime = DateTime.Now
+            });
+
+            var ipAddress = httpContextAccessor.HttpContext.Request.GetRemoteIpAddress();
+            var userAgent = httpContextAccessor.HttpContext.Request.Headers.UserAgent.ToString();
+
+            var token = new UserToken()
+            {
+                ExpirationDate = DateTime.Now.AddHours(2),
+                IpAddress = ipAddress.ToString(),
+                PlatformType = platform,
+                UserAgent = userAgent,
+                UserId = user.Id,
+                RefreshTokenIsAvailable = true
+            };
+
+            //token.Token = SecurityHelper.GenerateToken(user.Id.ToString(), token.ExpirationDate);
+            //token.TokenHash = SecurityHelper.EncodeMD5(token.Token);
+            //token.RefreshToken = SecurityHelper.GenerateToken(token.Token, token.ExpirationDate.AddMonths(1));
+
+            //// 获取用户默认角色信息
+            //var role = await this.userRoleService.GetUserDefaultRole(user.Id);
+            //if (role != null)
+            //{
+            //    token.RoleId = role.RoleId;
+            //    token.RegionId = role.RegionId;
+            //}
+            //else
+            //{
+            //    // 如果用户没用任何角色，则给该用户添加游客角色
+            //    var guestRole = await this.userRoleService.AddGuestRoleAsync(user.Id);
+            //    token.RoleId = guestRole.RoleId;
+            //    token.RegionId = guestRole.RegionId;
+            //}
+
+            //await this.InsertAsync(token);
+
+            //// 从数据库中加载 User 对象，以存储到缓存中
+            //token.User = await this.userService.GetAsync(a => a.Id == user.Id, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
+
+            //var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
+
+            //// 将 Token 信息存储到 Redis，有效期 2 小时
+            //await this.cachingProvider.SetAsync(BasicConstants.USER_TOKEN_CACHE_KEY_PATTERN.Format(token.TokenHash), cacheData, TimeSpan.FromHours(2));
+
+            return this.Mapper.Map<UserTokenDto>(token);
         }
     }
 }
