@@ -1,6 +1,18 @@
 {
     "WorkerId": 1,
 	"Urls": "http://*:11000",
+	"Serilog": {
+        "WriteTo": [
+            {},
+            {
+                "Name": "File",
+                "Args": {
+                    "path": "/var/log/aehyok/systemservice.log"
+                }
+            },
+            {}
+        ]
+    },
 	"Swagger": {
         "Enable": true,
         "SwaggerGen": true,
