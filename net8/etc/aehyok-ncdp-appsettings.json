@@ -1,4 +1,16 @@
 {
 	"WorkerId": 3,
 	"Urls": "http://*:11002",
+	"Serilog": {
+        "WriteTo": [
+            {},
+            {
+                "Name": "File",
+                "Args": {
+                    "path": "/var/log/aehyok/ncdp.log"
+                }
+            },
+            {}
+        ]
+    },
 }

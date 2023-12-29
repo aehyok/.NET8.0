@@ -1,4 +1,16 @@
 {
 	"WorkerId": 2,
-	"Urls": "http://*:11001"
+	"Urls": "http://0.0.0.0:11001",
+	"Serilog": {
+        "WriteTo": [
+            {},
+            {
+                "Name": "File",
+                "Args": {
+                    "path": "/var/log/aehyok/basic.log"
+                }
+            },
+            {}
+        ]
+    },
 }
