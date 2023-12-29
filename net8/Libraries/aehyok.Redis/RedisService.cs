@@ -1,10 +1,16 @@
 ﻿using aehyok.Infrastructure;
 using CSRedis;
+using System.Runtime.CompilerServices;
 
 namespace aehyok.Redis
 {
     public class RedisService: IRedisService, IScopedDependency
     {
+        public async Task<long> DeleteAsync(string key)
+        {
+            return await RedisHelper.DelAsync(key);
+        }
+
         public Task<T> GetAsync<T>(string key)
         {
             return RedisHelper.GetAsync<T>(key);

@@ -1,0 +1,20 @@
+[Unit]
+Description=aehyok-systemservice
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# modify when deploy in prod env
+# User=dvs
+# Group=dvs
+
+Type=simple
+ExecStart=/root/.dotnet/dotnet /usr/local/aehyok/aehyok-systemservice/aehyok.SystemService.dll
+WorkingDirectory=/usr/local/aehyok/aehyok-systemservice
+
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target

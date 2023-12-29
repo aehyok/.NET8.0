@@ -28,5 +28,23 @@ namespace aehyok.Basic.Api.Controllers
         {
             return this.userTokenService.GenerateCaptchaAsync();
         }
+
+        /// <summary>
+        /// 账号密码登录
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("password")]
+        [AllowAnonymous]
+        public async Task<UserTokenDto> PostAsync(PasswordLoginDto model)
+        {
+            if (!await this.userTokenService.ValidateCaptchaAsync(model.Captcha, model.CaptchaKey))
+            {
+                throw new Exception("验证码错误");
+            }
+
+            return null;
+            //return await this.userTokenService.LoginWithPasswordAsync(model.UserName, model.Password, model.Platform);
+        }
     }
 }

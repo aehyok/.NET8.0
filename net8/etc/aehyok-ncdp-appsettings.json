@@ -1,6 +1,6 @@
 {
 	"WorkerId": 3,
-	"Urls": "http://*:11002",
+	"Urls": "http://0.0.0.0:11002",
 	"Serilog": {
         "WriteTo": [
             {},

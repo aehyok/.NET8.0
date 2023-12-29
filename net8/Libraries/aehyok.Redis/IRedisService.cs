@@ -45,5 +45,12 @@ namespace aehyok.Redis
         /// <param name="value"></param>
         /// <returns></returns>
         Task<bool> SetAsync(string key, object value, int expireSeconds = -1, RedisExistence? exists = null);
+
+        /// <summary>
+        /// 删除Key
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        Task<long> DeleteAsync(string key);
     }
 }
