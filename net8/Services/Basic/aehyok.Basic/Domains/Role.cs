@@ -47,11 +47,6 @@ namespace aehyok.Basic.Domains
         public bool IsSystem { get; set; }
 
         /// <summary>
-        /// 总用户数
-        /// </summary>
-        public int TotalUsers { get; set; }
-
-        /// <summary>
         /// 显示排序
         /// </summary>
         public int Order { get; set; }
