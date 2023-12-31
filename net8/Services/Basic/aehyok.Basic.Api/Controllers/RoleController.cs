@@ -16,7 +16,7 @@ namespace aehyok.Basic.Api.Controllers
     /// <summary>
     /// 角色管理
     /// </summary>
-    public class RoleController(IRoleService roleService) : BasicControllerBase
+    public class RoleController(IRoleService roleService, IPermissionService permissionService) : BasicControllerBase
     {
         // <summary>
         /// 获取角色分页数据
@@ -152,6 +152,17 @@ namespace aehyok.Basic.Api.Controllers
 
             await roleService.DeleteAsync(entity);
             return Ok();
+        }
+
+        /// <summary>
+        /// 获取对象权限
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public Task<List<PermissionDto>> GetAsync([FromQuery] PermissionQueryModel model)
+        {
+            return permissionService.GetMenuPermissionAsync(model.RoleId);
         }
     }
 }
