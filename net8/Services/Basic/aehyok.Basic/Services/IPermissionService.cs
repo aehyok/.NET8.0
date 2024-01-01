@@ -16,6 +16,6 @@ namespace aehyok.Basic.Services
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        Task<List<PermissionDto>> GetMenuPermissionAsync(long roleId);
+        Task<List<PermissionDto>> GetRolePermissionAsync(long roleId);
     }
 }
