@@ -166,7 +166,7 @@ namespace aehyok.Basic.Api.Controllers
         }
 
         /// <summary>
-        /// 修改权限
+        /// 修改角色权限
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
