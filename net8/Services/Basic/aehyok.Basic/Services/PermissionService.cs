@@ -19,7 +19,7 @@ namespace aehyok.Basic.Services
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        public async Task<List<PermissionDto>> GetMenuPermissionAsync(long roleId)
+        public async Task<List<PermissionDto>> GetRolePermissionAsync(long roleId)
         {
             var query = from m in menuService.GetQueryable()
                         join p in this.GetQueryable().Where(a => a.RoleId == roleId) on m.Id equals p.MenuId into pt

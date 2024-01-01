@@ -160,9 +160,9 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public Task<List<PermissionDto>> GetAsync([FromQuery] PermissionQueryModel model)
+        public Task<List<PermissionDto>> GetRoleAsync([FromQuery] PermissionQueryModel model)
         {
-            return permissionService.GetMenuPermissionAsync(model.RoleId);
+            return permissionService.GetRolePermissionAsync(model.RoleId);
         }
     }
 }
