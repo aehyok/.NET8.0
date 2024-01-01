@@ -2,6 +2,7 @@
 using aehyok.Basic.Dtos;
 using aehyok.EntityFramework.Repository;
 using aehyok.Infrastructure;
+using aehyok.Infrastructure.Exceptions;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,8 +13,36 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
-    public class PermissionService(DbContext dbContext, IMapper mapper, IMenuService menuService) : ServiceBase<Permission>(dbContext, mapper), IPermissionService, IScopedDependency
+    public class PermissionService(DbContext dbContext, IMapper mapper, IMenuService menuService, IRoleService roleService) : ServiceBase<Permission>(dbContext, mapper), IPermissionService, IScopedDependency
     {
+        /// <summary>
+        /// 修改角色权限
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task ChangeRolePermissionAsync(ChangeRolePermissionModel model)
+        {
+            var role = await roleService.GetAsync(a => a.Id == model.RoleId);
+            if (role is null)
+            {
+                throw new ErrorCodeException(-1, "要授权的角色不存在");
+            }
+
+            // 删除原有数据
+            await this.BatchDeleteAsync(a => a.RoleId == model.RoleId);
+
+            var permissions = model.Premission.GroupBy(a => a.MenuId).Select(a => a.FirstOrDefault()).Where(a => a.HasPermission).Select(a => new Permission
+            {
+                //DataRange = a.DataRange,
+                HasPermission = a.HasPermission,
+                MenuId = a.MenuId,
+                RoleId = model.RoleId,
+                Remark = string.Empty
+            });
+
+            await this.InsertAsync(permissions);
+        }
+
         /// <summary>
         /// 获取对象菜单权限
         /// </summary>

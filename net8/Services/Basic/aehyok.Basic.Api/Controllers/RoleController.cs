@@ -155,14 +155,26 @@ namespace aehyok.Basic.Api.Controllers
         }
 
         /// <summary>
-        /// 获取对象权限
+        /// 获取角色权限
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("permission")]
         public Task<List<PermissionDto>> GetRoleAsync([FromQuery] PermissionQueryModel model)
         {
             return permissionService.GetRolePermissionAsync(model.RoleId);
+        }
+
+        /// <summary>
+        /// 修改权限
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("permission")]
+        public async Task<StatusCodeResult> PostAsync(ChangeRolePermissionModel model)
+        {
+            await permissionService.ChangeRolePermissionAsync(model);
+            return Ok();
         }
     }
 }
