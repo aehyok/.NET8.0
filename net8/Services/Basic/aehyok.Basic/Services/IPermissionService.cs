@@ -17,5 +17,12 @@ namespace aehyok.Basic.Services
         /// <param name="roleId"></param>
         /// <returns></returns>
         Task<List<PermissionDto>> GetRolePermissionAsync(long roleId);
+
+        /// <summary>
+        /// 修改角色权限
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task ChangeRolePermissionAsync(ChangeRolePermissionModel model);
     }
 }
