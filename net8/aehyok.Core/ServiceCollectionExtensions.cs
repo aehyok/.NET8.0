@@ -142,7 +142,11 @@ namespace aehyok.Core
             Thread.CurrentThread.Name = moduleKey;
 
             // 例如 aehyok.NCDP 最开始代码中没有使用到，是不会加载到内存中的，所以需要手动加载
-            Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll").Select(AssemblyLoadContext.Default.LoadFromAssemblyPath).ToList();
+            var assemblyFiles = Directory.GetFiles(AppContext.BaseDirectory, "aehyok.*.dll");
+            foreach (var assemblyFile in assemblyFiles)
+            {
+                AssemblyLoadContext.Default.LoadFromAssemblyPath(assemblyFile);
+            }
 
             builder.ConfigureAppConfiguration((context, options) =>
             {
@@ -201,7 +205,7 @@ namespace aehyok.Core
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        private static IServiceCollection ConfigureOptions(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection ConfigureOptions(this IServiceCollection services, ConfigurationManager configuration)
         {
             PrintConfigurationProvider(configuration);
 
