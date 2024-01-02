@@ -120,9 +120,8 @@ namespace aehyok.Basic.Api.Controllers
                 {
                     Name = a.Key.GroupName,
                     Code = $"{a.Key.NameSpace}.{a.Key.ControllerName}",
+                    Operations = a.Select(c => this.Mapper.Map<MenuResourceDto>(c)).ToList()
                 };
-
-                resource.Operations = a.Select(c => this.Mapper.Map<MenuResourceDto>(c)).ToList();
 
                 return resource;
             }).ToList();
