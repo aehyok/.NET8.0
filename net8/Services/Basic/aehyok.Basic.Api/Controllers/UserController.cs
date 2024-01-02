@@ -26,7 +26,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="regionService"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IPagedList<UserDto>> GetListAsync([FromQuery] UserQueryModel model
+        public async Task<IPagedList<UserDto>> GetListAsync([FromQuery] UserQueryDto model
             , [FromServices] IRoleService roleService
             , [FromServices] IRegionService regionService)
         {

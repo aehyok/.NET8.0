@@ -23,6 +23,6 @@ namespace aehyok.Basic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task ChangeRolePermissionAsync(ChangeRolePermissionModel model);
+        Task ChangeRolePermissionAsync(ChangeRolePermissionDto model);
     }
 }

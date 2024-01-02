@@ -48,7 +48,7 @@ namespace aehyok.Basic.Services
             return await base.InsertAsync(entity, cancellationToken);
         }
 
-        public async Task<List<MenuTreeDto>> GetTreeListAsync(PlatformType platformType, MenuTreeQueryModel model)
+        public async Task<List<MenuTreeDto>> GetTreeListAsync(PlatformType platformType, MenuTreeQueryDto model)
         {
             if (!model.ParentCode.IsNullOrEmpty())
             {

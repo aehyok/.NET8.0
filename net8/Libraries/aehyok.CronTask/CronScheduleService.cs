@@ -37,7 +37,7 @@ namespace aehyok.CronTask
 
 
             ///用于准确测量时间间隔
-            Stopwatch stopwatch = new Stopwatch();
+            Stopwatch stopwatch = new();
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -53,7 +53,7 @@ namespace aehyok.CronTask
                     stopwatch.Restart();
                     Console.WriteLine("开始执行任务");
                     await ProcessAsync(stoppingToken);
-                    Console.WriteLine($"任务执行时间:{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}");
+                    Console.WriteLine($"任务执行时间:{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
                     Console.WriteLine("任务执行完成");
                 }
                 catch

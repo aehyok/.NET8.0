@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Basic.Dtos.Create
 {
-    public class CreateRegionModel
+    public class CreateRegionDto
     {
         /// <summary>
         /// 名称

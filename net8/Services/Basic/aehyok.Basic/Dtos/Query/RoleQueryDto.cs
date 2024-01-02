@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Dtos.Query
 {
-    public class RoleQueryModel : PagedQueryModelBase
+    public class RoleQueryDto : PagedQueryModelBase
     {
         /// <summary>
         /// 角色状态，True 启用 False 禁用

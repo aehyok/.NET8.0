@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Dtos
 {
-    public class ChangeRolePermissionModel
+    public class ChangeRolePermissionDto
     {
         /// <summary>
         /// 角色编号

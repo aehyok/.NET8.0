@@ -24,7 +24,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public Task<IPagedList<RoleDto>> GetAsync([FromQuery] RoleQueryModel model)
+        public Task<IPagedList<RoleDto>> GetAsync([FromQuery] RoleQueryDto model)
         {
             var spec = Specifications<Role>.Create();
             spec.Query.OrderBy(a => a.Order);
@@ -160,7 +160,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("permission")]
-        public Task<List<PermissionDto>> GetRoleAsync([FromQuery] PermissionQueryModel model)
+        public Task<List<PermissionDto>> GetRoleAsync([FromQuery] PermissionQueryDto model)
         {
             return permissionService.GetRolePermissionAsync(model.RoleId);
         }
@@ -171,7 +171,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("permission")]
-        public async Task<StatusCodeResult> PostAsync(ChangeRolePermissionModel model)
+        public async Task<StatusCodeResult> PostAsync(ChangeRolePermissionDto model)
         {
             await permissionService.ChangeRolePermissionAsync(model);
             return Ok();

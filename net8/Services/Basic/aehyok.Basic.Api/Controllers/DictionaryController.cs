@@ -1,5 +1,5 @@
 ﻿using aehyok.Basic.Domains;
-using aehyok.Basic.Dtos;
+using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Services;
 using aehyok.EntityFramework.Repository;
 using aehyok.Infrastructure.Exceptions;
@@ -59,7 +59,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("group")]
-        public async Task<long> PostGroupAsync(CreateDictionaryGroupModel model)
+        public async Task<long> PostGroupAsync(CreateDictionaryGroupDto model)
         {
             var entity = this.Mapper.Map<DictionaryGroup>(model);
             await dictionaryGroupService.InsertAsync(entity);
@@ -73,7 +73,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("group/{id}")]
-        public async Task<StatusCodeResult> PutGroupAsync(long id, CreateDictionaryGroupModel model)
+        public async Task<StatusCodeResult> PutGroupAsync(long id, CreateDictionaryGroupDto model)
         {
             var entity = await dictionaryGroupService.GetAsync(a => a.Id == id) ?? throw new Exception("你要修改的数据不存在");
 

@@ -22,7 +22,7 @@ namespace aehyok.Basic.Services
         /// <param name="parentId"></param>
         /// <param name="includeChilds">是否包含下级</param>
         /// <returns></returns>
-        Task<List<MenuTreeDto>> GetTreeListAsync(PlatformType platformType, MenuTreeQueryModel model);
+        Task<List<MenuTreeDto>> GetTreeListAsync(PlatformType platformType, MenuTreeQueryDto model);
 
         /// <summary>
         /// 新增菜单

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Dtos.Query
 {
-    public class MenuTreeQueryModel
+    public class MenuTreeQueryDto
     {
         /// <summary>
         /// 父级 Id

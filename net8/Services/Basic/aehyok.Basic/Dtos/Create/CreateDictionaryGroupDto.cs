@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Basic.Dtos
+namespace aehyok.Basic.Dtos.Create
 {
-    public class CreateDictionaryGroupModel
+    public class CreateDictionaryGroupDto
     {
         /// <summary>
         /// 名称
