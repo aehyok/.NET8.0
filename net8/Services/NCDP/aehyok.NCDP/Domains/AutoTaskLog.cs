@@ -1,5 +1,5 @@
 ﻿using aehyok.Basic.Domains;
-using aehyok.EntityFramework.Entities;
+using aehyok.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

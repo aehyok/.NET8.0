@@ -1,5 +1,5 @@
-﻿using aehyok.EntityFramework.Entities;
-using aehyok.EntityFramework.Repository.AutoMapper;
+﻿using aehyok.EntityFrameworkCore.Entities;
+using aehyok.EntityFrameworkCore.Repository.AutoMapper;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Repository
+namespace aehyok.EntityFrameworkCore.Repository
 {
     public partial class ServiceBase<TEntity, TKey> : AutoMapperRepository<TEntity, TKey>, IServiceBase<TEntity, TKey> where TEntity : class, IEntity<TKey>
     {

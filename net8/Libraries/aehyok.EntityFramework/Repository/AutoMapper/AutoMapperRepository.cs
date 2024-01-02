@@ -15,9 +15,9 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using X.PagedList;
 using IConfigurationProvider = AutoMapper.IConfigurationProvider;
-using aehyok.EntityFramework.Repository.Base;
+using aehyok.EntityFrameworkCore.Repository.Base;
 
-namespace aehyok.EntityFramework.Repository.AutoMapper
+namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
 {
     public abstract class AutoMapperRepository<TEntity, TKey> : RepositoryBase<TEntity, TKey>, IAutoMapperRepository<TEntity, TKey> where TEntity : class
     {

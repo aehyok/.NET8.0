@@ -12,9 +12,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using X.PagedList;
-using aehyok.EntityFramework.Repository.Base;
+using aehyok.EntityFrameworkCore.Repository.Base;
 
-namespace aehyok.EntityFramework.Repository.AutoMapper
+namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
 {
     public interface IAutoMapperRepository<TEntity, TKey> : IRepositoryBase<TEntity, TKey> where TEntity : class
     {

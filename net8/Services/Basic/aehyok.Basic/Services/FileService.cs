@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Repository;
+﻿using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.FileStroage;

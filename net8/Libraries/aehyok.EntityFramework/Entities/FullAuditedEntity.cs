@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Entities
+namespace aehyok.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// 数据表实体（主键设置、软删除标识、CreatedAt CreatedBy、UpdatedAt UpdateBy、以及添加用户的关联实体）

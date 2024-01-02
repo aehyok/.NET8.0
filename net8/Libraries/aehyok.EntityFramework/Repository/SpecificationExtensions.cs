@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Repository
+namespace aehyok.EntityFrameworkCore.Repository
 {
     public static class SpecificationExtensions
     {

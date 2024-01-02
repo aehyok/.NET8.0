@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework
+namespace aehyok.EntityFrameworkCore
 {
     /// <summary>
     /// EF Core 数据库迁移时，过滤外键

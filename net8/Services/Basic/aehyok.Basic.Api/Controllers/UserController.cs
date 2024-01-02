@@ -2,7 +2,7 @@
 using aehyok.Basic.Dtos;
 using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
-using aehyok.EntityFramework.Repository;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Exceptions;
 using Ardalis.Specification;
 using Microsoft.AspNetCore.Http;

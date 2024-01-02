@@ -1,4 +1,4 @@
-﻿using aehyok.Core.Mapping;
+﻿using aehyok.EntityFrameworkCore.Mapping;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;

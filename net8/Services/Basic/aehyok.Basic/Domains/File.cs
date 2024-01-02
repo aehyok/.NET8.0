@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Entities;
+﻿using aehyok.EntityFrameworkCore.Entities;
 using aehyok.Infrastructure.Enums;
 using Microsoft.VisualBasic.FileIO;
 using System;

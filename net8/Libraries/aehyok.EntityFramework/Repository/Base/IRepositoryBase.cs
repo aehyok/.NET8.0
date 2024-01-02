@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Repository.Query;
+﻿using aehyok.EntityFrameworkCore.Repository.Query;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Repository.Base
+namespace aehyok.EntityFrameworkCore.Repository.Base
 {
     /// <summary>
     /// Contains all the repository methods.

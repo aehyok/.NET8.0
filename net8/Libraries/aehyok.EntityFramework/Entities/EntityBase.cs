@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using aehyok.Infrastructure;
 
-namespace aehyok.EntityFramework.Entities
+namespace aehyok.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// 抽象化数据默认实体基类，设置主键以及软删除

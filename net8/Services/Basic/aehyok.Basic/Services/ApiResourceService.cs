@@ -1,6 +1,6 @@
 ﻿using aehyok.Basic.Dtos;
 using aehyok.Core.Domains;
-using aehyok.EntityFramework.Repository;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;

@@ -1,5 +1,5 @@
 ﻿using aehyok.Basic.Domains;
-using aehyok.EntityFramework.Repository;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using Ardalis.Specification;
 using AutoMapper;

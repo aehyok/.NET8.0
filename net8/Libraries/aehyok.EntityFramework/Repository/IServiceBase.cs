@@ -1,5 +1,5 @@
-﻿using aehyok.EntityFramework.Entities;
-using aehyok.EntityFramework.Repository.AutoMapper;
+﻿using aehyok.EntityFrameworkCore.Entities;
+using aehyok.EntityFrameworkCore.Repository.AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Repository
+namespace aehyok.EntityFrameworkCore.Repository
 {
     public interface IServiceBase<TEntity> : IServiceBase<TEntity, long> where TEntity : class, IEntity<long>
     {

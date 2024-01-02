@@ -1,6 +1,5 @@
-﻿using aehyok.Core;
-using aehyok.EntityFramework.DbContexts;
-using aehyok.EntityFramework.Repository;
+﻿using aehyok.EntityFrameworkCore.DbContexts;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.TypeFinders;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace aehyok.EntityFramework
+namespace aehyok.EntityFrameworkCore
 {
     public static partial class ServiceCollectionExtensions
     {

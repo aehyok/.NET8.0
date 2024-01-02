@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using aehyok.Infrastructure;
 
-namespace aehyok.EntityFramework.Entities
+namespace aehyok.EntityFrameworkCore.Entities
 {
 
     /// <summary>

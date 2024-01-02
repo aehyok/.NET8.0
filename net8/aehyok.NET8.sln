@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.RabbitMQ", "Librarie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Infrastructure", "aehyok.Infrastructure\aehyok.Infrastructure.csproj", "{5C1256DA-06DC-45C2-85DE-B17B9B692B88}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.EntityFramework", "Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj", "{B1B36DB3-22C9-43F1-8977-9428B823916C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.EntityFrameworkCore", "Libraries\aehyok.EntityFramework\aehyok.EntityFrameworkCore.csproj", "{B1B36DB3-22C9-43F1-8977-9428B823916C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aehyok.Core", "aehyok.Core\aehyok.Core.csproj", "{AC89F4BA-C53E-4C94-82CD-F2E0C50AB8E1}"
 EndProject
