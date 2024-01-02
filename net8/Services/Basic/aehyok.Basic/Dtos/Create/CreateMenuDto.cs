@@ -12,7 +12,7 @@ namespace aehyok.Basic.Dtos.Create
     /// <summary>
     /// 创建菜单
     /// </summary>
-    public class CreateMenuModel
+    public class CreateMenuDto
     {
         /// <summary>
         /// 菜单名称

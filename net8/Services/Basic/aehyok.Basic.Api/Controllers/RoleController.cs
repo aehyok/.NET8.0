@@ -59,7 +59,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<long> PostAsync(CreateRoleModel model)
+        public async Task<long> PostAsync(CreateRoleDto model)
         {
             var entity = this.Mapper.Map<Role>(model);
             await roleService.InsertAsync(entity);
@@ -73,7 +73,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<StatusCodeResult> PutAsync(long id, CreateRoleModel model)
+        public async Task<StatusCodeResult> PutAsync(long id, CreateRoleDto model)
         {
             var entity = await roleService.GetAsync(a => a.Id == id);
             if (entity is null)

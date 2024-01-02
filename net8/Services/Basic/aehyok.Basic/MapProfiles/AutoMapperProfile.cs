@@ -25,6 +25,8 @@ namespace aehyok.Basic.MapProfiles
 
             CreateMap<ApiResource, ApiResourceDto>();
             CreateMap<ApiResourceDto, MenuResourceDto>();
+
+            CreateMap<Role, RoleDto>();
         }
     }
 }

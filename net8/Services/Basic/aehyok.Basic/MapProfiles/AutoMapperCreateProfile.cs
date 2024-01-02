@@ -19,7 +19,9 @@ namespace aehyok.Basic.MapProfiles
         {
             CreateMap<CreateDictionaryGroupModel, DictionaryGroup>();
 
-            CreateMap<CreateMenuModel, Menu>();
+            CreateMap<CreateMenuDto, Menu>();
+
+            CreateMap<CreateRoleDto, Role>();
         }
     }
 }
