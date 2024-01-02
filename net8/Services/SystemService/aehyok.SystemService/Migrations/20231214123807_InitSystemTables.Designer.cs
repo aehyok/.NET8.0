@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using aehyok.EntityFramework.DbContexts;
+using aehyok.EntityFrameworkCore.DbContexts;
 
 #nullable disable
 
