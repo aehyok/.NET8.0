@@ -1,5 +1,6 @@
 ﻿using aehyok.Basic.Domains;
 using aehyok.Basic.Dtos;
+using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
 using aehyok.EntityFramework.Repository;
@@ -22,7 +23,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public Task<List<RegionDto>> GetListAsync([FromQuery] RegionQueryModel model)
+        public Task<List<RegionDto>> GetListAsync([FromQuery] RegionQueryDto model)
         {
             var spec = Specifications<Region>.Create();
             spec.Query.OrderBy(a => a.Order);
@@ -48,14 +49,14 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<long> PostAsync(CreateRegionModel model)
+        public async Task<long> PostAsync(CreateRegionDto model)
         {
             var entity = this.Mapper.Map<Region>(model);
 
-            if (entity.ParentId == 0)
-            {
-                throw new ErrorCodeException(-1, "禁止创建根节点区域");
-            }
+            //if (entity.ParentId == 0)
+            //{
+            //    throw new ErrorCodeException(-1, "禁止创建根节点区域");
+            //}
 
             await regionService.InsertAsync(entity);
             return entity.Id;
@@ -69,7 +70,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         [HttpPut("{id}")]
-        public async Task<StatusCodeResult> PutAsync(long id, CreateRegionModel model)
+        public async Task<StatusCodeResult> PutAsync(long id, CreateRegionDto model)
         {
             var entity = await regionService.GetAsync(a => a.Id == id);
             if (entity is null)

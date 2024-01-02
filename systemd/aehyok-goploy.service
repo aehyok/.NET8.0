@@ -1,0 +1,11 @@
+[Unit]
+Description=The Goploy
+After=network.target
+
+[Service]
+Environment="HOME=/root"
+WorkingDirectory=/usr/local/aehyok/aehyok-goploy
+ExecStart=/usr/local/aehyok/aehyok-goploy/goploy
+
+[Install]
+WantedBy=multi-user.target

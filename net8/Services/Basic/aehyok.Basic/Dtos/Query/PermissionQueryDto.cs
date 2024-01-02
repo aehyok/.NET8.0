@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Dtos.Query
 {
-    public class PermissionQueryModel
+    public class PermissionQueryDto
     {
         /// <summary>
         /// 角色编号

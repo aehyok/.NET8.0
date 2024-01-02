@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Dtos.Query
 {
-    public class UserQueryModel : PagedQueryModelBase
+    public class UserQueryDto : PagedQueryModelBase
     {
         /// <summary>
         /// 角色编号

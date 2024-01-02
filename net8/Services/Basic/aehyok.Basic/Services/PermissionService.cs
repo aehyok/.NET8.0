@@ -20,7 +20,7 @@ namespace aehyok.Basic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task ChangeRolePermissionAsync(ChangeRolePermissionModel model)
+        public async Task ChangeRolePermissionAsync(ChangeRolePermissionDto model)
         {
             var role = await roleService.GetAsync(a => a.Id == model.RoleId);
             if (role is null)

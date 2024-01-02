@@ -1,5 +1,4 @@
 ﻿using aehyok.Basic.Domains;
-using aehyok.Basic.Dtos;
 using aehyok.Basic.Dtos.Create;
 using AutoMapper;
 using System;
@@ -17,11 +16,13 @@ namespace aehyok.Basic.MapProfiles
     {
         public AutoMapperCreateProfile()
         {
-            CreateMap<CreateDictionaryGroupModel, DictionaryGroup>();
+            CreateMap<CreateDictionaryGroupDto, DictionaryGroup>();
 
             CreateMap<CreateMenuDto, Menu>();
 
             CreateMap<CreateRoleDto, Role>();
+
+            CreateMap<CreateRegionDto,  Region>();
         }
     }
 }

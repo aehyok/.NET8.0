@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Dtos.Query
 {
-    public class RegionQueryModel
+    public class RegionQueryDto
     {
         /// <summary>
         /// 搜索关键字
