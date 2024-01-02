@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Dtos.Create
 {
-    public class CreateRoleModel
+    public class CreateRoleDto
     {
         /// <summary>
         /// 名称

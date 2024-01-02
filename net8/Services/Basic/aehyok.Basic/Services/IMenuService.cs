@@ -29,7 +29,7 @@ namespace aehyok.Basic.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<long> PostAsync(CreateMenuModel model);
+        Task<long> PostAsync(CreateMenuDto model);
 
         /// <summary>
         /// 修改菜单
@@ -37,7 +37,7 @@ namespace aehyok.Basic.Services
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<int> PutAsync(long id, CreateMenuModel model);
+        Task<int> PutAsync(long id, CreateMenuDto model);
 
         /// <summary>
         /// 删除菜单

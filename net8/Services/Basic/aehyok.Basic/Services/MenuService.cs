@@ -92,14 +92,14 @@ namespace aehyok.Basic.Services
             return getChildren(model.ParentId);
         }
 
-        public async Task<long> PostAsync(CreateMenuModel model)
+        public async Task<long> PostAsync(CreateMenuDto model)
         {
             var entity = this.Mapper.Map<Menu>(model);
             await this.InsertAsync(entity);
             return entity.Id;
         }
 
-        public async Task<int> PutAsync(long id, CreateMenuModel model)
+        public async Task<int> PutAsync(long id, CreateMenuDto model)
         {
             var entity = await this.GetAsync(a => a.Id == id) ?? throw new Exception("你要修改的数据不存在");
             entity = this.Mapper.Map(model, entity);

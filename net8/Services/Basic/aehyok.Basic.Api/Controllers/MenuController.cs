@@ -46,7 +46,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<long> PostAsync(CreateMenuModel model)
+        public async Task<long> PostAsync(CreateMenuDto model)
         {
             return await menuService.PostAsync(model);
         }
@@ -70,7 +70,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         [HttpPut("{id}")]
-        public async Task<StatusCodeResult> PutAsync(long id, CreateMenuModel model)
+        public async Task<StatusCodeResult> PutAsync(long id, CreateMenuDto model)
         {
             await menuService.PutAsync(id, model);
 
