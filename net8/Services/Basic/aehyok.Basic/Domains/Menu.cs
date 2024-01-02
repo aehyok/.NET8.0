@@ -1,5 +1,5 @@
 ﻿using aehyok.Infrastructure.Enums;
-using aehyok.EntityFramework.Entities;
+using aehyok.EntityFrameworkCore.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace aehyok.Basic.Domains

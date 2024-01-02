@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Entities;
+﻿using aehyok.EntityFrameworkCore.Entities;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;

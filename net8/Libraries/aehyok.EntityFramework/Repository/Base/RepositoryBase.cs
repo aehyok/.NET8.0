@@ -8,9 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
-using aehyok.EntityFramework.Repository.Query;
+using aehyok.EntityFrameworkCore.Repository.Query;
 
-namespace aehyok.EntityFramework.Repository.Base
+namespace aehyok.EntityFrameworkCore.Repository.Base
 {
     public abstract class RepositoryBase<TEntity, TKey>(
         DbContext dbContext, 

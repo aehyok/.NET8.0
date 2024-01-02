@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Repository;
+﻿using aehyok.EntityFrameworkCore.Repository;
 using aehyok.NCDP.Domains;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;

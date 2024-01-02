@@ -21,7 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.CronTask\aehyok.CronTask.csproj" />
-    <ProjectReference Include="..\Libraries\aehyok.EntityFramework\aehyok.EntityFramework.csproj" />
+    <ProjectReference Include="..\Libraries\aehyok.EntityFramework\aehyok.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.Redis\aehyok.Redis.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.Serilog\aehyok.Serilog.csproj" />

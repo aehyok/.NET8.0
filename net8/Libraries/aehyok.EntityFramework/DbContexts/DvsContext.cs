@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Entities;
+﻿using aehyok.EntityFrameworkCore.Entities;
 using Ardalis.Specification;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.DbContexts
+namespace aehyok.EntityFrameworkCore.DbContexts
 {
     /// <summary>
     /// 基础的数据库上下文DvsContext

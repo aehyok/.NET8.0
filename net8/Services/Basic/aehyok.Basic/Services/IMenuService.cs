@@ -2,7 +2,7 @@
 using aehyok.Basic.Dtos;
 using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Dtos.Query;
-using aehyok.EntityFramework.Repository;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;

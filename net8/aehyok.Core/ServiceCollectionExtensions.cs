@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using aehyok.RabbitMQ;
-using aehyok.EntityFramework;
+using aehyok.EntityFrameworkCore;
 using aehyok.Swagger;
 using aehyok.Redis;
 using aehyok.CronTask;

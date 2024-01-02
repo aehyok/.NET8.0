@@ -2,7 +2,7 @@
 using aehyok.Basic.Dtos;
 using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Dtos.Query;
-using aehyok.EntityFramework.Repository;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.Exceptions;
@@ -78,7 +78,10 @@ namespace aehyok.Basic.Services
                 return children.Select(a =>
                 {
                     var dto = this.Mapper.Map<MenuTreeDto>(a);
-                    dto.Children = getChildren(a.Id);
+                    if(model.IncludeChilds)
+                    {
+                        dto.Children = getChildren(a.Id);
+                    }
 
                     if (dto.Children.Count == 0)
                     {

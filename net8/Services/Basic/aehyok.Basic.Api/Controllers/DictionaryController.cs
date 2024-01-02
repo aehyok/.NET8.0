@@ -1,7 +1,7 @@
 ﻿using aehyok.Basic.Domains;
 using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Services;
-using aehyok.EntityFramework.Repository;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Exceptions;
 using aehyok.Infrastructure.Models;
 using Ardalis.Specification;

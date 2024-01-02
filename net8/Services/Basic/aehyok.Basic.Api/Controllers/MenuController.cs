@@ -5,7 +5,7 @@ using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
 using aehyok.Core.Domains;
 using aehyok.Core.Services;
-using aehyok.EntityFramework.Repository;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using Ardalis.Specification;

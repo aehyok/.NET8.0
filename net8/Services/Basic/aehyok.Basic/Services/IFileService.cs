@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Repository;
+﻿using aehyok.EntityFrameworkCore.Repository;
 using File = aehyok.Basic.Domains.File;
 
 namespace aehyok.Basic.Services

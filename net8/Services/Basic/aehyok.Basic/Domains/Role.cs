@@ -1,4 +1,4 @@
-﻿using aehyok.EntityFramework.Entities;
+﻿using aehyok.EntityFrameworkCore.Entities;
 using aehyok.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;

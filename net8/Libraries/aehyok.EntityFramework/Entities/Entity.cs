@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Entities
+namespace aehyok.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// 抽象化接口实体基础类（可用于默认初始化 相当于只有主键Key）

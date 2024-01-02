@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace aehyok.EntityFramework.Repository.Query
+namespace aehyok.EntityFrameworkCore.Repository.Query
 {
     /// <summary>
     ///  参考 https://github.com/TanvirArjel/EFCore.GenericRepository

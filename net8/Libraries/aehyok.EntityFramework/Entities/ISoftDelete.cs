@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.EntityFramework.Entities
+namespace aehyok.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// 给数据表实体添加软删除标记
