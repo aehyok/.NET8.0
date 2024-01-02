@@ -54,7 +54,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <summary>
         /// 获取菜单详情
         /// </summary>
-        /// <param name="id">菜单编号</param>
+        /// <param name="id">菜单Id</param>
         /// <returns></returns>
         [HttpGet("{id}")]
         public Task<MenuDto> GetByIdAsync(long id)

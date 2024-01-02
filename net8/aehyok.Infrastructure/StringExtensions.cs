@@ -69,5 +69,25 @@ namespace aehyok.Infrastructure
             RandomNumberGenerator.Create().GetBytes(data);
             return Convert.ToBase64String(data);
         }
+
+        /// <summary>
+        /// 判断字符串是否为空
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNullOrEmpty(this string value)
+        {
+            return string.IsNullOrWhiteSpace(value) || value.Equals("null", StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        /// <summary>
+        /// 判断字符串是否不为空
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNotNullOrEmpty(this string value)
+        {
+            return !string.IsNullOrWhiteSpace(value) && !value.Equals("null", StringComparison.CurrentCultureIgnoreCase);
+        }
     }
 }
