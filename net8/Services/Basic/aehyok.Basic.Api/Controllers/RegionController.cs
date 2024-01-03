@@ -36,7 +36,7 @@ namespace aehyok.Basic.Api.Controllers
             }
 
             if (model.ParentId == 0 && model.IsCurrent)
-                spec.Query.Where(a => a.Id == CurrentUser.RegionId);
+                spec.Query.Where(a => a.Id == this.CurrentUser.RegionId);
             else
                 spec.Query.Where(a => a.ParentId == model.ParentId);
 
@@ -85,16 +85,16 @@ namespace aehyok.Basic.Api.Controllers
             return Ok();
         }
 
-        ///// <summary>
-        ///// 获取区域信息
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <returns></returns>
-        //[HttpGet("{id}")]
-        //public async Task<RegionSimpleDto> GetByIdAsync(long id)
-        //{
-        //    return await this.regionService.GetAsync<RegionSimpleDto>(a => a.Id == id);
-        //}
+        /// <summary>
+        /// 获取区域信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<RegionDto> GetByIdAsync(long id)
+        {
+            return await regionService.GetAsync<RegionDto>(a => a.Id == id);
+        }
 
         /// <summary>
         /// 删除数据

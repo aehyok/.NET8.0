@@ -25,7 +25,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet]
-        public Task<IPagedList<RoleDto>> GetAsync([FromQuery] RoleQueryDto model)
+        public Task<IPagedList<RoleDto>> GetListAsync([FromQuery] RoleQueryDto model)
         {
             var spec = Specifications<Role>.Create();
             spec.Query.OrderBy(a => a.Order);

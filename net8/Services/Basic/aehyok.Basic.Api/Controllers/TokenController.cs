@@ -10,14 +10,9 @@ namespace aehyok.Basic.Api.Controllers
     /// <summary>
     /// Token 管理
     /// </summary>
-    public class TokenController : BasicControllerBase
+    public class TokenController(IUserTokenService userTokenService) : BasicControllerBase
     {
-        public IUserTokenService userTokenService;
 
-        public TokenController(IUserTokenService userTokenService)
-        {
-            this.userTokenService = userTokenService;
-        }
         /// <summary>
         /// 获取图片验证码
         /// </summary>
@@ -26,7 +21,7 @@ namespace aehyok.Basic.Api.Controllers
         [AllowAnonymous]
         public Task<CaptchaDto> GetCaptchaAsync()
         {
-            return this.userTokenService.GenerateCaptchaAsync();
+            return userTokenService.GenerateCaptchaAsync();
         }
 
         /// <summary>
@@ -38,7 +33,7 @@ namespace aehyok.Basic.Api.Controllers
         [AllowAnonymous]
         public async Task<UserTokenDto> PostAsync(PasswordLoginDto model)
         {
-            if (!await this.userTokenService.ValidateCaptchaAsync(model.Captcha, model.CaptchaKey))
+            if (!await userTokenService.ValidateCaptchaAsync(model.Captcha, model.CaptchaKey))
             {
                 throw new Exception("验证码错误");
             }
