@@ -10,6 +10,12 @@ namespace aehyok.Basic.Services
 {
     public interface IUserService: IServiceBase<User>
     {
-
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        Task ResetPasswordAsync(long id);
     }
 }
