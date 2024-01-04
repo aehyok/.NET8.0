@@ -94,18 +94,20 @@ namespace aehyok.Core
 
             builder.Services.AddRabbitMQ(builder.Configuration);
 
-
             builder.Services.AddSingleton<IContentTypeProvider, FileExtensionContentTypeProvider>();
-
-            //开发环境就不每次执行了，因为会重复执行，部署后每次执行问题不大
-            if(!builder.Environment.IsDevelopment())
-            {
-                builder.Services.AddHostedService<InitApiResourceService>();
-            }
 
             if (isSystemService) 
             {
                 builder.Services.AddCronTask();
+            }
+            else
+            {
+                // 非系统服务才需要初始化ApiResource
+                //开发环境就不每次执行了，因为会重复执行，部署后每次执行问题不大(每个微服务单独执行)
+                if (!builder.Environment.IsDevelopment())
+                {
+                    builder.Services.AddHostedService<InitApiResourceService>();
+                }
             }
 
             return builder;
