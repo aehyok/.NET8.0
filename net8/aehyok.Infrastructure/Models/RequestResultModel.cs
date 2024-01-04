@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Infrastructure.Models
 {
+
     /// <summary>
     /// 请求结果返回实体
     /// </summary>

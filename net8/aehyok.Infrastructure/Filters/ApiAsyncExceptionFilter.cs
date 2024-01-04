@@ -10,9 +10,14 @@ namespace aehyok.Infrastructure.Filters
     /// <summary>
     /// 错误异常处理过滤器（控制器构造函数、执行Action接口方法、执行ResultFilter结果过滤器）
     /// </summary>
-    public class ApiAsyncExceptionFilter(ILogger<ApiAsyncExceptionFilter> logger) : IAsyncExceptionFilter
+    public class ApiAsyncExceptionFilter : IAsyncExceptionFilter
     {
-        private readonly ILogger<ApiAsyncExceptionFilter> logger = logger;
+        private readonly ILogger<ApiAsyncExceptionFilter> logger;
+
+        public ApiAsyncExceptionFilter(ILogger<ApiAsyncExceptionFilter> logger)
+        {
+            this.logger = logger;
+        }
 
         public async Task OnExceptionAsync(ExceptionContext context)
         {
@@ -48,6 +53,7 @@ namespace aehyok.Infrastructure.Filters
             var message = exception.Message;
 
             logger.LogError(exception, message);
+
             await Task.CompletedTask;
         }
     }

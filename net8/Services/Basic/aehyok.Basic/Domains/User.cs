@@ -77,10 +77,10 @@ namespace aehyok.Basic.Domains
         /// </summary>
         public DateTime LastLoginTime { get; set; }
 
-        /// <summary>
-        /// 人口 Id
-        /// </summary>
-        public long PopulationId { get; set; }
+        ///// <summary>
+        ///// 人口 Id
+        ///// </summary>
+        //public long PopulationId { get; set; }
 
         /// <summary>
         /// 签名url
