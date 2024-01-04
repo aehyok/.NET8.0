@@ -123,3 +123,8 @@
 ## UI
 
 - https://github.com/tusen-ai/naive-ui
+
+
+## 初始化数据考量
+- 一次性数据
+- 每次更新版本时的数据更新

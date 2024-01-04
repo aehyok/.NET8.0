@@ -38,7 +38,7 @@ namespace aehyok.Infrastructure
         }
 
         /// <summary>
-        /// 密码混淆
+        /// 根据盐值加密密码
         /// </summary>
         /// <param name="password"></param>
         /// <param name="salt"></param>
@@ -52,7 +52,8 @@ namespace aehyok.Infrastructure
             Buffer.BlockCopy(src, 0, dst, 0, src.Length);
             Buffer.BlockCopy(bytes, 0, dst, src.Length, bytes.Length);
 
-            byte[] encodeBytes = HashAlgorithm.Create("SHA256").ComputeHash(dst);
+            //byte[] encodeBytes = HashAlgorithm.Create("SHA256").ComputeHash(dst);
+            byte[] encodeBytes = SHA256.HashData(dst);
 
             return Convert.ToBase64String(encodeBytes);
         }
@@ -66,6 +67,17 @@ namespace aehyok.Infrastructure
         public static string GenerateToken(string userName, DateTimeOffset expirationDate)
         {
             var data = new byte[64];
+            RandomNumberGenerator.Create().GetBytes(data);
+            return Convert.ToBase64String(data);
+        }
+
+        /// <summary>
+        /// 生成 PasswordSalt
+        /// </summary>
+        /// <returns></returns>
+        public static string GeneratePassworldSalt()
+        {
+            var data = new byte[32];
             RandomNumberGenerator.Create().GetBytes(data);
             return Convert.ToBase64String(data);
         }
