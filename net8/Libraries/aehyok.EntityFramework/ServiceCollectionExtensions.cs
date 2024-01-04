@@ -52,6 +52,8 @@ namespace aehyok.EntityFrameworkCore
                     //}
 
                     //mysqlOptions.UseNetTopologySuite();  // 操作GEO空间数据的时候需要开启
+
+                    // EnableSensitiveDataLogging(true) 可设置为true 开启敏感数据的记录
                 }).EnableSensitiveDataLogging().EnableDetailedErrors();
             }, poolSize: 1024);
             services.AddScoped(typeof(IServiceBase<,>), typeof(ServiceBase<,>));

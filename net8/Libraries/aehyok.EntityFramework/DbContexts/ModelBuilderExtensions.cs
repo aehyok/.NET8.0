@@ -1,8 +1,10 @@
 ﻿using aehyok.EntityFrameworkCore.Mapping;
+using aehyok.Infrastructure;
 using aehyok.Infrastructure.TypeFinders;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -40,6 +42,42 @@ namespace aehyok.EntityFrameworkCore.DbContexts
             foreach (var type in types)
             {
                 builder.Entity(type).HasNoDiscriminator();
+            }
+        }
+
+        /// <summary>
+        /// Migrations 时生成表、字段注释，因 LoxSmoke.DocXml 无法添加多个 Xml , 所以目前暂时无法 读取实体基类注释
+        /// </summary>
+        /// <param name="builder"></param>
+        public static void AddEntityComments(this ModelBuilder builder)
+        {
+            //Debugger.Launch();
+            var coreAssemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                var typeAssemblyName = entityType.ClrType.Assembly.GetName().Name;
+
+                var typeComment = DocsHelper.GetTypeComments(entityType.ClrType.Assembly.GetName().Name, entityType.ClrType);
+                builder.Entity(entityType.ClrType).HasComment(typeComment);
+
+                //builder.Entity(entityType.ClrType).ToTable( a => a.HasComment(typeComment));
+
+                foreach (var property in entityType.GetProperties())
+                {
+                    string memberComment;
+
+                    if (property.PropertyInfo?.DeclaringType?.Assembly == Assembly.GetExecutingAssembly())
+                    {
+                        memberComment = DocsHelper.GetMemberComments(coreAssemblyName, property.PropertyInfo);
+                    }
+                    else
+                    {
+                        memberComment = DocsHelper.GetMemberComments(typeAssemblyName, property.PropertyInfo);
+                    }
+
+                    property.SetComment(memberComment);
+                }
             }
         }
     }
