@@ -23,6 +23,11 @@ namespace aehyok.Basic.MapProfiles
             CreateMap<CreateRoleDto, Role>();
 
             CreateMap<CreateRegionDto,  Region>();
+            
+            CreateMap<CreateUserDto, User>()
+                .ForMember(a => a.Roles, a => a.Ignore());
+
+            CreateMap<CreateUserRoleDto, UserRole>();
         }
     }
 }

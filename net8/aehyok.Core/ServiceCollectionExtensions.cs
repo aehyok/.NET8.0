@@ -21,6 +21,7 @@ using aehyok.Infrastructure.Filters;
 using Microsoft.AspNetCore.StaticFiles;
 using aehyok.Core.HostedServices;
 using System.Text.Json;
+using aehyok.Infrastructure.Middlewares;
 
 namespace aehyok.Core
 {
@@ -55,7 +56,28 @@ namespace aehyok.Core
         /// <returns></returns>
         public static WebApplicationBuilder AddBuilderServices(this WebApplicationBuilder builder, string moduleKey, string moduleTitle, bool isSystemService = false)
         {
-            builder.Services.AddControllers( options =>
+            builder.Host.InitHostAndConfig(moduleKey);
+
+            builder.Services.AddEndpointsApiExplorer();
+
+            builder.Services.AddSwaggerGen(moduleKey, moduleTitle);
+
+            builder.Services.ConfigureOptions(builder.Configuration);
+
+            // 注册IHttpContextAccessor
+            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddHttpLogging(options =>
+            {
+                options.RequestBodyLogLimit = 1024 * 1024;
+                options.ResponseBodyLogLimit = 1024 * 1024;
+                options.LoggingFields = Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.All;
+                options.MediaTypeOptions.AddText("application/json");
+            });
+
+            builder.Services.AddEFCoreAndMySql(builder.Configuration);
+
+            builder.Services.AddControllers(options =>
             {
                 //统一接口返回的处理
                 options.Filters.Add<RequestAsyncResultFilter>();
@@ -68,19 +90,6 @@ namespace aehyok.Core
                 options.JsonSerializerOptions.Converters.Add(new JsonLongConverter());
             });
 
-            builder.Services.AddEndpointsApiExplorer();
-
-            builder.Host.InitHostAndConfig(moduleKey);
-
-            builder.Services.AddSwaggerGen(moduleKey, moduleTitle);
-
-            builder.Services.ConfigureOptions(builder.Configuration);
-
-            // 注册IHttpContextAccessor
-            builder.Services.AddHttpContextAccessor();
-
-            builder.Services.AddEFCoreAndMySql(builder.Configuration);
-
             builder.Services.AddAllAutoMapper();
 
             builder.Services.AddRabbitMQ(builder.Configuration);
@@ -89,7 +98,7 @@ namespace aehyok.Core
             builder.Services.AddSingleton<IContentTypeProvider, FileExtensionContentTypeProvider>();
 
             //开发环境就不每次执行了，因为会重复执行，部署后每次执行问题不大
-            if(!builder.Environment.IsDevelopment() )
+            if(!builder.Environment.IsDevelopment())
             {
                 builder.Services.AddHostedService<InitApiResourceService>();
             }
@@ -114,6 +123,10 @@ namespace aehyok.Core
             app.UseSetStartDefaultRoute();
 
             app.UseSwagger(moduleKey, moduleTitle);
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+            app.UseHttpLogging();
 
             app.UseRedis(app.Configuration);
 
