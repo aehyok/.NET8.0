@@ -16,7 +16,8 @@ namespace aehyok.Basic.Api.Controllers
     /// </summary>
     public class RoleController(IRoleService roleService, IPermissionService permissionService) : BasicControllerBase
     {
-        // <summary>
+
+        /// <summary>
         /// 获取角色分页数据
         /// </summary>
         /// <param name="model"></param>
@@ -67,7 +68,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <summary>
         /// 修改角色信息
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">角色Id</param>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
@@ -131,7 +132,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <summary>
         /// 删除角色
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">角色Id</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         [HttpDelete("{id}")]

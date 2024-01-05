@@ -38,7 +38,7 @@ namespace aehyok.Basic.Api.Controllers
                 throw new Exception("验证码错误");
             }
 
-            return null;
+            return new UserTokenDto() { };
             //return await this.userTokenService.LoginWithPasswordAsync(model.UserName, model.Password, model.Platform);
         }
     }
