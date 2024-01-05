@@ -28,6 +28,12 @@ namespace aehyok.Basic.MapProfiles
 
             CreateMap<Role, RoleDto>();
 
+            CreateMap<User, UserDto>()
+                .ForMember(a => a.Roles, a => a.MapFrom(c => c.UserRoles))
+                .ForMember(a => a.HasPassword, a => a.MapFrom(c => !string.IsNullOrWhiteSpace(c.Password)));
+
+            CreateMap<UserRole, UserRoleDto>();
+
             CreateMap<Region, RegionDto>();
         }
     }
