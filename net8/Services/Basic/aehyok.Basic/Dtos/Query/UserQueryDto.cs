@@ -23,7 +23,7 @@ namespace aehyok.Basic.Dtos.Query
         /// <summary>
         /// 区域编码
         /// </summary>
-        public string RegionCode { get; set; }
+        //public string RegionCode { get; set; }
 
         /// <summary>
         /// 包含下级
@@ -36,13 +36,13 @@ namespace aehyok.Basic.Dtos.Query
         public bool? IsEnable { get; set; }
 
         /// <summary>
-        /// 用户类型 0=全部，1=公众用户，2=工作人员, 网格员 = 3,网格长 = 4,企业管理员 = 5
+        /// 用户类型
         /// </summary>
         public UserType UserType { get; set; }
 
         /// <summary>
         /// 权限code
         /// </summary>
-        public string PermissionCode { get; set; }
+        //public string PermissionCode { get; set; }
     }
 }

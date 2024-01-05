@@ -52,12 +52,12 @@ namespace aehyok.Basic.Api.Controllers
                 spec.Query.Where(a => a.UserRoles.Any(c => c.RoleId == model.RoleId.Value));
             }
 
-            if (model.RegionCode.IsNotNullOrEmpty())
-            {
-                var regionInfo = await regionService.GetAsync(e => e.Code == model.RegionCode);
-                if (regionInfo is null) throw new ErrorCodeException(-1, "未找到对应区域");
-                model.RegionId = regionInfo.Id;
-            }
+            //if (model.RegionCode.IsNotNullOrEmpty())
+            //{
+            //    var regionInfo = await regionService.GetAsync(e => e.Code == model.RegionCode);
+            //    if (regionInfo is null) throw new ErrorCodeException(-1, "未找到对应区域");
+            //    model.RegionId = regionInfo.Id;
+            //}
 
             
             // 所有包含农户角色和非游客角色之外角色信息的的用户

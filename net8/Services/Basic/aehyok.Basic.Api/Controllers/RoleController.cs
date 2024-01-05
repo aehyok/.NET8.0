@@ -3,12 +3,9 @@ using aehyok.Basic.Dtos;
 using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
-using aehyok.Core;
-using aehyok.EntityFrameworkCore.Repository;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Exceptions;
 using Ardalis.Specification;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 
