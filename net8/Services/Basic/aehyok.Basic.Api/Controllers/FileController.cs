@@ -4,7 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace aehyok.Basic.Api.Controllers
 {
-    public class FileController(IFileService fileService, ILogger<FileController> logger) : BasicControllerBase
+    /// <summary>
+    /// 文件管理
+    /// </summary>
+    /// <param name="fileService"></param>
+    public class FileController(IFileService fileService) : BasicControllerBase
     {
         /// <summary>
         /// 上传文件

@@ -10,7 +10,7 @@ namespace aehyok.Basic.Domains
     /// <summary>
     /// 用户角色关联信息
     /// </summary>
-    public class UserRole : EntityBase
+    public class UserRole : FullAuditedEntity<User>
     {
         /// <summary>
         /// 用户编号

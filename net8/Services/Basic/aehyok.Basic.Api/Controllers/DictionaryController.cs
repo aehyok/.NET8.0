@@ -1,7 +1,10 @@
 ﻿using aehyok.Basic.Domains;
+using aehyok.Basic.Dtos;
 using aehyok.Basic.Dtos.Create;
+using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
 using aehyok.EntityFrameworkCore.Repository;
+using aehyok.Infrastructure;
 using aehyok.Infrastructure.Exceptions;
 using aehyok.Infrastructure.Models;
 using Ardalis.Specification;
@@ -17,7 +20,6 @@ namespace aehyok.Basic.Api.Controllers
     /// 字典管理
     /// </summary>
     public class DictionaryController(
-        ILogger<DictionaryController> logger,
         IDictionaryGroupService dictionaryGroupService,
         IDictionaryItemService dictionaryItemService) : BasicControllerBase
     {
@@ -97,6 +99,121 @@ namespace aehyok.Basic.Api.Controllers
         {
             var entity = await dictionaryGroupService.GetByIdAsync(id) ?? throw new ErrorCodeException(-1, "你要删除的数据不存在");
             await dictionaryGroupService.DeleteAsync(entity);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// 获取字典项列表
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<List<DictionaryItemDto>> GetItemAsync([FromQuery] DictionaryItemQueryDto model)
+        {
+            if (model.DictionaryGroupId <= 0 && model.GroupCode.IsNullOrEmpty())
+            {
+                throw new ErrorCodeException(-1, "分组id 和 分组Key 至少选填一项");
+            }
+
+            if (model.DictionaryGroupId == 0)
+            {
+                var group = await dictionaryGroupService.GetAsync(a => a.Code == model.GroupCode);
+                if (group is null)
+                {
+                    throw new ErrorCodeException(-1, $"根据字典分组key [{model.GroupCode}] 未查询到任何分组信息");
+                }
+
+                model.DictionaryGroupId = group.Id;
+            }
+
+            return await dictionaryItemService.GetTreeListAsync(model.DictionaryGroupId, model.Keyword);
+        }
+
+        /// <summary>
+        /// 获取字典项详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
+        public async Task<DictionaryItemDto> GetItemByIdAsync(long id)
+        {
+            return await dictionaryItemService.GetAsync<DictionaryItemDto>(a => a.Id == id);
+        }
+
+        /// <summary>
+        /// 添加字典项
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<long> PostItemAsync(CreateDictionaryItemDto model)
+        {
+            var entity = this.Mapper.Map<DictionaryItem>(model);
+            if (model.DictionaryGroupId <= 0)
+            {
+                var dictionaryGroup = await dictionaryGroupService.GetAsync(a => a.Code == model.DictionaryGroupCode);
+                if (dictionaryGroup is null)
+                {
+                    throw new ErrorCodeException(-1, "字典分组未找到");
+                }
+
+                entity.DictionaryGroupId = dictionaryGroup.Id;
+            }
+
+            await dictionaryItemService.InsertAsync(entity);
+            return entity.Id;
+        }
+
+        /// <summary>
+        /// 修改字典项
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<StatusCodeResult> PutItemAsync(long id, CreateDictionaryItemDto model)
+        {
+            var entity = await dictionaryItemService.GetAsync(a => a.Id == id);
+            if (entity is null)
+            {
+                throw new Exception("你要修改的数据不存在");
+            }
+
+            if (model.DictionaryGroupId <= 0)
+            {
+                var dictionaryGroup = await dictionaryGroupService.GetAsync(a => a.Code == model.DictionaryGroupCode);
+                if (dictionaryGroup is null)
+                {
+                    throw new ErrorCodeException(-1, "字典分组未找到");
+                }
+
+                model.DictionaryGroupId = dictionaryGroup.Id;
+            }
+
+            entity = this.Mapper.Map(model, entity);
+
+            await dictionaryItemService.UpdateAsync(entity);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// 删除字典项
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<StatusCodeResult> DeleteItemAsync(long id)
+        {
+            var entity = await dictionaryItemService.GetByIdAsync(id);
+
+            if (entity is null)
+            {
+                throw new ErrorCodeException(-1, "您要删除的数据不存在");
+            }
+
+            await dictionaryItemService.DeleteAsync(entity);
 
             return Ok();
         }
