@@ -24,14 +24,13 @@ namespace aehyok.Basic.Api.Controllers
     /// 菜单管理
     /// </summary>
     public class MenuController(IMenuService menuService,
-        IApiResourceService apiResourceService,
-        IServiceProvider services) : BasicControllerBase
+        IApiResourceService apiResourceService) : BasicControllerBase
     {
 
         /// <summary>
         /// 获取菜单树
         /// </summary>
-        /// <param name="platformType"></param>
+        /// <param name="platformType">平台类型</param>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("tree/{platformType}")]
