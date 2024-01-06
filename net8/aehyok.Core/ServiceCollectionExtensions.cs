@@ -96,9 +96,14 @@ namespace aehyok.Core
 
             builder.Services.AddSingleton<IContentTypeProvider, FileExtensionContentTypeProvider>();
 
+            //builder.Services.AddTransient<ITransientDependency>();
+            //builder.Services.AddScoped<IScopedDependency>();
+
             if (isSystemService) 
             {
                 builder.Services.AddCronTask();
+
+                builder.Services.AddHostedService<ExecuteSeedDataService>();
             }
             else
             {
