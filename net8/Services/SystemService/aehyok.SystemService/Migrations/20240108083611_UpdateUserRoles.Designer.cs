@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using aehyok.EntityFrameworkCore.DbContexts;
 
@@ -10,9 +11,11 @@ using aehyok.EntityFrameworkCore.DbContexts;
 namespace aehyok.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    partial class DvsContextModelSnapshot : ModelSnapshot
+    [Migration("20240108083611_UpdateUserRoles")]
+    partial class UpdateUserRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1230,6 +1233,7 @@ namespace aehyok.SystemService.Migrations
                         .HasComment("");
 
                     b.Property<DateTime>("LastWriteTime")
+                        .HasPrecision(6)
                         .HasColumnType("datetime(6)")
                         .HasComment("");
 

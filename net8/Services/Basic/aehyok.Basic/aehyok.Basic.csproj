@@ -16,9 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Templates\Region.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="Templates\" />
   </ItemGroup>
 
 </Project>

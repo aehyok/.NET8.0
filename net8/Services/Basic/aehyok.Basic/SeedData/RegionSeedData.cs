@@ -13,18 +13,11 @@ using File = System.IO.File;
 
 namespace aehyok.Basic.SeedData
 {
-    public class RegionSeedData : ISeedData, IScopedDependency
+    public class RegionSeedData(IServiceScopeFactory scopeFactory) : ISeedData, ITransientDependency
     {
-        private readonly IServiceScopeFactory scopeFactory;
-
-        public RegionSeedData(IServiceScopeFactory scopeFactory)
-        {
-            this.scopeFactory = scopeFactory;
-        }
-
         public int Order => 0;
 
-        public string ConfigPath { get; set; } = Path.Combine(AppContext.BaseDirectory, "Templates/Region.json");
+        public string ConfigPath { get; set; } = null;
 
         public async Task ApplyAsync(ScheduleTask model, Func<ScheduleTask, Task> action)
         {

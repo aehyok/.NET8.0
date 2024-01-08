@@ -17,12 +17,7 @@ namespace aehyok.Core.HostedServices
         /// <summary>
         /// 当前配置文件的路径
         /// </summary>
-        private string currentConfigPath = "";
-
-        /// <summary>
-        /// 当前任务是否需要执行
-        /// </summary>
-        private bool isExecute = false;
+        private string currentConfigPath = null;
 
         /// <summary>
         /// 更新定时任务记录
@@ -32,7 +27,7 @@ namespace aehyok.Core.HostedServices
         public async Task UpdateCronTask(ScheduleTask model)
         {
             using var scope = scopeFactory.CreateScope();
-            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<ICronTaskCoreService>();
+            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<IScheduleTaskCoreService>();
 
             await cronTaskCoreService.UpdateAsync(model);
         }
@@ -42,19 +37,25 @@ namespace aehyok.Core.HostedServices
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        private void GetExecuteStatus(ScheduleTask model)
+        private bool GetExecuteStatus(ScheduleTask model)
         {
+            // 为空，则表示数据没有写入在json配置文件中
             if (string.IsNullOrEmpty(currentConfigPath))
             {
-                isExecute = true;
+                return true;
             }
-            var file = new FileInfo(currentConfigPath);
-
-            //将日期转换为秒数，读取的文件的日期中的毫秒数位数为7，写入到mysql数据库的位数只能为6
-            if((long)model.LastWriteTime.TimeOfDay.TotalSeconds < (long)file.LastWriteTime.TimeOfDay.TotalSeconds)
+            else
             {
-                isExecute = true;
-                model.LastWriteTime = file.LastWriteTime;
+                // 判断json文件是否保存过，通过最后保存时间来判断
+                var file = new FileInfo(currentConfigPath);
+
+                //将日期转换为秒数，读取的文件的日期中的毫秒数位数为7，写入到mysql数据库的位数只能为6
+                if ((long)model.LastWriteTime.TimeOfDay.TotalSeconds < (long)file.LastWriteTime.TimeOfDay.TotalSeconds)
+                {
+                    model.LastWriteTime = file.LastWriteTime;
+                    return true;
+                }
+                return false;
             }
         }
 
@@ -66,16 +67,11 @@ namespace aehyok.Core.HostedServices
 
             stopwatch.Start();
             using var scope = scopeFactory.CreateScope();
-            //var redisDatabaseProvider = scope.ServiceProvider.GetService<IRedisDatabaseProvider>();
-            //var seedDataSection = configuration.GetSection("SeedData");
-
-
-            //using var scope = services.CreateScope();
             var redisDatabaseProvider = scope.ServiceProvider.GetRequiredService<IRedisService>();
 
             var seedInstants = scope.ServiceProvider.GetServices<ISeedData>();
 
-            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<ICronTaskCoreService>();
+            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<IScheduleTaskCoreService>();
 
             var list = await cronTaskCoreService.GetListAsync();
 
@@ -104,11 +100,9 @@ namespace aehyok.Core.HostedServices
                             
                         });
 
-                    }
-
-                    GetExecuteStatus(model);
-
-                    if (isExecute)
+                    }                    
+                    //判断任务是否需要执行任务
+                    if (GetExecuteStatus(model))
                     {
                         logger.LogInformation($"开始执行[{taskName}]");
 
@@ -131,7 +125,6 @@ namespace aehyok.Core.HostedServices
                 }
                 finally
                 {
-                    //await redisDatabaseProvider.LockReleaseAsync(taskName, taskId);
                     await UpdateCronTask(model);
                     await redisDatabaseProvider.DeleteAsync(taskName);
                 }

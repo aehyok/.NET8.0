@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using aehyok.Core.HostedServices;
 using System.Text.Json;
 using aehyok.Infrastructure.Middlewares;
+using aehyok.Infrastructure.TypeFinders;
 
 namespace aehyok.Core
 {
@@ -76,6 +77,10 @@ namespace aehyok.Core
             });
 
             builder.Services.AddEFCoreAndMySql(builder.Configuration);
+
+            builder.Services.AddServices<ITransientDependency>(ServiceLifetime.Transient);
+            builder.Services.AddServices<IScopedDependency>(ServiceLifetime.Scoped);
+            //builder.Services.AddServices</*ISingletonDependency*/>(ServiceLifetime.Singleton);
 
             builder.Services.AddControllers(options =>
             {
