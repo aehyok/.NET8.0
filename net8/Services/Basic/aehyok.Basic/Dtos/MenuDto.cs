@@ -1,5 +1,6 @@
 ﻿using aehyok.Basic.Domains;
 using aehyok.Infrastructure.Dtos;
+using aehyok.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -91,5 +92,11 @@ namespace aehyok.Basic.Dtos
         /// 更新时间
         /// </summary>
         public DateTime UpdatedAt { get; set; }
+
+
+        /// <summary>
+        ///菜单所属平台类型
+        /// </summary>
+        public PlatformType PlatformType { get; set; }
     }
 }
