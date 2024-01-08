@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,8 @@ namespace aehyok.EntityFrameworkCore.DbContexts
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // 如果执行数据迁移失败，可以打开下面的代码，然后在程序启动时，会弹出一个对话框，选择调试器，然后就可以调试了
+            //Debugger.Launch();
             Console.WriteLine("OnModelCreating");
             // 只有继承了IEntity的实体才会被注册到数据库上下文中,并且排除了NotMappedAttribute特性的实体
             modelBuilder.RegisterFromAssembly<IEntity>(a => !a.IsDefined(typeof(NotMappedAttribute), true));

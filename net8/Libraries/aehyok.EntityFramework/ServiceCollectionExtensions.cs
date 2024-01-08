@@ -59,32 +59,6 @@ namespace aehyok.EntityFrameworkCore
             services.AddScoped(typeof(IServiceBase<,>), typeof(ServiceBase<,>));
             services.AddScoped(typeof(IServiceBase<>), typeof(ServiceBase<>));
 
-            services.AddServices();
-            return services;
-        }
-
-        public static IServiceCollection AddServices(this IServiceCollection services)
-        {
-            var types = TypeFinders.SearchTypes(typeof(IScopedDependency), TypeFinders.TypeClassification.Interface);
-
-            foreach (var type in types)
-            {
-                var interfaces = type.GetInterfaces().Where(t => !t.IsGenericType && t != typeof(IScopedDependency));
-
-                foreach (var interfaceType in interfaces)
-                {
-                    services.AddService(interfaceType, type, ServiceLifetime.Scoped);
-                }
-            }
-
-            return services;
-        }
-
-        public static IServiceCollection AddService(this IServiceCollection services, Type interfaceType, Type implementationType, ServiceLifetime lifetime)
-        {
-            services.Add(new ServiceDescriptor(implementationType, implementationType, lifetime));
-            services.Add(new ServiceDescriptor(interfaceType, implementationType, lifetime));
-
             return services;
         }
 

@@ -6,25 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace aehyok.SystemService.Migrations
 {
     /// <inheritdoc />
-    public partial class UpdateScheduleTaskColumnDateTime : Migration
+    public partial class UpdateScheduleTaskDateTimes : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "LastWriteTime",
-                table: "ScheduleTask",
-                type: "datetime(6)",
-                precision: 6,
-                nullable: false,
-                comment: "",
-                oldClrType: typeof(DateTime),
-                oldType: "datetime(6)",
-                oldComment: "");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<DateTime>(
                 name: "LastWriteTime",
@@ -35,6 +20,21 @@ namespace aehyok.SystemService.Migrations
                 oldClrType: typeof(DateTime),
                 oldType: "datetime(6)",
                 oldPrecision: 6,
+                oldComment: "");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.AlterColumn<DateTime>(
+                name: "LastWriteTime",
+                table: "ScheduleTask",
+                type: "datetime(6)",
+                precision: 6,
+                nullable: false,
+                comment: "",
+                oldClrType: typeof(DateTime),
+                oldType: "datetime(6)",
                 oldComment: "");
         }
     }

@@ -1237,8 +1237,8 @@ namespace aehyok.SystemService.Migrations
                         .HasComment("");
 
                     b.Property<DateTime>("LastWriteTime")
-                        .HasPrecision(7)
-                        .HasColumnType("datetime(7)")
+                        .HasPrecision(6)
+                        .HasColumnType("datetime(6)")
                         .HasComment("");
 
                     b.Property<string>("TaskName")

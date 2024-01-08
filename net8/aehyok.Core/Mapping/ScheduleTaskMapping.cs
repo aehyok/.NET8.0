@@ -15,7 +15,8 @@ namespace aehyok.Core.Mapping
         {
             base.Configure(builder);
 
-            builder.Property(x => x.LastWriteTime).HasPrecision(7);
+            // 可通过此设置DateTime类型的精度，但是不能超过数据库的精度6
+            //builder.Property(x => x.LastWriteTime).HasPrecision(7);
         }
     }
 }
