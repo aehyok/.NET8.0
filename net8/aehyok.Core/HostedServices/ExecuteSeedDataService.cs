@@ -50,8 +50,8 @@ namespace aehyok.Core.HostedServices
             }
             var file = new FileInfo(currentConfigPath);
 
-            //if (model.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss.fff") < (file.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss.fff"))
-            if(model.LastWriteTime < file.LastWriteTime)
+            //将日期转换为秒数，读取的文件的日期中的毫秒数位数为7，写入到mysql数据库的位数只能为6
+            if((long)model.LastWriteTime.TimeOfDay.TotalSeconds < (long)file.LastWriteTime.TimeOfDay.TotalSeconds)
             {
                 isExecute = true;
                 model.LastWriteTime = file.LastWriteTime;
