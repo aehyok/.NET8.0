@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.Mapping
 {
-    public class ScheduleTaskMapping : MapBase<ScheduleTask>
+    public class ScheduleTaskMapping : MapBase<SeedDataTask>
     {
-        public override void Configure(EntityTypeBuilder<ScheduleTask> builder)
+        public override void Configure(EntityTypeBuilder<SeedDataTask> builder)
         {
             base.Configure(builder);
 

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.Services
 {
-    public class ScheduleTaskCoreService(DbContext dbContext, IMapper mapper) : ServiceBase<ScheduleTask>(dbContext, mapper), IScheduleTaskCoreService, IScopedDependency
+    public class ScheduleTaskCoreService(DbContext dbContext, IMapper mapper) : ServiceBase<SeedDataTask>(dbContext, mapper), IScheduleTaskCoreService, IScopedDependency
     {
 
     }

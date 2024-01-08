@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.Services
 {
-    public interface IScheduleTaskCoreService : IServiceBase<ScheduleTask>
+    public interface IScheduleTaskCoreService : IServiceBase<SeedDataTask>
     {
 
     }

@@ -26,6 +26,6 @@ namespace aehyok.Core
         /// 执行初始化数据的逻辑
         /// </summary>
         /// <returns></returns>
-        Task ApplyAsync(ScheduleTask model, Func<ScheduleTask, Task> action);
+        Task ApplyAsync(SeedDataTask model, Func<SeedDataTask, Task> action);
     }
 }

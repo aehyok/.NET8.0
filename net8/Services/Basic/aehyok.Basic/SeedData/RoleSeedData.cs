@@ -22,7 +22,7 @@ namespace aehyok.Basic.SeedData
 
         public string ConfigPath { get; set; } = null;
 
-        public async Task ApplyAsync(ScheduleTask model, Func<ScheduleTask, Task> action)
+        public async Task ApplyAsync(SeedDataTask model, Func<SeedDataTask, Task> action)
         {
             var roles = new Role[]
             {

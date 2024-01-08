@@ -11,7 +11,7 @@ namespace aehyok.Core.Domains
     /// <summary>
     /// 计划定时任务表
     /// </summary>
-    public class ScheduleTask:EntityBase
+    public class SeedDataTask:EntityBase
     {
         /// <summary>
         /// 最后一次的文件修改时间
