@@ -23,6 +23,7 @@ using aehyok.Core.HostedServices;
 using System.Text.Json;
 using aehyok.Infrastructure.Middlewares;
 using aehyok.Infrastructure.TypeFinders;
+using Microsoft.Extensions.Options;
 
 namespace aehyok.Core
 {
@@ -148,6 +149,8 @@ namespace aehyok.Core
 
             app.MapControllers();
 
+            app.UseStaticFileServer();
+
             if(isSystemService)
             {
                 app.AddRabbitMQEventBus();
@@ -187,6 +190,28 @@ namespace aehyok.Core
             builder.UseLog();
 
             return builder;
+        }
+
+        /// <summary>
+        /// 上传文件的静态文件服务
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseStaticFileServer(this IApplicationBuilder app)
+        {
+            var storageOptions = app.ApplicationServices.GetService<IOptions<StorageOptions>>();
+            var staticDirectory = Path.Combine(AppContext.BaseDirectory, storageOptions.Value.Path.IsNullOrEmpty() ? "uploads" : storageOptions.Value.Path);
+
+            Directory.CreateDirectory(staticDirectory);
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ServeUnknownFileTypes = true,
+                RequestPath = "/static",
+                FileProvider = new PhysicalFileProvider(staticDirectory)
+            });
+
+            return app;
         }
 
         /// <summary>
