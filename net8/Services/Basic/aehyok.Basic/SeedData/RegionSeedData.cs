@@ -19,7 +19,7 @@ namespace aehyok.Basic.SeedData
 
         public string ConfigPath { get; set; } = null;
 
-        public async Task ApplyAsync(ScheduleTask model, Func<ScheduleTask, Task> action)
+        public async Task ApplyAsync(SeedDataTask model, Func<SeedDataTask, Task> action)
         {
             using var scope = scopeFactory.CreateScope();
             var regionService = scope.ServiceProvider.GetService<IRegionService>();

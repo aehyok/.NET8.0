@@ -1,5 +1,8 @@
+## 待处理的问题
+- 上传视频的缩略图生成方案
+
 ## .net 8
-- 1、初始化aehyok.EFCore
+- 1、初始化aehyok.EntityFrameworkCore
 - 2、初始化了定时任务CronTask
 - 3、初始化了消息队列RabbitMQ
 - 4、初始化了持久化缓存Redis

@@ -24,7 +24,7 @@ namespace aehyok.Core.HostedServices
         /// </summary>  
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task UpdateCronTask(ScheduleTask model)
+        public async Task UpdateCronTask(SeedDataTask model)
         {
             using var scope = scopeFactory.CreateScope();
             var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<IScheduleTaskCoreService>();
@@ -37,7 +37,7 @@ namespace aehyok.Core.HostedServices
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        private bool GetExecuteStatus(ScheduleTask model)
+        private bool GetExecuteStatus(SeedDataTask model)
         {
             // 为空，则表示数据没有写入在json配置文件中
             if (string.IsNullOrEmpty(currentConfigPath))
@@ -93,7 +93,7 @@ namespace aehyok.Core.HostedServices
 
                     if(model is null)
                     {
-                        model = await cronTaskCoreService.InsertAsync(new ScheduleTask
+                        model = await cronTaskCoreService.InsertAsync(new SeedDataTask
                         {
                             TaskName = taskName,
                             IsEnable = true,
