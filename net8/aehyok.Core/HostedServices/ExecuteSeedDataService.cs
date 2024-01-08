@@ -50,7 +50,8 @@ namespace aehyok.Core.HostedServices
             }
             var file = new FileInfo(currentConfigPath);
 
-            if (model.LastWriteTime < file.LastWriteTime)
+            //if (model.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss.fff") < (file.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss.fff"))
+            if(model.LastWriteTime < file.LastWriteTime)
             {
                 isExecute = true;
                 model.LastWriteTime = file.LastWriteTime;
@@ -114,6 +115,8 @@ namespace aehyok.Core.HostedServices
                         if (await redisDatabaseProvider.SetAsync(taskName, taskId, TimeSpan.FromMinutes(5), CSRedis.RedisExistence.Nx))
                         {
                             await seed.ApplyAsync(model, UpdateCronTask);
+                            model.ExecuteStatus = ExecuteStatus.成功;
+                            model.ExecuteTime = DateTime.Now;
                         }
 
                         logger.LogInformation($"[{taskName}]执行完成");
@@ -122,6 +125,8 @@ namespace aehyok.Core.HostedServices
                 }
                 catch (Exception ex)
                 {
+                    model.ExecuteStatus = ExecuteStatus.失败;
+                    model.ExecuteTime = DateTime.Now;
                     logger.LogError(ex, ex.Message);
                 }
                 finally

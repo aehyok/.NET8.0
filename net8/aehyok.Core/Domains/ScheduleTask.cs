@@ -1,6 +1,7 @@
 ﻿using aehyok.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,14 +28,24 @@ namespace aehyok.Core.Domains
         /// </summary>
         public bool IsEnable { get; set; } = true;
 
+        /// <summary>
+        /// 执行时间
+        /// </summary>
+        public DateTime ExecuteTime { get; set; }
+
+        /// <summary>
+        /// 任务执行状态
+        /// </summary>
+        public ExecuteStatus ExecuteStatus { get; set; } 
     }
 }
 
 
-public enum TaskType
+/// <summary>
+/// 执行状态
+/// </summary>
+public enum ExecuteStatus
 {
-    /// <summary>
-    /// 种子数据
-    /// </summary>
-    SeedData = 1,
+    成功 = 1,
+    失败 = 2
 }
