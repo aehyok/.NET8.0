@@ -3,6 +3,7 @@ using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.TypeFinders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,8 @@ namespace aehyok.EntityFrameworkCore
         public static IServiceCollection AddEFCoreAndMySql(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("MySQL");
+            services.AddTransient<DvsSaveChangeInterceptor>();
+
             services.AddDbContextPool<DbContext, DvsContext>((sp, options) =>
             {
                 // 添加保存更改拦截器，处理软删除和数据审计，注入 ICurrentUser 以自动处理数据 CreateBy 和 UpdateBy
@@ -33,6 +36,9 @@ namespace aehyok.EntityFrameworkCore
                 //        options.AddInterceptors(saveChangeInterceptor);
                 //    }
                 //}
+                // 注册自定义拦截器
+                options.AddInterceptors(sp.GetRequiredService<DvsSaveChangeInterceptor>());
+                
 
                 // 移除外键
                 options.UseRemoveForeignKeys();

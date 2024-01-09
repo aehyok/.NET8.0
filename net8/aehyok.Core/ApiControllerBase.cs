@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using aehyok.Infrastructure;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;

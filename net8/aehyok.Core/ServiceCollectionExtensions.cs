@@ -81,6 +81,7 @@ namespace aehyok.Core
 
             builder.Services.AddServices<ITransientDependency>(ServiceLifetime.Transient);
             builder.Services.AddServices<IScopedDependency>(ServiceLifetime.Scoped);
+            builder.Services.AddServices<ISingletonDependency>(ServiceLifetime.Singleton);
             //builder.Services.AddServices</*ISingletonDependency*/>(ServiceLifetime.Singleton);
 
             builder.Services.AddControllers(options =>

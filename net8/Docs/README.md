@@ -18,6 +18,12 @@
    
    dotnet-ef database update -c DvsContext --framework net8.0 -v
   ```
+-**1.1、EFCore 新增更新删除时的操作**
+```
+新增时会通过拦截器DvsSaveChangeInterceptor拦截器，将CreateBy CreateAt UpdateBy UpdateAt写入到数据库中
+修改时，只会将UpdateBy UpdateAt写入到数据库中
+删除的时候，会在修改的基础上将IsDeleted置为true
+```
 
 - **2、接口安全性**
   ```
