@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace aehyok.Core.Domains
 {
     /// <summary>
-    /// 计划定时任务表
+    /// 种子数据更新任务
     /// </summary>
     public class SeedDataTask:EntityBase
     {
@@ -36,7 +36,12 @@ namespace aehyok.Core.Domains
         /// <summary>
         /// 任务执行状态
         /// </summary>
-        public ExecuteStatus ExecuteStatus { get; set; } 
+        public ExecuteStatus ExecuteStatus { get; set; }
+
+        /// <summary>
+        /// 配置文件地址
+        /// </summary>
+        public string ConfigPath { get; set; }
     }
 }
 
