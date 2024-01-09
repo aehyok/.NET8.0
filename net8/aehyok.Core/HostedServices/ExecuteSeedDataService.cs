@@ -55,6 +55,12 @@ namespace aehyok.Core.HostedServices
                     model.LastWriteTime = file.LastWriteTime;
                     return true;
                 }
+
+                // 如果执行失败，则需要重新执行
+                if(model.ExecuteStatus == ExecuteStatus.失败)
+                {
+                    return true;
+                }
                 return false;
             }
         }
@@ -77,7 +83,7 @@ namespace aehyok.Core.HostedServices
 
             foreach (var seed in seedInstants.OrderBy(a => a.Order))
             {
-                var taskName = seed.GetType().Name;
+                var taskName = seed.GetType().FullName;
                 currentConfigPath = seed.ConfigPath;
                 var taskId = Guid.NewGuid().ToString();
                
@@ -96,8 +102,8 @@ namespace aehyok.Core.HostedServices
                         model = await cronTaskCoreService.InsertAsync(new SeedDataTask
                         {
                             TaskName = taskName,
-                            IsEnable = true,
-                            
+                            ConfigPath = currentConfigPath,
+                            IsEnable = true
                         });
 
                     }                    
@@ -108,7 +114,7 @@ namespace aehyok.Core.HostedServices
 
                         if (await redisDatabaseProvider.SetAsync(taskName, taskId, TimeSpan.FromMinutes(5), CSRedis.RedisExistence.Nx))
                         {
-                            await seed.ApplyAsync(model, UpdateCronTask);
+                            await seed.ApplyAsync(model);
                             model.ExecuteStatus = ExecuteStatus.成功;
                             model.ExecuteTime = DateTime.Now;
                         }
