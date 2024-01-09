@@ -18,6 +18,13 @@ using File = aehyok.Basic.Domains.File;
 
 namespace aehyok.Basic.Services
 {
+    /// <summary>
+    /// 文件服务
+    /// </summary>
+    /// <param name="dbContext"></param>
+    /// <param name="mapper"></param>
+    /// <param name="storageFactory"></param>
+    /// <param name="contentTypeProvider"></param>
     public class FileService(DbContext dbContext, IMapper mapper, IFileStorageFactory storageFactory, IContentTypeProvider contentTypeProvider) : ServiceBase<File>(dbContext, mapper), IFileService, IScopedDependency
     {
         public Task<byte[]> GetContentAsync(string url)

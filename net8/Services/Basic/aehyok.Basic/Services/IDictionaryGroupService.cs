@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
+    /// <summary>
+    /// 字典分组接口
+    /// </summary>
     public interface IDictionaryGroupService : IServiceBase<DictionaryGroup>
     {
 

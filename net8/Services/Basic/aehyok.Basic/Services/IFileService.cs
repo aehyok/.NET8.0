@@ -3,6 +3,9 @@ using File = aehyok.Basic.Domains.File;
 
 namespace aehyok.Basic.Services
 {
+    /// <summary>
+    /// 文件服务接口
+    /// </summary>
     public interface IFileService : IServiceBase<File>
     {
         /// <summary>

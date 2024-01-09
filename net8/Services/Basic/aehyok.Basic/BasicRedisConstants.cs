@@ -15,5 +15,9 @@ namespace aehyok.Basic
         /// 图片验证码缓存 Key
         /// </summary>
         public static string CAPTCHA_CACHE_KEY_PATTERN = $"{currentAssembly}:Captcha:{{0}}";
+
+        public static string USER_TOKEN_CACHE_KEY_PATTERN = $"{currentAssembly}:UserToken:{{0}}";
+
+
     }
 }

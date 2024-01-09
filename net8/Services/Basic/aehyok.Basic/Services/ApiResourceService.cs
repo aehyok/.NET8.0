@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
+    /// <summary>
+    /// 接口资源服务
+    /// </summary>
+    /// <param name="dbContext"></param>
+    /// <param name="mapper"></param>
     public class ApiResourceService(DbContext dbContext, IMapper mapper) : ServiceBase<ApiResource>(dbContext, mapper), IApiResourceService, IScopedDependency
     {
         public async Task<List<MenuResourceDto>> GetTreeListAsync()

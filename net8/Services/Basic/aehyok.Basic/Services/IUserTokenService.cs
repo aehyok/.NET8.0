@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
+    /// <summary>
+    /// 用户token服务
+    /// </summary>
     public interface IUserTokenService: IServiceBase<UserToken>
     {
         /// <summary>

@@ -16,10 +16,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StringExtensions = aehyok.Infrastructure.StringExtensions;
 
 namespace aehyok.Basic.Services
 {
-    public class UserTokenService(DbContext dbContext, IMapper mapper, IRedisService redisService,IUserService userService, IHttpContextAccessor httpContextAccessor) : ServiceBase<UserToken>(dbContext, mapper), IUserTokenService, IScopedDependency
+    /// <summary>
+    /// 用户Token服务
+    /// </summary>
+    /// <param name="dbContext"></param>
+    /// <param name="mapper"></param>
+    /// <param name="redisService"></param>
+    /// <param name="userService"></param>
+    /// <param name="httpContextAccessor"></param>
+    public class UserTokenService(
+        DbContext dbContext, 
+        IMapper mapper, 
+        IRedisService redisService,
+        IUserService userService, 
+        IUserRoleService userRoleService,
+        IHttpContextAccessor httpContextAccessor) : ServiceBase<UserToken>(dbContext, mapper), IUserTokenService, IScopedDependency
     {
         public async Task<CaptchaDto> GenerateCaptchaAsync()
         {
@@ -128,17 +143,17 @@ namespace aehyok.Basic.Services
                 RefreshTokenIsAvailable = true
             };
 
-            //token.Token = SecurityHelper.GenerateToken(user.Id.ToString(), token.ExpirationDate);
-            //token.TokenHash = SecurityHelper.EncodeMD5(token.Token);
-            //token.RefreshToken = SecurityHelper.GenerateToken(token.Token, token.ExpirationDate.AddMonths(1));
+            token.Token = StringExtensions.GenerateToken(user.Id.ToString(), token.ExpirationDate);
+            token.TokenHash = StringExtensions.EncodeMD5(token.Token);
+            token.RefreshToken = StringExtensions.GenerateToken(token.Token, token.ExpirationDate.AddMonths(1));
 
             //// 获取用户默认角色信息
-            //var role = await this.userRoleService.GetUserDefaultRole(user.Id);
-            //if (role != null)
-            //{
-            //    token.RoleId = role.RoleId;
-            //    token.RegionId = role.RegionId;
-            //}
+            var role = await userRoleService.GetUserDefaultRole(user.Id);
+            if (role != null)
+            {
+                token.RoleId = role.RoleId;
+                token.RegionId = role.RegionId;
+            }
             //else
             //{
             //    // 如果用户没用任何角色，则给该用户添加游客角色
@@ -147,15 +162,15 @@ namespace aehyok.Basic.Services
             //    token.RegionId = guestRole.RegionId;
             //}
 
-            //await this.InsertAsync(token);
+            await this.InsertAsync(token);
 
-            //// 从数据库中加载 User 对象，以存储到缓存中
-            //token.User = await this.userService.GetAsync(a => a.Id == user.Id, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
+            // 从数据库中加载 User 对象，以存储到缓存中
+            token.User = await userService.GetAsync(a => a.Id == user.Id, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
 
-            //var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
+            var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
 
-            //// 将 Token 信息存储到 Redis，有效期 2 小时
-            //await this.cachingProvider.SetAsync(BasicConstants.USER_TOKEN_CACHE_KEY_PATTERN.Format(token.TokenHash), cacheData, TimeSpan.FromHours(2));
+            // 将 Token 信息存储到 Redis，有效期 2 小时
+            await redisService.SetAsync(BasicRedisConstants.USER_TOKEN_CACHE_KEY_PATTERN.Format(token.TokenHash), cacheData, TimeSpan.FromHours(2));
 
             return this.Mapper.Map<UserTokenDto>(token);
         }

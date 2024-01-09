@@ -59,6 +59,29 @@ namespace aehyok.Infrastructure
         }
 
         /// <summary>
+        /// MD5 混淆
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns>MD5 Base64 值</returns>
+        public static string EncodeMD5(string source)
+        {
+            var bytes = Encoding.UTF8.GetBytes(source);
+            return EncodeMD5(bytes);
+        }
+
+        /// <summary>
+        /// MD5 混淆
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns>MD5 Base64 值</returns>
+        public static string EncodeMD5(byte[] data)
+        {
+            using var hasher = HashAlgorithm.Create("MD5");
+            var encodeBytes = hasher.ComputeHash(data);
+            return Convert.ToBase64String(encodeBytes);
+        }
+
+        /// <summary>
         /// 生成 Token
         /// </summary>
         /// <param name="username"></param>

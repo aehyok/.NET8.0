@@ -1,5 +1,4 @@
-﻿using aehyok.Basic.Dtos;
-using aehyok.Core.Domains;
+﻿using aehyok.Basic.Domains;
 using aehyok.EntityFrameworkCore.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,14 +9,15 @@ using System.Threading.Tasks;
 namespace aehyok.Basic.Services
 {
     /// <summary>
-    /// 接口资源接口
+    /// 用户角色服务
     /// </summary>
-    public interface IApiResourceService: IServiceBase<ApiResource>
+    public interface IUserRoleService: IServiceBase<UserRole>
     {
         /// <summary>
-        /// 获取接口资源定义树列表
+        /// 获取用户默认角色
         /// </summary>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        Task<List<MenuResourceDto>> GetTreeListAsync();
+        Task<UserRole> GetUserDefaultRole(long userId);
     }
 }

@@ -13,6 +13,11 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
+    /// <summary>
+    /// 字典项服务
+    /// </summary>
+    /// <param name="dbContext"></param>
+    /// <param name="mapper"></param>
     public class DictionaryItemService(DbContext dbContext, IMapper mapper) : ServiceBase<DictionaryItem>(dbContext, mapper), IDictionaryItemService,IScopedDependency
     {
         /// <summary>

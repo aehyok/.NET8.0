@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Basic
+namespace aehyok.Basic.Dtos
 {
+    /// <summary>
+    /// 字典分组
+    /// </summary>
     public class DictionaryGroupDto
     {
         /// <summary>

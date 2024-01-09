@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
+    /// <summary>
+    ///字典项接口
+    /// </summary>
     public interface IDictionaryItemService: IServiceBase<DictionaryItem>
     {
         /// <summary>
-        /// 通过
+        /// 获取字典项树列表
         /// </summary>
         /// <param name="groupId"></param>
         /// <param name="keyword"></param>

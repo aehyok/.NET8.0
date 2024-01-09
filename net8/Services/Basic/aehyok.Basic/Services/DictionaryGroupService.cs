@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 
 namespace aehyok.Basic.Services
 {
+    /// <summary>
+    /// 字典分组服务
+    /// </summary>
+    /// <param name="dbContext"></param>
+    /// <param name="mapper"></param>
     public class DictionaryGroupService(DbContext dbContext, IMapper mapper) : ServiceBase<DictionaryGroup>(dbContext, mapper), IDictionaryGroupService, IScopedDependency
     {
     }
