@@ -82,6 +82,17 @@ namespace aehyok.Infrastructure
         }
 
         /// <summary>
+        /// Base64 解密
+        /// </summary>
+        /// <param name="base64String"></param>
+        /// <returns></returns>
+        public static string Base64ToString(this string base64String)
+        {
+            byte[] base64Bytes = Convert.FromBase64String(base64String);
+            return Encoding.UTF8.GetString(base64Bytes);
+        }
+
+        /// <summary>
         /// 生成 Token
         /// </summary>
         /// <param name="username"></param>

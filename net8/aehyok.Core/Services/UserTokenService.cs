@@ -99,11 +99,17 @@ namespace aehyok.Core.Services
                 throw new ErrorCodeException(100003, "该用户还未设置密码");
             }
 
-            //// 如果密码是以 BPSE 开头的，则表示密码明文已经被 Base64 加密
-            //if (password.StartsWith("BPSE"))
-            //{
-            //    password = SecurityHelper.Base64ToString(password[4..]);
-            //}
+            if(password.StartsWith("swagger"))
+            {
+                password = password[7..];
+            } 
+            else
+            {
+                //前端传递的密码是经过base64位处理过的
+                password = password.Base64ToString();
+                //!等特殊字符会被转义，这里需要解码
+                password = Uri.UnescapeDataString(password);
+            }
 
             if (!user.Password.Equals(password.EncodePassword(user.PasswordSalt)))
             {

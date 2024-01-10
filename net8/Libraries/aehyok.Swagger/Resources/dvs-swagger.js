@@ -134,8 +134,9 @@ var dvs = dvs || {};
 
     dvs.swagger.login = async function (callback) {
         var data = {
-            password: document.getElementById('password').value,
             userName: document.getElementById('username').value,
+            // 密码暂时前端通过base64进行转码加密，swagger这里做特殊处理
+            password: "swagger" + document.getElementById('password').value,
             captcha: document.getElementById('captcha').value,
             captchaKey: document.getElementById('captcha-image').dataset.key,
             platform: 0,
