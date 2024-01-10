@@ -15,7 +15,14 @@ namespace aehyok.Infrastructure.Models
     {
         public RequestResultModel()
         {
-            
+
+        }
+
+        public RequestResultModel(int code, string message, object data)
+        {
+            Code = code;
+            Message = message;
+            Data = data;
         }
 
         /// <summary>

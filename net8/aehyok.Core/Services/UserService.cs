@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StringExtensions = aehyok.Infrastructure.StringExtensions;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     public class UserService(DbContext dbContext, IMapper mapper) : ServiceBase<User>(dbContext, mapper), IUserService, IScopedDependency
     {

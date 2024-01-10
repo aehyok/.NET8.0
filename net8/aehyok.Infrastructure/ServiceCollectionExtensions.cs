@@ -9,6 +9,13 @@ namespace aehyok.Infrastructure
 {
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// 根据不同的接口，注册不同生命周期的接口服务
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="services"></param>
+        /// <param name="lifetime"></param>
+        /// <returns></returns>
         public static IServiceCollection AddServices<T>(this IServiceCollection services, ServiceLifetime lifetime)
         {
             var types = TypeFinders.TypeFinders.SearchTypes(typeof(T), TypeFinders.TypeFinders.TypeClassification.Interface);

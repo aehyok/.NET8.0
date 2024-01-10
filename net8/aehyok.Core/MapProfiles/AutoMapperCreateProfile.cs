@@ -21,6 +21,8 @@ namespace aehyok.Core.MapProfiles
                 .ForMember(a => a.Roles, a => a.Ignore());
 
             CreateMap<CreateUserRoleDto, UserRole>();
+
+
         }
     }
 }

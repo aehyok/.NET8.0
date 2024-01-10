@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     /// <summary>
     /// 用户角色

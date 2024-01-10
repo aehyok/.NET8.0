@@ -2,6 +2,7 @@
 using aehyok.Basic.Services;
 using aehyok.Core;
 using aehyok.Core.Domains;
+using aehyok.Core.Services;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using Microsoft.Extensions.DependencyInjection;

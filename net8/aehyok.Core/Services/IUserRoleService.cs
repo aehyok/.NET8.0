@@ -1,7 +1,7 @@
 ﻿using aehyok.Core.Domains;
 using aehyok.EntityFrameworkCore.Repository;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     /// <summary>
     /// 用户角色服务

@@ -1,7 +1,8 @@
 ﻿using aehyok.Basic.Dtos;
 using aehyok.Basic.Services;
+using aehyok.Core.Dtos;
+using aehyok.Core.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aehyok.Basic.Api.Controllers

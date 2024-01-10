@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
-namespace aehyok.Infrastructure.Filters
+namespace aehyok.Core.Filters
 {
     public class JsonLongConverter : JsonConverter<long>
     {

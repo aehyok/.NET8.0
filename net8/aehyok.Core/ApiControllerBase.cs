@@ -1,5 +1,7 @@
 ﻿using aehyok.Infrastructure;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,7 @@ namespace aehyok.Core
     /// </summary>
     [ApiController]
     [Route("api/[controller]")]
+    //[Authorize(AuthenticationSchemes = "Authorization-Token")]
     public abstract class ApiControllerBase : ControllerBase
     {
         /// <summary>

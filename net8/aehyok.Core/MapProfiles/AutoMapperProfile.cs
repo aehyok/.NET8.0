@@ -1,4 +1,5 @@
-﻿using aehyok.Core.Domains;
+﻿using aehyok.Basic.Domains;
+using aehyok.Core.Domains;
 using aehyok.Core.Dtos;
 using AutoMapper;
 
@@ -28,6 +29,14 @@ namespace aehyok.Core.MapProfiles
             CreateMap<UserRole, UserRoleDto>();
 
             CreateMap<Region, RegionDto>();
+
+            CreateMap<UserToken, UserTokenCacheDto>()
+    .ForMember(a => a.Roles, a => a.MapFrom(c => c.User.UserRoles.Select(r => r.Role.Code).ToList()));
+            //.ForMember(a => a.PopulationId, a => a.MapFrom(c => c.User.PopulationId));
+
+            CreateMap<UserToken, UserTokenDto>();
+
+            CreateMap<UserTokenCacheDto, UserTokenDto>();
         }
     }
 }

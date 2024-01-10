@@ -1,5 +1,6 @@
 ﻿using aehyok.Basic.Domains;
 using aehyok.Basic.Dtos;
+using aehyok.Core.Dtos;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Enums;
 using System;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     /// <summary>
     /// 用户token服务
@@ -30,11 +31,18 @@ namespace aehyok.Basic.Services
         Task<bool> ValidateCaptchaAsync(string captchaCode, string captchaKey);
 
         /// <summary>
+        /// 验证用户Token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        Task<UserTokenCacheDto> ValidateTokenAsync(string token);
+
+        /// <summary>
         /// 通过账号密码登录
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <param name="platform"></param>
+        /// <param name="platformType"></param>
         /// <returns></returns>
         Task<UserTokenDto> LoginWithPasswordAsync(string username, string password, PlatformType platformType);
     }

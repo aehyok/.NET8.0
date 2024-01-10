@@ -1,11 +1,12 @@
-﻿using aehyok.Infrastructure.Exceptions;
+﻿using aehyok.Infrastructure;
+using aehyok.Infrastructure.Exceptions;
 using aehyok.Infrastructure.Models;
 using aehyok.Infrastructure.Options;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System.Net;
 
-namespace aehyok.Infrastructure.Filters
+namespace aehyok.Core.Filters
 {
     /// <summary>
     /// 错误异常处理过滤器（控制器构造函数、执行Action接口方法、执行ResultFilter结果过滤器）

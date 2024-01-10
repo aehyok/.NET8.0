@@ -1,6 +1,7 @@
 ﻿using aehyok.Basic.Domains;
 using aehyok.Basic.Dtos;
 using aehyok.Core.Domains;
+using aehyok.Core.Dtos;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Captcha;
@@ -19,7 +20,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StringExtensions = aehyok.Infrastructure.StringExtensions;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     /// <summary>
     /// 用户Token服务
@@ -53,7 +54,7 @@ namespace aehyok.Basic.Services
             };
 
             // 将验证码存储到缓存中，有效期 10 分钟
-            await redisService.SetAsync(BasicRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captcha.Key), captchaCode.ToLower(), TimeSpan.FromMinutes(10));
+            await redisService.SetAsync(CoreRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captcha.Key), captchaCode.ToLower(), TimeSpan.FromMinutes(10));
 
             return captcha;
         }
@@ -61,10 +62,10 @@ namespace aehyok.Basic.Services
         public async Task<bool> ValidateCaptchaAsync(string captchaCode, string captchaKey)
         {
 
-            var cachedCaptcha = await redisService.GetAsync<string>(BasicRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captchaKey));
+            var cachedCaptcha = await redisService.GetAsync<string>(CoreRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captchaKey));
 
             // 删除缓存
-            await redisService.DeleteAsync(BasicRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captchaKey));
+            await redisService.DeleteAsync(CoreRedisConstants.CAPTCHA_CACHE_KEY_PATTERN.Format(captchaKey));
 
             // 因为验证码存入缓存时转为了小写，所以这里转小写后对比
             return !cachedCaptcha.IsNullOrEmpty() && cachedCaptcha == captchaCode.ToLower();
@@ -171,9 +172,23 @@ namespace aehyok.Basic.Services
             var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
 
             // 将 Token 信息存储到 Redis，有效期 2 小时
-            await redisService.SetAsync(BasicRedisConstants.USER_TOKEN_CACHE_KEY_PATTERN.Format(token.TokenHash), cacheData, TimeSpan.FromHours(2));
+            await redisService.SetAsync(CoreRedisConstants.USER_TOKEN_CACHE_KEY_PATTERN.Format(token.TokenHash), cacheData, TimeSpan.FromHours(2));
 
             return this.Mapper.Map<UserTokenDto>(token);
+        }
+
+        /// <summary>
+        /// 验证用户 Token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        public virtual async Task<UserTokenCacheDto> ValidateTokenAsync(string token)
+        {
+            var tokenHash = StringExtensions.EncodeMD5(token);
+            var cacheValue = await redisService.GetAsync<UserTokenCacheDto>(CoreRedisConstants.USER_TOKEN_CACHE_KEY_PATTERN.Format(tokenHash));
+
+            // 如果 Redis 中没有数据，是否需要查询一次数据库？
+            return cacheValue;
         }
     }
 }

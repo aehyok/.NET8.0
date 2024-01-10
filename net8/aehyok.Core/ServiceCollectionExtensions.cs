@@ -17,13 +17,13 @@ using aehyok.Infrastructure.Options;
 using aehyok.Infrastructure;
 using aehyok.Serilog;
 using AutoMapper;
-using aehyok.Infrastructure.Filters;
 using Microsoft.AspNetCore.StaticFiles;
 using aehyok.Core.HostedServices;
-using System.Text.Json;
 using aehyok.Infrastructure.Middlewares;
-using aehyok.Infrastructure.TypeFinders;
 using Microsoft.Extensions.Options;
+using aehyok.Core.Filters;
+using Microsoft.AspNetCore.Authentication;
+using aehyok.Core.Authentication;
 
 namespace aehyok.Core
 {
@@ -82,7 +82,8 @@ namespace aehyok.Core
             builder.Services.AddServices<ITransientDependency>(ServiceLifetime.Transient);
             builder.Services.AddServices<IScopedDependency>(ServiceLifetime.Scoped);
             builder.Services.AddServices<ISingletonDependency>(ServiceLifetime.Singleton);
-            //builder.Services.AddServices</*ISingletonDependency*/>(ServiceLifetime.Singleton);
+
+            builder.Services.AddAuthentication("Authorization-Token").AddScheme<RequestAuthenticationSchemeOptions, RequestAuthenticationHandler>("Authorization-Token", options => { });
 
             builder.Services.AddControllers(options =>
             {
@@ -91,6 +92,9 @@ namespace aehyok.Core
 
                 //接口异常统一处理
                 options.Filters.Add<ApiAsyncExceptionFilter>();
+
+                // 接口权限验证
+                options.Filters.Add<RequestAuthorizeFilter>();
             }).AddJsonOptions(options =>
             {
                 // 针对字段 long 类型，序列化时转换为字符串

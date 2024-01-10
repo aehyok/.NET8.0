@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     public interface IUserService: IServiceBase<User>
     {
