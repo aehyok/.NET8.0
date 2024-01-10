@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\aehyok.Core\aehyok.Core.csproj" />
     <ProjectReference Include="..\..\Basic\aehyok.Basic\aehyok.Basic.csproj" />
     <ProjectReference Include="..\..\NCDP\aehyok.NCDP\aehyok.NCDP.csproj" />
   </ItemGroup>
