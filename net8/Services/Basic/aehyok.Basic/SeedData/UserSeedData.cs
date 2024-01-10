@@ -34,7 +34,7 @@ namespace aehyok.Basic.SeedData
                     Mobile = "18888888888",
                     NickName = "",
                     RealName = "运维管理员",
-                    Password = "sunlight",
+                    Password = "Long2024!",
                 };
 
                 var roleService = scope.ServiceProvider.GetService<IRoleService>();
