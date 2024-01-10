@@ -11,7 +11,7 @@ namespace aehyok.NCDP.Domains
     /// <summary>
     /// 自动化指标表
     /// </summary>
-    public class AutoGuideLine: FullAuditedEntity<User>
+    public class AutoGuideLine: AuditedEntity
     {
 
     }

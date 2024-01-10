@@ -14,7 +14,7 @@ namespace aehyok.Basic.Domains
     /// <summary>
     /// 文件
     /// </summary>
-    public class File: FullAuditedEntity<User>
+    public class File: AuditedEntity
     {
         /// <summary>
         /// 文件名称

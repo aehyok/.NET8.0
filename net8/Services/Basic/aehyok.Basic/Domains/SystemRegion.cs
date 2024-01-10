@@ -1,4 +1,5 @@
-﻿using aehyok.EntityFrameworkCore.Entities;
+﻿using aehyok.Core.Domains;
+using aehyok.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace aehyok.Basic.Domains
     /// <summary>
     /// 系统勾选区域Id
     /// </summary>
-    public class SystemRegion: FullAuditedEntity<User>
+    public class SystemRegion: AuditedEntity
     {
         /// <summary>
         /// 系统Id

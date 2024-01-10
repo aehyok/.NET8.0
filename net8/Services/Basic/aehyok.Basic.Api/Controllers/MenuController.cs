@@ -4,6 +4,9 @@ using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
 using aehyok.Core.Domains;
+using aehyok.Core.Dtos;
+using aehyok.Core.Dtos.Create;
+using aehyok.Core.Dtos.Query;
 using aehyok.Core.Services;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
@@ -24,7 +27,7 @@ namespace aehyok.Basic.Api.Controllers
     /// 菜单管理
     /// </summary>
     public class MenuController(IMenuService menuService,
-        IApiResourceService apiResourceService) : BasicControllerBase
+        IApiResrouceCoreService apiResourceService) : BasicControllerBase
     {
 
         /// <summary>

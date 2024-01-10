@@ -11,7 +11,7 @@ namespace aehyok.NCDP.Domains
     /// <summary>
     /// 自动化任务表
     /// </summary>
-    public class AutoTask: FullAuditedEntity<User>
+    public class AutoTask: AuditedEntity
     {
         /// <summary>
         /// 名称

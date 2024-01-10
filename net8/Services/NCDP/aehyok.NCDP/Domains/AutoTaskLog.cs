@@ -11,7 +11,7 @@ namespace aehyok.NCDP.Domains
     /// <summary>
     /// 自动化任务日志
     /// </summary>
-    public class AutoTaskLog: FullAuditedEntity<User>
+    public class AutoTaskLog: AuditedEntity
     {
     }
 }

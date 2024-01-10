@@ -1,12 +1,11 @@
-﻿using aehyok.Basic.Domains;
-using aehyok.Basic.Dtos;
-using aehyok.Basic.Dtos.Create;
-using aehyok.Basic.Dtos.Query;
-using aehyok.Basic.Services;
+﻿using aehyok.Basic.Services;
+using aehyok.Core.Domains;
+using aehyok.Core.Dtos;
+using aehyok.Core.Dtos.Create;
+using aehyok.Core.Dtos.Query;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Exceptions;
 using Ardalis.Specification;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 

@@ -1,5 +1,6 @@
 ﻿using aehyok.Basic.Domains;
 using aehyok.Basic.Dtos;
+using aehyok.Core.Domains;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Captcha;

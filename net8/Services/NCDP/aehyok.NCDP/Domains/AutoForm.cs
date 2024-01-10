@@ -11,7 +11,7 @@ namespace aehyok.NCDP.Domains
     /// <summary>
     /// 自定义表单表
     /// </summary>
-    public class AutoForm:FullAuditedEntity<User>
+    public class AutoForm: AuditedEntity
     {
 
     }

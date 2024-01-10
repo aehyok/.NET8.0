@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace aehyok.NCDP.Domains
 {
-    public class AutoRecord: FullAuditedEntity<User>
+    public class AutoRecord: AuditedEntity
     {
     }
 }

@@ -11,7 +11,7 @@ namespace aehyok.Basic.Domains
     /// <summary>
     /// 租户平台配置项
     /// </summary>
-    public class PlatformOptions : FullAuditedEntity<User>
+    public class PlatformOptions : AuditedEntity
     {
         public string SectionName => "Platform";
 

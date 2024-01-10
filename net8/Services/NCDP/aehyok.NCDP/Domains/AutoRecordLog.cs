@@ -11,7 +11,7 @@ namespace aehyok.NCDP.Domains
     /// <summary>
     /// 自动化填报记录日志
     /// </summary>
-    public class AutoRecordLog: FullAuditedEntity<User>
+    public class AutoRecordLog: AuditedEntity
     {
 
     }

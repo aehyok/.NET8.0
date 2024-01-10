@@ -1,4 +1,5 @@
 ﻿using aehyok.Basic.Domains;
+using aehyok.Core.Domains;
 using aehyok.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace aehyok.NCDP.Domains
     /// <summary>
     /// 自动化字典
     /// </summary>
-    public class AutoDictionary : FullAuditedEntity<User>
+    public class AutoDictionary : AuditedEntity
     {
 
     }
