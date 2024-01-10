@@ -95,6 +95,9 @@ namespace aehyok.Core
 
                 // 接口权限验证
                 options.Filters.Add<RequestAuthorizeFilter>();
+
+                // 操作日志统一处理
+                options.Filters.Add<LogActionFilter>();
             }).AddJsonOptions(options =>
             {
                 // 针对字段 long 类型，序列化时转换为字符串

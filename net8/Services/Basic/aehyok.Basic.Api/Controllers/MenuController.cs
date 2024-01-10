@@ -7,6 +7,7 @@ using aehyok.Core.Domains;
 using aehyok.Core.Dtos;
 using aehyok.Core.Dtos.Create;
 using aehyok.Core.Dtos.Query;
+using aehyok.Core.Log;
 using aehyok.Core.Services;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
@@ -37,6 +38,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("tree/{platformType}")]
+        [LogAction("你好啊日志{0}")]
         public async Task<List<MenuTreeDto>> GetTreeAsync(PlatformType platformType, [FromQuery] MenuTreeQueryDto model)
         {
             return await menuService.GetTreeListAsync(platformType, model);

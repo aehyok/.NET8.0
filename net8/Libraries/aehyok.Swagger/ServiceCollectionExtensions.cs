@@ -77,6 +77,8 @@ namespace aehyok.Swagger
 
                 // 加载程序运行目录下的所有 xml 注释文档
                 Directory.GetFiles(AppContext.BaseDirectory, "*.xml").ToList().ForEach(comment => options.IncludeXmlComments(comment, true));
+
+                options.OperationFilter<HttpHeaderFilter>(Array.Empty<object>());
             });
 
             return services;

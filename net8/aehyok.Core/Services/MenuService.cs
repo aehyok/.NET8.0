@@ -12,7 +12,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     public class MenuService(DbContext dbContext, IMapper mapper) : ServiceBase<Menu>(dbContext, mapper), IMenuService, IScopedDependency
     {
@@ -108,6 +108,34 @@ namespace aehyok.Basic.Services
             entity = this.Mapper.Map(model, entity);
 
             return await this.UpdateAsync(entity);
+        }
+
+        /// <summary>
+        /// 根据 Code 获取父级菜单
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public virtual async Task<List<Menu>> GetParentMenuAsync(string menuCode)
+        {
+            var menu = await this.GetListAsync(a => a.Code == menuCode);
+            return await GetParentMenuAsync(menu[0]);
+        }
+
+        /// <summary>
+        /// 根据菜单对象获取父级菜单
+        /// </summary>
+        /// <param name="menu"></param>
+        /// <returns></returns>
+        public virtual async Task<List<Menu>> GetParentMenuAsync(Menu menu)
+        {
+            if (menu == null)
+            {
+                return new List<Menu>();
+            }
+
+            var parentIds = menu.IdSequences.Split(".", StringSplitOptions.RemoveEmptyEntries).Select(a => Convert.ToInt64(a));
+            var parents = await this.GetListAsync(a => parentIds.Contains(a.Id));
+            return parents;
         }
     }
 }

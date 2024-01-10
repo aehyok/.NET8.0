@@ -39,5 +39,12 @@ namespace aehyok.Core.Services
         /// <param name="id"></param>
         /// <returns></returns>
         Task<int> DeleteAsync(long id);
+
+        /// <summary>
+        /// 根据 Code 获取父级菜单
+        /// </summary>
+        /// <param name="menuCode></param>
+        /// <returns></returns>
+        Task<List<Menu>> GetParentMenuAsync(string menuCode);
     }
 }
