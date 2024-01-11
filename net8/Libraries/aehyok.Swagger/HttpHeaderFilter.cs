@@ -10,6 +10,9 @@ using System.Xml.Linq;
 
 namespace aehyok.Swagger
 {
+    /// <summary>
+    /// Swagger请求头Header统一添加
+    /// </summary>
     public class HttpHeaderFilter : IOperationFilter
     {
         public void Apply(OpenApiOperation operation, OperationFilterContext context)

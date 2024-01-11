@@ -3,32 +3,24 @@ using aehyok.Basic.Dtos;
 using aehyok.Basic.Dtos.Create;
 using aehyok.Basic.Dtos.Query;
 using aehyok.Basic.Services;
+using aehyok.Core.Attributes;
 using aehyok.Core.Domains;
 using aehyok.Core.Dtos;
 using aehyok.Core.Dtos.Create;
 using aehyok.Core.Dtos.Query;
-using aehyok.Core.Log;
 using aehyok.Core.Services;
 using aehyok.EntityFrameworkCore.Repository;
-using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using Ardalis.Specification;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
 
 namespace aehyok.Basic.Api.Controllers
 {
-
     /// <summary>
     /// 菜单管理
     /// </summary>
     public class MenuController(IMenuService menuService,
-        IApiResrouceCoreService apiResourceService) : BasicControllerBase
+        IApiResrouceCoreService apiResourceService, IServiceBase<MenuResource> menuResourceService) : BasicControllerBase
     {
 
         /// <summary>
@@ -38,7 +30,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("tree/{platformType}")]
-        [LogAction("你好啊日志{0}")]
+        [OperationLogAction("获取菜单列表: {model.ParentId}")]
         public async Task<List<MenuTreeDto>> GetTreeAsync(PlatformType platformType, [FromQuery] MenuTreeQueryDto model)
         {
             return await menuService.GetTreeListAsync(platformType, model);
@@ -50,6 +42,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [OperationLogAction("新增菜单，菜单名称为:{model.Name}")]
         public async Task<long> PostAsync(CreateMenuDto model)
         {
             return await menuService.PostAsync(model);
@@ -61,6 +54,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="id">菜单Id</param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [OperationLogAction("获取菜单详情，菜单Id为:{id}")]
         public Task<MenuDto> GetByIdAsync(long id)
         {
             return menuService.GetByIdAsync<MenuDto>(id);
@@ -74,6 +68,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         [HttpPut("{id}")]
+        [OperationLogAction("修改菜单，菜单Id为:{id}，菜单Code为{model.Code}")]
         public async Task<StatusCodeResult> PutAsync(long id, CreateMenuDto model)
         {
             await menuService.PutAsync(id, model);
@@ -102,7 +97,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}/Resources")]
-        public async Task<List<MenuResourceDto>> GetResourcesAsync([FromServices] IServiceBase<MenuResource> menuResourceService, long id)
+        public async Task<List<MenuResourceDto>> GetResourcesAsync(long id)
         {
             var resources = await apiResourceService.GetListAsync<ApiResourceDto>();
 

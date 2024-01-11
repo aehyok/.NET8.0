@@ -29,9 +29,9 @@ namespace aehyok.Core.Services
         /// 记录操作日志
         /// </summary>
         /// <param name="code">操作菜单</param>
-        /// <param name="option"></param>
+        /// <param name="content"></param>
         /// <returns></returns>
-        public async Task LogAsync(string code, string option)
+        public async Task LogAsync(string code, string content, string json)
         {
             var menus = await this.menuService.GetParentMenuAsync(code);
             if (!menus.Any())
@@ -47,9 +47,10 @@ namespace aehyok.Core.Services
             {
                 IpAddress = ipAddress,
                 OperationMenu = operationMenu,
-                Operation = option,
+                Operation = content,
                 UserAgent = this.httpContextAccessor.HttpContext.Request.Headers.UserAgent,
                 MenuCode = code,
+                Remark = json
             };
 
             await this.InsertAsync(entity);

@@ -97,7 +97,7 @@ namespace aehyok.Core
                 options.Filters.Add<RequestAuthorizeFilter>();
 
                 // 操作日志统一处理
-                options.Filters.Add<LogActionFilter>();
+                options.Filters.Add<OperationLogActionFilter>();
             }).AddJsonOptions(options =>
             {
                 // 针对字段 long 类型，序列化时转换为字符串

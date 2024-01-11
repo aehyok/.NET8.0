@@ -16,9 +16,10 @@ namespace aehyok.Core.Services
         /// <summary>
         /// 记录操作日志
         /// </summary>
-        /// <param name="code"></param>
-        /// <param name="option"></param>
+        /// <param name="code">菜单Code</param>
+        /// <param name="content">操作内容</param>
+        /// <param name="remark">操作参数</param>
         /// <returns></returns>
-        Task LogAsync(string code, string option);
+        Task LogAsync(string code, string content, string remark);
     }
 }
