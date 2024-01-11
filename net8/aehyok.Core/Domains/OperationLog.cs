@@ -31,7 +31,7 @@ namespace aehyok.Core.Domains
         /// 操作
         /// </summary>
         [MaxLength(512)]
-        public string Operation { get; set; }
+        public string OperationContent { get; set; }
 
         /// <summary>
         /// 菜单代码

@@ -117,8 +117,8 @@ namespace aehyok.Core.Services
         /// <returns></returns>
         public virtual async Task<List<Menu>> GetParentMenuAsync(string menuCode)
         {
-            var menu = await this.GetListAsync(a => a.Code == menuCode);
-            return await GetParentMenuAsync(menu[0]);
+            var menu = await this.GetAsync(a => a.Code == menuCode);
+            return await GetParentMenuAsync(menu);
         }
 
         /// <summary>

@@ -47,7 +47,7 @@ namespace aehyok.Core.Services
             {
                 IpAddress = ipAddress,
                 OperationMenu = operationMenu,
-                Operation = content,
+                OperationContent = content,
                 UserAgent = this.httpContextAccessor.HttpContext.Request.Headers.UserAgent,
                 MenuCode = code,
                 Remark = json
