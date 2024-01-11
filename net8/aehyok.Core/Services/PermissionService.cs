@@ -28,10 +28,10 @@ namespace aehyok.Basic.Services
             // 删除原有数据
             await this.BatchDeleteAsync(a => a.RoleId == model.RoleId);
 
-            var permissions = model.Premission.GroupBy(a => a.MenuId).Select(a => a.FirstOrDefault()).Where(a => a.HasPermission).Select(a => new Permission
+            var permissions = model.Premission.Select(a => new Permission
             {
                 //DataRange = a.DataRange,
-                HasPermission = a.HasPermission,
+                //HasPermission = a.HasPermission,
                 MenuId = a.MenuId,
                 RoleId = model.RoleId,
                 Remark = string.Empty

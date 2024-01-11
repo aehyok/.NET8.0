@@ -2,13 +2,21 @@
 - 上传视频的缩略图生成方案
 
 ## .net 8
-- 1、初始化aehyok.EntityFrameworkCore
+```
+- 1、初始化了EntityFrameworkCore
 - 2、初始化了定时任务CronTask
 - 3、初始化了消息队列RabbitMQ
 - 4、初始化了持久化缓存Redis
 - 5、初始化了记录日志Serilog
 - 6、初始化了接口文档Swagger
-    ```
+```
+
+## 完成的中间件
+```
+- 1、操作日志通过Action上标注特性
+    [OperationLogAction("修改菜单，菜单Id为:{id}，菜单Code为{model.Code}")]
+
+```
 
 - **1、EFCore更新数据库**
   ```

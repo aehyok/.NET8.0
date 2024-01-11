@@ -21,7 +21,7 @@ namespace aehyok.Basic.Api.Controllers
     /// <summary>
     /// 用户管理
     /// </summary>
-    public class UserController(IUserService userService) : BasicControllerBase
+    public class UserController(IUserService userService, IPermissionService permissionService) : BasicControllerBase
     {
         /// <summary>
         /// 获取用户列表
@@ -216,6 +216,16 @@ namespace aehyok.Basic.Api.Controllers
 
             return Ok();
         }
+
+        ///// <summary>
+        ///// 获取当前用户权限
+        ///// </summary>
+        ///// <returns></returns>
+        //[HttpGet("permission")]
+        //public Task<List<RolePermissionDto>> GetCurrentUserPermissionAsync()
+        //{
+        //    return permissionService.GetCurrentRolePermissionAsync();
+        //}
 
         /// <summary>
         /// 重置密码

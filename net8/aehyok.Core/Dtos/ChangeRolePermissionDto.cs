@@ -20,10 +20,10 @@
         /// </summary>
         public long MenuId { get; set; }
 
-        /// <summary>
-        /// 是否拥有权限
-        /// </summary>
-        public bool HasPermission { get; set; }
+        ///// <summary>
+        ///// 是否拥有权限
+        ///// </summary>
+        //public bool HasPermission { get; set; }
 
         ///// <summary>
         ///// 数据范围

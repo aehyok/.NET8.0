@@ -93,7 +93,6 @@ namespace aehyok.Basic.Api.Controllers
         /// <summary>
         /// 获取菜单绑定接口
         /// </summary>
-        /// <param name="menuResourceService"></param>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}/Resources")]
