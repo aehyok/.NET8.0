@@ -1,15 +1,8 @@
-﻿using aehyok.Basic.Domains;
-using aehyok.Basic.Services;
+﻿using aehyok.Basic.Services;
 using aehyok.Core;
 using aehyok.Core.Domains;
 using aehyok.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using File = System.IO.File;
 
 namespace aehyok.Basic.SeedData
 {
@@ -35,9 +28,6 @@ namespace aehyok.Basic.SeedData
 
                 await regionService.InsertAsync(defaultRegion);
             }
-            //var dateTime = File.GetLastWriteTimeUtc(dataJsonPath);
-
-
         }
     }
 }

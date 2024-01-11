@@ -15,17 +15,16 @@
 ```
 - 1、操作日志通过Action上标注特性
     [OperationLogAction("修改菜单，菜单Id为:{id}，菜单Code为{model.Code}")]
-
 ```
 
 - **1、EFCore更新数据库**
-  ```
-   在aehyok.Schedules项目下
+```
+在aehyok.Schedules项目下
 
-   dotnet-ef migrations add InitTask -c DvsContext --framework net8.0 -v
+dotnet-ef migrations add InitTask -c DvsContext --framework net8.0 -v
    
-   dotnet-ef database update -c DvsContext --framework net8.0 -v
-  ```
+dotnet-ef database update -c DvsContext --framework net8.0 -v
+```
 -**1.1、EFCore 新增更新删除时的操作**
 ```
 新增时会通过拦截器DvsSaveChangeInterceptor拦截器，将CreateBy CreateAt UpdateBy UpdateAt写入到数据库中
@@ -148,4 +147,6 @@
     - 区域初始化根节点
     - 角色初始化（运维管理员角色）
     - 用户初始化（运维管理员）
-- 每次更新版本时的数据更新
+- 2、每次更新版本时的数据更新
+    - 菜单需要每次更新程序要先初始化
+    - 然后运维角色的权限将所有菜单写入

@@ -37,6 +37,8 @@ namespace aehyok.Core.MapProfiles
             CreateMap<UserToken, UserTokenDto>();
 
             CreateMap<UserTokenCacheDto, UserTokenDto>();
+
+            CreateMap<Permission, RolePermissionDto>();
         }
     }
 }

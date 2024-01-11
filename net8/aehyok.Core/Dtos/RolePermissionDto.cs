@@ -30,6 +30,11 @@ namespace aehyok.Core.Dtos
         public string MenuName { get; set; }
 
         /// <summary>
+        /// 子菜单列表
+        /// </summary>
+        public List<RolePermissionDto> Children { get; set; }
+
+        /// <summary>
         /// 数据范围
         /// </summary>
         //public DataRange DataRange { get; set; }

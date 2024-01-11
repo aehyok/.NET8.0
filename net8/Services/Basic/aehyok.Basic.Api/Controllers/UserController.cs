@@ -21,7 +21,11 @@ namespace aehyok.Basic.Api.Controllers
     /// <summary>
     /// 用户管理
     /// </summary>
-    public class UserController(IUserService userService, IPermissionService permissionService) : BasicControllerBase
+    public class UserController(
+        IUserService userService, 
+        IPermissionService permissionService, 
+        IMenuService menuService,
+        IUserRoleService userRoleService) : BasicControllerBase
     {
         /// <summary>
         /// 获取用户列表
@@ -217,15 +221,32 @@ namespace aehyok.Basic.Api.Controllers
             return Ok();
         }
 
-        ///// <summary>
-        ///// 获取当前用户权限
-        ///// </summary>
-        ///// <returns></returns>
-        //[HttpGet("permission")]
-        //public Task<List<RolePermissionDto>> GetCurrentUserPermissionAsync()
-        //{
-        //    return permissionService.GetCurrentRolePermissionAsync();
-        //}
+        /// <summary>
+        /// 获取当前用户权限
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("permission")]
+        public async Task<List<RolePermissionDto>> GetCurrentUserPermissionAsync()
+        {
+            var currentUser = this.CurrentUser;
+
+
+            var query = from p in permissionService.GetQueryable()
+                        join m in menuService.GetQueryable() on p.MenuId equals m.Id
+                        join ur in userRoleService.GetQueryable() on p.RoleId equals ur.RoleId
+                        join r in userService.GetQueryable() on ur.UserId equals r.Id
+                        where ur.UserId == currentUser.UserId 
+                        select new RolePermissionDto
+                        {
+                            MenuId = m.Id,
+                            RoleId = p.RoleId,
+                            MenuName = m.Name,
+                            MenuCode = m.Code,
+                        };
+            var list = await query.ToListAsync();
+
+            return list;
+        }
 
         /// <summary>
         /// 重置密码

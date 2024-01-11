@@ -99,10 +99,11 @@ namespace aehyok.Core.Services
                 throw new ErrorCodeException(100003, "该用户还未设置密码");
             }
 
+            // swagger特殊登录
             if(password.StartsWith("swagger"))
             {
                 password = password[7..];
-            } 
+            }
             else
             {
                 //前端传递的密码是经过base64位处理过的
@@ -155,7 +156,7 @@ namespace aehyok.Core.Services
             token.TokenHash = StringExtensions.EncodeMD5(token.Token);
             token.RefreshToken = StringExtensions.GenerateToken(token.Token, token.ExpirationDate.AddMonths(1));
 
-            //// 获取用户默认角色信息
+            // 获取用户默认角色信息
             var role = await userRoleService.GetUserDefaultRole(user.Id);
             if (role != null)
             {

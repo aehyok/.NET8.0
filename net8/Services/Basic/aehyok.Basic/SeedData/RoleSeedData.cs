@@ -1,15 +1,9 @@
-﻿using aehyok.Basic.Domains;
-using aehyok.Basic.Services;
+﻿using aehyok.Basic.Services;
 using aehyok.Core;
 using aehyok.Core.Domains;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace aehyok.Basic.SeedData
 {
