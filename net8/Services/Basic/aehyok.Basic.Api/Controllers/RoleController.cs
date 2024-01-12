@@ -29,7 +29,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="platformType">所属平台</param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpGet("/{platformType}")]
+        [HttpGet("{platformType}")]
         public Task<IPagedList<RoleDto>> GetListAsync(PlatformType platformType,[FromQuery] RoleQueryDto model)
         {
             var spec = Specifications<Role>.Create();
