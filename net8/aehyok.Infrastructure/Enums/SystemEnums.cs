@@ -12,7 +12,12 @@ namespace aehyok.Infrastructure.Enums
     public enum PlatformType
     {
         /// <summary>
-        /// PC浏览器
+        /// 超管平台
+        /// </summary>
+        Admin = 0,
+
+        /// <summary>
+        /// PC业务系统
         /// </summary>
         Pc = 1,
 

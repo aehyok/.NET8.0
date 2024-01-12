@@ -9,6 +9,7 @@ using aehyok.Core.Dtos.Create;
 using aehyok.Core.Dtos.Query;
 using aehyok.Core.Services;
 using aehyok.EntityFrameworkCore.Repository;
+using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.Exceptions;
 using Ardalis.Specification;
 using Microsoft.AspNetCore.Mvc;
@@ -25,13 +26,15 @@ namespace aehyok.Basic.Api.Controllers
         /// <summary>
         /// 获取角色分页数据
         /// </summary>
+        /// <param name="platformType">所属平台</param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpGet]
-        public Task<IPagedList<RoleDto>> GetListAsync([FromQuery] RoleQueryDto model)
+        [HttpGet("/{platformType}")]
+        public Task<IPagedList<RoleDto>> GetListAsync(PlatformType platformType,[FromQuery] RoleQueryDto model)
         {
             var spec = Specifications<Role>.Create();
             spec.Query.OrderBy(a => a.Order);
+            spec.Query.Where(a => a.PlatformType == platformType);
 
             if (!string.IsNullOrEmpty(model.Keyword))
             {
@@ -97,7 +100,6 @@ namespace aehyok.Basic.Api.Controllers
         /// </summary>
         /// <param name="id">角色Id</param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
         [HttpPut("enable/{id}")]
         public async Task<StatusCodeResult> EnableAsync(long id)
         {
@@ -118,7 +120,6 @@ namespace aehyok.Basic.Api.Controllers
         /// </summary>
         /// <param name="id">角色Id</param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
         [HttpPut("disable/{id}")]
         public async Task<StatusCodeResult> DisableAsync(long id)
         {
@@ -139,7 +140,6 @@ namespace aehyok.Basic.Api.Controllers
         /// </summary>
         /// <param name="id">角色Id</param>
         /// <returns></returns>
-        /// <exception cref="Exception"></exception>
         [HttpDelete("{id}")]
         public async Task<StatusCodeResult> DeleteAsync(long id)
         {

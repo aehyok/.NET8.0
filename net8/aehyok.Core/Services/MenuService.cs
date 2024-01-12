@@ -58,6 +58,7 @@ namespace aehyok.Core.Services
 
             var spec = Specifications<Menu>.Create();
 
+            spec.Query.Where(a => a.PlatformType == platformType);
             if(model.ParentId != 0)
             {
                 if(model.IncludeChilds)
@@ -74,7 +75,7 @@ namespace aehyok.Core.Services
 
             List<MenuTreeDto> getChildren(long parentId)
             {
-                var children = menus.Where(a => a.ParentId == parentId && a.PlatformType == platformType).OrderBy(a => a.Order).ToList();
+                var children = menus.Where(a => a.ParentId == parentId).OrderBy(a => a.Order).ToList();
                 return children.Select(a =>
                 {
                     var dto = this.Mapper.Map<MenuTreeDto>(a);

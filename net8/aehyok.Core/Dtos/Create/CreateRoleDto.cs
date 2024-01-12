@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using aehyok.Infrastructure.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace aehyok.Core.Dtos.Create
 {
@@ -32,5 +33,10 @@ namespace aehyok.Core.Dtos.Create
         /// 是否启用
         /// </summary>
         public bool IsEnable { get; set; }
+
+        /// <summary>
+        /// 所属平台
+        /// </summary>
+        public PlatformType platformType { get; set; }
     }
 }

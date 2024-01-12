@@ -51,6 +51,8 @@ namespace aehyok.EntityFrameworkCore.DbContexts
             // 只有继承了IEntity的实体才会被注册到数据库上下文中,并且排除了NotMappedAttribute特性的实体
             modelBuilder.RegisterFromAssembly<IEntity>(a => !a.IsDefined(typeof(NotMappedAttribute), true));
 
+            //查询时全局统一过滤软删除的数据
+            modelBuilder.ApplyGlobalFilterAsDeleted<ISoftDelete>(a => !a.IsDeleted);
 
             base.OnModelCreating(modelBuilder);
 

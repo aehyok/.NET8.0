@@ -1,4 +1,5 @@
 ﻿using aehyok.Infrastructure.Dtos;
+using aehyok.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,5 +39,10 @@ namespace aehyok.Core.Dtos
         /// 是否启用
         /// </summary>
         public bool IsEnable { get; set; }
+
+        /// <summary>
+        /// 所属平台
+        /// </summary>
+        public PlatformType platformType { get; set; }
     }
 }

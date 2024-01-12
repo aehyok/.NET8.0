@@ -2,10 +2,12 @@
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.TypeFinders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +45,28 @@ namespace aehyok.EntityFrameworkCore.DbContexts
             {
                 builder.Entity(type).HasNoDiscriminator();
             }
+        }
+
+        /// <summary>
+        /// 查询时添加全局过滤器
+        /// </summary>
+        /// <typeparam name="TInterface"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public static ModelBuilder ApplyGlobalFilterAsDeleted<TInterface>(this ModelBuilder builder, Expression<Func<TInterface, bool>> expression)
+        {
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                if (entityType.ClrType.GetInterface(typeof(TInterface).Name) != null)
+                {
+                    var newParam = Expression.Parameter(entityType.ClrType);
+                    var newBody = ReplacingExpressionVisitor.Replace(expression.Parameters.Single(), newParam, expression.Body);
+                    builder.Entity(entityType.ClrType).HasQueryFilter(Expression.Lambda(newBody, newParam));
+                }
+            }
+
+            return builder;
         }
 
         /// <summary>
