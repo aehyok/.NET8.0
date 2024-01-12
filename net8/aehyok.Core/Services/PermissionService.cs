@@ -30,8 +30,6 @@ namespace aehyok.Basic.Services
 
             var permissions = model.Premission.Select(a => new Permission
             {
-                //DataRange = a.DataRange,
-                //HasPermission = a.HasPermission,
                 MenuId = a.MenuId,
                 RoleId = model.RoleId,
                 Remark = string.Empty

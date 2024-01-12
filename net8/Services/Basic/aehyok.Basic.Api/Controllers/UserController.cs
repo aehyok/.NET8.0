@@ -28,19 +28,16 @@ namespace aehyok.Basic.Api.Controllers
         IUserService userService, 
         IPermissionService permissionService, 
         IMenuService menuService,
+        IRegionService regionService,
         IUserRoleService userRoleService) : BasicControllerBase
     {
         /// <summary>
         /// 获取用户列表
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="roleService"></param>
-        /// <param name="regionService"></param>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<IPagedList<UserDto>> GetListAsync([FromQuery] UserQueryDto model
-            , [FromServices] IRoleService roleService
-            , [FromServices] IRegionService regionService)
+        [HttpGet("list")]
+        public async Task<IPagedList<UserDto>> GetListAsync([FromQuery] UserQueryDto model)
         {
             var spec = Specifications<User>.Create();
             spec.Query.OrderByDescending(a => a.Id).Include(a => a.Roles);
@@ -291,8 +288,36 @@ namespace aehyok.Basic.Api.Controllers
         [HttpGet("current")]
         public async Task<CurrentUserDto> GetCurrentUserAsync()
         {
-            //return await userService.GetCurrentUserAsync();
-            return null;
+            if (!this.CurrentUser.IsAuthenticated)
+                return default;
+
+            var user = await userService.GetAsync(a => a.Id == this.CurrentUser.UserId, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
+            var result = this.Mapper.Map<CurrentUserDto>(user);
+            
+            if (result is null)
+                throw new ErrorCodeException(100212, "用户信息不存在");
+
+            var regionInfo = await regionService.GetAsync(r => r.Id == this.CurrentUser.RegionId);
+            string[] regionFullName = new List<string>().ToArray();
+            if (regionInfo is not null)
+            {
+                var ids = regionInfo.IdSequences.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList().Select(id => id.Long());
+                var regions = (await regionService.GetListAsync(r => ids.Contains(r.Id))).OrderBy(r => r.Level);
+                regionFullName = regions.Select(r => r.Name).ToArray();
+            }
+
+            result.RoleId = this.CurrentUser.RoleId;
+            result.RoleName = result.Roles?.Find(e => e.RoleId == this.CurrentUser.RoleId)?.RoleName;
+            result.RegionId = this.CurrentUser.RegionId;
+            result.RegionName = regionInfo?.Name;
+            result.RegionFullName = regionFullName;
+            result.RegionLevel = regionInfo?.Level ?? RegionLevel.区县;
+            ////是否有公众号绑定记录
+            //result.IsSubscribed = await userThirdPlatformService.ExistsAsync(e => e.UserId == result.Id
+            //    && e.Platform == ThirdPlatform.公众号
+            //    && !string.IsNullOrWhiteSpace(e.OpenId));
+
+            return result;
         }
 
         /// <summary>

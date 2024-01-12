@@ -28,6 +28,17 @@ namespace aehyok.Infrastructure
         }
 
         /// <summary>
+        /// 将字符串转换为long类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static long Long(this string value)
+        {
+            long.TryParse(value, out long result);
+            return result;
+        }
+
+        /// <summary>
         /// 判断字符串是否为手机号码
         /// </summary>
         /// <param name="source"></param>
