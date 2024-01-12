@@ -48,7 +48,7 @@ namespace aehyok.Basic.SeedData
 
                 var regionService = scope.ServiceProvider.GetService<IRegionService>();
 
-                var region = regionService.GetAsync(a => a.ParentId == 0);
+                var region = await regionService.GetAsync(a => a.ParentId == 0);
                 if (region is null)
                 {
                     throw new Exception("请先创建行政区域数据");

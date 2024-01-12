@@ -15,7 +15,7 @@ namespace aehyok.Basic.SeedData
 {
     public class PermissionSeedData(IServiceScopeFactory scopeFactory) : ISeedData, ITransientDependency
     {
-        public int Order => 1;
+        public int Order => 2;
 
         public string ConfigPath { get; set; } = null;
 
