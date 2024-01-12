@@ -172,12 +172,19 @@ namespace aehyok.Basic.Api.Controllers
         /// <summary>
         /// 修改角色权限
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="menus">菜单id数组</param>
         /// <returns></returns>
-        [HttpPost("permission")]
-        public async Task<StatusCodeResult> PostAsync(ChangeRolePermissionDto model)
+        [HttpPost("permission/{roleId}")]
+        public async Task<StatusCodeResult> PostAsync(long roleId, long[] menus)
         {
-            await permissionService.ChangeRolePermissionAsync(model);
+            ChangeRolePermissionDto dto = new ChangeRolePermissionDto();
+            dto.RoleId = roleId;
+            dto.Premission = new List<ChangePermissionModel>();
+            dto.Premission = menus.Select(a => new ChangePermissionModel
+            {
+                MenuId = a
+            }).ToList();
+            await permissionService.ChangeRolePermissionAsync(dto);
             return Ok();
         }
     }
