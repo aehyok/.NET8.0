@@ -150,3 +150,14 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 - 2、每次更新版本时的数据更新
     - 菜单需要每次更新程序要先初始化
     - 然后运维角色的权限将所有菜单写入
+
+
+
+
+## 从登录开始说起
+
+- 比如用户名和密码登录后，会生成一个token，有效期为两个小时，同时会生成一个RefreshToken，有效期为一个月
+- 每次请求接口时，都会带上token，如果token过期了，就会使用RefreshToken去刷新token，如果RefreshToken也过期了，就需要重新登录
+
+## 登录成功后获取用户信息
+

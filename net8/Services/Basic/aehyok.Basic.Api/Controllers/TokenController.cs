@@ -41,5 +41,17 @@ namespace aehyok.Basic.Api.Controllers
 
             return await userTokenService.LoginWithPasswordAsync(model.UserName, model.Password, model.PlatformType);
         }
+
+        /// <summary>
+        /// 使用 Refresh Token 获取新的 Token
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("Refresh")]
+        [AllowAnonymous]
+        public Task<UserTokenDto> RefreshAsync(RefreshTokenDto model)
+        {
+            return userTokenService.RefreshTokenAsync(model.UserId, model.RefreshToken);
+        }
     }
 }

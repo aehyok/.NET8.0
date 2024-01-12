@@ -15,6 +15,7 @@ using aehyok.Core.Domains;
 using aehyok.Core.Dtos.Create;
 using aehyok.Core.Dtos;
 using aehyok.Core.Services;
+using aehyok.Infrastructure.Enums;
 
 namespace aehyok.Basic.Api.Controllers
 {
@@ -226,26 +227,38 @@ namespace aehyok.Basic.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("permission")]
-        public async Task<List<RolePermissionDto>> GetCurrentUserPermissionAsync()
+        public async Task<List<RolePermissionDto>> GetCurrentUserPermissionAsync(PlatformType platformType)
         {
             var currentUser = this.CurrentUser;
-
 
             var query = from p in permissionService.GetQueryable()
                         join m in menuService.GetQueryable() on p.MenuId equals m.Id
                         join ur in userRoleService.GetQueryable() on p.RoleId equals ur.RoleId
                         join r in userService.GetQueryable() on ur.UserId equals r.Id
-                        where ur.UserId == currentUser.UserId 
+                        where ur.UserId == currentUser.UserId  && m.PlatformType == platformType
                         select new RolePermissionDto
                         {
                             MenuId = m.Id,
                             RoleId = p.RoleId,
                             MenuName = m.Name,
                             MenuCode = m.Code,
+                            ParentId = m.ParentId,
+                            Order = m.Order
                         };
             var list = await query.ToListAsync();
 
             return list;
+        }
+
+        /// <summary>
+        /// 获取当前登录用户详情
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("current")]
+        public async Task<CurrentUserDto> GetCurrentUserAsync()
+        {
+            //return await userService.GetCurrentUserAsync();
+            return null;
         }
 
         /// <summary>

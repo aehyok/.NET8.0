@@ -39,6 +39,10 @@ namespace aehyok.Core.MapProfiles
             CreateMap<UserTokenCacheDto, UserTokenDto>();
 
             CreateMap<Permission, RolePermissionDto>();
+
+            CreateMap<User, CurrentUserDto>()
+                .ForMember(a => a.Roles, a => a.MapFrom(c => c.UserRoles))
+                .ForMember(a => a.HasPassword, a => a.MapFrom(c => !string.IsNullOrWhiteSpace(c.Password)));
         }
     }
 }

@@ -71,4 +71,48 @@ namespace aehyok.Core.Dtos
         //public List<UserDepartmentDto> Departments { get; set; }
     }
 
+    public class CurrentUserDto : UserDto
+    {
+        /// <summary>
+        /// 角色 Id
+        /// </summary>
+        public long RoleId { get; set; }
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string RoleName { get; set; }
+
+        /// <summary>
+        /// 角色区域 Id
+        /// </summary>
+        public long RegionId { get; set; }
+
+        /// <summary>
+        /// 区域名称
+        /// </summary>
+        public string RegionName { get; set; }
+
+        public string[] RegionFullName { get; set; }
+
+        /// <summary>
+        /// 人口身份证号码
+        /// </summary>
+        public string IdCard { get; set; }
+
+        /// <summary>
+        /// 区域等级
+        /// </summary>
+        public RegionLevel RegionLevel { get; set; }
+
+        /// <summary>
+        /// 是否关注公众号
+        /// </summary>
+        //public bool IsSubscribed { get; set; }
+
+        /// <summary>
+        /// 签名url
+        /// </summary>
+        public string SignatureUrl { get; set; }
+    }
 }

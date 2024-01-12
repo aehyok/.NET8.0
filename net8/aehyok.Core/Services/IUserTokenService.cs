@@ -45,5 +45,13 @@ namespace aehyok.Core.Services
         /// <param name="platformType"></param>
         /// <returns></returns>
         Task<UserTokenDto> LoginWithPasswordAsync(string username, string password, PlatformType platformType);
+
+        /// <summary>
+        /// 使用 Refresh Token 获取新 Token
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        Task<UserTokenDto> RefreshTokenAsync(long userId, string refreshToken);
     }
 }

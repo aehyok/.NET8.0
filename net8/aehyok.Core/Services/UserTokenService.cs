@@ -197,5 +197,44 @@ namespace aehyok.Core.Services
             // 如果 Redis 中没有数据，是否需要查询一次数据库？
             return cacheValue;
         }
+
+        /// <summary>
+        /// 使用 Refresh Token 获取新 Token
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        public virtual async Task<UserTokenDto> RefreshTokenAsync(long userId, string refreshToken)
+        {
+            if (refreshToken.IsNullOrEmpty())
+            {
+                throw new ErrorCodeException(-1, "Refresh Token 无效");
+            }
+
+            var userToken = await this.GetAsync(a => a.RefreshToken == refreshToken);
+            if (userToken is null || !userToken.RefreshTokenIsAvailable || userToken.UserId != userId)
+            {
+                throw new ErrorCodeException(-1, "Refresh Token 无效");
+            }
+
+            // RefreshToken 有效期为一个月
+            if (userToken.CreatedAt < DateTime.Now.AddMonths(-1))
+            {
+                throw new ErrorCodeException(-1, "Refresh Token 已过期");
+            }
+
+            var user = await userService.GetAsync(a => a.Id == userToken.UserId);
+
+            // 生成 Token
+            var token = await GenerateUserTokenAsync(user, userToken.PlatformType);
+
+            user.LastLoginTime = DateTime.Now;
+            await userService.UpdateAsync(user);
+
+            userToken.RefreshTokenIsAvailable = false;
+            await this.UpdateAsync(userToken);
+
+            return token;
+        }
     }
 }
