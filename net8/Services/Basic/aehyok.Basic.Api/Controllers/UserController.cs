@@ -16,6 +16,7 @@ using aehyok.Core.Dtos.Create;
 using aehyok.Core.Dtos;
 using aehyok.Core.Services;
 using aehyok.Infrastructure.Enums;
+using LinqKit;
 
 namespace aehyok.Basic.Api.Controllers
 {
@@ -223,16 +224,37 @@ namespace aehyok.Basic.Api.Controllers
         }
 
         /// <summary>
-        /// 获取当前用户权限
+        /// 获取当前用户拥有的菜单权限列表
         /// </summary>
         /// <returns></returns>
         [HttpGet("permission")]
-        public async Task<List<RolePermissionDto>> GetCurrentUserPermissionAsync(PlatformType platformType)
+        public async Task<List<RolePermissionDto>> GetCurrentUserPermissionAsync(PlatformType platformType, [FromQuery]MenuTreeQueryDto model)
         {
+
+            var menuFilter = PredicateBuilder.New<Menu>(true);
+
+            menuFilter.And(a => a.PlatformType == platformType);
+
+            var spec = Specifications<Menu>.Create();
+
+            if (model.ParentId != 0)
+            {
+                if (model.IncludeChilds)
+                {
+                    //spec.Query.Search(a => a.IdSequences, $"%{model.ParentId}%");
+                    menuFilter.And(a => a.IdSequences.Contains(model.ParentId.ToString()));
+                }
+                else
+                {
+                    menuFilter.And(a => a.ParentId == model.ParentId);
+                }
+            }
+
+
             var currentUser = this.CurrentUser;
 
             var query = from p in permissionService.GetQueryable()
-                        join m in menuService.GetQueryable() on p.MenuId equals m.Id
+                        join m in menuService.GetExpandable().Where(menuFilter) on p.MenuId equals m.Id
                         join ur in userRoleService.GetQueryable() on p.RoleId equals ur.RoleId
                         join r in userService.GetQueryable() on ur.UserId equals r.Id
                         where ur.UserId == currentUser.UserId  && m.PlatformType == platformType
@@ -247,7 +269,21 @@ namespace aehyok.Basic.Api.Controllers
                         };
             var list = await query.ToListAsync();
 
-            return list;
+
+            List<RolePermissionDto> getChildren(long parentId)
+            {
+                var children = list.Where(a => a.ParentId == parentId).OrderBy(a => a.Order).ToList();
+                return children.Select(a =>
+                {
+                    if(model.IncludeChilds)
+                    {
+                        a.Children = getChildren(a.MenuId);
+                    }
+                    return a;
+                }).ToList();
+            }
+
+            return getChildren(model.ParentId);
         }
 
         /// <summary>

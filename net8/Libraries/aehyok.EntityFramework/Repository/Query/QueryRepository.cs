@@ -11,6 +11,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using X.PagedList;
+using LinqKit.Core;
 
 namespace aehyok.EntityFrameworkCore.Repository.Query
 {
@@ -46,8 +47,7 @@ namespace aehyok.EntityFrameworkCore.Repository.Query
 
         public IQueryable<TEntity> GetExpandable()
         {
-            //return GetQueryable().AsExpandable();
-            throw new Exception("未实现");
+            return GetQueryable().AsExpandable();
         }
 
         public IQueryable<TEntity> GetQueryable()

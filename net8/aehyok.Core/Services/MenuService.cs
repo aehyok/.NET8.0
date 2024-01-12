@@ -50,11 +50,11 @@ namespace aehyok.Core.Services
 
         public async Task<List<MenuTreeDto>> GetTreeListAsync(PlatformType platformType, MenuTreeQueryDto model)
         {
-            if (!model.ParentCode.IsNullOrEmpty())
-            {
-                var parent = await this.GetAsync(a => a.Code == model.ParentCode && a.PlatformType == platformType) ?? throw new ErrorCodeException(-1, $"未找到代码【{model.ParentCode}】对应菜单") ;
-                model.ParentId = parent.Id;
-            }
+            //if (!model.ParentCode.IsNullOrEmpty())
+            //{
+            //    var parent = await this.GetAsync(a => a.Code == model.ParentCode && a.PlatformType == platformType) ?? throw new ErrorCodeException(-1, $"未找到代码【{model.ParentCode}】对应菜单") ;
+            //    model.ParentId = parent.Id;
+            //}
 
             var spec = Specifications<Menu>.Create();
 
