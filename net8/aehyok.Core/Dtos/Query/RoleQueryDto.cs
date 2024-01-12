@@ -10,10 +10,10 @@ namespace aehyok.Core.Dtos.Query
         /// </summary>
         public bool? IsEnable { get; set; }
 
-        /// <summary>
-        /// 所属平台
-        /// </summary>
-        public PlatformType platformType { get; set; }
+        ///// <summary>
+        ///// 所属平台
+        ///// </summary>
+        //public PlatformType platformType { get; set; }
 
     }
 }

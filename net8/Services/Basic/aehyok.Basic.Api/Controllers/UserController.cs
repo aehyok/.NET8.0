@@ -17,6 +17,7 @@ using aehyok.Core.Dtos;
 using aehyok.Core.Services;
 using aehyok.Infrastructure.Enums;
 using LinqKit;
+using X.PagedList.EF;
 
 namespace aehyok.Basic.Api.Controllers
 {
@@ -230,7 +231,6 @@ namespace aehyok.Basic.Api.Controllers
         [HttpGet("permission")]
         public async Task<List<RolePermissionDto>> GetCurrentUserPermissionAsync(PlatformType platformType, [FromQuery]MenuTreeQueryDto model)
         {
-
             var menuFilter = PredicateBuilder.New<Menu>(true);
 
             menuFilter.And(a => a.PlatformType == platformType);
@@ -250,7 +250,6 @@ namespace aehyok.Basic.Api.Controllers
                 }
             }
 
-
             var currentUser = this.CurrentUser;
 
             var query = from p in permissionService.GetQueryable()
@@ -268,7 +267,6 @@ namespace aehyok.Basic.Api.Controllers
                             Order = m.Order
                         };
             var list = await query.ToListAsync();
-
 
             List<RolePermissionDto> getChildren(long parentId)
             {
