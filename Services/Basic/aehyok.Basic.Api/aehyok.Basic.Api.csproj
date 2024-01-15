@@ -12,8 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="LinqKit" Version="1.2.5" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="LinqKit.Core" Version="1.2.5" />
   </ItemGroup>
 
   <ItemGroup>
