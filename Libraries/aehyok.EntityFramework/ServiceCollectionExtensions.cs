@@ -25,17 +25,6 @@ namespace aehyok.EntityFrameworkCore
 
             services.AddDbContextPool<DbContext, DvsContext>((sp, options) =>
             {
-                // 添加保存更改拦截器，处理软删除和数据审计，注入 ICurrentUser 以自动处理数据 CreateBy 和 UpdateBy
-                //var interceptors = FindTypes.InAllAssemblies.Where(a => a.IsAssignableTo(typeof(Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor)) && !a.IsInterface && !a.IsAbstract && a.Assembly.GetName().Name.StartsWith("DVS")).ToArray();
-                //foreach (var interceptor in interceptors)
-                //{
-                //    var constructor = interceptor.GetConstructor(new[] { typeof(IServiceScopeFactory) });
-                //    if (constructor != null)
-                //    {
-                //        var saveChangeInterceptor = constructor.Invoke(new[] { sp.GetService<IServiceScopeFactory>() }) as Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor;
-                //        options.AddInterceptors(saveChangeInterceptor);
-                //    }
-                //}
                 // 注册自定义拦截器
                 options.AddInterceptors(sp.GetRequiredService<DvsSaveChangeInterceptor>());
                 
@@ -52,10 +41,6 @@ namespace aehyok.EntityFrameworkCore
                 {
                     // 设置数据迁移的程序集名称
                     mysqlOptions.MigrationsAssembly("aehyok.SystemService");
-                    //if (moduleKey == AppConstants.SYSTEM_MIGRATIONS_MODULE_KEY)
-                    //{
-                    //    mysqlOptions.MigrationsAssembly("DVS.SystemService");
-                    //}
 
                     //mysqlOptions.UseNetTopologySuite();  // 操作GEO空间数据的时候需要开启
 

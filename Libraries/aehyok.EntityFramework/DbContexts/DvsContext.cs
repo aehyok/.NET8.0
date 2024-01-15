@@ -55,7 +55,7 @@ namespace aehyok.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyGlobalFilterAsDeleted<ISoftDelete>(a => !a.IsDeleted);
 
             base.OnModelCreating(modelBuilder);
-
+            modelBuilder.SetDeleteBehaviorToRestrict();
             modelBuilder.AddEntityComments();
         }
     }

@@ -1,16 +1,20 @@
-﻿using aehyok.Basic.Dtos;
+﻿using aehyok.Basic.Domains;
+using aehyok.Basic.Dtos;
 using aehyok.Basic.Services;
 using aehyok.Core;
 using aehyok.Core.Dtos;
+using aehyok.Core.Dtos.Query;
 using aehyok.Core.Services;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.Exceptions;
 using aehyok.Redis;
+using LinqKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using X.PagedList;
 using StringExtensions = aehyok.Infrastructure.StringExtensions;
 
 namespace aehyok.Basic.Api.Controllers
@@ -69,6 +73,7 @@ namespace aehyok.Basic.Api.Controllers
             if (userToken != null)
             {
                 userToken.ExpirationDate = DateTime.Now;
+                userToken.LoginType = LoginType.logout;
                 await userTokenService.UpdateAsync(userToken);
                 // 删除 Redis 中的缓存
                 await redisService.DeleteAsync(CoreRedisConstants.UserToken.Format(userToken.TokenHash));

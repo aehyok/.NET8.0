@@ -11,8 +11,8 @@ using aehyok.EntityFrameworkCore.DbContexts;
 namespace aehyok.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    [Migration("20240110160800_OperationLogTable")]
-    partial class OperationLogTable
+    [Migration("20240115122910_initAllTables")]
+    partial class initAllTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -531,6 +531,10 @@ namespace aehyok.SystemService.Migrations
                         .HasColumnType("int")
                         .HasComment("登录方式");
 
+                    b.Property<int>("LoginType")
+                        .HasColumnType("int")
+                        .HasComment("登录方式");
+
                     b.Property<int>("PlatformType")
                         .HasColumnType("int")
                         .HasComment("当前获取 Token 平台");
@@ -859,7 +863,7 @@ namespace aehyok.SystemService.Migrations
                         .HasColumnType("varchar(128)")
                         .HasComment("菜单代码");
 
-                    b.Property<string>("Operation")
+                    b.Property<string>("OperationContent")
                         .HasMaxLength(512)
                         .HasColumnType("varchar(512)")
                         .HasComment("操作");
@@ -1621,13 +1625,13 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Basic.Domains.DictionaryGroup", "DictionaryGroup")
                         .WithMany("Items")
                         .HasForeignKey("DictionaryGroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Basic.Domains.DictionaryItem", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.User", "Modifier")
@@ -1648,7 +1652,7 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Basic.Domains.Tenant", "Tenant")
                         .WithMany()
                         .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Tenant");
@@ -1659,7 +1663,7 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Basic.Domains.Tenant", "Tenant")
                         .WithMany()
                         .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Tenant");
@@ -1670,13 +1674,13 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Core.Domains.Region", "Region")
                         .WithMany()
                         .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Basic.Domains.System", "System")
                         .WithMany()
                         .HasForeignKey("SystemId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Region");
@@ -1689,19 +1693,19 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Core.Domains.Region", "Region")
                         .WithMany()
                         .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.Role", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Region");
@@ -1716,7 +1720,7 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Core.Domains.Menu", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Parent");
@@ -1727,13 +1731,13 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Core.Domains.ApiResource", "ApiResource")
                         .WithMany()
                         .HasForeignKey("ApiResourceId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.Menu", "Menu")
                         .WithMany("Resources")
                         .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ApiResource");
@@ -1755,13 +1759,13 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Core.Domains.Menu", "Menu")
                         .WithMany()
                         .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.Role", "Role")
                         .WithMany("Permissions")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Menu");
@@ -1774,19 +1778,19 @@ namespace aehyok.SystemService.Migrations
                     b.HasOne("aehyok.Core.Domains.Region", "Region")
                         .WithMany()
                         .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.Role", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Region");

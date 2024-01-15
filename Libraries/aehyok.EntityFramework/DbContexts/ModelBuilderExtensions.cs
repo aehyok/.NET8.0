@@ -70,6 +70,23 @@ namespace aehyok.EntityFrameworkCore.DbContexts
         }
 
         /// <summary>
+        /// 设置级联删除为禁止
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
+        public static ModelBuilder SetDeleteBehaviorToRestrict(this ModelBuilder builder)
+        {
+            var foreignKeys = builder.Model.GetEntityTypes().SelectMany(a => a.GetForeignKeys()).Where(a => a.DeleteBehavior == DeleteBehavior.Cascade);
+
+            foreach (var foreignKey in foreignKeys)
+            {
+                foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+
+            return builder;
+        }
+
+        /// <summary>
         /// Migrations 时生成表、字段注释，因 LoxSmoke.DocXml 无法添加多个 Xml , 所以目前暂时无法 读取实体基类注释
         /// </summary>
         /// <param name="builder"></param>

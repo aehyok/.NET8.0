@@ -94,5 +94,23 @@ namespace aehyok.Basic.Domains
         /// 区域
         /// </summary>
         public virtual Region Region { get; set; }
+
+        /// <summary>
+        /// 登录方式
+        /// </summary>
+        public LoginType LoginType { get; set; }
+    }
+
+    public enum LoginType
+    {
+        /// <summary>
+        /// 登录状态
+        /// </summary>
+        Login = 1,
+        /// <summary>
+        /// 登出状态
+        /// </summary>
+        logout = 2
     }
 }
+

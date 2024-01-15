@@ -14,17 +14,17 @@ namespace aehyok.Infrastructure.Enums
         /// <summary>
         /// 超管平台
         /// </summary>
-        Admin = 0,
+        Admin = 1,
 
         /// <summary>
         /// PC业务系统
         /// </summary>
-        Pc = 1,
+        Pc = 2,
 
         /// <summary>
         /// 微信小程序
         /// </summary>
-        Mini = 2,
+        Mini = 3,
 
         ///// <summary>
         ///// App
