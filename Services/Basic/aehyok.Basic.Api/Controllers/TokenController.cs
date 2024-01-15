@@ -10,6 +10,7 @@ using aehyok.Redis;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using StringExtensions = aehyok.Infrastructure.StringExtensions;
 
 namespace aehyok.Basic.Api.Controllers
@@ -47,6 +48,33 @@ namespace aehyok.Basic.Api.Controllers
             }
 
             return await userTokenService.LoginWithPasswordAsync(model.UserName, model.Password, model.PlatformType);
+        }
+
+        /// <summary>
+        /// 退出登录
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("signout")]
+        public async Task<StatusCodeResult> SignoutAsync()
+        {
+            if (!this.CurrentUser.IsAuthenticated)
+            {
+                throw new ErrorCodeException(-1, "请先登录");
+            }
+
+            var tokenHash = StringExtensions.EncodeMD5(this.CurrentUser.Token);
+
+            // 修改 UserToken 中的 ExpirationDate 为当前时间
+            var userToken = await userTokenService.GetAsync(a => a.TokenHash == tokenHash && a.UserId == this.CurrentUser.UserId);
+            if (userToken != null)
+            {
+                userToken.ExpirationDate = DateTime.Now;
+                await userTokenService.UpdateAsync(userToken);
+                // 删除 Redis 中的缓存
+                await redisService.DeleteAsync(CoreRedisConstants.UserToken.Format(userToken.TokenHash));
+            }
+
+            return Ok();
         }
 
         /// <summary>
@@ -100,7 +128,7 @@ namespace aehyok.Basic.Api.Controllers
 
             var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
 
-            await redisService.SetAsync(CoreRedisConstants.USER_TOKEN_CACHE_KEY_PATTERN.Format(token.TokenHash), cacheData, token.ExpirationDate - DateTime.Now);
+            await redisService.SetAsync(CoreRedisConstants.UserToken.Format(token.TokenHash), cacheData, token.ExpirationDate - DateTime.Now);
 
             return true;
         }
