@@ -16,6 +16,8 @@
 - 1、docker和docker-compose（✓）
 - 2、zabbix docker 分布式监控系统，监控服务器的CPU、内存、硬盘、网络等使用情况
 - 3、Serilog docker 日志记录系统（✓）
+    - 可通过端口12000进行访问 
+    - 用户名和密码 admin sunlight2023 
 - 4、goploy CI CD 部署系统（✓）
 - 5、redis 可使用docker部署（✓）
 - 6、rabbitmq 可使用docker部署（✓）
