@@ -172,6 +172,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <summary>
         /// 修改角色权限
         /// </summary>
+        /// <param name="roleId"></param>
         /// <param name="menus">菜单id数组</param>
         /// <returns></returns>
         [HttpPost("permission/{roleId}")]

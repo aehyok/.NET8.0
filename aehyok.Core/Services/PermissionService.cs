@@ -45,8 +45,14 @@ namespace aehyok.Basic.Services
         /// <returns></returns>
         public async Task<List<PermissionDto>> GetRolePermissionAsync(long roleId)
         {
-            var query = from m in menuService.GetQueryable()
-                        join p in this.GetQueryable().Where(a => a.RoleId == roleId) on m.Id equals p.MenuId into pt
+            var role = await roleService.GetByIdAsync(roleId);
+            if (role is null)
+            {
+                throw new ErrorCodeException(-1, "角色不存在");
+            }
+
+            var query = from m in menuService.GetQueryable().Where(a => !a.IsDeleted && a.PlatformType == role.PlatformType)
+                        join p in this.GetQueryable().Where(a => a.RoleId == roleId && !a.IsDeleted) on m.Id equals p.MenuId into pt
                         from pm in pt.DefaultIfEmpty()
                         select new PermissionDto
                         {
@@ -55,8 +61,7 @@ namespace aehyok.Basic.Services
                             MenuParentId = m.ParentId,
                             MenuType = m.Type,
                             MenuOrder = m.Order,
-                            DataRange = pm != null ? pm.DataRange : DataRange.全部,
-                            HasPermission = pm != null ? pm.HasPermission : false,
+                            HasPermission = pm != null ? true : false,
                             RoleId = pm != null ? pm.RoleId : roleId,
                             Id = pm != null ? pm.Id : 0,
                             MenuUrl = m.Url

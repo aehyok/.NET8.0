@@ -1,5 +1,6 @@
 ﻿using aehyok.Core.Domains;
 using aehyok.EntityFrameworkCore.Repository;
+using aehyok.Infrastructure.Enums;
 
 namespace aehyok.Core.Services
 {
@@ -14,5 +15,22 @@ namespace aehyok.Core.Services
         /// <param name="userId"></param>
         /// <returns></returns>
         Task<UserRole> GetUserDefaultRole(long userId);
+
+        /// <summary>
+        /// 获取用户下所有的角色
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
+        Task<List<UserRole>> GetUserRoles(long userId, PlatformType platformType);
+
+        /// <summary>
+        /// 修改用户默认角色
+        /// </summary>
+        /// <param name="userRoleId"></param>
+        /// <param name="userId"></param>
+        /// <param name="platformType"></param>
+        /// <returns></returns>
+        Task ChangeDefaultRoleAsync(long userRoleId, long userId, PlatformType platformType);
     }
 }
