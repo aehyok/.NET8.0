@@ -101,6 +101,16 @@ namespace aehyok.Core.Domains
         /// 角色用户关系数据
         /// </summary>
         public virtual List<UserRole> UserRoles { get; set; }
+
+        /// <summary>
+        /// 区域Id
+        /// </summary>
+        public long RegionId { get;set; }
+
+        /// <summary>
+        /// 所属区域
+        /// </summary>
+        public Region Region { get; set; }
     }
 
     /// <summary>

@@ -43,6 +43,10 @@ namespace aehyok.Core.Dtos.Create
         public List<CreateUserRoleDto> Roles { get; set; }
 
         /// <summary>
+        /// 人员所属区域
+        /// </summary>
+        public long RegionId { get; set; }
+        /// <summary>
         /// 用户部门
         /// </summary>
         //public List<CreateUserDepartmentModel> Departments { get; set; }
