@@ -68,7 +68,6 @@ namespace aehyok.Basic.Api.Controllers
             //}
 
             
-            // 所有包含农户角色和非游客角色之外角色信息的的用户
             if (model.RegionId.HasValue && model.RegionId != 0)
             {
                 if (model.IncludeChilds)

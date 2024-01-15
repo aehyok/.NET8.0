@@ -11,6 +11,19 @@
 - 6、初始化了接口文档Swagger
 ```
 
+## 服务器上所使用的外部套件
+```
+- 1、docker和docker-compose（✓）
+- 2、zabbix docker 分布式监控系统，监控服务器的CPU、内存、硬盘、网络等使用情况
+- 3、Serilog docker 日志记录系统（✓）
+- 4、goploy CI CD 部署系统（✓）
+- 5、redis 可使用docker部署（✓）
+- 6、rabbitmq 可使用docker部署（✓）
+- 7、mysql 可使用docker部署（✓）
+- 8、nginx 可使用docker部署（✓）
+- 9、net8.0 可使用docker部署（✓）
+```
+
 ## 完成的中间件
 ```
 - 1、操作日志通过Action上标注特性
