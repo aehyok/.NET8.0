@@ -24,6 +24,8 @@
 - 7、mysql 可使用docker部署（✓）
 - 8、nginx 可使用docker部署（✓）
 - 9、net8.0 可使用docker部署（✓）
+- 10、SkyWalking 监测  链路追踪（×）  
+    - https://www.cnblogs.com/wei325/p/16412775.html
 ```
 
 ## 完成的中间件
