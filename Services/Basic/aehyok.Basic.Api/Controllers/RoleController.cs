@@ -30,11 +30,19 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("list/{platformType}")]
-        public Task<IPagedList<RoleDto>> GetListAsync(PlatformType platformType,[FromQuery] RoleQueryDto model)
+        public async Task<IPagedList<RoleDto>> GetListAsync(PlatformType platformType,[FromQuery] RoleQueryDto model)
         {
+            var roleId = base.CurrentUser.RoleId;
             var spec = Specifications<Role>.Create();
             spec.Query.OrderBy(a => a.Order);
             spec.Query.Where(a => a.PlatformType == platformType);
+            
+            var role = await roleService.GetByIdAsync(roleId);
+
+            if(role.Code != SystemRoles.ROOT)
+            {
+                spec.Query.Where(a => a.Code != SystemRoles.ROOT);
+            }
 
             if (!string.IsNullOrEmpty(model.Keyword))
             {
@@ -46,7 +54,7 @@ namespace aehyok.Basic.Api.Controllers
                 spec.Query.Where(a => a.IsEnable == model.IsEnable.Value);
             }
 
-            return roleService.GetPagedListAsync<RoleDto>(spec, model.Page, model.Limit);
+            return await roleService.GetPagedListAsync<RoleDto>(spec, model.Page, model.Limit);
         }
 
         /// <summary>

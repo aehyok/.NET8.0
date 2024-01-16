@@ -163,7 +163,6 @@ namespace aehyok.Basic.Api.Controllers
             {
                 if (model.IncludeChilds)
                 {
-                    //spec.Query.Search(a => a.IdSequences, $"%{model.ParentId}%");
                     menuFilter.And(a => a.IdSequences.Contains(model.ParentId.ToString()));
                 }
                 else

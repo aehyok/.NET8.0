@@ -76,7 +76,17 @@ namespace aehyok.Basic.Api.Controllers
                 }
             }
 
-            return await userService.GetPagedListAsync<UserDto>(spec, model.Page, model.Limit);
+            var list = await userService.GetPagedListAsync<UserDto>(spec, model.Page, model.Limit);
+            foreach(var item in list)
+            {
+                foreach(var userRole in item.Roles)
+                {
+                    userRole.PlatformType = userRole.Role.PlatformType;
+                    userRole.Role = null;
+                }
+                item.Roles.OrderBy(a => a.PlatformType);
+            }
+            return list;
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿using aehyok.Infrastructure.Dtos;
+﻿using aehyok.Core.Domains;
+using aehyok.Infrastructure.Dtos;
+using aehyok.Infrastructure.Enums;
 
 namespace aehyok.Core.Dtos
 {
@@ -28,5 +30,15 @@ namespace aehyok.Core.Dtos
         /// 是否默认角色
         /// </summary>
         public bool IsDefault { get; set; }
+
+        /// <summary>
+        /// 所属业务平台
+        /// </summary>
+        public PlatformType PlatformType { get; set; }
+
+        /// <summary>
+        /// 所属角色
+        /// </summary>
+        public RoleDto Role { get; set; }
     }
 }

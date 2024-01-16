@@ -43,6 +43,6 @@ namespace aehyok.Core.Dtos
         /// <summary>
         /// 所属平台
         /// </summary>
-        public PlatformType platformType { get; set; }
+        public PlatformType PlatformType { get; set; }
     }
 }
