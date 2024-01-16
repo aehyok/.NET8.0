@@ -129,7 +129,7 @@ namespace aehyok.Swagger
 
                     var file = fileProvider.GetFileInfo("Resources/dvs-swagger.js");
 
-                    if (file.Exists)
+                       if (file.Exists)
                     {
                         using var stream = file.CreateReadStream();
 
@@ -143,7 +143,7 @@ namespace aehyok.Swagger
 
                 app.MapGet("/docs/static/dvs-swagger.css", async () =>
                 {
-                    var fileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly());    
+                    var fileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly());
                     
                     var file = fileProvider.GetFileInfo("Resources/dvs-swagger.css");
 

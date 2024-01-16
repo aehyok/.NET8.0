@@ -34,7 +34,7 @@ namespace aehyok.Serilog
                     remoteIP = Dns.GetHostEntry(remoteIP).AddressList.FirstOrDefault(a => a.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
                 }
                 catch (Exception ex)
-                {
+                {   
                     Log.Error($"获取主机信息失败，主机地址:{remoteIP}");
                     Log.Error(ex, ex.Message);
                 }
