@@ -207,10 +207,10 @@ namespace aehyok.Basic.Api.Controllers
         }
 
         /// <summary>
-        /// 获取当前登录用户详情
+        /// 获取当前登录用户详细信息
         /// </summary>
         /// <returns></returns>
-        [HttpGet("current")]
+        [HttpGet("userinfo")]
         public async Task<CurrentUserDto> GetCurrentUserAsync()
         {
             if (!this.CurrentUser.IsAuthenticated)

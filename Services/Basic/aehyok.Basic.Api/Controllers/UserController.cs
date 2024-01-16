@@ -25,11 +25,7 @@ namespace aehyok.Basic.Api.Controllers
     /// 用户管理
     /// </summary>
     public class UserController(
-        IUserService userService, 
-        IPermissionService permissionService, 
-        IMenuService menuService,
-        IRegionService regionService,
-        IUserRoleService userRoleService) : BasicControllerBase
+        IUserService userService) : BasicControllerBase
     {
         /// <summary>
         /// 获取用户列表
