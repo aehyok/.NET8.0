@@ -3,6 +3,7 @@ using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Exceptions;
 using aehyok.Infrastructure.Options;
+using aehyok.Infrastructure.Utils;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StringExtensions = aehyok.Infrastructure.StringExtensions;
+using StringExtensions = aehyok.Infrastructure.Utils.StringExtensions;
 
 namespace aehyok.Core.Services
 {

@@ -6,13 +6,14 @@ using aehyok.Infrastructure;
 using aehyok.Infrastructure.Captcha;
 using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.Exceptions;
+using aehyok.Infrastructure.Utils;
 using aehyok.Redis;
 using aehyok.Serilog;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using StringExtensions = aehyok.Infrastructure.StringExtensions;
+using StringExtensions = aehyok.Infrastructure.Utils.StringExtensions;
 
 namespace aehyok.Core.Services
 {

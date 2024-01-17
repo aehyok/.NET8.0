@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace aehyok.Infrastructure
+namespace aehyok.Infrastructure.Utils
 {
     /// <summary>
     /// 字符串扩展方法

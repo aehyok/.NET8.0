@@ -7,9 +7,9 @@ using aehyok.Core.Dtos;
 using aehyok.Core.Dtos.Query;
 using aehyok.Core.Services;
 using aehyok.EntityFrameworkCore.Repository;
-using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.Exceptions;
+using aehyok.Infrastructure.Utils;
 using aehyok.Redis;
 using Ardalis.Specification;
 using LinqKit;
@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
-using StringExtensions = aehyok.Infrastructure.StringExtensions;
+using StringExtensions = aehyok.Infrastructure.Utils.StringExtensions;
 
 namespace aehyok.Basic.Api.Controllers
 {
@@ -169,7 +169,7 @@ namespace aehyok.Basic.Api.Controllers
 
             if (result is null)
                 throw new ErrorCodeException(100212, "用户信息不存在");
-
+                
             var regionInfo = await regionService.GetAsync(r => r.Id == this.CurrentUser.RegionId);
             string[] regionFullName = new List<string>().ToArray();
             if (regionInfo is not null)

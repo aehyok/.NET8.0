@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Infrastructure
+namespace aehyok.Infrastructure.Utils
 {
     /// <summary>
     /// 日期扩展方法

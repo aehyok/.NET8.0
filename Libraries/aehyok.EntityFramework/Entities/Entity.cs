@@ -1,4 +1,4 @@
-﻿using aehyok.Infrastructure;
+﻿using aehyok.Infrastructure.SnowFlake;
 using System;
 using System.Collections.Generic;
 using System.Linq;

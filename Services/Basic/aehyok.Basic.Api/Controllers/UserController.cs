@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using X.PagedList;
-using aehyok.Infrastructure;
 using aehyok.Core.Dtos.Query;
 using aehyok.Core.Domains;
 using aehyok.Core.Dtos.Create;
@@ -18,6 +17,7 @@ using aehyok.Core.Services;
 using aehyok.Infrastructure.Enums;
 using LinqKit;
 using X.PagedList.EF;
+using aehyok.Infrastructure.Utils;
 
 namespace aehyok.Basic.Api.Controllers
 {

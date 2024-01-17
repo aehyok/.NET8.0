@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace aehyok.Infrastructure
+namespace aehyok.Infrastructure.SnowFlake
 {
     /// <summary>
     /// 分布式雪花Id生成器
