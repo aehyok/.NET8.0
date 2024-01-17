@@ -33,7 +33,7 @@ namespace aehyok.Core.HostedServices
             var token = Guid.NewGuid().ToString("N");
 
             // 获取锁
-            if (await redisDatabaseProvider.SetAsync(lockKey, token, TimeSpan.FromSeconds(3), CSRedis.RedisExistence.Nx))
+            if (await redisDatabaseProvider.SetAsync(lockKey, token, TimeSpan.FromSeconds(10), CSRedis.RedisExistence.Nx))
             {
                 var actionDescriptorProvider = scope.ServiceProvider.GetRequiredService<IActionDescriptorCollectionProvider>();
                 var actions = actionDescriptorProvider.ActionDescriptors.Items;

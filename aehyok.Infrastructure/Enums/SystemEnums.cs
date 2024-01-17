@@ -15,6 +15,7 @@ namespace aehyok.Infrastructure.Enums
         /// 传0获取所有
         /// </summary>
         All =0,
+
         /// <summary>
         /// 超管平台
         /// </summary>
