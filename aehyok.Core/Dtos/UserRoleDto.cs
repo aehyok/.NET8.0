@@ -35,10 +35,5 @@ namespace aehyok.Core.Dtos
         /// 所属业务平台
         /// </summary>
         public PlatformType PlatformType { get; set; }
-
-        /// <summary>
-        /// 所属角色
-        /// </summary>
-        public RoleDto Role { get; set; }
     }
 }

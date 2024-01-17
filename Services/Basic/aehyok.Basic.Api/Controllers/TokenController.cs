@@ -215,7 +215,13 @@ namespace aehyok.Basic.Api.Controllers
             if (!this.CurrentUser.IsAuthenticated)
                 return default;
 
-            var user = await userService.GetAsync(a => a.Id == this.CurrentUser.UserId, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
+            var user = await userService.GetAsync(
+                a => a.Id == this.CurrentUser.UserId, 
+                includes: a => a.Include(c => c.UserRoles)
+                    .ThenInclude(c => c.Role)
+                    .Include(c => c.UserRoles)
+                    .ThenInclude(c => c.Region));
+                                                                                                             
             var result = this.Mapper.Map<CurrentUserDto>(user);
 
             if (result is null)
@@ -236,10 +242,6 @@ namespace aehyok.Basic.Api.Controllers
             result.RegionName = regionInfo?.Name;
             result.RegionFullName = regionFullName;
             result.RegionLevel = regionInfo?.Level ?? RegionLevel.区县;
-            ////是否有公众号绑定记录
-            //result.IsSubscribed = await userThirdPlatformService.ExistsAsync(e => e.UserId == result.Id
-            //    && e.Platform == ThirdPlatform.公众号
-            //    && !string.IsNullOrWhiteSpace(e.OpenId));
 
             return result;
         }

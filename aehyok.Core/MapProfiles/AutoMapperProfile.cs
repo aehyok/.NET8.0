@@ -26,7 +26,10 @@ namespace aehyok.Core.MapProfiles
                 .ForMember(a => a.Roles, a => a.MapFrom(c => c.UserRoles))
                 .ForMember(a => a.HasPassword, a => a.MapFrom(c => !string.IsNullOrWhiteSpace(c.Password)));
 
-            CreateMap<UserRole, UserRoleDto>();
+            CreateMap<UserRole, UserRoleDto>()
+                .ForMember(a => a.RegionName, a => a.MapFrom(c => c.Region.Name))
+                .ForMember(a => a.RoleName, a => a.MapFrom(c => c.Role.Name))
+                .ForMember(a => a.PlatformType, a => a.MapFrom(c => c.Role.PlatformType));
 
             CreateMap<Region, RegionDto>();
 
