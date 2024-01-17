@@ -11,6 +11,7 @@ using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.Exceptions;
 using aehyok.Redis;
+using Ardalis.Specification;
 using LinqKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -100,52 +101,6 @@ namespace aehyok.Basic.Api.Controllers
         public Task<UserTokenDto> RefreshAsync(RefreshTokenDto model)
         {
             return userTokenService.RefreshTokenAsync(model.UserId, model.RefreshToken);
-        }
-
-        /// <summary>
-        /// 切换当前用户角色
-        /// </summary>
-        /// <param name="platformType"></param>
-        /// <param name="userRoleId">用户角色Id(不是roleId)</param>
-        /// <returns></returns>
-        [HttpGet("switchrole/{platformType}")]
-        public async Task<bool> SwitchRoleAsync(PlatformType platformType,[FromQuery]long userRoleId)
-        {
-            var userId = base.CurrentUser.UserId;
-
-            var roles = await userRoleService.GetUserRoles(userId, platformType);
-
-            var role = roles.FirstOrDefault(a => a.Id == userRoleId);
-
-            if(role is null)
-            {
-                throw new ErrorCodeException(-1, "你要切换的角色已不存在");
-            }
-
-            var tokenHash = StringExtensions.EncodeMD5(this.CurrentUser.Token);
-
-            var token = await userTokenService.GetAsync(a => a.TokenHash == tokenHash);
-
-            if(token is null)
-            {
-                throw new ErrorCodeException(-1, "请先登录");
-            }
-
-            token.RoleId = role.RoleId;
-            token.RegionId = role.RegionId;
-
-            await userRoleService.ChangeDefaultRoleAsync(userRoleId, userId, platformType);
-
-            //修改userToken 角色信息
-            await userTokenService.UpdateAsync(token);
-
-            token.User = await userService.GetAsync(a => a.Id == token.UserId, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
-
-            var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
-
-            await redisService.SetAsync(CoreRedisConstants.UserToken.Format(token.TokenHash), cacheData, token.ExpirationDate - DateTime.Now);
-
-            return true;
         }
 
         /// <summary>
@@ -248,9 +203,74 @@ namespace aehyok.Basic.Api.Controllers
             return result;
         }
 
-        public async Task ChangeDefaultRoleAsync(long userRoleId, PlatformType platformType)
+        /// <summary>
+        /// 切换当前用户角色
+        /// </summary>
+        /// <param name="platformType"></param>
+        /// <param name="userRoleId">用户角色Id(不是roleId)</param>
+        /// <returns></returns>
+        [HttpGet("switchrole/{platformType}/{userRoleId}")]
+        public async Task<bool> SwitchRoleAsync(PlatformType platformType, long userRoleId)
         {
+            var userId = base.CurrentUser.UserId;
 
+            var roles = await userRoleService.GetUserRoles(userId, platformType);
+
+            var role = roles.FirstOrDefault(a => a.Id == userRoleId);
+
+            if (role is null)
+            {
+                throw new ErrorCodeException(-1, "你要切换的角色已不存在");
+            }
+
+            var tokenHash = StringExtensions.EncodeMD5(this.CurrentUser.Token);
+
+            var token = await userTokenService.GetAsync(a => a.TokenHash == tokenHash);
+
+            if (token is null)
+            {
+                throw new ErrorCodeException(-1, "请先登录");
+            }
+
+            token.RoleId = role.RoleId;
+            token.RegionId = role.RegionId;
+
+            await userRoleService.ChangeDefaultRoleAsync(userRoleId, userId, platformType);
+
+            //修改userToken 角色信息
+            await userTokenService.UpdateAsync(token);
+
+            token.User = await userService.GetAsync(a => a.Id == token.UserId, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
+
+            var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
+
+            await redisService.SetAsync(CoreRedisConstants.UserToken.Format(token.TokenHash), cacheData, token.ExpirationDate - DateTime.Now);
+
+            return true;
+        }
+
+        /// <summary>
+        /// 获取当前用户当前角色下有权限的行政区域
+        /// </summary>
+        /// <param name="parentId">父级 Id</param>
+        /// <returns></returns>
+        [HttpGet("region")]
+        public Task<List<RegionDto>> GetCurrentRegionsAsync(long parentId)
+        {
+            var spec = Specifications<Region>.Create();
+            spec.Query.OrderBy(a => a.Order);
+            spec.Query.Where(a => EF.Functions.Like(a.IdSequences, $"%.{this.CurrentUser.RegionId}.%"));
+
+            if (parentId > 0)
+            {
+                spec.Query.Where(a => a.ParentId == parentId);
+            }
+            else
+            {
+                spec.Query.Where(a => a.Id == this.CurrentUser.RegionId);
+            }
+                
+            return regionService.GetListAsync<RegionDto>(spec);
         }
     }
 }

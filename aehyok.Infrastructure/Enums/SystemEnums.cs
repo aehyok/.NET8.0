@@ -12,6 +12,10 @@ namespace aehyok.Infrastructure.Enums
     public enum PlatformType
     {
         /// <summary>
+        /// 传0获取所有
+        /// </summary>
+        All =0,
+        /// <summary>
         /// 超管平台
         /// </summary>
         Admin = 1,

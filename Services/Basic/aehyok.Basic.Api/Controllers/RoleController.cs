@@ -26,7 +26,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <summary>
         /// 获取角色分页数据
         /// </summary>
-        /// <param name="platformType">所属平台</param>
+        /// <param name="platformType">所属平台(传0获取所有)</param>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpGet("list/{platformType}")]
@@ -35,7 +35,11 @@ namespace aehyok.Basic.Api.Controllers
             var roleId = base.CurrentUser.RoleId;
             var spec = Specifications<Role>.Create();
             spec.Query.OrderBy(a => a.Order);
-            spec.Query.Where(a => a.PlatformType == platformType);
+
+            if(platformType > 0)
+            {
+                spec.Query.Where(a => a.PlatformType == platformType);
+            }
             
             var role = await roleService.GetByIdAsync(roleId);
 
