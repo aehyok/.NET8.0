@@ -109,7 +109,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="userRoleId">用户角色Id(不是roleId)</param>
         /// <returns></returns>
         [HttpGet("switchrole/{platformType}")]
-        public async Task<bool> SwitchRoleAsync(PlatformType platformType,long userRoleId)
+        public async Task<bool> SwitchRoleAsync(PlatformType platformType,[FromQuery]long userRoleId)
         {
             var userId = base.CurrentUser.UserId;
 
@@ -133,6 +133,8 @@ namespace aehyok.Basic.Api.Controllers
 
             token.RoleId = role.RoleId;
             token.RegionId = role.RegionId;
+
+            await userRoleService.ChangeDefaultRoleAsync(userRoleId, userId, platformType);
 
             //修改userToken 角色信息
             await userTokenService.UpdateAsync(token);
@@ -244,6 +246,11 @@ namespace aehyok.Basic.Api.Controllers
             result.RegionLevel = regionInfo?.Level ?? RegionLevel.区县;
 
             return result;
+        }
+
+        public async Task ChangeDefaultRoleAsync(long userRoleId, PlatformType platformType)
+        {
+
         }
     }
 }
