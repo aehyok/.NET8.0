@@ -1,4 +1,5 @@
-﻿using System;
+﻿using aehyok.Infrastructure.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,5 +53,10 @@ namespace aehyok.Infrastructure
         /// 所属租户Id
         /// </summary>
         long TenantId { get; set; }
+
+        /// <summary>
+        /// 所属平台
+        /// </summary>
+        PlatformType PlatformType { get; }
     }
 }

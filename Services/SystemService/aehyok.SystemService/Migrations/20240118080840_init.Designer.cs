@@ -11,8 +11,8 @@ using aehyok.EntityFrameworkCore.DbContexts;
 namespace aehyok.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    [Migration("20240117115831_AddTable_AsyncTask")]
-    partial class AddTable_AsyncTask
+    [Migration("20240118080840_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1199,6 +1199,67 @@ namespace aehyok.SystemService.Migrations
                         });
                 });
 
+            modelBuilder.Entity("aehyok.Core.Domains.Template", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(256)
+                        .HasColumnType("varchar(256)")
+                        .HasComment("编码");
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(2048)
+                        .HasColumnType("varchar(2048)")
+                        .HasComment("内容");
+
+                    b.Property<int>("ContentType")
+                        .HasColumnType("int")
+                        .HasComment("内容类型");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasComment("创建时间");
+
+                    b.Property<long?>("CreatedBy")
+                        .HasColumnType("bigint")
+                        .HasComment("创建人id");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)")
+                        .HasComment("是否删除");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(120)
+                        .HasColumnType("varchar(120)")
+                        .HasComment("名称");
+
+                    b.Property<string>("Remark")
+                        .HasColumnType("longtext")
+                        .HasComment("备注");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime(6)")
+                        .HasComment("修改时间");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint")
+                        .HasComment("修改人id");
+
+                    b.Property<string>("Variable")
+                        .HasColumnType("longtext")
+                        .HasComment("变量");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Template", t =>
+                        {
+                            t.HasComment("模板");
+                        });
+                });
+
             modelBuilder.Entity("aehyok.Core.Domains.User", b =>
                 {
                     b.Property<long>("Id")
@@ -1268,6 +1329,10 @@ namespace aehyok.SystemService.Migrations
                         .HasColumnType("longtext")
                         .HasComment("备注");
 
+                    b.Property<long?>("RoleId")
+                        .HasColumnType("bigint")
+                        .HasComment("");
+
                     b.Property<string>("SignatureUrl")
                         .HasColumnType("longtext")
                         .HasComment("签名url");
@@ -1286,6 +1351,8 @@ namespace aehyok.SystemService.Migrations
                         .HasComment("用户名");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User", t =>
                         {
@@ -1835,6 +1902,13 @@ namespace aehyok.SystemService.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("aehyok.Core.Domains.User", b =>
+                {
+                    b.HasOne("aehyok.Core.Domains.Role", null)
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId");
+                });
+
             modelBuilder.Entity("aehyok.Core.Domains.UserRole", b =>
                 {
                     b.HasOne("aehyok.Core.Domains.Region", "Region")
@@ -1850,7 +1924,7 @@ namespace aehyok.SystemService.Migrations
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.User", "User")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1884,11 +1958,8 @@ namespace aehyok.SystemService.Migrations
                     b.Navigation("Permissions");
 
                     b.Navigation("UserRoles");
-                });
 
-            modelBuilder.Entity("aehyok.Core.Domains.User", b =>
-                {
-                    b.Navigation("UserRoles");
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

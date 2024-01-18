@@ -16,13 +16,10 @@ namespace aehyok.Core.MapProfiles
             CreateMap<CreateRoleDto, Role>();
 
             CreateMap<CreateRegionDto,  Region>();
-            
-            CreateMap<CreateUserDto, User>()
-                .ForMember(a => a.Roles, a => a.Ignore());
+
+            CreateMap<CreateUserDto, User>();
 
             CreateMap<CreateUserRoleDto, UserRole>();
-
-
         }
     }
 }

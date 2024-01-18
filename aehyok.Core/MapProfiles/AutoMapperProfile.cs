@@ -23,7 +23,7 @@ namespace aehyok.Core.MapProfiles
             CreateMap<Role, RoleDto>();
 
             CreateMap<User, UserDto>()
-                .ForMember(a => a.Roles, a => a.MapFrom(c => c.UserRoles))
+                //.ForMember(a => a.Roles, a => a.MapFrom(c => c.UserRoles))
                 .ForMember(a => a.HasPassword, a => a.MapFrom(c => !string.IsNullOrWhiteSpace(c.Password)));
 
             CreateMap<UserRole, UserRoleDto>()
@@ -33,8 +33,8 @@ namespace aehyok.Core.MapProfiles
 
             CreateMap<Region, RegionDto>();
 
-            CreateMap<UserToken, UserTokenCacheDto>()
-    .ForMember(a => a.Roles, a => a.MapFrom(c => c.User.UserRoles.Select(r => r.Role.Code).ToList()));
+            CreateMap<UserToken, UserTokenCacheDto>();
+    //.ForMember(a => a.Roles, a => a.MapFrom(c => c.User.UserRoles.Select(r => r.Role.Code).ToList()));
             //.ForMember(a => a.PopulationId, a => a.MapFrom(c => c.User.PopulationId));
 
             CreateMap<UserToken, UserTokenDto>();
@@ -44,7 +44,7 @@ namespace aehyok.Core.MapProfiles
             CreateMap<Permission, RolePermissionDto>();
 
             CreateMap<User, CurrentUserDto>()
-                .ForMember(a => a.Roles, a => a.MapFrom(c => c.UserRoles))
+                //.ForMember(a => a.Roles, a => a.MapFrom(c => c.UserRoles))
                 .ForMember(a => a.HasPassword, a => a.MapFrom(c => !string.IsNullOrWhiteSpace(c.Password)));
 
             CreateMap<AsyncTask, AsyncTaskDto>();

@@ -45,7 +45,7 @@ namespace aehyok.Core.Dtos.Create
         /// <summary>
         /// 人员所属区域
         /// </summary>
-        public long RegionId { get; set; }
+        //public long RegionId { get; set; }
         /// <summary>
         /// 用户部门
         /// </summary>

@@ -1,4 +1,5 @@
 ﻿using aehyok.Infrastructure;
+using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.Utils;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -26,6 +27,8 @@ namespace aehyok.Core
         public const string PopulationId = "DVS.PopulationId";
 
         public const string TokenId = "DVS.TokenId";
+
+        public const string PlatFormType = "DVS.PlatFormType";
     }
 
 
@@ -74,6 +77,8 @@ namespace aehyok.Core
         public long TenantId { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public long PopulationId => throw new NotImplementedException();
+
+        public PlatformType PlatformType => this.FindClaimValue<PlatformType>(DvsClaimTypes.PlatFormType);
 
         public virtual Claim FindClaim(string claimType)
         {

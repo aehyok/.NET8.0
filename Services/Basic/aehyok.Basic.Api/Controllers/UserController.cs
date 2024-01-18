@@ -16,8 +16,9 @@ using aehyok.Core.Dtos;
 using aehyok.Core.Services;
 using aehyok.Infrastructure.Enums;
 using LinqKit;
-using X.PagedList.EF;
 using aehyok.Infrastructure.Utils;
+using System.Linq;
+using System.Data;
 
 namespace aehyok.Basic.Api.Controllers
 {
@@ -25,7 +26,7 @@ namespace aehyok.Basic.Api.Controllers
     /// 用户管理
     /// </summary>
     public class UserController(
-        IUserService userService) : BasicControllerBase
+        IUserService userService, IUserRoleService userRoleService) : BasicControllerBase
     {
         /// <summary>
         /// 获取用户列表
@@ -36,7 +37,8 @@ namespace aehyok.Basic.Api.Controllers
         public async Task<IPagedList<UserDto>> GetListAsync([FromQuery] UserQueryDto model)
         {
             var spec = Specifications<User>.Create();
-            spec.Query.OrderByDescending(a => a.Id).Include(a => a.Roles);
+
+            //spec.Query.OrderByDescending(a => a.Id).Include(a => a.Roles);
 
             if (!string.IsNullOrWhiteSpace(model.Keyword))
             {
@@ -46,14 +48,27 @@ namespace aehyok.Basic.Api.Controllers
                           .Search(a => a.RealName, $"%{model.Keyword}%");
             }
 
+
+            var filter = PredicateBuilder.New<User>(true);
+            var userRoleFilter = PredicateBuilder.New<UserRole>(true);
+
+
+            if (!string.IsNullOrWhiteSpace(model.Keyword))
+            {
+                filter.And(a => a.UserName.Contains(model.Keyword) || a.Mobile.Contains(model.Keyword) || a.NickName.Contains(model.Keyword) || a.RealName.Contains(model.Keyword));
+            }
+
+
             if (model.IsEnable.HasValue)
             {
-                spec.Query.Where(a => a.IsEnable == model.IsEnable.Value);
+                filter.And(a => a.IsEnable == model.IsEnable.Value);
+                //spec.Query.Where(a => a.IsEnable == model.IsEnable.Value);
             }
 
             if (model.RoleId.HasValue && model.RoleId != 0)
             {
-                spec.Query.Where(a => a.UserRoles.Any(c => c.RoleId == model.RoleId.Value));
+                userRoleFilter.And(item => item.RoleId == model.RoleId.Value);
+                //spec.Query.Where(a => a.UserRoles.Any(c => c.RoleId == model.RoleId.Value));
             }
 
             //if (model.RegionCode.IsNotNullOrEmpty())
@@ -68,19 +83,46 @@ namespace aehyok.Basic.Api.Controllers
             {
                 if (model.IncludeChilds)
                 {
-                    spec.Query.Where(a => a.UserRoles.Any(c => EF.Functions.Like(c.Region.IdSequences, $"%.{model.RegionId.Value}.%")));
+                    userRoleFilter.And( a => a.Region.IdSequences.Contains($"{model.RegionId.Value}"));
+                    //spec.Query.Where(a => a.UserRoles.Any(c => EF.Functions.Like(c.Region.IdSequences, $"%.{model.RegionId.Value}.%")));
                 }
                 else
                 {
-                    spec.Query.Where(a => a.UserRoles.Any(c => c.RegionId == model.RegionId.Value));
+                    userRoleFilter.And(a => a.RegionId == model.RegionId.Value);
+                    //spec.Query.Where(a => a.UserRoles.Any(c => c.RegionId == model.RegionId.Value));
                 }
             }
 
-            var list = await userService.GetPagedListAsync<UserDto>(spec, model.Page, model.Limit);
+            var query = (from u in userService.GetExpandable().Where(filter)
+                        join ur in userRoleService.GetExpandable().Where(userRoleFilter) on u.Id equals ur.UserId
+                        select new UserDto
+                        {
+                            Id = u.Id,
+                            UserName = u.UserName,
+                            Mobile = u.Mobile,
+                            NickName = u.NickName,
+                            RealName = u.RealName,
+                            IsEnable = u.IsEnable,
+                        })
+                        .Distinct()
+                        .OrderByDescending(a => a.Id);
+
+            var list = await query.ToPagedListAsync(model.Page, model.Limit);
 
             foreach(var item in list)
-            { 
-                if(item.Roles is not null && item.Roles.Count > 0)
+            {
+                item.Roles = (from urs in userRoleService.GetExpandable()
+                              where urs.UserId == item.Id
+                              select new UserRoleDto
+                              {
+                                  Id = urs.Id,
+                                  PlatformType = urs.Role.PlatformType,
+                                  RoleId = urs.RoleId,
+                                  RoleName = urs.Role.Name,
+                                  RegionId = urs.RegionId,
+                                  RegionName = urs.Region.Name
+                              }).ToList();
+                if (item.Roles is not null && item.Roles.Count > 0)
                     item.Roles.OrderBy(a => a.PlatformType);
             }
             return list;
@@ -102,12 +144,27 @@ namespace aehyok.Basic.Api.Controllers
                 throw new ErrorCodeException(-1, "请为用户选择角色");
 
             var entity = this.Mapper.Map<User>(model);
-            entity.UserRoles = model.Roles.Select(a => new UserRole
-            {
-                RoleId = a.RoleId,
-                UserId = entity.Id,
-                RegionId = a.RegionId
-            }).ToList();
+
+            var roles = new List<UserRole>();
+
+            model.Roles.ForEach((item => 
+            { 
+                roles.Add(new UserRole
+                {
+                    RoleId = item.RoleId,
+                    UserId = entity.Id,
+                    RegionId = item.RegionId
+                });
+            }));
+
+            await userRoleService.InsertAsync(roles);
+
+            //entity.UserRoles = model.Roles.Select(a => new UserRole
+            //{
+            //    RoleId = a.RoleId,
+            //    UserId = entity.Id,
+            //    RegionId = a.RegionId
+            //}).ToList();
 
             //if (model.Departments.IsNotNull())// 插入新部门
             //    await userDepartmentService.InsertAsync(model.Departments.Select(a => new UserDepartment
@@ -159,12 +216,30 @@ namespace aehyok.Basic.Api.Controllers
 
             entity = this.Mapper.Map(model, entity);
 
-            entity.UserRoles = model.Roles.Select(a => new UserRole
+            //var userRoleList = await userRoleService.GetListAsync(a => a.UserId == id);
+            await userRoleService.BatchSoftDeleteAsync(a => a.UserId == id);
+
+
+            foreach(var item in model.Roles)
             {
-                RoleId = a.RoleId,
-                UserId = entity.Id,
-                RegionId = a.RegionId
-            }).ToList();
+                //var isExist = await userRoleService.ExistsAsync(a => a.UserId == id && a.RoleId == item.RoleId && a.RegionId == item.RegionId); 
+                //if(!isExist)
+                //{
+                    var userRole = new UserRole
+                    {
+                        RoleId = item.RoleId,
+                        UserId = entity.Id,
+                        RegionId = item.RegionId
+                    };
+                    await userRoleService.InsertAsync(userRole);
+                //}
+            }
+            //entity.UserRoles = model.Roles.Select(a => new UserRole
+            //{
+            //    RoleId = a.RoleId,
+            //    UserId = entity.Id,
+            //    RegionId = a.RegionId
+            //}).ToList();
 
             // 删除原部门
             //await userDepartmentService.GetQueryable().Where(a => a.UserId == entity.Id).UpdateFromQueryAsync(m => new UserDepartment() { IsDeleted = true });

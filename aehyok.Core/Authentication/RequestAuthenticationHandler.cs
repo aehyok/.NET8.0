@@ -41,6 +41,7 @@ namespace aehyok.Core.Authentication
                     new(DvsClaimTypes.PopulationId, userToken.PopulationId.ToString()),
                     new(ClaimTypes.NameIdentifier, userToken.UserId.ToString()),
                     new(DvsClaimTypes.TokenId, userToken.Id.ToString()),
+                    new(DvsClaimTypes.PlatFormType, userToken.PlatformType.ToString()),
                 };
 
                 // 将当前用户的所有角色添加到 Claims 中

@@ -92,15 +92,15 @@ namespace aehyok.Core.Domains
         /// </summary>
         //public virtual Population Population { get; set; }
 
-        /// <summary>
-        /// 用户所有角色
-        /// </summary>
-        public virtual List<Role> Roles { get; set; }
+        ///// <summary>
+        ///// 用户所有角色
+        ///// </summary>
+        //public virtual List<Role> Roles { get; set; }
 
-        /// <summary>
-        /// 角色用户关系数据
-        /// </summary>
-        public virtual List<UserRole> UserRoles { get; set; }
+        ///// <summary>
+        ///// 角色用户关系数据
+        ///// </summary>
+        //public virtual List<UserRole> UserRoles { get; set; }
     }
 
     /// <summary>

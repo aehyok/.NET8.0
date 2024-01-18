@@ -159,23 +159,13 @@ namespace aehyok.Core.Services
                 token.RoleId = role.RoleId;
                 token.RegionId = role.RegionId;
             }
-            //else
-            //{
-            //    // 如果用户没用任何角色，则给该用户添加游客角色
-            //    var guestRole = await this.userRoleService.AddGuestRoleAsync(user.Id);
-            //    token.RoleId = guestRole.RoleId;
-            //    token.RegionId = guestRole.RegionId;
-            //}
 
             await this.InsertAsync(token);
-
-            // 从数据库中加载 User 对象，以存储到缓存中
-            token.User = await userService.GetAsync(a => a.Id == user.Id, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
 
             var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
 
             // 将 Token 信息存储到 Redis，有效期 2 小时
-            await redisService.SetAsync(CoreRedisConstants.UserToken.Format(token.TokenHash), cacheData, TimeSpan.FromHours(2));
+            await redisService.SetAsync(CoreRedisConstants.UserToken.Format(token.TokenHash), cacheData, TimeSpan.FromHours(10));
             return this.Mapper.Map<UserTokenDto>(token);
         }
 

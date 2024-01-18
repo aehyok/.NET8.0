@@ -1,4 +1,5 @@
-﻿using System;
+﻿using aehyok.Infrastructure.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,5 +33,10 @@ namespace aehyok.Core.Dtos
         /// 当前角色
         /// </summary>
         public long RoleId { get; set; }
+
+        /// <summary>
+        /// Token所属平台
+        /// </summary>
+        public PlatformType PlatformType { get; set; }
     }
 }

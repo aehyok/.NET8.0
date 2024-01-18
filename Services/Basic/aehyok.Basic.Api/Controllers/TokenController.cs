@@ -158,11 +158,14 @@ namespace aehyok.Basic.Api.Controllers
                 return default;
 
             var user = await userService.GetAsync(
-                a => a.Id == this.CurrentUser.UserId, 
-                includes: a => a.Include(c => c.UserRoles)
-                    .ThenInclude(c => c.Role)
-                    .Include(c => c.UserRoles)
-                    .ThenInclude(c => c.Region));
+                a => a.Id == this.CurrentUser.UserId);
+            //includes: a => a.Include(c => c.UserRoles)
+            //    .ThenInclude(c => c.Role)
+            //    .Include(c => c.UserRoles)
+            //    .ThenInclude(c => c.Region));
+
+            var userRoleList = await userRoleService.GetListAsync<UserRoleDto>(item => item.UserId == this.CurrentUser.UserId, includes: a => a.Include( c => c.Role).Include( v => v.Region));
+           
                                                                                                              
             var result = this.Mapper.Map<CurrentUserDto>(user);
             //result.Roles = result.Roles.OrderBy(item => item.IsDefault).ToList();
@@ -178,7 +181,7 @@ namespace aehyok.Basic.Api.Controllers
                 var regions = (await regionService.GetListAsync(r => ids.Contains(r.Id))).OrderBy(r => r.Level);
                 regionFullName = regions.Select(r => r.Name).ToArray();
             }
-
+            result.Roles = userRoleList;
             result.RoleId = this.CurrentUser.RoleId;
             result.RoleName = result.Roles?.Find(e => e.RoleId == this.CurrentUser.RoleId)?.RoleName;
             result.RegionId = this.CurrentUser.RegionId;
@@ -226,7 +229,7 @@ namespace aehyok.Basic.Api.Controllers
             //修改userToken 角色信息
             await userTokenService.UpdateAsync(token);
 
-            token.User = await userService.GetAsync(a => a.Id == token.UserId, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
+            //token.User = await userService.GetAsync(a => a.Id == token.UserId, includes: a => a.Include(c => c.UserRoles).ThenInclude(c => c.Role));
 
             var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
 

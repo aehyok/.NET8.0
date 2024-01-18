@@ -1326,6 +1326,10 @@ namespace aehyok.SystemService.Migrations
                         .HasColumnType("longtext")
                         .HasComment("备注");
 
+                    b.Property<long?>("RoleId")
+                        .HasColumnType("bigint")
+                        .HasComment("");
+
                     b.Property<string>("SignatureUrl")
                         .HasColumnType("longtext")
                         .HasComment("签名url");
@@ -1344,6 +1348,8 @@ namespace aehyok.SystemService.Migrations
                         .HasComment("用户名");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("User", t =>
                         {
@@ -1893,6 +1899,13 @@ namespace aehyok.SystemService.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("aehyok.Core.Domains.User", b =>
+                {
+                    b.HasOne("aehyok.Core.Domains.Role", null)
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId");
+                });
+
             modelBuilder.Entity("aehyok.Core.Domains.UserRole", b =>
                 {
                     b.HasOne("aehyok.Core.Domains.Region", "Region")
@@ -1908,7 +1921,7 @@ namespace aehyok.SystemService.Migrations
                         .IsRequired();
 
                     b.HasOne("aehyok.Core.Domains.User", "User")
-                        .WithMany("UserRoles")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1942,11 +1955,8 @@ namespace aehyok.SystemService.Migrations
                     b.Navigation("Permissions");
 
                     b.Navigation("UserRoles");
-                });
 
-            modelBuilder.Entity("aehyok.Core.Domains.User", b =>
-                {
-                    b.Navigation("UserRoles");
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

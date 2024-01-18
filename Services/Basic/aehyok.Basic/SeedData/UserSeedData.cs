@@ -5,6 +5,7 @@ using aehyok.Core.Domains;
 using aehyok.Core.Services;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,7 @@ namespace aehyok.Basic.SeedData
                 };
 
                 var roleService = scope.ServiceProvider.GetService<IRoleService>();
+                var userRoleService = scope.ServiceProvider.GetService<IUserRoleService>();
 
                 var rootRole = await roleService.GetAsync(a => a.Code == SystemRoles.ROOT);
 
@@ -54,16 +56,25 @@ namespace aehyok.Basic.SeedData
                     throw new Exception("请先创建行政区域数据");
                 }
 
-                rootUser.UserRoles = new List<UserRole>
+                await userRoleService.InsertAsync(new UserRole
                 {
-                    new UserRole
-                    {
-                        RegionId = region.Id,
-                        UserId = rootUser.Id,
-                        RoleId = rootRole.Id,
-                        IsDefault = true
-                    }
-                };
+                    RegionId = region.Id,
+                    UserId = rootUser.Id,
+                    RoleId = rootRole.Id,
+                    IsDefault = true
+                });
+
+
+                //rootUser.UserRoles = new List<UserRole>
+                //{
+                //    new UserRole
+                //    {
+                //        RegionId = region.Id,
+                //        UserId = rootUser.Id,
+                //        RoleId = rootRole.Id,
+                //        IsDefault = true
+                //    }
+                //};
 
                 await userService.InsertAsync(rootUser);
             }
