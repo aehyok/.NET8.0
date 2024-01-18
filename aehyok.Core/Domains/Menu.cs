@@ -113,9 +113,9 @@ namespace aehyok.Core.Domains
     public enum MenuType
     {
         子系统 = 1,
-        目录 = 1,
-        菜单 = 2,
-        操作 = 3,
+        目录 = 2,
+        菜单 = 3,
+        操作 = 4,
     }
 
     /// <summary>
