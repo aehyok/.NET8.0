@@ -112,9 +112,10 @@ namespace aehyok.Core.Domains
     /// </summary>
     public enum MenuType
     {
-        目录 = 0,
-        菜单 = 1,
-        操作 = 2,
+        子系统 = 1,
+        目录 = 1,
+        菜单 = 2,
+        操作 = 3,
     }
 
     /// <summary>
@@ -122,7 +123,7 @@ namespace aehyok.Core.Domains
     /// </summary>
     public enum MenuIconType
     {
-        图标 = 0,
-        图片 = 1
+        图标 = 1,
+        图片 = 2
     }
 }
