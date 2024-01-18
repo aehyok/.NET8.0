@@ -116,8 +116,8 @@ namespace aehyok.RabbitMQ
                 {
                     foreach (var type in assembly.GetTypes())
                     {
-                        //判断type是否继承了CronScheduleService类
-                        if(TypeFinders.IsAssignableToGenericInterface(type, typeof(IEventHandler<>)))
+                        //判断type是否继承了IEventHandler<>
+                        if (TypeFinders.IsAssignableToGenericInterface(type, typeof(IEventHandler<>)))
                         {
                             //var handler = (IEventHandler)this.scopeFactory.CreateScope().ServiceProvider.GetRequiredService(type);
                             var handler = (IEventHandler)Activator.CreateInstance(type);
