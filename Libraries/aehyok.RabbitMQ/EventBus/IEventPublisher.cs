@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace aehyok.RabbitMQ.EventBus
 {
+    /// <summary>
+    /// RabbitMQ 发布接口
+    /// </summary>
     public interface IEventPublisher
     {
         /// <summary>

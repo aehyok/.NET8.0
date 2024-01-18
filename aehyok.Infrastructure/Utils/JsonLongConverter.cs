@@ -23,7 +23,7 @@ namespace aehyok.Infrastructure.Utils
             }
             else
             {
-                writer.WriteNumberValue(value);
+                writer.WriteStringValue(value.ToString());
             }
         }
     }

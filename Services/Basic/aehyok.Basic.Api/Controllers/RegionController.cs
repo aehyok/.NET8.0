@@ -3,18 +3,20 @@ using aehyok.Core.Domains;
 using aehyok.Core.Dtos;
 using aehyok.Core.Dtos.Create;
 using aehyok.Core.Dtos.Query;
+using aehyok.Core.Services;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Exceptions;
 using Ardalis.Specification;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.Threading.Tasks;
 
 namespace aehyok.Basic.Api.Controllers
 {
     /// <summary>
     /// 行政区域管理
     /// </summary>
-    public class RegionController(IRegionService regionService) : BasicControllerBase
+    public class RegionController(IRegionService regionService, IAsyncTaskService asyncTaskService) : BasicControllerBase
     {
         /// <summary>
         /// 获取区域列表
@@ -112,6 +114,19 @@ namespace aehyok.Basic.Api.Controllers
 
             await regionService.DeleteAsync(entity);
             return Ok();
+        }
+
+        /// <summary>
+        /// 区域导出
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("export")]
+        public async Task<AsyncTaskDto> ExportAsync([FromQuery] RegionQueryDto model)
+        {
+            var asyncTask = await asyncTaskService.GenerateTaskAsync(model, "export");
+
+            return this.Mapper.Map<AsyncTaskDto>(asyncTask);
         }
     }
 }
