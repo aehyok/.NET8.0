@@ -215,31 +215,38 @@ namespace aehyok.Basic.Api.Controllers
             }
 
             entity = this.Mapper.Map(model, entity);
-            //var userRoleList = await userRoleService.GetListAsync(a => a.UserId == id);
-            await userRoleService.BatchSoftDeleteAsync(a => a.UserId == id);
 
+            using var trans = await userService.BeginTransactionAsync();
 
-            foreach (var item in model.UserRoles)
+            try
             {
-                //var isExist = await userRoleService.ExistsAsync(a => a.UserId == id && a.RoleId == item.RoleId && a.RegionId == item.RegionId); 
-                //if(!isExist)
-                //{
-                var userRole = new UserRole
+                await userRoleService.BatchSoftDeleteAsync(a => a.UserId == id);
+
+
+                foreach (var item in model.UserRoles)
                 {
-                    RoleId = item.RoleId,
-                    UserId = entity.Id,
-                    RegionId = item.RegionId
-                };
-                await userRoleService.InsertAsync(userRole);
-                //}
+                    var userRole = new UserRole
+                    {
+                        RoleId = item.RoleId,
+                        UserId = entity.Id,
+                        RegionId = item.RegionId
+                    };
+                    await userRoleService.InsertAsync(userRole);
+                    //}
+                }
+
+
+                entity.UserRoles = null;
+
+                await userService.UpdateAsync(entity);
+
+                await trans.CommitAsync();
+                return Ok();
             }
-
-
-            entity.UserRoles = null;
-            
-            await userService.UpdateAsync(entity);
-
-            return Ok();
+            catch(Exception ex)
+            {
+                return Ok();
+            }
         }
 
         /// <summary>

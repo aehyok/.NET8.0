@@ -249,22 +249,40 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="parentId">父级 Id</param>
         /// <returns></returns>
         [HttpGet("region")]
-        public Task<List<RegionDto>> GetCurrentRegionsAsync(long parentId)
+        public async Task<List<RegionDto>> GetCurrentRegionsAsync(long parentId)
         {
-            var spec = Specifications<Region>.Create();
-            spec.Query.OrderBy(a => a.Order);
-            spec.Query.Where(a => EF.Functions.Like(a.IdSequences, $"%.{this.CurrentUser.RegionId}.%"));
+            var filter = PredicateBuilder.New<Region>(true);
+
+            filter.And(a => EF.Functions.Like(a.IdSequences, $"%.{this.CurrentUser.RegionId}.%"));
 
             if (parentId > 0)
             {
-                spec.Query.Where(a => a.ParentId == parentId);
+                filter.And(a => a.ParentId == parentId);
             }
             else
             {
-                spec.Query.Where(a => a.Id == this.CurrentUser.RegionId);
+                filter.And(a => a.Id == this.CurrentUser.RegionId);
             }
+
+            var list = await regionService.GetListAsync<RegionDto>(filter);
+
+            return list;
+
+
+            //var spec = Specifications<Region>.Create();
+            //spec.Query.OrderBy(a => a.Order);
+            //spec.Query.Where(a => EF.Functions.Like(a.IdSequences, $"%.{this.CurrentUser.RegionId}.%"));
+
+            //if (parentId > 0)
+            //{
+            //    spec.Query.Where(a => a.ParentId == parentId);
+            //}
+            //else
+            //{
+            //    spec.Query.Where(a => a.Id == this.CurrentUser.RegionId);
+            //}
                 
-            return regionService.GetListAsync<RegionDto>(spec);
+            //return regionService.GetListAsync<RegionDto>(spec);
         }
     }
 }

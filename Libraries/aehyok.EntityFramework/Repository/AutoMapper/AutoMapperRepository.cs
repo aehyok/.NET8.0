@@ -16,6 +16,7 @@ using AutoMapper.QueryableExtensions;
 using X.PagedList;
 using IConfigurationProvider = AutoMapper.IConfigurationProvider;
 using aehyok.EntityFrameworkCore.Repository.Base;
+using LinqKit;
 
 namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
 {
@@ -158,6 +159,11 @@ namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
         public Task<IPagedList<TProjectedType>> GetPagedListAsync<TProjectedType>(ISpecification<TEntity> specification, int pageIndex = 1, int pageSize = 10, CancellationToken cancellationToken = default) where TProjectedType : class
         {
             return ApplySpecification(specification).ProjectTo<TProjectedType>(MapperConfig).ToPagedListAsync(pageIndex, pageSize, null, cancellationToken);
+        }
+
+        public Task<List<TProjectedType>> GetListAsync<TProjectedType>(ExpressionStarter<TEntity> expression, CancellationToken cancellationToken = default) where TProjectedType : class
+        {
+            return GetExpandable().Where(expression).ProjectTo<TProjectedType>(MapperConfig).ToListAsync(cancellationToken);
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using X.PagedList;
 using aehyok.EntityFrameworkCore.Repository.Base;
+using LinqKit;
 
 namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
 {
@@ -41,5 +42,7 @@ namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
                                                                 CancellationToken cancellationToken = default) where TProjectedType : class;
 
         Task<List<TProjectedType>> GetListAsync<TProjectedType>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) where TProjectedType : class;
+
+        Task<List<TProjectedType>> GetListAsync<TProjectedType>(ExpressionStarter<TEntity> expression, CancellationToken cancellationToken = default) where TProjectedType : class;
     }
 }
