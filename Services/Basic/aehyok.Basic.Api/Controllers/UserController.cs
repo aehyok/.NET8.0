@@ -71,19 +71,11 @@ namespace aehyok.Basic.Api.Controllers
                 //spec.Query.Where(a => a.UserRoles.Any(c => c.RoleId == model.RoleId.Value));
             }
 
-            //if (model.RegionCode.IsNotNullOrEmpty())
-            //{
-            //    var regionInfo = await regionService.GetAsync(e => e.Code == model.RegionCode);
-            //    if (regionInfo is null) throw new ErrorCodeException(-1, "未找到对应区域");
-            //    model.RegionId = regionInfo.Id;
-            //}
-
-            
             if (model.RegionId.HasValue && model.RegionId != 0)
             {
                 if (model.IncludeChilds)
                 {
-                    userRoleFilter.And( a => a.Region.IdSequences.Contains($"{model.RegionId.Value}"));
+                    userRoleFilter.And(c => EF.Functions.Like(c.Region.IdSequences, $"%.{model.RegionId.Value}.%"));
                     //spec.Query.Where(a => a.UserRoles.Any(c => EF.Functions.Like(c.Region.IdSequences, $"%.{model.RegionId.Value}.%")));
                 }
                 else
