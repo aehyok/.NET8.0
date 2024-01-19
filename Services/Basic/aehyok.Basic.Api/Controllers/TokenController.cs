@@ -130,7 +130,12 @@ namespace aehyok.Basic.Api.Controllers
                             MenuName = m.Name,
                             MenuCode = m.Code,
                             ParentId = m.ParentId,
-                            Order = m.Order
+                            Order = m.Order,
+                            MenuUrl = m.Url,
+                            Type = m.Type,
+                            IconType = m.IconType,
+                            ActiveIcon = m.ActiveIcon,
+                            Icon = m.Icon,
                         };
             var list = await query.ToListAsync();
 

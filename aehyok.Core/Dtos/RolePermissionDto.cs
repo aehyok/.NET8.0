@@ -1,6 +1,7 @@
 ﻿using aehyok.Core.Domains;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,9 +41,39 @@ namespace aehyok.Core.Dtos
         public int Order { get; set; }
 
         /// <summary>
+        /// 菜单路径
+        /// </summary>
+        public string MenuUrl { get; set; }
+
+        /// <summary>
         /// 子菜单列表
         /// </summary>
         public List<RolePermissionDto> Children { get; set; }
+
+        /// <summary>
+        /// 菜单类型
+        /// </summary>
+        public MenuType Type { get; set; }
+
+        /// <summary>
+        /// 菜单图标类型
+        /// </summary>
+        public MenuIconType IconType { get; set; }
+
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string Icon { get; set; }
+
+        /// <summary>
+        /// 选中图标
+        /// </summary>
+        public string ActiveIcon { get; set; }
+
+        /// <summary>
+        /// 菜单选中图标类型
+        /// </summary>
+        public MenuIconType ActiveIconType { get; set; }
 
         /// <summary>
         /// 数据范围
