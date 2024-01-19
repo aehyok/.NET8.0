@@ -40,7 +40,7 @@ namespace aehyok.Core.Dtos.Create
         /// <summary>
         /// 用户角色
         /// </summary>
-        public List<CreateUserRoleDto> Roles { get; set; }
+        public List<CreateUserRoleDto> UserRoles { get; set; }
 
         /// <summary>
         /// 人员所属区域

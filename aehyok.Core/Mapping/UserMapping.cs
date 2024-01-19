@@ -10,9 +10,9 @@ namespace aehyok.Basic.Mapping
         {
             base.Configure(builder);
 
-            //builder.HasMany(a => a.Roles).WithMany(a => a.Users)
-            //    .UsingEntity<UserRole>(a => a.HasOne(c => c.Role).WithMany(c => c.UserRoles).HasForeignKey(c => c.RoleId),
-            //    a => a.HasOne(c => c.User).WithMany(c => c.UserRoles).HasForeignKey(c => c.UserId));
+            // builder.HasMany(a => a.Roles) 指示一个用户下可以有多个角色（一对多的关系）
+            builder.HasMany(a => a.Roles).WithMany(a => a.Users)
+                .UsingEntity<UserRole>();
         }
     }
 }

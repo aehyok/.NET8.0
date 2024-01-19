@@ -140,14 +140,14 @@ namespace aehyok.Basic.Api.Controllers
                 throw new ErrorCodeException(-1, "账号不能为空");
             if (model.Mobile.IsNullOrEmpty())
                 throw new ErrorCodeException(-1, "手机号码不能为空");
-            if (model.Roles.IsNull())
+            if (model.UserRoles.IsNull())
                 throw new ErrorCodeException(-1, "请为用户选择角色");
 
             var entity = this.Mapper.Map<User>(model);
 
             var roles = new List<UserRole>();
 
-            model.Roles.ForEach((item => 
+            model.UserRoles.ForEach((item => 
             { 
                 roles.Add(new UserRole
                 {
@@ -208,49 +208,35 @@ namespace aehyok.Basic.Api.Controllers
         [HttpPut("{id}")]
         public async Task<StatusCodeResult> PutAsync(long id, CreateUserDto model)
         {
-            var entity = await userService.GetByIdAsync(id);
+            var entity = await userService.GetAsync(item => item.Id == id);
             if (entity is null)
             {
                 throw new ErrorCodeException(-1, "你要修改的用户不存在");
             }
 
             entity = this.Mapper.Map(model, entity);
-
             //var userRoleList = await userRoleService.GetListAsync(a => a.UserId == id);
             await userRoleService.BatchSoftDeleteAsync(a => a.UserId == id);
 
 
-            foreach(var item in model.Roles)
+            foreach (var item in model.UserRoles)
             {
                 //var isExist = await userRoleService.ExistsAsync(a => a.UserId == id && a.RoleId == item.RoleId && a.RegionId == item.RegionId); 
                 //if(!isExist)
                 //{
-                    var userRole = new UserRole
-                    {
-                        RoleId = item.RoleId,
-                        UserId = entity.Id,
-                        RegionId = item.RegionId
-                    };
-                    await userRoleService.InsertAsync(userRole);
+                var userRole = new UserRole
+                {
+                    RoleId = item.RoleId,
+                    UserId = entity.Id,
+                    RegionId = item.RegionId
+                };
+                await userRoleService.InsertAsync(userRole);
                 //}
             }
-            //entity.UserRoles = model.Roles.Select(a => new UserRole
-            //{
-            //    RoleId = a.RoleId,
-            //    UserId = entity.Id,
-            //    RegionId = a.RegionId
-            //}).ToList();
 
-            // 删除原部门
-            //await userDepartmentService.GetQueryable().Where(a => a.UserId == entity.Id).UpdateFromQueryAsync(m => new UserDepartment() { IsDeleted = true });
-            //if (model.Departments.IsNotNull())// 插入新部门
-            //    await userDepartmentService.InsertAsync(model.Departments.Select(a => new UserDepartment
-            //    {
-            //        UserId = entity.Id,
-            //        RegionId = a.RegionId,
-            //        DepartmentId = a.DepartmentId
-            //    }).ToList());
 
+            entity.UserRoles = null;
+            
             await userService.UpdateAsync(entity);
 
             return Ok();
