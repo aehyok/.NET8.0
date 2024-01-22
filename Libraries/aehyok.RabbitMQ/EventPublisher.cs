@@ -30,7 +30,7 @@ namespace aehyok.RabbitMQ
             var eventName = message.GetType().FullName;
             var body = JsonSerializer.Serialize(message);
 
-            this.publisherChannel.BasicPublish(this.options.ExchangeName, "", null, Encoding.UTF8.GetBytes(body));
+            this.publisherChannel.BasicPublish(this.options.ExchangeName, eventName, null, Encoding.UTF8.GetBytes(body));
         }
 
         private IModel CreateChannel ()

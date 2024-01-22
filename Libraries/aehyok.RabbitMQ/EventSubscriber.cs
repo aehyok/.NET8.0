@@ -75,8 +75,6 @@ namespace aehyok.RabbitMQ
             //exclusive false代表队列非独占
             channel.QueueDeclare(this.options.QueueName,true,exclusive: false);
 
-            channel.QueueBind(this.options.QueueName, this.options.ExchangeName, "");
-
             var consumer = new AsyncEventingBasicConsumer(channel);
             consumer.Received += OnConsumerMessageReceived;
 
