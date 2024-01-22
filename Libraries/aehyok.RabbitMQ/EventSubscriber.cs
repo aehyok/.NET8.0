@@ -40,7 +40,6 @@ namespace aehyok.RabbitMQ
             this.consumerChannel = CreateConsumerChannel();
         }
 
-
         public void Dispose()
         {
             this.logger.LogInformation($"IEventSubscriber Dispose");
@@ -69,7 +68,6 @@ namespace aehyok.RabbitMQ
         {
             var channel = this.connection.CreateModel();
 
-            // Fanout模式下 必须先启动消费者端，然后再生产者端。
             channel.ExchangeDeclare(this.options.ExchangeName, ExchangeType.Fanout, true);
 
             //exclusive false代表队列非独占
@@ -108,73 +106,45 @@ namespace aehyok.RabbitMQ
             {
                 Type eventType = null;
 
-                //if(this.eventTypes)
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(item => item.FullName.StartsWith("aehyok."));
-                //foreach (var assembly in assemblies)
-                //{
-                //    foreach (var type in assembly.GetTypes())
-                //    {
-                //        if (type.Name == eventName)
-                //        {
-                //            eventType = type;
-                //            break;
-                //        }
-                //    }
-                //    if (eventType != null)
-                //    {
-                //        break;
-                //    }
-                //}
 
                 eventType = this.eventTypes.SingleOrDefault(item => item.FullName == eventName);
 
-                //foreach (Assembly assembly in assemblies)
-                //{
-                //    foreach (var type in assembly.GetTypes())
-                //    {
-                //        //判断type是否继承了IEventHandler<>
-                //        if (TypeFinders.IsAssignableToGenericInterface(type, typeof(IEventHandler<>)))
-                //        {
+                if(this.EventHandlerFactories.TryGetValue(eventName, out var eventHandlers) && eventHandlers.Count > 0)
+                {
+                    foreach (var eventHandler in eventHandlers)
+                    {
+                        var handler = (IEventHandler)Activator.CreateInstance(eventHandler);
 
-                            if(this.EventHandlerFactories.TryGetValue(eventName, out var eventHandlers) && eventHandlers.Count > 0)
-                            {
-                                foreach (var eventHandler in eventHandlers)
-                                {
-                                    var handler = (IEventHandler)Activator.CreateInstance(eventHandler);
+                        var eventData = JsonSerializer.Deserialize(message, eventType, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                                    var eventData = JsonSerializer.Deserialize(message, eventType, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        using var scope = this.logger.BeginScope(new Dictionary<string, object>
+                        {
+                            ["EventBusId"] = ((EventBase)eventData).Id,
+                            ["Handler"] = handler.GetType().FullName,
+                        });
 
-                                    using var scope = this.logger.BeginScope(new Dictionary<string, object>
-                                    {
-                                        ["EventBusId"] = ((EventBase)eventData).Id,
-                                        ["Handler"] = handler.GetType().FullName,
-                                    });
-
-                                    try
-                                    {
-                                        await Task.Yield();
-                                        var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
-                                        this.logger.LogInformation($"开始执行 {eventName} 事件, 内容：{message}");
-                                        await (Task)concreteType.GetMethod("HandleAsync").Invoke(handler, new object[] { eventData });
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        this.logger.LogInformation($"事件处理程序处理事件时发生错误，消息内容:{message}");
-                                        this.logger.LogError(ex, ex.Message);
-                                    }
-                                    finally
-                                    {
-                                        this.logger.LogInformation($"事件 {eventName} 执行完成");
-                                        scope.Dispose();
-                                    }
-                                }
-                            }
-                                //var handler = (IEventHandler)this.scopeFactory.CreateScope().ServiceProvider.GetRequiredService(type);
-                            
-                //        }
-                //    }
-                //}
-
+                        try
+                        {
+                            // 创建一个异步操作点，允许异步方法在执行时暂时释放线程，以允许其他任务在同一线程上执行。
+                            // 使得方法的剩余部分可以在稍后的时间继续执行。
+                            await Task.Yield();
+                            var concreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+                            this.logger.LogInformation($"开始执行 {eventName} 事件, 内容：{message}");
+                            await (Task)concreteType.GetMethod("HandleAsync").Invoke(handler, new object[] { eventData });
+                        }
+                        catch (Exception ex)
+                        {
+                            this.logger.LogInformation($"事件处理程序处理事件时发生错误，消息内容:{message}");
+                            this.logger.LogError(ex, ex.Message);
+                        }
+                        finally
+                        {
+                            this.logger.LogInformation($"事件 {eventName} 执行完成");
+                            scope.Dispose();
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {

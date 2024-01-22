@@ -124,7 +124,7 @@ namespace aehyok.Basic.Api.Controllers
         [HttpPost("export")]
         public async Task<AsyncTaskDto> ExportAsync([FromQuery] RegionQueryDto model)
         {
-            var asyncTask = await asyncTaskService.GenerateTaskAsync(model, "export");
+            var asyncTask = await asyncTaskService.GenerateTaskAsync(model, "RegionExport");
 
             return this.Mapper.Map<AsyncTaskDto>(asyncTask);
         }
