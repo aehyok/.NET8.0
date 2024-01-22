@@ -27,10 +27,10 @@ namespace aehyok.RabbitMQ
         }
         public void Publish<TEvent>(TEvent message) where TEvent : IEvent
         {
-            var eventName = message.GetType().Name;
+            var eventName = message.GetType().FullName;
             var body = JsonSerializer.Serialize(message);
 
-            this.publisherChannel.BasicPublish(this.options.ExchangeName, eventName, null, Encoding.UTF8.GetBytes(body));
+            this.publisherChannel.BasicPublish(this.options.ExchangeName, "", null, Encoding.UTF8.GetBytes(body));
         }
 
         private IModel CreateChannel ()

@@ -92,6 +92,15 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 
 
  ```
+
+## RabbitMQ 调试
+- 暂时开两个解决方案调试
+- aehyok.NET8: 一个是为了打开 aehyok.Basic.Api 发布消息的或者其他API服务
+- aehyok.NET8.SystemService: 另外一个为了打开aehyok.SystemService 开启订阅消息
+
+```
+
+```
 ## 使用的开源库
 
 ```
