@@ -1,7 +1,7 @@
 ﻿using aehyok.EntityFrameworkCore.Repository;
-using File = aehyok.Basic.Domains.File;
+using File = aehyok.Core.Domains.File;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     /// <summary>
     /// 文件服务接口

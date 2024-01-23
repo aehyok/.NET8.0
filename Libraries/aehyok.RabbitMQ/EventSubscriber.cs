@@ -105,16 +105,14 @@ namespace aehyok.RabbitMQ
             try
             {
                 Type eventType = null;
-
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies().Where(item => item.FullName.StartsWith("aehyok."));
-
                 eventType = this.eventTypes.SingleOrDefault(item => item.FullName == eventName);
 
                 if(this.EventHandlerFactories.TryGetValue(eventName, out var eventHandlers) && eventHandlers.Count > 0)
                 {
                     foreach (var eventHandler in eventHandlers)
                     {
-                        var handler = (IEventHandler)Activator.CreateInstance(eventHandler);
+                        // 通过反射创建事件处理程序实例，并传递IServiceScopeFactory参数
+                        var handler = (IEventHandler)Activator.CreateInstance(eventHandler, scopeFactory);
 
                         var eventData = JsonSerializer.Deserialize(message, eventType, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 

@@ -8,9 +8,9 @@
         public string Keyword { get; set; }
 
         /// <summary>
-        /// 父级 Id
+        /// 父级区域 Id
         /// </summary>
-        public long ParentId { get; set; }
+        public long RegionId { get; set; }
 
         /// <summary>
         /// 是否只查询当前区域下

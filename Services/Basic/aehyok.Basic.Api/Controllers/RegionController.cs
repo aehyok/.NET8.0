@@ -36,10 +36,10 @@ namespace aehyok.Basic.Api.Controllers
                           .Search(a => a.Code, $"%{model.Keyword}%");
             }
 
-            if (model.ParentId == 0 && model.IsCurrent)
+            if (model.RegionId == 0 && model.IsCurrent)
                 spec.Query.Where(a => a.Id == this.CurrentUser.RegionId);
             else
-                spec.Query.Where(a => a.ParentId == model.ParentId);
+                spec.Query.Where(a => a.ParentId == model.RegionId);
 
             return regionService.GetListAsync<RegionDto>(spec);
         }

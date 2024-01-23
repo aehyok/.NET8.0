@@ -18,7 +18,7 @@ namespace aehyok.Core.EventData
 
         public AsyncTaskEventData(long id, string code)
         {
-            this.Id = id;
+            this.TaskId = id;
             this.TaskCode = code;
         }
         public AsyncTaskEventData(AsyncTask asyncTask)

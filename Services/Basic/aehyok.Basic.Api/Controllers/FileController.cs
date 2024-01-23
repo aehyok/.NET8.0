@@ -1,4 +1,5 @@
 ﻿using aehyok.Basic.Services;
+using aehyok.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace aehyok.Basic.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Domains.File> PostAsync(IFormFile file)
+        public async Task<Core.Domains.File> PostAsync(IFormFile file)
         {
             using var stream = file.OpenReadStream();
             return await fileService.UploadAsync(stream, file.FileName);

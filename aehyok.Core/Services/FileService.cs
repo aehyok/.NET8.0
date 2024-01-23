@@ -1,6 +1,7 @@
 ﻿using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.Enums;
+using aehyok.Infrastructure.Exceptions;
 using aehyok.Infrastructure.FileStroage;
 using aehyok.Infrastructure.SnowFlake;
 using aehyok.Infrastructure.Utils;
@@ -15,10 +16,11 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using File = aehyok.Basic.Domains.File;
+using File = aehyok.Core.Domains.File;
 
-namespace aehyok.Basic.Services
+namespace aehyok.Core.Services
 {
     /// <summary>
     /// 文件服务
@@ -31,22 +33,32 @@ namespace aehyok.Basic.Services
     {
         public Task<byte[]> GetContentAsync(string url)
         {
-            throw new NotImplementedException();
+            var idStr = Regex.Match(url, "[0-9]{19}").Value;
+
+            if (long.TryParse(idStr, out var id))
+            {
+                return GetContentAsync(id);
+            }
+
+            throw new ErrorCodeException(-1, "文件未找到");
         }
 
-        public Task<byte[]> GetContentAsync(File file)
+        public async Task<byte[]> GetContentAsync(File file)
         {
-            throw new NotImplementedException();
+            return await storageFactory.GetStorage().GetAsync(file.Path);
         }
 
-        public Task<byte[]> GetContentAsync(long id)
+        public async Task<byte[]> GetContentAsync(long id)
         {
-            throw new NotImplementedException();
+            var file = await this.GetByIdAsync(id);
+            return await GetContentAsync(file);
         }
 
         public Task<File> GetFileByUrlAsync(string path)
         {
-            throw new NotImplementedException();
+            // 使用正则匹配 19 位雪花 Id
+            var id = Regex.Match(path, "[0-9]{19}").Value;
+            return this.GetByIdAsync(id);
         }
 
         public Task<List<File>> GetFilesByIds(string ids)

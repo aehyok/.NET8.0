@@ -26,6 +26,7 @@ using Microsoft.AspNetCore.Authentication;
 using aehyok.Core.Authentication;
 using aehyok.Infrastructure.Utils;
 using JsonLongConverter = aehyok.Infrastructure.Utils.JsonLongConverter;
+using OfficeOpenXml;
 
 namespace aehyok.Core
 {
@@ -41,6 +42,8 @@ namespace aehyok.Core
         /// <returns></returns>
         public static async Task InitAppliation(this WebApplicationBuilder builder, string moduleKey, string moduleTitle, bool isSystemService = false)
         {
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+
             builder.AddBuilderServices(moduleKey, moduleTitle, isSystemService);
 
             var app = builder.Build();
