@@ -30,6 +30,7 @@ namespace aehyok.Core.Services
     /// <param name="mapper"></param>
     /// <param name="storageFactory"></param>
     /// <param name="contentTypeProvider"></param>
+    /// <param name="httpClientFactory"></param>
     public class FileService(DbContext dbContext, IMapper mapper, IFileStorageFactory storageFactory, IContentTypeProvider contentTypeProvider, IHttpClientFactory httpClientFactory) : ServiceBase<File>(dbContext, mapper), IFileService, IScopedDependency
     {
         public Task<byte[]> GetContentAsync(string url)
@@ -126,7 +127,7 @@ namespace aehyok.Core.Services
         public async Task<File> UploadAsync(byte[] bytes, string originName, long originalFileId = 0, bool transcode = true)
         {
             var storage = storageFactory.GetStorage();
-            var file = new Domains.File
+            var file = new File
             {
                 Size = bytes.Length,
                 StorageType = storage.StorageType,
