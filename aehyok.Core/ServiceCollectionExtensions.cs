@@ -25,7 +25,7 @@ using aehyok.Core.Filters;
 using Microsoft.AspNetCore.Authentication;
 using aehyok.Core.Authentication;
 using aehyok.Infrastructure.Utils;
-using JsonLongConverter = aehyok.Infrastructure.Utils.JsonLongConverter;
+using JsonLongConverter = aehyok.Infrastructure.Converters.JsonLongConverter;
 using OfficeOpenXml;
 
 namespace aehyok.Core
@@ -40,6 +40,7 @@ namespace aehyok.Core
         /// <param name="moduleTitle"></param>
         /// <param name="isSystemService">是否是SystemService这个服务</param>
         /// <returns></returns>
+        /// 
         public static async Task InitAppliation(this WebApplicationBuilder builder, string moduleKey, string moduleTitle, bool isSystemService = false)
         {
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
@@ -108,6 +109,9 @@ namespace aehyok.Core
                 // 针对字段 long 类型，序列化时转换为字符串
                 options.JsonSerializerOptions.Converters.Add(new JsonLongConverter());
             });
+
+            // 注册 IHttpClientFactory 
+            builder.Services.AddHttpClient();
 
             builder.Services.AddAllAutoMapper();
 
