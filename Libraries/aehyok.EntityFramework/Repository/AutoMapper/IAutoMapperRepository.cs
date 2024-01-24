@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using X.PagedList;
 using aehyok.EntityFrameworkCore.Repository.Base;
 using LinqKit;
+using AutoMapper.QueryableExtensions;
 
 namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
 {
@@ -42,6 +43,8 @@ namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
                                                                 CancellationToken cancellationToken = default) where TProjectedType : class;
 
         Task<List<TProjectedType>> GetListAsync<TProjectedType>(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) where TProjectedType : class;
+
+        Task<IPagedList<TProjectedType>> GetPagedListAsync<TProjectedType>(ExpressionStarter<TEntity> expression, int pageIndex = 1, int pageSize = 10, CancellationToken cancellationToken = default) where TProjectedType : class;
 
         Task<List<TProjectedType>> GetListAsync<TProjectedType>(ExpressionStarter<TEntity> expression, CancellationToken cancellationToken = default) where TProjectedType : class;
     }

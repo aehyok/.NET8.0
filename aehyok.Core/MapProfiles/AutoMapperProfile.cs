@@ -2,6 +2,7 @@
 using aehyok.Core.Domains;
 using aehyok.Core.Dtos;
 using AutoMapper;
+using File = aehyok.Core.Domains.File;
 
 namespace aehyok.Core.MapProfiles
 {
@@ -21,6 +22,8 @@ namespace aehyok.Core.MapProfiles
             CreateMap<ApiResourceDto, MenuResourceDto>();
 
             CreateMap<Role, RoleDto>();
+
+            CreateMap<File, FileDto>();
 
             CreateMap<User, UserDto>()
                 //.ForMember(a => a.Roles, a => a.MapFrom(c => c.UserRoles))

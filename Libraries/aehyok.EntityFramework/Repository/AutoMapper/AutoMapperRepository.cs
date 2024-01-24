@@ -161,6 +161,11 @@ namespace aehyok.EntityFrameworkCore.Repository.AutoMapper
             return ApplySpecification(specification).ProjectTo<TProjectedType>(MapperConfig).ToPagedListAsync(pageIndex, pageSize, null, cancellationToken);
         }
 
+        public Task<IPagedList<TProjectedType>> GetPagedListAsync<TProjectedType>(ExpressionStarter<TEntity> expression, int pageIndex = 1, int pageSize = 10, CancellationToken cancellationToken = default) where TProjectedType : class
+        {
+            return GetExpandable().Where(expression).ProjectTo<TProjectedType>(MapperConfig).ToPagedListAsync(pageIndex, pageSize, null, cancellationToken);
+        }
+
         public Task<List<TProjectedType>> GetListAsync<TProjectedType>(ExpressionStarter<TEntity> expression, CancellationToken cancellationToken = default) where TProjectedType : class
         {
             return GetExpandable().Where(expression).ProjectTo<TProjectedType>(MapperConfig).ToListAsync(cancellationToken);

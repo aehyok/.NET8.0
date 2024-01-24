@@ -28,7 +28,7 @@ namespace aehyok.Core.Domains
         public FileType Type { get; set; }
 
         /// <summary>
-        /// 文件大小
+        /// 文件大小(字节) 1024字节=1KB
         /// </summary>
         public long Size { get; set; }
 

@@ -117,12 +117,13 @@ namespace aehyok.Core
 
             builder.Services.AddRabbitMQ(builder.Configuration);
 
+            // 指定文件的静态资源
             builder.Services.AddSingleton<IContentTypeProvider, FileExtensionContentTypeProvider>();
 
             //builder.Services.AddTransient<ITransientDependency>();
             //builder.Services.AddScoped<IScopedDependency>();
 
-            if (isSystemService) 
+            if (isSystemService)
             {
                 builder.Services.AddCronTask();
 
