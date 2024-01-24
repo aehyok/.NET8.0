@@ -1,0 +1,62 @@
+[
+    {
+        "Name": "RealName",
+        "Title": "姓名",
+        "Required": true,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "UserName",
+        "Title": "账号",
+        "Required": true,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "Mobile",
+        "Title": "手机号码",
+        "Required": true,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "Gender",
+        "Title": "性别",
+        "Required": false,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "RegionCode1",
+        "Title": "区域1",
+        "Required": false,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "RoleCode1",
+        "Title": "角色1",
+        "Required": false,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "RegionCode2",
+        "Title": "区域2",
+        "Required": false,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "RoleCode2",
+        "Title": "角色2",
+        "Required": false,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "RegionCode3",
+        "Title": "区域3",
+        "Required": false,
+        "DictionaryGroupCode": ""
+    },
+    {
+        "Name": "RoleCode3",
+        "Title": "角色3",
+        "Required": false,
+        "DictionaryGroupCode": ""
+    }
+]

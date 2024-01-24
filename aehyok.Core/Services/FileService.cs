@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
@@ -29,7 +30,7 @@ namespace aehyok.Core.Services
     /// <param name="mapper"></param>
     /// <param name="storageFactory"></param>
     /// <param name="contentTypeProvider"></param>
-    public class FileService(DbContext dbContext, IMapper mapper, IFileStorageFactory storageFactory, IContentTypeProvider contentTypeProvider) : ServiceBase<File>(dbContext, mapper), IFileService, IScopedDependency
+    public class FileService(DbContext dbContext, IMapper mapper, IFileStorageFactory storageFactory, IContentTypeProvider contentTypeProvider, IHttpClientFactory httpClientFactory) : ServiceBase<File>(dbContext, mapper), IFileService, IScopedDependency
     {
         public Task<byte[]> GetContentAsync(string url)
         {
@@ -66,19 +67,52 @@ namespace aehyok.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<string> GetTempFilePathAsync(File file)
+        public async Task<string> GetTempFilePathAsync(File file)
         {
-            throw new NotImplementedException();
+            // 判断本地是否有该文件，如果有则直接返回文件路径，没有则将文件下载到本地
+            var tempPath = App.GetTempPath();
+            var tempFilePath = Path.Combine(tempPath, $"{file.Id}{file.Extension}");
+
+            if (System.IO.File.Exists(tempFilePath))
+            {
+                return tempFilePath;
+            }
+
+            // 如果是开发模式，则直接下载该文件到本地环境
+            if (Debugger.IsAttached)
+            {
+                var client = httpClientFactory.CreateClient();
+                var downloadBytes = await client.GetByteArrayAsync(file.Url);
+
+                using var tempStream = new FileStream(tempFilePath, FileMode.Create);
+                await tempStream.WriteAsync(downloadBytes);
+
+                return tempFilePath;
+            }
+
+            var bytes = await this.GetContentAsync(file);
+            using var stream = new FileStream(tempFilePath, FileMode.Create);
+            await stream.WriteAsync(bytes);
+
+            return tempFilePath;
         }
 
-        public Task<string> GetTempFilePathAsync(long id)
+        public async Task<string> GetTempFilePathAsync(long id)
         {
-            throw new NotImplementedException();
+            var file = await this.GetByIdAsync(id);
+            return await GetTempFilePathAsync(file);
         }
 
-        public Task<string> GetTempFilePathAsync(string url)
+        public async Task<string> GetTempFilePathAsync(string url)
         {
-            throw new NotImplementedException();
+            var idStr = Regex.Match(url, "[0-9]{19}").Value;
+
+            if (long.TryParse(idStr, out var id))
+            {
+                return await GetTempFilePathAsync(id);
+            }
+
+            throw new ErrorCodeException(-1, "文件未找到");
         }
 
         public async Task<File> UploadAsync(Stream stream, string originName, long originalFileId = 0, bool transcode = true)

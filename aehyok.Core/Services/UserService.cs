@@ -1,6 +1,7 @@
 ﻿using aehyok.Core.Domains;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
+using aehyok.Infrastructure.Enums;
 using aehyok.Infrastructure.Exceptions;
 using aehyok.Infrastructure.Options;
 using aehyok.Infrastructure.Utils;
@@ -15,8 +16,17 @@ using StringExtensions = aehyok.Infrastructure.Utils.StringExtensions;
 
 namespace aehyok.Core.Services
 {
-    public class UserService(DbContext dbContext, IMapper mapper) : ServiceBase<User>(dbContext, mapper), IUserService, IScopedDependency
+    public class UserService(DbContext dbContext, IMapper mapper, IFileService fileService) : ServiceBase<User>(dbContext, mapper), IUserService, IScopedDependency
     {
+        public async Task<dynamic> ImportAsync(string url, UserType userType, long operatorId)
+        {
+            //// 获取文件的本地路径
+            //var localPath = await fileService.GetTempFilePathAsync(url);
+
+            //var reader = new ExcelReader(localPath);
+            throw new Exception("未实现");
+        }
+
         public override async Task<User> InsertAsync(User entity, CancellationToken cancellationToken = default)
         {
             // 密码不为空的时候，加密密码

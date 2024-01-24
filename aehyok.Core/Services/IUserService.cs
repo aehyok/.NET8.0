@@ -1,5 +1,6 @@
 ﻿using aehyok.Core.Domains;
 using aehyok.EntityFrameworkCore.Repository;
+using aehyok.Infrastructure.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,14 @@ namespace aehyok.Core.Services
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         Task ResetPasswordAsync(long id);
+
+        /// <summary>
+        /// 导入用户列表
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="userType"></param>
+        /// <param name="operatorId"></param>
+        /// <returns></returns>
+        Task<dynamic> ImportAsync(string url, UserType userType, long operatorId);
     }
 }
