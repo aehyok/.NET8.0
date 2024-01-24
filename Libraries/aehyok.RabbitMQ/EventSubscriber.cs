@@ -115,7 +115,6 @@ namespace aehyok.RabbitMQ
                         var handler = (IEventHandler)Activator.CreateInstance(eventHandler, scopeFactory);
 
                         var eventData = JsonSerializer.Deserialize(message, eventType, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
                         using var scope = this.logger.BeginScope(new Dictionary<string, object>
                         {
                             ["EventBusId"] = ((EventBase)eventData).Id,

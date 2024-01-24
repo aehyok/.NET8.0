@@ -35,8 +35,7 @@ namespace aehyok.CronTask
                 Console.WriteLine($"任务下次执行时间:{nextExcuteTime.Value.ToLocalTime()}");
             }
 
-
-            ///用于准确测量时间间隔
+            //用于准确测量时间间隔
             Stopwatch stopwatch = new();
 
             while (!stoppingToken.IsCancellationRequested)

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.0.7" />
     <PackageReference Include="LinqKit.Core" Version="1.2.5" />
   </ItemGroup>
 
