@@ -1,6 +1,7 @@
 ﻿using aehyok.Basic.Services;
 using aehyok.Core.Domains;
 using aehyok.Core.Dtos;
+using aehyok.Core.Dtos.Query;
 using aehyok.Core.Services;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Models;
@@ -24,12 +25,17 @@ namespace aehyok.Basic.Api.Controllers
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         [HttpGet]
-        public async Task<IPagedList<FileDto>> GetListAsync([FromQuery]PagedQueryModelBase model)
+        public async Task<IPagedList<FileDto>> GetListAsync([FromQuery]FileQueryDto model)
         {
             var filter = PredicateBuilder.New<File>(true);
             if(!string.IsNullOrEmpty(model.Keyword))
             {
                 filter = filter.And(a => a.Name.Contains(model.Keyword));
+            }
+
+            if(model.FileType > 0)
+            {
+                filter = filter.And(a => a.Type == model.FileType);
             }
 
             var list =await fileService.GetPagedListAsync<FileDto>(filter, model.Page, model.Limit);   //.ToPagedListAsync<FileDto>(model.Page, model.Limit);

@@ -23,11 +23,11 @@ namespace aehyok.Infrastructure.Enums
     /// </summary>
     public enum FileType
     {
-        其他 = 0,
-        图片,
-        文档,
-        视频,
-        音频
+        其他 = 9,
+        图片 = 1,
+        文档 = 2,
+        视频 = 3,
+        音频 = 4,
     }
 
     public enum FileState
