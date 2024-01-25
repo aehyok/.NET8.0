@@ -18,6 +18,8 @@ namespace aehyok.Core.MapProfiles
 
             CreateMap<MenuDto, MenuTreeDto>();
 
+            CreateMap<SeedDataTask, SeedDataTaskDto>();
+
             CreateMap<ApiResource, ApiResourceDto>();
             CreateMap<ApiResourceDto, MenuResourceDto>();
 
