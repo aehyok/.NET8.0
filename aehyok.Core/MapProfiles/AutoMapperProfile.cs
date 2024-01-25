@@ -38,6 +38,8 @@ namespace aehyok.Core.MapProfiles
 
             CreateMap<Region, RegionDto>();
 
+            CreateMap<ScheduleTask, ScheduleTaskExecuteDto>();
+
             CreateMap<UserToken, UserTokenCacheDto>();
     //.ForMember(a => a.Roles, a => a.MapFrom(c => c.User.UserRoles.Select(r => r.Role.Code).ToList()));
             //.ForMember(a => a.PopulationId, a => a.MapFrom(c => c.User.PopulationId));

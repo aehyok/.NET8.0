@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 
 namespace aehyok.Core.Services
 {
-    public interface IScheduleTaskCoreService : IServiceBase<SeedDataTask>
+    public interface IScheduleTaskService: IServiceBase<ScheduleTask>
     {
-
+        /// <summary>
+        /// 初始化定时任务
+        /// </summary>
+        /// <returns></returns>
+        Task InitializeAsync();
     }
 }

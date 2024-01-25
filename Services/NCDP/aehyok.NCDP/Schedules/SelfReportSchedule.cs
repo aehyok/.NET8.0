@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace aehyok.NCDP.Schedules
 {
+    /// <summary>
+    /// 测试自主填报的功能
+    /// </summary>
     public class SelfReportSchedule : CronScheduleService
     {
-        protected override string Expression => "0 50 * * * ?";
+        protected override string Expression => "5 * * * * ?";
 
         protected override Task ProcessAsync(CancellationToken cancellationToken)
         {

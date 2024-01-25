@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace aehyok.NCDP.Schedules
 {
+    /// <summary>
+    /// 测试调查问卷的功能
+    /// </summary>
     public class QuestionSchedule2 : CronScheduleService
     {
-        protected override string Expression => "* 50 * * * ?";
+        protected override string Expression => "10 * * * * ?";
 
         protected override Task ProcessAsync(CancellationToken cancellationToken)
         {

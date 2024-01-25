@@ -1,6 +1,8 @@
 ﻿using aehyok.Core.Domains;
 using aehyok.Core.Services;
+using aehyok.Infrastructure;
 using aehyok.Redis;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,7 +29,7 @@ namespace aehyok.Core.HostedServices
         public async Task UpdateCronTask(SeedDataTask model)
         {
             using var scope = scopeFactory.CreateScope();
-            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<IScheduleTaskCoreService>();
+            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<ISeedDataTaskCoreService>();
 
             await cronTaskCoreService.UpdateAsync(model);
         }
@@ -77,17 +79,17 @@ namespace aehyok.Core.HostedServices
 
             var seedInstants = scope.ServiceProvider.GetServices<ISeedData>();
 
-            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<IScheduleTaskCoreService>();
+            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<ISeedDataTaskCoreService>();
 
             var list = await cronTaskCoreService.GetListAsync();
 
             foreach (var seed in seedInstants.OrderBy(a => a.Order))
             {
-                var taskName = seed.GetType().FullName;
+                var code = seed.GetType().FullName;
                 currentConfigPath = seed.ConfigPath;
                 var taskId = Guid.NewGuid().ToString();
                
-                var model = list.FirstOrDefault(item => item.TaskName == taskName);
+                var model = list.FirstOrDefault(item => item.Code == code);
 
                 try
                 {
@@ -101,7 +103,8 @@ namespace aehyok.Core.HostedServices
                     {
                         model = await cronTaskCoreService.InsertAsync(new SeedDataTask
                         {
-                            TaskName = taskName,
+                            Name = DocsHelper.GetTypeComments(seed.GetType().Assembly.GetName().Name, seed.GetType()),
+                            Code = code,
                             ConfigPath = currentConfigPath,
                             IsEnable = true
                         });
@@ -110,16 +113,16 @@ namespace aehyok.Core.HostedServices
                     //判断任务是否需要执行任务
                     if (GetExecuteStatus(model))
                     {
-                        logger.LogInformation($"开始执行[{taskName}]");
+                        logger.LogInformation($"开始执行[{code}]");
 
-                        if (await redisDatabaseProvider.SetAsync(taskName, taskId, TimeSpan.FromMinutes(5), CSRedis.RedisExistence.Nx))
+                        if (await redisDatabaseProvider.SetAsync(code, taskId, TimeSpan.FromMinutes(5), CSRedis.RedisExistence.Nx))
                         {
                             await seed.ApplyAsync(model);
                             model.ExecuteStatus = ExecuteStatus.成功;
                             model.ExecuteTime = DateTime.Now;
                         }
 
-                        logger.LogInformation($"[{taskName}]执行完成");
+                        logger.LogInformation($"[{code}]执行完成");
                     }
 
                 }
@@ -132,7 +135,7 @@ namespace aehyok.Core.HostedServices
                 finally
                 {
                     await UpdateCronTask(model);
-                    await redisDatabaseProvider.DeleteAsync(taskName);
+                    await redisDatabaseProvider.DeleteAsync(code);
                 }
             }
 

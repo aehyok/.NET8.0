@@ -20,5 +20,10 @@ namespace aehyok.Core
         /// 用户Token缓存 Key
         /// </summary>
         public static string UserToken = $"{currentAssembly}:UserToken:{{0}}";
+
+        /// <summary>
+        /// 定时任务 Cache Key
+        /// </summary>
+        public static string ScheduleTaskCache = $"ScheduleTask:{{0}}";
     }
 }

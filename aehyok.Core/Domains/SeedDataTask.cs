@@ -21,7 +21,12 @@ namespace aehyok.Core.Domains
         /// <summary>
         /// 任务名称
         /// </summary>
-        public string TaskName { get; set; }
+        public string Name { get; set; }
+
+        /// <summary>
+        /// 种子数据所属类的类名
+        /// </summary>
+        public string Code { get; set; }
 
         /// <summary>
         /// 是否启用
