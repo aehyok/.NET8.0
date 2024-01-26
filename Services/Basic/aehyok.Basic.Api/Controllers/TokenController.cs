@@ -173,7 +173,7 @@ namespace aehyok.Basic.Api.Controllers
            
                                                                                                              
             var result = this.Mapper.Map<CurrentUserDto>(user);
-            //result.Roles = result.Roles.OrderBy(item => item.IsDefault).ToList();
+            result.Roles = result.Roles.OrderBy(item => item.IsDefault).ToList();
 
             if (result is null)
                 throw new ErrorCodeException(100212, "用户信息不存在");
