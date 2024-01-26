@@ -15,7 +15,7 @@ namespace aehyok.Basic.Api.Controllers
     /// <summary>
     /// 操作日志
     /// </summary>
-    public class OperationLogController(IOperationLogService operationLogService, IUserService userService) : ApiControllerBase
+    public class OperationLogController(IOperationLogService operationLogService, IUserService userService) : BasicControllerBase
     {
         /// <summary>
         /// 操作日志列表
