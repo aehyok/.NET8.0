@@ -217,6 +217,11 @@ namespace aehyok.Basic.Api.Controllers
                 throw new ErrorCodeException(-1, "你要切换的角色已不存在");
             }
 
+            if(await permissionService.GetCountAsync(item => item.RoleId == role.RoleId) == 0)
+            {
+                throw new ErrorCodeException(-1, "该角色下没有任何权限");
+            }
+
             var tokenHash = StringExtensions.EncodeMD5(this.CurrentUser.Token);
 
             var token = await userTokenService.GetAsync(a => a.TokenHash == tokenHash);
