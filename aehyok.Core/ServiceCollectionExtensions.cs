@@ -11,7 +11,6 @@ using aehyok.RabbitMQ;
 using aehyok.EntityFrameworkCore;
 using aehyok.Swagger;
 using aehyok.Redis;
-using aehyok.CronTask;
 using System.Runtime.Loader;
 using aehyok.Infrastructure.Options;
 using aehyok.Infrastructure;
@@ -27,6 +26,7 @@ using aehyok.Core.Authentication;
 using aehyok.Infrastructure.Utils;
 using JsonLongConverter = aehyok.Infrastructure.Converters.JsonLongConverter;
 using OfficeOpenXml;
+using aehyok.Core.Schedule;
 
 namespace aehyok.Core
 {
@@ -315,6 +315,23 @@ namespace aehyok.Core
                 //Log.Information($"配置文件({(File.Exists(path) ? "有效" : "无效")}):{path}");
                 Console.WriteLine($"配置文件({(File.Exists(path) ? "有效" : "无效")}):{path}");
             }
+        }
+
+        /// <summary>
+        /// 初始化定时任务
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddCronTask(this IServiceCollection services)
+        {
+            var cronType = typeof(CronScheduleService);
+
+            foreach (var type in TypeFinders.SearchTypes(cronType, TypeFinders.TypeClassification.Class))
+            {
+                services.Add(new ServiceDescriptor(typeof(IHostedService), type, ServiceLifetime.Singleton));
+            }
+            return services;
+
         }
     }
 }

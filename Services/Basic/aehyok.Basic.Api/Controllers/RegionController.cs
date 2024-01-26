@@ -36,10 +36,10 @@ namespace aehyok.Basic.Api.Controllers
                           .Search(a => a.Code, $"%{model.Keyword}%");
             }
 
-            if (model.RegionId == 0 && model.IsCurrent)
+            if (model.ParentId == 0 && model.IsCurrent)
                 spec.Query.Where(a => a.Id == this.CurrentUser.RegionId);
             else
-                spec.Query.Where(a => a.ParentId == model.RegionId);
+                spec.Query.Where(a => a.ParentId == model.ParentId);
 
             return regionService.GetListAsync<RegionDto>(spec);
         }
@@ -122,7 +122,7 @@ namespace aehyok.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("export")]
-        public async Task<AsyncTaskDto> ExportAsync([FromQuery] RegionQueryDto model)
+        public async Task<AsyncTaskDto> ExportAsync([FromQuery] RegionExportQueryDto model)
         {
             var asyncTask = await asyncTaskService.GenerateTaskAsync(model, "RegionExport");
 

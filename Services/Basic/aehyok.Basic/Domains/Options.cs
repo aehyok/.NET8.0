@@ -32,15 +32,15 @@ namespace aehyok.Basic.Domains
         [MaxLength(1024)]
         public string Remark { get; set; }
         
-        /// <summary>
-        /// 租户Id
-        /// </summary>
-        public long TenantId { get; set; }
+        ///// <summary>
+        ///// 租户Id
+        ///// </summary>
+        //public long TenantId { get; set; }
 
-        /// <summary>
-        /// 所属租户
-        /// </summary>
-        public virtual Tenant Tenant { get; set; }
+        ///// <summary>
+        ///// 所属租户
+        ///// </summary>
+        //public virtual Tenant Tenant { get; set; }
 
         /// <summary>
         /// 所属系统Id

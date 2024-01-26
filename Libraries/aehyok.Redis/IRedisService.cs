@@ -43,6 +43,8 @@ namespace aehyok.Redis
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
+        /// <param name="expireSeconds"></param>
+        /// <param name="exists"></param>
         /// <returns></returns>
         Task<bool> SetAsync(string key, object value, int expireSeconds = -1, RedisExistence? exists = null);
 

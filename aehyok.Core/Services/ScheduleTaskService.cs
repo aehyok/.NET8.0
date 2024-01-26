@@ -1,6 +1,6 @@
 ﻿using aehyok.Core.Domains;
 using aehyok.Core.Dtos;
-using aehyok.CronTask;
+using aehyok.Core.Schedule;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
 using aehyok.Infrastructure.TypeFinders;
@@ -9,7 +9,6 @@ using aehyok.Redis;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace aehyok.Core.Services
 {

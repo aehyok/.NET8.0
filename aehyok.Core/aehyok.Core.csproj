@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Cronos" Version="0.8.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.Internal" Version="8.0.0" />
@@ -21,7 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\aehyok.Excel\aehyok.Excel.csproj" />
     <ProjectReference Include="..\aehyok.Infrastructure\aehyok.Infrastructure.csproj" />
-    <ProjectReference Include="..\Libraries\aehyok.CronTask\aehyok.CronTask.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.EntityFramework\aehyok.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.RabbitMQ\aehyok.RabbitMQ.csproj" />
     <ProjectReference Include="..\Libraries\aehyok.Redis\aehyok.Redis.csproj" />

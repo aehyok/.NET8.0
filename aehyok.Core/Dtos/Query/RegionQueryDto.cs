@@ -10,7 +10,7 @@
         /// <summary>
         /// 父级区域 Id
         /// </summary>
-        public long RegionId { get; set; }
+        public long ParentId { get; set; }
 
         /// <summary>
         /// 是否只查询当前区域下

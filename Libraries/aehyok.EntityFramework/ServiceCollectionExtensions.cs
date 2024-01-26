@@ -42,6 +42,7 @@ namespace aehyok.EntityFrameworkCore
                     // 设置数据迁移的程序集名称
                     mysqlOptions.MigrationsAssembly("aehyok.SystemService");
 
+                    mysqlOptions.EnableRetryOnFailure(); // 失败重试
                     //mysqlOptions.UseNetTopologySuite();  // 操作GEO空间数据的时候需要开启
 
                     // EnableSensitiveDataLogging(true) 可设置为true 开启敏感数据的记录

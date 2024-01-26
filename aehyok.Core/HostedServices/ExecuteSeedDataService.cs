@@ -29,9 +29,9 @@ namespace aehyok.Core.HostedServices
         public async Task UpdateCronTask(SeedDataTask model)
         {
             using var scope = scopeFactory.CreateScope();
-            var cronTaskCoreService = scope.ServiceProvider.GetRequiredService<ISeedDataTaskCoreService>();
+            var seedDataService = scope.ServiceProvider.GetRequiredService<ISeedDataTaskCoreService>();
 
-            await cronTaskCoreService.UpdateAsync(model);
+            await seedDataService.UpdateAsync(model);
         }
 
         /// <summary>

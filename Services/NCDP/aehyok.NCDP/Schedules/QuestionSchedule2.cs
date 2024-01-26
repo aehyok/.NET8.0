@@ -1,4 +1,5 @@
-﻿using aehyok.CronTask;
+﻿using aehyok.Core.Schedule;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace aehyok.NCDP.Schedules
     /// <summary>
     /// 测试调查问卷的功能
     /// </summary>
-    public class QuestionSchedule2 : CronScheduleService
+    public class QuestionSchedule2(IServiceScopeFactory serviceFactory) : CronScheduleService(serviceFactory)
     {
-        protected override string Expression => "10 * * * * ?";
+        protected override string Expression { get; set; } = "* 10 * * * ?";
+
+        protected override bool Singleton => true;
 
         protected override Task ProcessAsync(CancellationToken cancellationToken)
         {

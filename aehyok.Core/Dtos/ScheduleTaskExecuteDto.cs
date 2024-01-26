@@ -17,7 +17,7 @@ namespace aehyok.Core.Dtos
         /// <summary>
         /// Cron 表达式
         /// </summary>
-        public string CronExpression { get; set; }
+        public string Expression { get; set; }
 
         /// <summary>
         /// 状态
@@ -33,5 +33,10 @@ namespace aehyok.Core.Dtos
         /// 上次执行时间
         /// </summary>
         public DateTime LastExecuteTime { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// 下一次执行时间
+        /// </summary>
+        public DateTime NextExecuteTime { get; set; }
     }
 }
