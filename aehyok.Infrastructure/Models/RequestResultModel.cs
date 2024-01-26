@@ -55,7 +55,7 @@ namespace aehyok.Infrastructure.Models
         /// <summary>
         /// 总数量
         /// </summary>
-        public long Total { get; set; }
+        public int Total { get; set; }
 
         /// <summary>
         /// 当前页
