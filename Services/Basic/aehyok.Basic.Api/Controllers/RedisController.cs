@@ -1,9 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using aehyok.Redis;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aehyok.Basic.Api.Controllers
 {
-    public class RedisController : BasicControllerBase
+
+    /// <summary>
+    /// 缓存管理
+    /// </summary>
+    /// <param name="redisService"></param>
+    public class RedisController(IRedisService redisService) : BasicControllerBase
     {
         /// <summary>
         /// 获取redis所有keys
@@ -12,7 +18,11 @@ namespace aehyok.Basic.Api.Controllers
         [HttpGet]
         public async Task<dynamic> GetListAsync()
         {
-            return null;
+            return await redisService.ScanAsync();
+
+
+
+
         }
     }
 }

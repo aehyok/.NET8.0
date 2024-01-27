@@ -1,6 +1,7 @@
 ﻿using aehyok.Infrastructure;
 using CSRedis;
 using System.Runtime.CompilerServices;
+using static OfficeOpenXml.ExcelErrorValue;
 
 namespace aehyok.Redis
 {
@@ -19,6 +20,20 @@ namespace aehyok.Redis
         public bool PingAsync()
         {
             return RedisHelper.Ping();
+        }
+
+        public async Task<Dictionary<string,string>> ScanAsync()
+        {
+           List<string> list = new List<string>();
+           var result = await RedisHelper.ScanAsync(20, "*");
+            list.AddRange(result.Items);
+
+            var values = await RedisHelper.MGetAsync(list.ToArray());
+
+            var resultDictionary = list.Zip(values, (key, value) => new { key, value })
+                                            .ToDictionary(item => item.key, item => item.value);
+
+            return resultDictionary;
         }
 
         public Task<bool> SetAsync(string key, object value)

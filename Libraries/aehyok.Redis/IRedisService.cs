@@ -22,6 +22,8 @@ namespace aehyok.Redis
         /// <returns></returns>
         Task<T> GetAsync<T>(string key);
 
+
+
         /// <summary>
         /// 设置指定key的缓存值(不过期)
         /// </summary>
@@ -54,5 +56,8 @@ namespace aehyok.Redis
         /// <param name="key"></param>
         /// <returns></returns>
         Task<long> DeleteAsync(string key);
+
+
+        Task<Dictionary<string,string>> ScanAsync();
     }
 }
