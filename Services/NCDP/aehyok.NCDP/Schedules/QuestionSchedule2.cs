@@ -13,13 +13,12 @@ namespace aehyok.NCDP.Schedules
     /// </summary>
     public class QuestionSchedule2(IServiceScopeFactory serviceFactory) : CronScheduleService(serviceFactory)
     {
-        protected override string Expression { get; set; } = "* 10 * * * ?";
+        protected override string Expression { get; set; } = "0/2 * * * * ?";
 
         protected override bool Singleton => true;
 
         protected override Task ProcessAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine(this.Expression, "表达式");
             Console.WriteLine("实现调查问卷的功能");
             return Task.CompletedTask;
         }

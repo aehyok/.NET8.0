@@ -1,6 +1,7 @@
 ﻿using aehyok.Core.Domains;
 using aehyok.Core.Dtos;
 using aehyok.Core.Services;
+using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure.Utils;
 using aehyok.Redis;
 using AutoMapper;
@@ -28,6 +29,7 @@ namespace aehyok.Core.Schedule
         /// 如果为 True 在部署多个节点时，使用 Redis 作为分布式锁，限制每次只有一个服务执行
         /// </summary>
         protected abstract bool Singleton { get; }
+
         /// <summary>
         /// 获取下一次任务执行时间
         /// </summary>
@@ -60,6 +62,7 @@ namespace aehyok.Core.Schedule
                 using var scope = serviceFactory.CreateAsyncScope();
 
                 var scheduleTaskService = scope.ServiceProvider.GetService<IScheduleTaskService>();
+                var recordService = scope.ServiceProvider.GetService<IServiceBase<ScheduleTaskRecord>>();
                 var redisService = scope.ServiceProvider.GetService<IRedisService>();
                 var logger = scope.ServiceProvider.GetService<ILogger<CronScheduleService>>();
                 var mapper = scope.ServiceProvider.GetService<IMapper>();
@@ -111,8 +114,7 @@ namespace aehyok.Core.Schedule
                             await ProcessAsync(stoppingToken).ConfigureAwait(false);
 
                             scheduleTask.LastExecuteTime = scheduleTask.NextExecuteTime;
-
-                        } 
+                        }
                         else
                         {
                             logger.LogInformation($"定时任务 {code} 执行时未获取到锁，本次放弃执行");
@@ -121,13 +123,25 @@ namespace aehyok.Core.Schedule
                     }
 
                     scheduleTask.LastExecuteTime = DateTime.Now;
-                    await ProcessAsync(stoppingToken);
 
                     Console.WriteLine($"任务执行时间:{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+                    await recordService.InsertAsync(new ScheduleTaskRecord 
+                    { 
+                        ScheduleTaskId = scheduleTask.Id,
+                        ExecuteTime = DateTime.Now,
+                        IsSuccess = true,
+                    });
                     Console.WriteLine("任务执行完成");
                 }
                 catch(Exception ex)
                 {
+                    await recordService.InsertAsync(new ScheduleTaskRecord
+                    {
+                        ScheduleTaskId = scheduleTask.Id,
+                        ExecuteTime = DateTime.Now,
+                        ErrorMessage = ex.Message,
+                        IsSuccess = false,
+                    });
                     logger.LogError($"执行 {code} 任务发生错误");
                     logger.LogError(ex, ex.Message);
                 }

@@ -19,7 +19,6 @@ namespace aehyok.NCDP.Schedules
 
         protected override Task ProcessAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine(this.Expression, "表达式");
             Console.WriteLine("实现自主填报的功能");
             return Task.CompletedTask;
         }
