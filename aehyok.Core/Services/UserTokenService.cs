@@ -193,19 +193,19 @@ namespace aehyok.Core.Services
         {
             if (refreshToken.IsNullOrEmpty())
             {
-                throw new ErrorCodeException(-1, "Refresh Token 无效");
+                throw new ErrorCodeException(401, "Refresh Token 无效");
             }
 
             var userToken = await this.GetAsync(a => a.RefreshToken == refreshToken);
             if (userToken is null || !userToken.RefreshTokenIsAvailable || userToken.UserId != userId)
             {
-                throw new ErrorCodeException(-1, "Refresh Token 无效");
+                throw new ErrorCodeException(401, "Refresh Token 无效");
             }
 
             // RefreshToken 有效期为一个月
             if (userToken.CreatedAt < DateTime.Now.AddMonths(-1))
             {
-                throw new ErrorCodeException(-1, "Refresh Token 已过期");
+                throw new ErrorCodeException(401, "Refresh Token 已过期");
             }
 
             var user = await userService.GetAsync(a => a.Id == userToken.UserId);
