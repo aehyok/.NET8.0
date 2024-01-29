@@ -11,6 +11,8 @@ namespace aehyok.Basic.MapProfiles
             CreateMap<DictionaryGroup, DictionaryGroupDto>();
 
             CreateMap<DictionaryItem, DictionaryItemDto>();
+
+            CreateMap<Options, OptionsDto>();
         }
     }
 }

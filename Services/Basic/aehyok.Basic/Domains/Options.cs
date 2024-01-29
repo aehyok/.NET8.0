@@ -12,7 +12,7 @@ namespace aehyok.Basic.Domains
     /// <summary>
     /// 系统配置参数项
     /// </summary>
-    public class Options : Entity
+    public class Options : AuditedEntity
     {
         /// <summary>
         /// 键
