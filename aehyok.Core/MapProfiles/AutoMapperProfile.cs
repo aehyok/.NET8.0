@@ -24,6 +24,8 @@ namespace aehyok.Core.MapProfiles
 
             CreateMap<ScheduleTask, ScheduleTaskDto>();
 
+            CreateMap<Template, TemplateDto>();
+
             CreateMap<ApiResourceDto, MenuResourceDto>();
 
             CreateMap<Role, RoleDto>();

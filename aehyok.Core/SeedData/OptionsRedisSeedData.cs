@@ -15,7 +15,7 @@ namespace aehyok.Core.SeedData
 
         public Task ApplyAsync(SeedDataTask model)
         {
-            // 初始化配置参数到Options表，并同步到Redis
+            // TODO 初始化配置参数到Options表，并同步到Redis
             Console.WriteLine("初始化配置参数到Options表，并同步到Redis");
             return Task.CompletedTask;
         }
