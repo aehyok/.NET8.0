@@ -20,9 +20,9 @@ namespace aehyok.Core.Dtos
         public string Expression { get; set; }
 
         /// <summary>
-        /// 状态
+        /// 是否启用的状态
         /// </summary>
-        public ScheduleTaskStatus Status { get; set; }
+        public bool IsEnable { get; set; }
 
         /// <summary>
         /// 代码，默认为 Schedule 的类名

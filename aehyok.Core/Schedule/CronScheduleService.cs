@@ -65,7 +65,7 @@ namespace aehyok.Core.Schedule
                 var mapper = scope.ServiceProvider.GetService<IMapper>();
 
                 var scheduleTask = await redisService.GetAsync<ScheduleTaskExecuteDto>(CoreRedisConstants.ScheduleTaskCache.Format(code));
-                if (scheduleTask is null || scheduleTask.Status == ScheduleTaskStatus.暂停)
+                if (scheduleTask is null || !scheduleTask.IsEnable)
                 {
                     // 延迟重新执行
                     await Task.Delay(1000, stoppingToken);
@@ -77,7 +77,7 @@ namespace aehyok.Core.Schedule
                     this.Expression = scheduleTask.Expression;
                 }
 
-                if(scheduleTask.Status == ScheduleTaskStatus.已注册)
+                if(scheduleTask.IsEnable)
                 {
                     scheduleTask.NextExecuteTime = nextExcuteTime;
                 }

@@ -23,9 +23,9 @@ namespace aehyok.Core.Domains
         public string Code { get; set; }
 
         /// <summary>
-        /// 状态
+        /// 是否启用的状态
         /// </summary>   
-        public ScheduleTaskStatus Status { get; set; }
+        public bool IsEnable { get; set; } = true;
 
         /// <summary>
         /// Cron 表达式
@@ -41,12 +41,5 @@ namespace aehyok.Core.Domains
         /// 最后一次执行时间
         /// </summary>
         public DateTime LastExecuteTime { get; set; }
-    }
-
-    public enum ScheduleTaskStatus
-    {
-        已注册 = 1,
-        运行中 = 2,
-        暂停 = 3
     }
 }

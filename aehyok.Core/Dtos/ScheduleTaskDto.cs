@@ -28,7 +28,7 @@ namespace aehyok.Core.Dtos
         /// <summary>
         /// 状态
         /// </summary>
-        public ScheduleTaskStatus Status { get; set; }
+        public bool IsEnable { get; set; }
 
         /// <summary>
         /// 下一次执行时间

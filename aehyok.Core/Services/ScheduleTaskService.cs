@@ -37,7 +37,7 @@ namespace aehyok.Core.Services
                     exists = new ScheduleTask
                     {
                         Code = code,
-                        Status = ScheduleTaskStatus.已注册,
+                        IsEnable = true,
                         Name = name.IsNullOrEmpty() ? code : name
                     };
 
@@ -53,10 +53,10 @@ namespace aehyok.Core.Services
             }
         }
 
-        public async Task UpdateScheduleTaskStatusAsync(long scheduleTaskId, ScheduleTaskStatus scheduleTaskStatus, string cronExpression, DateTime nextExecuteTime)
+        public async Task UpdateScheduleTaskStatusAsync(long scheduleTaskId,bool IsEnable, string cronExpression, DateTime nextExecuteTime)
         {
             var scheduleTask = await this.GetAsync(a => a.Id == scheduleTaskId);
-            scheduleTask.Status = scheduleTaskStatus;
+            scheduleTask.IsEnable = IsEnable;
             scheduleTask.Expression = cronExpression;
             scheduleTask.NextExecuteTime = nextExecuteTime;
 

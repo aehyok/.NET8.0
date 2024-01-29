@@ -13,7 +13,7 @@ namespace aehyok.NCDP.Schedules
     /// </summary>
     public class SelfReportSchedule(IServiceScopeFactory serviceFactory) : CronScheduleService(serviceFactory)
     {
-        protected override string Expression { get; set; } = "5 * * * * ?";
+        protected override string Expression { get; set; } = "0/1 * * * * ?";
 
         protected override bool Singleton => true;
 
