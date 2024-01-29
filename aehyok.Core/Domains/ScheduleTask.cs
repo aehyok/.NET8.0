@@ -24,7 +24,7 @@ namespace aehyok.Core.Domains
 
         /// <summary>
         /// 状态
-        /// </summary>
+        /// </summary>   
         public ScheduleTaskStatus Status { get; set; }
 
         /// <summary>
