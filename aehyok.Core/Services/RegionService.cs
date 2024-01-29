@@ -3,7 +3,7 @@ using aehyok.Core.Dtos;
 using aehyok.Core.Services;
 using aehyok.EntityFrameworkCore.Repository;
 using aehyok.Infrastructure;
-using aehyok.Infrastructure.Excel;
+using aehyok.Excel.Export;
 using aehyok.Infrastructure.Exceptions;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
