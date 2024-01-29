@@ -22,7 +22,6 @@ namespace aehyok.Basic.Api.Controllers
     public class MenuController(IMenuService menuService,
         IApiResrouceCoreService apiResourceService, IServiceBase<MenuResource> menuResourceService) : BasicControllerBase
     {
-
         /// <summary>
         /// 获取菜单树
         /// </summary>
