@@ -118,7 +118,7 @@ namespace aehyok.Basic.Api.Controllers
             
             var currentUser = this.CurrentUser;
 
-            var query = from p in permissionService.GetQueryable()
+            var query = (from p in permissionService.GetQueryable()
                         join m in menuService.GetExpandable().Where(menuFilter) on p.MenuId equals m.Id
                         join ur in userRoleService.GetQueryable() on p.RoleId equals ur.RoleId
                         join r in userService.GetQueryable() on ur.UserId equals r.Id
@@ -136,7 +136,8 @@ namespace aehyok.Basic.Api.Controllers
                             IconType = m.IconType,
                             ActiveIcon = m.ActiveIcon,
                             Icon = m.Icon,
-                        };
+                        })
+                        .Distinct();
             var list = await query.ToListAsync();
 
             List<RolePermissionDto> getChildren(long parentId)
