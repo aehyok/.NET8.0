@@ -28,9 +28,9 @@ namespace aehyok.Core.Filters
         {
             var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
-            if (context.HttpContext.Request.Headers.ContainsKey("menuCode") && !string.IsNullOrEmpty(context.HttpContext.Request.Headers["menuCode"]))
+            if (context.HttpContext.Request.Headers.ContainsKey("Menu-Code") && !string.IsNullOrEmpty(context.HttpContext.Request.Headers["Menu-Code"]))
             {
-                var menuCode = context.HttpContext.Request.Headers["menuCode"].ToString();
+                var menuCode = context.HttpContext.Request.Headers["Menu-Code"].ToString();
                 if (actionDescriptor != null)
                 {
                     var json = JsonConvert.SerializeObject(context.ActionArguments);
