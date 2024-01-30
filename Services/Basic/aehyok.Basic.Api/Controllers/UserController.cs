@@ -103,7 +103,7 @@ namespace aehyok.Basic.Api.Controllers
 
             foreach(var item in list)
             {
-                item.Roles = (from urs in userRoleService.GetExpandable()
+                item.UserRoles = (from urs in userRoleService.GetExpandable()
                               where urs.UserId == item.Id
                               select new UserRoleDto
                               {
@@ -114,8 +114,8 @@ namespace aehyok.Basic.Api.Controllers
                                   RegionId = urs.RegionId,
                                   RegionName = urs.Region.Name
                               }).ToList();
-                if (item.Roles is not null && item.Roles.Count > 0)
-                    item.Roles.OrderBy(a => a.PlatformType);
+                if (item.UserRoles is not null && item.UserRoles.Count > 0)
+                    item.UserRoles.OrderBy(a => a.PlatformType);
             }
             return list;
         }
@@ -208,37 +208,41 @@ namespace aehyok.Basic.Api.Controllers
 
             entity = this.Mapper.Map(model, entity);
 
-            using var trans = await userService.BeginTransactionAsync();
+            var strategy = userService.GetDbContext.Database.CreateExecutionStrategy();
 
-            try
+            await strategy.ExecuteAsync(
+            async () =>
             {
-                await userRoleService.BatchSoftDeleteAsync(a => a.UserId == id);
+                using var trans = await userService.BeginTransactionAsync();
 
-
-                foreach (var item in model.UserRoles)
+                try
                 {
-                    var userRole = new UserRole
+                    await userRoleService.BatchSoftDeleteAsync(a => a.UserId == id);
+
+                    foreach (var item in model.UserRoles)
                     {
-                        RoleId = item.RoleId,
-                        UserId = entity.Id,
-                        RegionId = item.RegionId
-                    };
-                    await userRoleService.InsertAsync(userRole);
-                    //}
+                        var userRole = new UserRole
+                        {
+                            RoleId = item.RoleId,
+                            UserId = entity.Id,
+                            RegionId = item.RegionId
+                        };
+                        await userRoleService.InsertAsync(userRole);
+                    }
+
+                    entity.UserRoles = null;
+
+                    await userService.UpdateAsync(entity);
+
+                    await trans.CommitAsync();
                 }
-
-
-                entity.UserRoles = null;
-
-                await userService.UpdateAsync(entity);
-
-                await trans.CommitAsync();
-                return Ok();
-            }
-            catch(Exception ex)
-            {
-                return Ok();
-            }
+                catch (Exception ex)
+                {
+                    await trans.RollbackAsync();
+                    throw new Exception(ex.Message);
+                }
+            });
+            return Ok();
         }
 
         /// <summary>

@@ -63,7 +63,7 @@ namespace aehyok.Core.Dtos
         /// <summary>
         /// 用户角色
         /// </summary>
-        public List<UserRoleDto> Roles { get; set; }
+        public List<UserRoleDto> UserRoles { get; set; }
 
         /// <summary>
         /// 用户部门

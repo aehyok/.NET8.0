@@ -173,7 +173,7 @@ namespace aehyok.Basic.Api.Controllers
            
                                                                                                              
             var result = this.Mapper.Map<CurrentUserDto>(user);
-            result.Roles = result.Roles.OrderBy(item => item.IsDefault).ToList();
+            result.UserRoles = result.UserRoles.OrderBy(item => item.IsDefault).ToList();
 
             if (result is null)
                 throw new ErrorCodeException(100212, "用户信息不存在");
@@ -186,9 +186,9 @@ namespace aehyok.Basic.Api.Controllers
                 var regions = (await regionService.GetListAsync(r => ids.Contains(r.Id))).OrderBy(r => r.Level);
                 regionFullName = regions.Select(r => r.Name).ToArray();
             }
-            result.Roles = userRoleList;
+            result.UserRoles = userRoleList;
             result.RoleId = this.CurrentUser.RoleId;
-            result.RoleName = result.Roles?.Find(e => e.RoleId == this.CurrentUser.RoleId)?.RoleName;
+            result.RoleName = result.UserRoles?.Find(e => e.RoleId == this.CurrentUser.RoleId)?.RoleName;
             result.RegionId = this.CurrentUser.RegionId;
             result.RegionName = regionInfo?.Name;
             result.RegionFullName = regionFullName;
