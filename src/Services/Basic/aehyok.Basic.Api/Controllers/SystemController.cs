@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Renci.SshNet;
+using ConnectionInfo = Renci.SshNet.ConnectionInfo;
 
 namespace aehyok.Basic.Api.Controllers
 {
@@ -39,6 +41,43 @@ namespace aehyok.Basic.Api.Controllers
                 logger.LogInformation($"An error occurred: {ex.Message}");
             }
             return serviceFiles;
+        }
+
+        /// <summary>
+        /// 测试ssh
+        /// </summary>
+        /// <returns></returns> 
+        [HttpPost]
+        public  dynamic PostAsync()
+        {
+            var result = string.Empty;
+            try
+            {
+                string host = "121.37.222.1";
+                string userName = "root";
+                string password = "sunlight2010!";
+                string privateKeyFilePath = @"C:\Users\Administrator\.ssh\id_rsa";
+
+                //var pk = new PrivateKeyFile(yourkey);
+
+                //var keyFiles = new[] { privateKeyFilePath };
+
+                //var methods = new List<AuthenticationMethod>();
+                //methods.Add(new PrivateKeyAuthenticationMethod(userName, keyFiles));
+
+                //var connectionInfo = new ConnectionInfo(host, userName, new PrivateKeyAuthenticationMethod(userName, methods.ToArray()));
+                using(var client = new SshClient(host, userName, password))
+                {
+                    client.Connect();
+                    var output = client.RunCommand("docker ps");
+                    return output.Result;
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return result ;
         }
     }
 }

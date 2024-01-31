@@ -24,7 +24,7 @@ namespace aehyok.Infrastructure.Captcha
 
             // 创建画布
             using var canvas = new SKCanvas(image);
-
+               
             // 填充白色
             canvas.DrawColor(SKColors.White);
 
