@@ -24,7 +24,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine
 EXPOSE 11000
 
 WORKDIR /app
-COPY etc/.  .
+COPY src/etc/.  .
 COPY --from=build /app .
 
 ENTRYPOINT ["./aehyok.SystemService"]
