@@ -193,7 +193,7 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 ## 从登录开始说起
 
 - 比如用户名和密码登录后，会生成一个token，有效期为两个小时，同时会生成一个RefreshToken，有效期为一个月
-- 每次请求接口时，都会带上token，如果token过期了，就会使用RefreshToken去刷新token，如果RefreshToken也过期了，就需要重新登录
+- 每次请求接口时，都会带上token，如果token过期了，就会使用RefreshToken去刷新token，如果RefreshToken也过期了，那么就需要重新登录了
 
 ## 登录成功后获取用户信息
 
