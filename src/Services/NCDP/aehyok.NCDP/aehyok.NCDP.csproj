@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\aehyok.Core\aehyok.Core.csproj" />
+    <ProjectReference Include="..\..\Basic\aehyok.Basic\aehyok.Basic.csproj" />
+  </ItemGroup>
+
+</Project>
