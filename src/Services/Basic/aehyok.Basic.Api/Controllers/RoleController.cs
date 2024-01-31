@@ -142,6 +142,11 @@ namespace aehyok.Basic.Api.Controllers
                 throw new ErrorCodeException(-1, "你要禁用的数据不存在");
             }
 
+            if (entity.IsSystem) 
+            {
+                throw new ErrorCodeException(-1, "禁止禁用系统内置角色");
+            }
+
             entity.IsEnable = false;
             await roleService.UpdateAsync(entity);
 
