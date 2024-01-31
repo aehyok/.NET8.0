@@ -76,6 +76,11 @@ namespace aehyok.Core.Dtos
         public MenuIconType ActiveIconType { get; set; }
 
         /// <summary>
+        /// 是否外链
+        /// </summary>
+        public bool IsExternalLink { get; set; }
+
+        /// <summary>
         /// 数据范围
         /// </summary>
         //public DataRange DataRange { get; set; }

@@ -122,7 +122,7 @@ namespace aehyok.Basic.Api.Controllers
                         join m in menuService.GetExpandable().Where(menuFilter) on p.MenuId equals m.Id
                         join ur in userRoleService.GetQueryable() on p.RoleId equals ur.RoleId
                         join r in userService.GetQueryable() on ur.UserId equals r.Id
-                        where ur.UserId == currentUser.UserId && ur.RoleId == currentUser.RoleId
+                        where ur.UserId == currentUser.UserId && ur.RoleId == currentUser.RoleId  && m.IsVisible
                         select new RolePermissionDto
                         {
                             MenuId = m.Id,
@@ -136,6 +136,7 @@ namespace aehyok.Basic.Api.Controllers
                             IconType = m.IconType,
                             ActiveIcon = m.ActiveIcon,
                             Icon = m.Icon,
+                            IsExternalLink = m.IsExternalLink
                         })
                         .Distinct();
             var list = await query.ToListAsync();
