@@ -56,16 +56,7 @@ namespace aehyok.Basic.Api.Controllers
                 string host = "121.37.222.1";
                 string userName = "root";
                 string password = "sunlight2010!";
-                string privateKeyFilePath = @"C:\Users\Administrator\.ssh\id_rsa";
 
-                //var pk = new PrivateKeyFile(yourkey);
-
-                //var keyFiles = new[] { privateKeyFilePath };
-
-                //var methods = new List<AuthenticationMethod>();
-                //methods.Add(new PrivateKeyAuthenticationMethod(userName, keyFiles));
-
-                //var connectionInfo = new ConnectionInfo(host, userName, new PrivateKeyAuthenticationMethod(userName, methods.ToArray()));
                 using(var client = new SshClient(host, userName, password))
                 {
                     client.Connect();
