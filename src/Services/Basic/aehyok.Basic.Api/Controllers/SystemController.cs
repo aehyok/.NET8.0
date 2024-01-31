@@ -32,7 +32,6 @@ namespace aehyok.Basic.Api.Controllers
                     logger.LogInformation($"{serviceFiles.Length}");
                     Console.WriteLine($"An error occurred: {serviceFiles}");
                     logger.LogInformation($"An error occurred: {serviceFiles}");
-
                 }
             }
             catch (Exception ex)

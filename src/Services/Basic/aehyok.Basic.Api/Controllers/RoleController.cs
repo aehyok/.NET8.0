@@ -41,6 +41,7 @@ namespace aehyok.Basic.Api.Controllers
                 spec.Query.Where(a => a.PlatformType == platformType);
             }
             
+            // 当前用户角色不是超级管理员时，不允许查看超级管理员角色
             var role = await roleService.GetByIdAsync(roleId);
 
             if(role.Code != SystemRoles.ROOT)
