@@ -8,7 +8,7 @@ ARG TARGETARCH
 # 先拷贝源码
 WORKDIR /source
 
-COPY  .  .
+COPY  src/.  .
 
 # 设置当前工作目录
 WORKDIR Services/Basic/aehyok.Basic.Api
