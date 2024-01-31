@@ -58,6 +58,7 @@ namespace aehyok.Basic.Api.Controllers
                 filter.And(a => a.UserName.Contains(model.Keyword) || a.Mobile.Contains(model.Keyword) || a.NickName.Contains(model.Keyword) || a.RealName.Contains(model.Keyword));
             }
 
+            filter.And(a => a.UserName != "root");
 
             if (model.IsEnable.HasValue)
             {
