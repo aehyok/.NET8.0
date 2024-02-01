@@ -1,24 +1,85 @@
+## 待处理的问题
+
+- 上传视频以及上传视频的缩略图生成方案
+- 上传数据和下载数据  以及Excel文档等的处理
+- 手机号登录 微信扫码登录
+- 模版文件的处理
+- 上传所有文件的查看预览(√)
+- 任务调度表的维护(√)列表已有、 修改表达式和启用禁用待完善
+- 数据初始化的维护
+- 系统后端服务的维护
+- 系统前端的部署以及小程序的发布部署 ()
+- 系统redis所有缓存的查看维护 （Keys * 来获取数据）
+- 登录日志和操作日志的查看(已有接口)
+
 ## .net 8
+```
+- 1、初始化了EntityFrameworkCore
+- 2、初始化了消息队列RabbitMQ
+- 3、初始化了持久化缓存Redis
+- 4、初始化了记录日志Serilog
+- 5、初始化了接口文档Swagger
+```
+
+## 服务器上所使用的外部套件
+```
+- 1、docker和docker-compose（✓）
+- 2、zabbix docker 分布式监控系统，监控服务器的CPU、内存、硬盘、网络等使用情况
+- 3、Serilog docker 日志记录系统（✓）
+    - 可通过端口12000进行访问 
+    - 用户名和密码 admin sunlight2023 
+- 4、goploy CI CD 部署系统（✓）
+- 5、redis 可使用docker部署（✓）
+- 6、rabbitmq 可使用docker部署（✓）
+- 7、mysql 可使用docker部署（✓）
+- 8、nginx 可使用docker部署（✓）
+- 9、net8.0 可使用docker部署（✓）
+- 10、SkyWalking 监测  链路追踪（×）  
+    - https://www.cnblogs.com/wei325/p/16412775.html
+```
+
+
+##  操作日志记录通过后端中间件实现OperationLogActionFilter
+```
+- 1、操作日志通过Action上标注特性
+    [OperationLogAction("修改菜单，菜单Id为:{id}，菜单Code为{model.Code}")]
+```
+
+##  ApiAsyncExceptionFilter
 
 - **1、EFCore更新数据库**
-  ```
-   在aehyok.Schedules项目下
+```
+开发环境下在aehyok.SystemService项目下
 
-   dotnet-ef migrations add InitTask -c DvsContext --framework net8.0 -v
+dotnet-ef migrations add InitTask -c DvsContext --framework net8.0 -v
    
-   dotnet-ef database update -c DvsContext --framework net8.0 -v
-  ```
+dotnet-ef database update -c DvsContext --framework net8.0 -v
 
- ## 有些文件需要设置为 嵌入的资源
- ```
- CSS 文件
- JavaScript文件
- Html文件
- ``` 
+执行完记得将代码进行push，以免跟其他开发人员的更新数据库冲突
+```
+
+-**1.1、EFCore 新增更新删除时的操作**
+```
+新增时会通过拦截器DvsSaveChangeInterceptor拦截器，将CreateBy CreateAt UpdateBy UpdateAt写入到数据库中
+修改时，只会将UpdateBy UpdateAt写入到数据库中
+删除的时候，会在修改的基础上将IsDeleted置为true
+
+查询数据的时候统一过滤IsDeleted为false的数据（modelBuilder.ApplyGlobalFilterAsDeleted）
+```
+
+-**1.2、EFCore 查询时优化操作**
+
+
 
 - **2、接口安全性**
   ```
-  IActionDescriptorCollectionProvider 
+   Menu 菜单定义表（手动维护）
+   
+   ApiResource 接口列表（相当于通过反射将所有控制器和方法都提取出来进行保存）
+   
+   MenuResource 菜单和接口关联表
+   
+   每个操作
   ```
 
 - **3、操作日志**
@@ -32,6 +93,47 @@
   https://juejin.cn/post/7009116644031070244?searchId=2023121513462817BCA1D45D34D690B014
 
   ```
+ - **4、用户名密码登录
+ ```
+ 首先校验验证码
+ 根据用户名查找用户信息
+ 如果为空看看用户名是否为手机号，然后再根据手机号查找用户信息
+ 如果还是为空，则提示账号或密码错误
+ 如果不为空，判断PasswordSalt是否为空
+ 为空则提示密码没有设置
+ 有密码的话，则开始校验密码(密码混淆)
+
+ 判断用户是否启用，没启用则报错
+ 更新最后登录时间
+
+ 然后获取一堆信息
+ 写入usertoken
+ 并添加用户信息 角色信息等写入缓存
+
+ ```
+
+## RabbitMQ 调试
+- 暂时开两个解决方案调试
+- aehyok.NET8: 一个是为了打开 aehyok.Basic.Api 发布消息的或者其他API服务
+- aehyok.NET8.SystemService: 另外一个为了打开aehyok.SystemService 开启订阅消息
+
+
+## redis 单独封装保持与指令一致的操作
+
+- aehyok.Redis项目中封装了RedisService类，保持与redis指令一致的操作
+- 使用时只需要在构造函数进行注入（IRedisService redisService）
+- 然后就可以使用了
+```
+    // 构造函数注入服务
+    public class RedisController(IRedisService redisService) 
+
+    // 获取key数据
+    redisService.GetAsync<T>(key);
+
+    // 设置key数据
+    redisService.SetAsync<T>(key, value);
+```
+
 ## 使用的开源库
 
 ```
@@ -87,10 +189,55 @@
   - https://github.com/oozcitak/exiflibrary
 - itext
   - https://github.com/itext/itext7-dotnet
+- 工作流
+  - https://github.com/elsa-workflows/elsa-core 
+- swagger 
+  - https://github.com/domaindrivendev/Swashbuckle.AspNetCore
 ```
 
 
 
-## UI
+## 前端
 
-- https://github.com/tusen-ai/naive-ui
+- 前端UI https://github.com/tusen-ai/naive-ui
+- 微前端 https://github.com/Tencent/wujie
+
+## swagger
+
+开启aehyok.SystemService项目，然后访问http://localhost:12000/swagger/index.html
+然后在配置文件中配置了Endpoints数组，每个数组中的节点配置开启的微服务，
+然后就可以通过http://localhost:12000/swagger/index.html访问到其他微服务的接口文档了
+
+## 初始化数据考量
+
+会在aehyok.SystemService系统初始化的时候，进行种子数据的初始化，并将种子数据任务写入到数据库（SeedDataTask）方便后台查看
+种子数据初始化的时候可以设置执行顺序，通过设置Order进行排序，越小的Order值越先执行
+
+同时可以在后台进行设置是否启用，如果不启用则不会执行
+
+几种类型
+- 1、一次性数据更新（只会执行一次后续将不会更新）
+    - 区域初始化根节点
+    - 角色初始化（运维管理员角色）系统角色（已处理不允许删除和编辑）
+    - 用户初始化（运维管理员）root用户不会出现在用户列表进行了过滤
+- 2、每次更新版本时的数据更新
+    - 菜单需要每次更新程序要先初始化
+    - 然后运维角色的权限将所有菜单写入
+- 3、根据需要全量拷贝的初始化数据待处理（???）
+
+## token无感刷新
+
+- 比如用户名和密码登录后，会生成一个token，有效期为两个小时，同时会生成一个RefreshToken，有效期为一个月
+- 每次请求接口时，都会带上token，如果token过期了，就会使用RefreshToken去刷新token，如果RefreshToken也过期了，那么就需要重新登录了
+
+这算是无感刷新token的一个比较好的方案了
+
+## 定时任务
+- 使用.net内置 BackgroundService后台异步执行任务
+- 使用Cronos表达式进行定时任务的配置，可支持到秒级执行
+- 封装统一处理定时任务基类CronScheduleService，会在aehyok.SystemService系统服务开启后将服务本身同步到Mysql和Redis（ScheduleTask)
+- 会对定时任务的执行过程进行记录，记录到数据库中(ScheduleTaskRecord) 记录开始执行时间，结束执行时间，执行是否成功，以及表达式的转换时间等
+- 通过后台可以对定时任务进行启用禁用，修改表达式等操作
+
+
+

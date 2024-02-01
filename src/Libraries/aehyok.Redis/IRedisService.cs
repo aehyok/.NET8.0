@@ -37,6 +37,8 @@ namespace aehyok.Redis
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
+        /// <param name="expire"></param>
+        /// <param name="exists"></param>
         /// <returns></returns>
         Task<bool> SetAsync(string key, object value, TimeSpan expire, RedisExistence? exists = null);
 
@@ -45,7 +47,7 @@ namespace aehyok.Redis
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        /// <param name="expireSeconds"></param>
+        /// <param name="expireSeconds">过期时间单位为秒</param>
         /// <param name="exists"></param>
         /// <returns></returns>
         Task<bool> SetAsync(string key, object value, int expireSeconds = -1, RedisExistence? exists = null);
