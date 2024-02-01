@@ -8,6 +8,7 @@ using LinqKit.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
+using sun.Infrastructure.Utils;
 
 namespace sun.Basic.Api.Controllers
 {
@@ -27,6 +28,13 @@ namespace sun.Basic.Api.Controllers
         {
             var filter = PredicateBuilder.New<OperationLog>(true);
 
+            if(model.Keyword.IsNotNullOrEmpty())
+            {
+                //filter.And(a => a.OperationContent.Contains(model.Keyword) || a.OperationMenu.Contains(model.Keyword));
+                filter.Or(a => a.OperationContent.Contains(model.Keyword));
+                filter.Or(a => a.OperationMenu.Contains(model.Keyword));
+            }
+
             if (model.StartTime.HasValue)
             {
                 filter.And( a => a.CreatedAt >= model.StartTime.Value);
@@ -37,10 +45,10 @@ namespace sun.Basic.Api.Controllers
                 filter.And(a => a.CreatedAt <= model.EndTime.Value);
             }
 
-            if (!string.IsNullOrWhiteSpace(model.Keyword))
-            {
-                filter.And(a => a.OperationContent.Contains(model.Keyword) || a.OperationMenu.Contains(model.Keyword));
-            }
+            //if (!string.IsNullOrWhiteSpace(model.Keyword))
+            //{
+            //    filter.And(a => a.OperationContent.Contains(model.Keyword) || a.OperationMenu.Contains(model.Keyword));
+            //}
 
             var query = from log in operationLogService.GetExpandable().Where(filter)
                         join user in userService.GetQueryable() on log.CreatedBy equals user.Id into lu

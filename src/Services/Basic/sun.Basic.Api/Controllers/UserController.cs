@@ -36,17 +36,17 @@ namespace sun.Basic.Api.Controllers
         [HttpGet("list")]
         public async Task<IPagedList<UserDto>> GetListAsync([FromQuery] UserQueryDto model)
         {
-            var spec = Specifications<User>.Create();
+            //var spec = Specifications<User>.Create();
 
             //spec.Query.OrderByDescending(a => a.Id).Include(a => a.Roles);
 
-            if (!string.IsNullOrWhiteSpace(model.Keyword))
-            {
-                spec.Query.Search(a => a.UserName, $"%{model.Keyword}%")
-                          .Search(a => a.Mobile, $"%{model.Keyword}%")
-                          .Search(a => a.NickName, $"%{model.Keyword}%")
-                          .Search(a => a.RealName, $"%{model.Keyword}%");
-            }
+            //if (!string.IsNullOrWhiteSpace(model.Keyword))
+            //{
+            //    spec.Query.Search(a => a.UserName, $"%{model.Keyword}%")
+            //              .Search(a => a.Mobile, $"%{model.Keyword}%")
+            //              .Search(a => a.NickName, $"%{model.Keyword}%")
+            //              .Search(a => a.RealName, $"%{model.Keyword}%");
+            //}
 
 
             var filter = PredicateBuilder.New<User>(true);
@@ -55,7 +55,11 @@ namespace sun.Basic.Api.Controllers
 
             if (!string.IsNullOrWhiteSpace(model.Keyword))
             {
-                filter.And(a => a.UserName.Contains(model.Keyword) || a.Mobile.Contains(model.Keyword) || a.NickName.Contains(model.Keyword) || a.RealName.Contains(model.Keyword));
+                //filter.And(a => a.UserName.Contains(model.Keyword) || a.Mobile.Contains(model.Keyword) || a.NickName.Contains(model.Keyword) || a.RealName.Contains(model.Keyword));
+                filter.Or(a => a.UserName.Contains(model.Keyword));
+                filter.Or(a => a.Mobile.Contains(model.Keyword));
+                filter.Or(a => a.NickName.Contains(model.Keyword));
+                filter.Or(a => a.RealName.Contains(model.Keyword));
             }
 
             filter.And(a => a.UserName != "root");
