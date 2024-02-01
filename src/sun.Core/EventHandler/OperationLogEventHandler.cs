@@ -15,7 +15,7 @@ namespace sun.Core.EventHandler
 {
     public class OperationLogEventHandler(IServiceScopeFactory scopeFactory): IEventHandler<OperationLogEventData>
     {
-        public async Task HandleAsync(OperationLogEventData @event)
+        public Task HandleAsync(OperationLogEventData @event)
         {
             using var scope = scopeFactory.CreateScope();
             var logger = scope.ServiceProvider.GetService<ILogger<OperationLogEventHandler>>();
@@ -23,7 +23,8 @@ namespace sun.Core.EventHandler
             var httpContextAccessor = scope.ServiceProvider.GetService<IHttpContextAccessor>();
             var operationLogService = scope.ServiceProvider.GetService<IOperationLogService>();
             var ipAddress = httpContextAccessor.HttpContext.Request.GetRemoteIpAddress();
-            await operationLogService.LogAsync(@event.Code, @event.Content, @event.Json, ipAddress, @event.UserId);
+            //await operationLogService.LogAsync(@event.Code, @event.Content, @event.Json, ipAddress, @event.UserId);
+            return Task.CompletedTask;
         }
     }
 }
