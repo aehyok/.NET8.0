@@ -41,13 +41,14 @@
 
 ##  操作日志记录通过后端中间件实现OperationLogActionFilter
 ```
-- 1、操作日志通过Action上标注特性
+    操作日志通过Action上标注特性
     [OperationLogAction("修改菜单，菜单Id为:{id}，菜单Code为{model.Code}")]
+    同时需要前端传递menuCode，如果不传递menuCode则不进行记录操作日志的行为
 ```
 
 ##  ApiAsyncExceptionFilter
 
-- **1、EFCore更新数据库**
+## EFCore更新数据库
 ```
 开发环境下在aehyok.SystemService项目下
 
@@ -207,6 +208,8 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 开启aehyok.SystemService项目，然后访问http://localhost:12000/swagger/index.html
 然后在配置文件中配置了Endpoints数组，每个数组中的节点配置开启的微服务，
 然后就可以通过http://localhost:12000/swagger/index.html访问到其他微服务的接口文档了
+
+以及在swagger中配置了接口的安全性，需要在请求头中添加token才能访问接口，接口也可以设置无需token访问
 
 ## 初始化数据考量
 

@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sun.Basic.Api", "Services\B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{8D102B9A-B984-498B-83BE-8A01CAE00695}"
 	ProjectSection(SolutionItems) = preProject
-		Docs\README.md = Docs\README.md
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SystemService", "SystemService", "{E7BC258F-CB76-4061-AD59-6527E289A92F}"
