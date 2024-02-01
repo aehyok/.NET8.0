@@ -48,7 +48,7 @@
 
 ##  ApiAsyncExceptionFilter
 
-## EFCore更新数据库
+## EFCore 开发环境更新数据库
 ```
 开发环境下在aehyok.SystemService项目下
 
@@ -57,9 +57,11 @@ dotnet-ef migrations add InitTask -c DvsContext --framework net8.0 -v
 dotnet-ef database update -c DvsContext --framework net8.0 -v
 
 执行完记得将代码进行push，以免跟其他开发人员的更新数据库冲突
+
+生产环境待确认生成脚本进行执行（？？？）https://www.cnblogs.com/chenxinblogs/p/15208251.html
 ```
 
--**1.1、EFCore 新增更新删除时的操作**
+## EFCore新增更新删除时的操作
 ```
 新增时会通过拦截器DvsSaveChangeInterceptor拦截器，将CreateBy CreateAt UpdateBy UpdateAt写入到数据库中
 修改时，只会将UpdateBy UpdateAt写入到数据库中
@@ -68,7 +70,18 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 查询数据的时候统一过滤IsDeleted为false的数据（modelBuilder.ApplyGlobalFilterAsDeleted）
 ```
 
--**1.2、EFCore 查询时优化操作**
+## EFCore查询优化操作
+- 通过LinqKit(https://github.com/scottksmith95/LINQKit) 进行优化查询条件表达式
+
+
+- 通过Specification(https://github.com/ardalis/Specification) 进行查询表达式的优化
+```
+    // 关联查询
+    if (model.AuthStatus == 1)
+        spec.Query.Where(a => villagePopulationService.GetDbContext.Set<User>().Any(c => c.PopulationId == a.PopulationId));
+    else if (model.AuthStatus == 2)
+        spec.Query.Where(a => !villagePopulationService.GetDbContext.Set<User>().Any(c => c.PopulationId == a.PopulationId));
+```
 
 
 
@@ -196,6 +209,11 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
   - https://github.com/domaindrivendev/Swashbuckle.AspNetCore
 ```
 
+- 待对接的第三方组件库
+```
+- 发送邮件 https://github.com/jstedfast/MimeKit
+```
+
 
 
 ## 前端
@@ -210,6 +228,10 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 然后就可以通过http://localhost:12000/swagger/index.html访问到其他微服务的接口文档了
 
 以及在swagger中配置了接口的安全性，需要在请求头中添加token才能访问接口，接口也可以设置无需token访问
+
+## RabbitMQ 
+- https://www.cnblogs.com/ysocean/p/9251884.html#_label2
+## Serilog日志
 
 ## 初始化数据考量
 
