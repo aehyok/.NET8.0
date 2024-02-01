@@ -1,5 +1,5 @@
 [Unit]
-Description=aehyok-systemservice
+Description=sun-ncdp
 After=network-online.target
 Wants=network-online.target
 
@@ -9,8 +9,8 @@ Wants=network-online.target
 # Group=dvs
 
 Type=simple
-ExecStart=/root/.dotnet/dotnet /usr/local/aehyok/aehyok-systemservice/aehyok.SystemService.dll
-WorkingDirectory=/usr/local/aehyok/aehyok-systemservice
+ExecStart=/root/.dotnet/dotnet /usr/local/sunlight/sun-ncdp/sun.NCDP.Api.dll
+WorkingDirectory=/usr/local/sunlight/sun-ncdp
 
 Restart=always
 RestartSec=1
