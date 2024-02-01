@@ -21,6 +21,7 @@ namespace sun.Core.Services
     /// </summary>
     /// <param name="dbContext"></param>
     /// <param name="mapper"></param>
+    /// <param name="publisher"></param>
     public class AsyncTaskService(DbContext dbContext, IMapper mapper, IEventPublisher publisher) : ServiceBase<AsyncTask>(dbContext, mapper), IAsyncTaskService,IScopedDependency
     {
         public async Task<AsyncTask> GenerateTaskAsync<TData>(TData data, string code) where TData : new()
