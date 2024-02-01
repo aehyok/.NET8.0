@@ -11,9 +11,9 @@ WORKDIR /source
 COPY  src/.  .
 
 # 设置当前工作目录
-WORKDIR Services/SystemService/aehyok.SystemService
+WORKDIR Services/SystemService/sun.SystemService
 # 编译当前项目
-RUN dotnet publish "aehyok.SystemService.csproj" -o /app -f net8.0
+RUN dotnet publish "sun.SystemService.csproj" -o /app -f net8.0
 
 
 # Enable globalization and time zones:
@@ -27,4 +27,4 @@ WORKDIR /app
 COPY src/etc/.  .
 COPY --from=build /app .
 
-ENTRYPOINT ["./aehyok.SystemService"]
+ENTRYPOINT ["./sun.SystemService"]

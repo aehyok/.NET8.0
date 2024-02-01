@@ -1,0 +1,6 @@
+@sun.Basic.Api_HostAddress = http://localhost:11001
+
+GET {{sun.Basic.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

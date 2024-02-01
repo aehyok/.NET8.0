@@ -1,0 +1,6 @@
+@sun.NCDP.Api_HostAddress = http://localhost:11002
+
+GET {{sun.NCDP.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

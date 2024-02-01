@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\DictionaryController.cs~RFa4584.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.0.7" />
+    <PackageReference Include="LinqKit.Core" Version="1.2.5" />
+    <PackageReference Include="SSH.NET" Version="2023.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\sun.Infrastructure\sun.Infrastructure.csproj" />
+    <ProjectReference Include="..\sun.Basic\sun.Basic.csproj" />
+  </ItemGroup>
+
+</Project>
