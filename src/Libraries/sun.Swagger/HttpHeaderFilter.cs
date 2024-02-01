@@ -22,7 +22,7 @@ namespace sun.Swagger
 
             operation.Parameters.Add(new OpenApiParameter
             {
-                Name = "menuCode",
+                Name = "Menu-Code",
                 Description = "当前操作的menuCode",
                 In = ParameterLocation.Header,
                 Required = false,
