@@ -7,7 +7,7 @@
             {
                 "Name": "File",
                 "Args": {
-                    "path": "/var/log/aehyok/basic.log"
+                    "path": "/var/log/sunlight/sun-basic.log"
                 }
             },
             {}
