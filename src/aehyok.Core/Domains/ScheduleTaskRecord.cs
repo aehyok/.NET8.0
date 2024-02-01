@@ -26,9 +26,19 @@ namespace aehyok.Core.Domains
         public string ErrorMessage { get; set; }
 
         /// <summary>
-        /// 执行时间
+        /// 执行开始时间
         /// </summary>
-        public DateTime ExecuteTime { get; set; }
+        public DateTime ExecuteStartTime { get; set; }
+
+        /// <summary>
+        /// 表达式计算时间
+        /// </summary>
+        public DateTime ExpressionTime { get; set; }
+
+        /// <summary>
+        /// 执行结束时间
+        /// </summary>
+        public DateTime ExecuteEndTime { get; set; }
 
         /// <summary>
         /// 定时任务

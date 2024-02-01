@@ -94,12 +94,14 @@ namespace aehyok.Core.Schedule
                 }
 
                 var lockName = $"ScheduleTask:{code}.{nextExcuteTime}";
+                var scheduleTaskRecord = new ScheduleTaskRecord();
+                scheduleTaskRecord.ScheduleTaskId = scheduleTask.Id;
                 try
                 {
                     stopwatch.Restart();
-                    Console.WriteLine("开始执行任务");
-
-                    if(!Singleton)
+                    scheduleTaskRecord.ExpressionTime = nextExcuteTime;
+                    scheduleTaskRecord.ExecuteStartTime = DateTime.Now;
+                    if (!Singleton)
                     {
                         // ConfigureAwait允许你配置异步等待的行为。如果你使用ConfigureAwait(false)，
                         // 则表示你不需要恢复到原始上下文，而是允许异步操作在任何上下文中继续执行。
@@ -123,25 +125,17 @@ namespace aehyok.Core.Schedule
                     }
 
                     scheduleTask.LastExecuteTime = DateTime.Now;
+                    scheduleTaskRecord.ExecuteEndTime = DateTime.Now;
+                    scheduleTaskRecord.IsSuccess = true;
+                    await recordService.InsertAsync(scheduleTaskRecord);
 
-                    Console.WriteLine($"任务执行时间:{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-                    await recordService.InsertAsync(new ScheduleTaskRecord 
-                    { 
-                        ScheduleTaskId = scheduleTask.Id,
-                        ExecuteTime = DateTime.Now,
-                        IsSuccess = true,
-                    });
-                    Console.WriteLine("任务执行完成");
                 }
                 catch(Exception ex)
                 {
-                    await recordService.InsertAsync(new ScheduleTaskRecord
-                    {
-                        ScheduleTaskId = scheduleTask.Id,
-                        ExecuteTime = DateTime.Now,
-                        ErrorMessage = ex.Message,
-                        IsSuccess = false,
-                    });
+                    scheduleTaskRecord.ExecuteEndTime = DateTime.Now;
+                    scheduleTaskRecord.ErrorMessage = ex.Message;
+                    scheduleTaskRecord.IsSuccess = false;
+                    await recordService.InsertAsync(scheduleTaskRecord);
                     logger.LogError($"执行 {code} 任务发生错误");
                     logger.LogError(ex, ex.Message);
                 }
