@@ -127,7 +127,6 @@ namespace sun.Basic.Api.Controllers
         /// <summary>
         /// 绑定接口
         /// </summary>
-        /// <param name="menuResourceService"></param>
         /// <param name="id">菜单Id</param>
         /// <param name="resources">接口资源id数组</param>
         /// <returns></returns>
