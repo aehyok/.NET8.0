@@ -50,7 +50,7 @@
 
 ## EFCore 开发环境更新数据库
 ```
-开发环境下在aehyok.SystemService项目下
+开发环境下在sun.SystemService项目下
 
 dotnet-ef migrations add InitTask -c DvsContext --framework net8.0 -v
    
@@ -128,13 +128,13 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 
 ## RabbitMQ 调试
 - 暂时开两个解决方案调试
-- aehyok.NET8: 一个是为了打开 aehyok.Basic.Api 发布消息的或者其他API服务
-- aehyok.NET8.SystemService: 另外一个为了打开aehyok.SystemService 开启订阅消息
+- sun.NET8: 一个是为了打开 sun.Basic.Api 发布消息的或者其他API服务
+- sun.NET8.SystemService: 另外一个为了打开sun.SystemService 开启订阅消息
 
 
 ## redis 单独封装保持与指令一致的操作
 
-- aehyok.Redis项目中封装了RedisService类，保持与redis指令一致的操作
+- sun.Redis项目中封装了RedisService类，保持与redis指令一致的操作
 - 使用时只需要在构造函数进行注入（IRedisService redisService）
 - 然后就可以使用了
 ```
@@ -223,7 +223,7 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 
 ## swagger
 
-开启aehyok.SystemService项目，然后访问http://localhost:12000/swagger/index.html
+开启sun.SystemService项目，然后访问http://localhost:12000/swagger/index.html
 然后在配置文件中配置了Endpoints数组，每个数组中的节点配置开启的微服务，
 然后就可以通过http://localhost:12000/swagger/index.html访问到其他微服务的接口文档了
 
@@ -235,7 +235,7 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 
 ## 初始化数据考量
 
-会在aehyok.SystemService系统初始化的时候，进行种子数据的初始化，并将种子数据任务写入到数据库（SeedDataTask）方便后台查看
+会在sun.SystemService系统初始化的时候，进行种子数据的初始化，并将种子数据任务写入到数据库（SeedDataTask）方便后台查看
 种子数据初始化的时候可以设置执行顺序，通过设置Order进行排序，越小的Order值越先执行
 
 同时可以在后台进行设置是否启用，如果不启用则不会执行
@@ -260,7 +260,7 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 ## 定时任务
 - 使用.net内置 BackgroundService后台异步执行任务
 - 使用Cronos表达式进行定时任务的配置，可支持到秒级执行
-- 封装统一处理定时任务基类CronScheduleService，会在aehyok.SystemService系统服务开启后将服务本身同步到Mysql和Redis（ScheduleTask)
+- 封装统一处理定时任务基类CronScheduleService，会在sun.SystemService系统服务开启后将服务本身同步到Mysql和Redis（ScheduleTask)
 - 会对定时任务的执行过程进行记录，记录到数据库中(ScheduleTaskRecord) 记录开始执行时间，结束执行时间，执行是否成功，以及表达式的转换时间等
 - 通过后台可以对定时任务进行启用禁用，修改表达式等操作
 
