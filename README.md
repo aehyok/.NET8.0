@@ -1,3 +1,7 @@
+## 已经使用的技术
+- 依赖注入和控制反转
+  - https://furion.net/docs/dependency-injection
+  - https://www.cnblogs.com/laozhang-is-phi/p/9541414.html
 ## 待处理的问题
 
 - 上传视频以及上传视频的缩略图生成方案

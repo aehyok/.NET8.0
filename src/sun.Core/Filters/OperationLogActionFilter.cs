@@ -14,17 +14,17 @@ using System.Xml.Linq;
 namespace sun.Core.Filters
 {
     /// <summary>
-    /// 日志记录过滤器
+    /// 操作日志记录过滤器
     /// </summary>
     public class OperationLogActionFilter(IOperationLogService operationLogService) : IAsyncActionFilter
     {
         /// <summary>
-        /// 接口方法执行后
+        /// 执行时机可通过代码中的的位置（await next();）来分辨
         /// </summary>
         /// <param name="context"></param>
         /// <exception cref="NotImplementedException"></exception>
 
-        public  async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var actionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
 
