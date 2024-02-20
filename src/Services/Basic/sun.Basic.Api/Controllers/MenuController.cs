@@ -132,7 +132,7 @@ namespace sun.Basic.Api.Controllers
         /// <param name="resources">接口资源id数组</param>
         /// <returns></returns>
         [HttpPut("{id}/bind")]
-        public async Task<StatusCodeResult> BindResourceAsync([FromServices] IServiceBase<MenuResource> menuResourceService, long id, long[] resources)
+        public async Task<StatusCodeResult> BindResourceAsync(long id, long[] resources)
         {
             var existLists = await menuResourceService.GetListAsync(a => a.MenuId == id);
             await menuResourceService.DeleteAsync(existLists);
