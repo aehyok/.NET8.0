@@ -20,5 +20,13 @@ namespace sun.Core.Services
         /// <param name="model"></param>
         /// <returns></returns>
         Task ChangeRolePermissionAsync(ChangeRolePermissionDto model);
+
+        /// <summary>
+        /// 获取当前菜单是否拥有接口权限
+        /// </summary>
+        /// <param name="code">控制器action</param>
+        /// <param name="menuCode">当前菜单或者操作的code</param>
+        /// <returns></returns>
+        Task<bool> JudgeHasPermissionAsync(string code, string menuCode);
     }
 }

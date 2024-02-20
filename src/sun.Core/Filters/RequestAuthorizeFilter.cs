@@ -42,7 +42,15 @@ namespace sun.Core.Filters
 
                 var code = $"{namespaceStr}.{controllerName}.{actionName}";
 
-                var hasPermission = true;  // await this.permissionService.CheckUserResourcePermissionAsync(code);
+                var menuCode = string.Empty;
+                if (context.HttpContext.Request.Headers.ContainsKey("Menu-Code") && !string.IsNullOrEmpty(context.HttpContext.Request.Headers["Menu-Code"]))
+                {
+                    menuCode = context.HttpContext.Request.Headers["Menu-Code"].ToString();
+                }
+
+                // 通过menuCode找到菜单Id，通过code找到接口Id
+
+                var hasPermission = true; // await this.permissionService.JudgeHasPermissionAsync(code, menuCode);
                 if (hasPermission)
                 {
                     return;

@@ -1,9 +1,4 @@
-﻿using sun.Basic.Domains;
-using sun.Basic.Dtos;
-using sun.Basic.Dtos.Create;
-using sun.Basic.Dtos.Query;
-using sun.Basic.Services;
-using sun.Core.Attributes;
+﻿using sun.Core.Attributes;
 using sun.Core.Domains;
 using sun.Core.Dtos;
 using sun.Core.Dtos.Create;

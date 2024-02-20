@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace sun.Basic.Services
 {
-    public class PermissionService(DbContext dbContext, IMapper mapper, IMenuService menuService, IRoleService roleService) : ServiceBase<Permission>(dbContext, mapper), IPermissionService, IScopedDependency
+    public class PermissionService(DbContext dbContext, IMapper mapper, IMenuService menuService, IServiceBase<ApiResource> apiResourceService, IServiceBase<MenuResource> menuResourceService, IRoleService roleService) : ServiceBase<Permission>(dbContext, mapper), IPermissionService, IScopedDependency
     {
         /// <summary>
         /// 修改角色权限
@@ -94,6 +94,15 @@ namespace sun.Basic.Services
             };
 
             return getChildren(0, false);
+        }
+
+        public async Task<bool> JudgeHasPermissionAsync(string code, string menuCode)
+        {
+            var menu = await menuService.GetAsync(a => a.Code == menuCode);
+
+            var resource = await apiResourceService.GetAsync(a => a.Code == code);
+
+            return await menuResourceService.ExistsAsync(a => a.MenuId == menu.Id && a.ApiResourceId == resource.Id);
         }
     }
 }
