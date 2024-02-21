@@ -12,7 +12,7 @@ namespace sun.Basic.Api.Controllers
     /// <summary>
     /// 种子数据初始化
     /// </summary>
-    [Authorize(Roles = SystemRoles.ROOT)]
+    //[Authorize(Roles = SystemRoles.ROOT)]
     public class SeedDataTaskController(IServiceBase<SeedDataTask> seedDataTaskService) : BasicControllerBase
     {
         /// <summary>

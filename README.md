@@ -1,6 +1,7 @@
 ## 已经使用的技术
 - 依赖注入和控制反转
   - https://furion.net/docs/dependency-injection
+  - https://www.cnblogs.com/laozhang-is-phi/p/9529480.html
   - https://www.cnblogs.com/laozhang-is-phi/p/9541414.html
     - 
 ## 待处理的问题
@@ -45,6 +46,8 @@
     - https://www.cnblogs.com/edisonchou/p/netcore_microservice_apollo_foundation.html
 - 12、jwt sso登录
     - https://www.cnblogs.com/wei325/p/16316004.html#_label1_0
+- 13、轻量级的配置中心和服务注册发现
+  - https://github.com/dotnetcore/AgileConfig
 ```
 
 
@@ -272,6 +275,16 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 - 封装统一处理定时任务基类CronScheduleService，会在sun.SystemService系统服务开启后将服务本身同步到Mysql和Redis（ScheduleTask)
 - 会对定时任务的执行过程进行记录，记录到数据库中(ScheduleTaskRecord) 记录开始执行时间，结束执行时间，执行是否成功，以及表达式的转换时间等
 - 通过后台可以对定时任务进行启用禁用，修改表达式等操作
-
+## agileconfig
+```
+docker run \
+--name agile_config \
+-e TZ=Asia/Shanghai \
+-e adminConsole=true \
+-e db__provider=mysql \
+-e db__conn="Database=agile_config;Data Source=172.18.0.3;User Id=root;Password=123456;port=3306" \
+-p 5000:5000 \
+-d kklldog/agile_config:latest
+```
 
 

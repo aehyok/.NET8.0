@@ -15,7 +15,7 @@ namespace sun.Basic.Api.Controllers
     /// <summary>
     /// 菜单管理
     /// </summary>
-    [Authorize(Roles = SystemRoles.ROOT)]
+    //[Authorize(Roles = SystemRoles.ROOT)]
     public class MenuController(IMenuService menuService,
         IApiResrouceCoreService apiResourceService, IServiceBase<MenuResource> menuResourceService) : BasicControllerBase
     {

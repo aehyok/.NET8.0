@@ -11,7 +11,7 @@ namespace sun.Basic.Api.Controllers
     /// 定时任务
     /// </summary>
     /// <param name="scheduleTaskService"></param>
-    [Authorize(Roles = SystemRoles.ROOT)]
+    //[Authorize(Roles = SystemRoles.ROOT)]
     public class ScheduleTaskController(IScheduleTaskService scheduleTaskService) : BasicControllerBase
     {
         /// <summary>

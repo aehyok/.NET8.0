@@ -18,7 +18,7 @@ namespace sun.Basic.Api.Controllers
     /// <summary>
     /// 行政区域管理
     /// </summary>
-    [Authorize(Roles = SystemRoles.ROOT)]
+    //[Authorize(Roles = SystemRoles.ROOT)]
     public class RegionController(IRegionService regionService, IAsyncTaskService asyncTaskService) : BasicControllerBase
     {
         /// <summary>

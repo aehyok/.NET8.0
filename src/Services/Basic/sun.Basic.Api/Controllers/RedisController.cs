@@ -11,7 +11,7 @@ namespace sun.Basic.Api.Controllers
     /// 缓存管理
     /// </summary>
     /// <param name="redisService"></param>
-    [Authorize(Roles = SystemRoles.ROOT)]
+    //[Authorize(Roles = SystemRoles.ROOT)]
     public class RedisController(IRedisService redisService) : BasicControllerBase
     {
         /// <summary>
