@@ -1,6 +1,8 @@
 ﻿using sun.Redis;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using sun.Infrastructure.Enums;
 
 namespace sun.Basic.Api.Controllers
 {
@@ -9,6 +11,7 @@ namespace sun.Basic.Api.Controllers
     /// 缓存管理
     /// </summary>
     /// <param name="redisService"></param>
+    [Authorize(Roles = SystemRoles.ROOT)]
     public class RedisController(IRedisService redisService) : BasicControllerBase
     {
         /// <summary>

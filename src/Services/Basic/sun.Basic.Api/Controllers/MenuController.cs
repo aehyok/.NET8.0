@@ -8,12 +8,14 @@ using sun.EntityFrameworkCore.Repository;
 using sun.Infrastructure.Enums;
 using Ardalis.Specification;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace sun.Basic.Api.Controllers
 {
     /// <summary>
     /// 菜单管理
     /// </summary>
+    [Authorize(Roles = SystemRoles.ROOT)]
     public class MenuController(IMenuService menuService,
         IApiResrouceCoreService apiResourceService, IServiceBase<MenuResource> menuResourceService) : BasicControllerBase
     {

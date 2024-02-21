@@ -10,12 +10,15 @@ using Ardalis.Specification;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using sun.Infrastructure.Enums;
 
 namespace sun.Basic.Api.Controllers
 {
     /// <summary>
     /// 行政区域管理
     /// </summary>
+    [Authorize(Roles = SystemRoles.ROOT)]
     public class RegionController(IRegionService regionService, IAsyncTaskService asyncTaskService) : BasicControllerBase
     {
         /// <summary>

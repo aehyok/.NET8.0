@@ -41,6 +41,10 @@
 - 9、net8.0 可使用docker部署（✓）
 - 10、SkyWalking 监测  链路追踪（×）  
     - https://www.cnblogs.com/wei325/p/16412775.html
+- 11、apollo待尝试
+    - https://www.cnblogs.com/edisonchou/p/netcore_microservice_apollo_foundation.html
+- 12、jwt sso登录
+    - https://www.cnblogs.com/wei325/p/16316004.html#_label1_0
 ```
 
 

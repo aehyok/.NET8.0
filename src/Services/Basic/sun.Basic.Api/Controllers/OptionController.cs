@@ -10,12 +10,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.Design;
 using X.PagedList;
+using Microsoft.AspNetCore.Authorization;
+using sun.Infrastructure.Enums;
 
 namespace sun.Basic.Api.Controllers
 {
     /// <summary>
     /// 系统参数
     /// </summary>
+    [Authorize(Roles = SystemRoles.ROOT)]
     public class OptionController(IOptionsSerivce optionsService) : BasicControllerBase
     {
         /// <summary>

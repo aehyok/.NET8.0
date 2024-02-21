@@ -139,7 +139,7 @@ namespace sun.Core.Services
 
             var token = new UserToken()
             {
-                ExpirationDate = DateTime.Now.AddHours(2),
+                ExpirationDate = DateTime.Now.AddHours(10),
                 IpAddress = ipAddress.ToString(),
                 PlatformType = platform,
                 UserAgent = userAgent,
