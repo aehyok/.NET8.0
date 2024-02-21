@@ -10,13 +10,17 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using sun.RabbitMQ.EventBus;
+using sun.Core.EventData;
+using Microsoft.AspNetCore.Http;
+using sun.Serilog;
 
 namespace sun.Core.Filters
 {
     /// <summary>
     /// 操作日志记录过滤器
     /// </summary>
-    public class OperationLogActionFilter(IOperationLogService operationLogService) : IAsyncActionFilter
+    public class OperationLogActionFilter(IOperationLogService operationLogService, IEventPublisher publisher, ICurrentUser currentUser) : IAsyncActionFilter
     {
         /// <summary>
         /// 执行时机可通过代码中的的位置（await next();）来分辨
@@ -51,7 +55,18 @@ namespace sun.Core.Filters
                         var commentsInfo = DocsHelper.GetMethodComments(actionDescriptor.ControllerTypeInfo.Assembly.GetName().Name, actionDescriptor.MethodInfo);
                         logMessage = commentsInfo;
                     }
-                    await operationLogService.LogAsync(menuCode, logMessage, json);
+                    // 待处理发布事件
+
+                    publisher.Publish(new OperationLogEventData()
+                    {
+                        Code = menuCode,
+                        Content = logMessage,
+                        Json = json,
+                        UserId = currentUser.UserId,
+                        IpAddress = context.HttpContext.Request.GetRemoteIpAddress(),
+                        UserAgent = context.HttpContext.Request.Headers.UserAgent
+                    }) ;
+                    //await operationLogService.LogAsync(menuCode, logMessage, json);
                 }
             }
             await next();

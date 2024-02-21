@@ -66,14 +66,14 @@ namespace sun.Core
         {
             builder.Host.InitHostAndConfig(moduleKey);
 
+            // 注册IHttpContextAccessor
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddSwaggerGen(moduleKey, moduleTitle);
 
             builder.Services.ConfigureOptions(builder.Configuration);
-
-            // 注册IHttpContextAccessor
-            builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddHttpLogging(options =>
             {

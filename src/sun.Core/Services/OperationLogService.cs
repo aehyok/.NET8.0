@@ -10,30 +10,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using System.Net;
 
 namespace sun.Core.Services
 {
-    public class OperationLogService : ServiceBase<OperationLog>, IOperationLogService, IScopedDependency
+    public class OperationLogService(DbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor, IMenuService menuService, IServiceProvider scopeFactory) : ServiceBase<OperationLog>(dbContext, mapper), IOperationLogService, IScopedDependency
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IMenuService menuService;
-
-        public OperationLogService(DbContext dbContext, IMapper mapper, IHttpContextAccessor httpContextAccessor, IMenuService menuService)
-            : base(dbContext, mapper)
-        {
-            this.httpContextAccessor = httpContextAccessor;
-            this.menuService = menuService;
-        }
-
         /// <summary>
         /// 记录操作日志
         /// </summary>
         /// <param name="code">操作菜单</param>
         /// <param name="content"></param>
         /// <returns></returns>
-        public async Task LogAsync(string code, string content, string json)
+        public async Task LogAsync(string code, string content, string json, string ipAddress, string userAgent, long userId =0)
         {
-            var menus = await this.menuService.GetParentMenuAsync(code);
+            using var scope = scopeFactory.CreateScope();
+            var menuService = scope.ServiceProvider.GetService<IMenuService>();
+            var operationLogService = scope.ServiceProvider.GetService<IServiceBase<OperationLog>>();
+            
+            var menus = await menuService.GetParentMenuAsync(code);
             if (!menus.Any())
             {
                 return;
@@ -41,19 +37,20 @@ namespace sun.Core.Services
 
             var operationMenu = string.Join(">", menus.OrderBy(a => a.IdSequences.Length).Select(a => a.Name));
 
-            var ipAddress = this.httpContextAccessor.HttpContext.Request.GetRemoteIpAddress();
 
             var entity = new OperationLog
             {
                 IpAddress = ipAddress,
                 OperationMenu = operationMenu,
                 OperationContent = content,
-                UserAgent = this.httpContextAccessor.HttpContext.Request.Headers.UserAgent,
+                UserAgent = userAgent,
                 MenuCode = code,
-                Remark = json
+                Remark = json,
+                CreatedBy = userId,
+                UpdatedBy = userId
             };
 
-            await this.InsertAsync(entity);
+            await operationLogService.InsertAsync(entity);
         }
     }
 }

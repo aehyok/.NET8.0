@@ -33,6 +33,10 @@ namespace sun.Core.EventData
         public string IpAddress { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string UserAgent { get; set; }
+        /// <summary>
         /// 用户Id
         /// </summary>
         public long UserId { get; set; }
