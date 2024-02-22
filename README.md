@@ -276,15 +276,30 @@ dotnet-ef database update -c DvsContext --framework net8.0 -v
 - 会对定时任务的执行过程进行记录，记录到数据库中(ScheduleTaskRecord) 记录开始执行时间，结束执行时间，执行是否成功，以及表达式的转换时间等
 - 通过后台可以对定时任务进行启用禁用，修改表达式等操作
 ## agileconfig
+
+
+## 自己编译镜像
 ```
+git clone https://github.com/dotnetcore/AgileConfig/
+
+cd src/AgileConfig.Server.UI/react-ui-antd
+npm i
+npm run build
+
+cp -r dist/* /root/github/AgileConfig/AgileConfig/src/AgileConfig.Server.UI/react-ui-antd/wwwroot/ui/
+
+然后再到Dockerfile文件下  执行docker build -t xxx . 生成镜像
+
 docker run \
 --name agile_config \
 -e TZ=Asia/Shanghai \
 -e adminConsole=true \
 -e db__provider=mysql \
--e db__conn="Database=agile_config;Data Source=172.18.0.3;User Id=root;Password=123456;port=3306" \
--p 5000:5000 \
--d kklldog/agile_config:latest
+-e db__conn="Database=agile_config;Data Source=192.168.0.100;User Id=root;Password=sunlight2010;port=4006" \
+-p 8011:5000 \
+--link 8358283fe5fa:mysql \
+-d agileconfig
+
+外网直接访问 xxx.xx.xxx:8011
+admin 初始化密码 sunlight2024
 ```
-
-

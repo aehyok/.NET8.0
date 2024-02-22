@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Renci.SshNet;
+using System.Dynamic;
 using ConnectionInfo = Renci.SshNet.ConnectionInfo;
 
 namespace sun.Basic.Api.Controllers
@@ -8,8 +9,26 @@ namespace sun.Basic.Api.Controllers
     /// <summary>
     /// 系统服务
     /// </summary>
-    public class SystemController(ILogger<SystemController> logger) : BasicControllerBase
+    public class SystemController(ILogger<SystemController> logger, IConfiguration configuration) : BasicControllerBase
     {
+
+        /// <summary>
+        /// 获取配置json字符串
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("config")]
+        public dynamic GetConfigJson()
+        {
+            dynamic result = new ExpandoObject();
+            
+            var connString = configuration.GetValue<string>("Host");
+
+            var test = configuration.GetValue<string>("Test");
+            result.connString = connString;
+            result.test = test;
+            return result;
+        }
+
         /// <summary>
         /// 获取系统服务列表
         /// </summary>

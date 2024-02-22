@@ -27,6 +27,7 @@ using sun.Infrastructure.Utils;
 using JsonLongConverter = sun.Infrastructure.Converters.JsonLongConverter;
 using OfficeOpenXml;
 using sun.Core.Schedule;
+using Microsoft.AspNetCore.Hosting;
 
 namespace sun.Core
 {
@@ -205,13 +206,19 @@ namespace sun.Core
                 options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/{moduleKey}-appsettings.json"), true, true);
             });
 
+            builder.ConfigureAppConfiguration((context, options) =>
+            {
+                // 注册配置中心
+                options.AddAgileConfig();
+            });
+
             builder.UseLog();
 
             return builder;
         }
 
         /// <summary>
-        /// 上传文件的静态文件服务
+        /// 上传文件的静态文件服务5
         /// </summary>
         /// <param name="app"></param>
         /// <returns></returns>
