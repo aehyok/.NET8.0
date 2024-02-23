@@ -22,8 +22,6 @@ namespace sun.Redis
         /// <returns></returns>
         Task<T> GetAsync<T>(string key);
 
-
-
         /// <summary>
         /// 设置指定key的缓存值(不过期)
         /// </summary>

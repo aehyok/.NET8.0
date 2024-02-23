@@ -130,7 +130,6 @@ namespace sun.EntityFrameworkCore.Repository
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        /// <exception cref="ErrorCodeException"></exception>
         public virtual async Task<int> DeleteAsync(long id, CancellationToken cancellationToken = default)
         {
             if (typeof(TEntity).IsAssignableTo(typeof(ISoftDelete)))

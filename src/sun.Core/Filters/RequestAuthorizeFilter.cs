@@ -10,15 +10,8 @@ namespace sun.Core.Filters
     /// <summary>
     /// 请求接口权限过滤器而AuthenticationHandler则是用户认证，token认证
     /// </summary>
-    public class RequestAuthorizeFilter : IAsyncAuthorizationFilter
+    public class RequestAuthorizeFilter(IPermissionService permissionService) : IAsyncAuthorizationFilter
     {
-        private readonly IPermissionService permissionService;
-
-        public RequestAuthorizeFilter(IPermissionService permissionService)
-        {
-            this.permissionService = permissionService;
-        }
-
         public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             // 接口标记了[AllowAnonymous]，则不需要进行权限验证
@@ -49,8 +42,15 @@ namespace sun.Core.Filters
                 }
 
                 // 通过menuCode找到菜单Id，通过code找到接口Id
+                var hasPermission = false;
 
-                var hasPermission = true; // await this.permissionService.JudgeHasPermissionAsync(code, menuCode);
+                //有些操作是不在菜单下面的，则默认有访问接口的权限
+                if (string.IsNullOrEmpty(menuCode))
+                {
+                    hasPermission = true;
+                }
+
+                hasPermission = await permissionService.JudgeHasPermissionAsync(code, menuCode);
                 if (hasPermission)
                 {
                     return;

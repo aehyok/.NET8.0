@@ -37,8 +37,10 @@ namespace sun.Core.Filters
                 var menuCode = context.HttpContext.Request.Headers["Menu-Code"].ToString();
                 if (actionDescriptor != null)
                 {
+                    //前端传递的接口参数
                     var json = JsonConvert.SerializeObject(context.ActionArguments);
 
+                    //OperationLogActionAttribute 标记自定义操作日志内容（可加入参数）
                     var logAttribute = actionDescriptor.MethodInfo.GetCustomAttribute<OperationLogActionAttribute>();
                     string logMessage = null;
                     if (logAttribute != null)

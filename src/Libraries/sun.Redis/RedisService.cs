@@ -1,7 +1,5 @@
 ﻿using sun.Infrastructure;
 using CSRedis;
-using System.Runtime.CompilerServices;
-using static OfficeOpenXml.ExcelErrorValue;
 
 namespace sun.Redis
 {

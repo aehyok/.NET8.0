@@ -13,13 +13,14 @@ namespace sun.Infrastructure.SnowFlake
     /// </summary>
     public class SnowFlake
     {
+        /// <summary>
+        /// 通过静态类只实例化一次IdWorker 否则生成的Id会有重复
+        /// </summary>
         private static readonly Lazy<IdWorker> _instance = new(() =>
         {
             var commonOptions = App.Options<CommonOptions>();
 
-            long WorkerId = 1;
-            long DatacenterId = 0;
-            return new IdWorker(WorkerId, DatacenterId);
+            return new IdWorker(commonOptions.WorkerId, commonOptions.DatacenterId);
         });
 
         public static IdWorker Instance = _instance.Value;
