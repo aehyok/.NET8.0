@@ -36,7 +36,7 @@ namespace sun.Redis
                                             .ToDictionary(item => item.key, item => item.value);
             dynamic result = new ExpandoObject();
             result.Items = resultDictionary;
-            result.Cursor = scanResult.Cursor;  // 下一次获取要通过这个Cursor获取下一页的keys
+            result.Cursor = scanResult.Cursor;  // 下一次要通过这个Cursor获取下一页的keys
            return result;
         }
 

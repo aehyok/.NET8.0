@@ -23,10 +23,6 @@ namespace sun.Basic.Api.Controllers
         public async Task<dynamic> GetListAsync(PagedQueryModelBase model)
         {
             return await redisService.ScanAsync(model);
-
-
-
-
         }
     }
 }
