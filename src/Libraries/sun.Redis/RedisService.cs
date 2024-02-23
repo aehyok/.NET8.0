@@ -1,5 +1,7 @@
 ﻿using sun.Infrastructure;
 using CSRedis;
+using sun.Infrastructure.Models;
+using System.Dynamic;
 
 namespace sun.Redis
 {
@@ -20,18 +22,22 @@ namespace sun.Redis
             return RedisHelper.Ping();
         }
 
-        public async Task<Dictionary<string,string>> ScanAsync()
+        public async Task<dynamic> ScanAsync(PagedQueryModelBase model)
         {
-           List<string> list = new List<string>();
-           var result = await RedisHelper.ScanAsync(20, "*");
-            list.AddRange(result.Items);
+            List<string> list = new List<string>();
+
+            //根沐model.Keyword进行模糊匹配
+            var scanResult = await RedisHelper.ScanAsync(model.Page, $"*{model.Keyword}*", model.Limit);
+            list.AddRange(scanResult.Items);
 
             var values = await RedisHelper.MGetAsync(list.ToArray());
 
             var resultDictionary = list.Zip(values, (key, value) => new { key, value })
                                             .ToDictionary(item => item.key, item => item.value);
-
-            return resultDictionary;
+            dynamic result = new ExpandoObject();
+            result.Items = resultDictionary;
+            result.Cursor = scanResult.Cursor;  // 下一次获取要通过这个Cursor获取下一页的keys
+           return result;
         }
 
         public Task<bool> SetAsync(string key, object value)

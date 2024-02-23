@@ -1,4 +1,5 @@
 ﻿using CSRedis;
+using sun.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,6 @@ namespace sun.Redis
         Task<long> DeleteAsync(string key);
 
 
-        Task<Dictionary<string,string>> ScanAsync();
+        Task<dynamic> ScanAsync(PagedQueryModelBase model);
     }
 }
