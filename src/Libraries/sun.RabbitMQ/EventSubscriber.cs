@@ -50,7 +50,10 @@ namespace sun.RabbitMQ
         public void Subscribe(Type eventType, Type eventHandlerType)
         {
             var eventName = eventType.FullName;
-            var queueName = $"{this.options.QueueName}.{eventName}.{Guid.NewGuid():N}";
+
+            var eventHandlerName = eventHandlerType.FullName;
+
+            var queueName = $"{this.options.QueueName}.{eventHandlerName}.{Guid.NewGuid():N}";
 
             this.consumerChannel.QueueDeclare(queueName, true, exclusive: false);
 
