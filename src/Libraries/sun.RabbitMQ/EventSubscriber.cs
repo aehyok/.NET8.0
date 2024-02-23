@@ -9,6 +9,7 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Channels;
 
 namespace sun.RabbitMQ
 {
@@ -49,8 +50,18 @@ namespace sun.RabbitMQ
         public void Subscribe(Type eventType, Type eventHandlerType)
         {
             var eventName = eventType.FullName;
+            var queueName = $"{this.options.QueueName}.{eventName}.{Guid.NewGuid():N}";
 
-            if(!this.eventTypes.Where(item=>item.FullName==eventName).Any())
+            this.consumerChannel.QueueDeclare(queueName, true, exclusive: false);
+
+            //exclusive false代表队列非独占
+
+            var consumer = new AsyncEventingBasicConsumer(this.consumerChannel);
+            consumer.Received += OnConsumerMessageReceived;
+
+            this.consumerChannel.BasicConsume(queueName, false, consumer);
+
+            if (!this.eventTypes.Where(item=>item.FullName==eventName).Any())
             {
                 this.eventTypes.Add(eventType);
             }
@@ -61,22 +72,15 @@ namespace sun.RabbitMQ
                 return list;
             });
 
-            this.consumerChannel.QueueBind(this.options.QueueName, this.options.ExchangeName, eventName);
+            this.consumerChannel.QueueBind(queueName, this.options.ExchangeName, eventName);
         }
 
         private IModel CreateConsumerChannel()
         {
             var channel = this.connection.CreateModel();
 
-            channel.ExchangeDeclare(this.options.ExchangeName, ExchangeType.Fanout, true);
-
-            //exclusive false代表队列非独占
-            channel.QueueDeclare(this.options.QueueName,true,exclusive: false);
-
-            var consumer = new AsyncEventingBasicConsumer(channel);
-            consumer.Received += OnConsumerMessageReceived;
-
-            channel.BasicConsume(this.options.QueueName, false, consumer);
+            //channel.ExchangeDeclare(this.options.ExchangeName, ExchangeType.Fanout, true);
+            channel.ExchangeDeclare(this.options.ExchangeName, ExchangeType.Direct, true);
 
             return channel;
         }

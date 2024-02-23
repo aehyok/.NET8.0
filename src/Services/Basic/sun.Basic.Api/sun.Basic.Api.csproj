@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Controllers\DictionaryController.cs~RFa4584.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EPPlus" Version="7.0.7" />
     <PackageReference Include="LinqKit.Core" Version="1.2.5" />
     <PackageReference Include="SSH.NET" Version="2023.0.1" />

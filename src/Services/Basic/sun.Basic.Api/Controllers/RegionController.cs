@@ -125,7 +125,7 @@ namespace sun.Basic.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("export")]
-        public async Task<AsyncTaskDto> ExportAsync([FromQuery] RegionExportQueryDto model)
+        public async Task<AsyncTaskDto> ExportAsync(RegionExportQueryDto model)
         {
             var asyncTask = await asyncTaskService.GenerateTaskAsync(model, "RegionExport");
 

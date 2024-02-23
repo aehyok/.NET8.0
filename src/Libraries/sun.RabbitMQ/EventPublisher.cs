@@ -25,6 +25,7 @@ namespace sun.RabbitMQ
             this.options = options.Value;
             this.publisherChannel = CreateChannel();
         }
+
         public void Publish<TEvent>(TEvent message) where TEvent : IEvent
         {
             var eventName = message.GetType().FullName;
@@ -37,7 +38,8 @@ namespace sun.RabbitMQ
         {
             var channel = connection.CreateModel();
 
-            channel.ExchangeDeclare(this.options.ExchangeName, ExchangeType.Fanout, true);
+            //channel.ExchangeDeclare(this.options.ExchangeName, ExchangeType.Fanout, true);
+            channel.ExchangeDeclare(this.options.ExchangeName, ExchangeType.Direct, true);
 
             return channel;
         }
