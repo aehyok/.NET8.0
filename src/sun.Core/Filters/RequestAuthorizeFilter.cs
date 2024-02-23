@@ -49,8 +49,12 @@ namespace sun.Core.Filters
                 {
                     hasPermission = true;
                 }
+                else
+                {
+                    hasPermission = await permissionService.JudgeHasPermissionAsync(code, menuCode);
+                }
 
-                hasPermission = await permissionService.JudgeHasPermissionAsync(code, menuCode);
+                
                 if (hasPermission)
                 {
                     return;
