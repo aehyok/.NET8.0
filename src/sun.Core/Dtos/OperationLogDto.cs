@@ -28,5 +28,20 @@ namespace sun.Core.Dtos
         /// 操作菜单
         /// </summary>
         public string OperationMenu { get; set; }
+
+        /// <summary>
+        /// IP地址
+        /// </summary>
+        public string IpAddress { get; set; }
+
+        /// <summary>
+        /// 浏览器类型
+        /// </summary>
+        public string UserAgent { get; set; }
+
+        /// <summary>
+        /// 请求参数
+        /// </summary>
+        public string RequestJson { get; set; }
     }
 }

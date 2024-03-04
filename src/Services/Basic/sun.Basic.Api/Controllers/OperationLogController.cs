@@ -59,7 +59,10 @@ namespace sun.Basic.Api.Controllers
                             CreatedAt = log.CreatedAt,
                             CreatedBy = s.RealName ?? string.Empty,
                             OperationContent = log.OperationContent,
-                            OperationMenu = log.OperationMenu
+                            OperationMenu = log.OperationMenu,
+                            IpAddress = log.IpAddress,
+                            UserAgent = log.UserAgent,
+                            RequestJson = log.Remark
                         };
             query = query.OrderByDescending(a => a.Id);
 

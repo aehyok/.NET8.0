@@ -303,3 +303,18 @@ docker run \
 外网直接访问 xxx.xx.xxx:8011
 admin 初始化密码 sunlight2024
 ```
+
+
+## 我还通过google/zx使用nodejs开发了一个脚本，用于自动化部署
+
+主要是用于开发环境，通过
+```
+pnpm sun-baisc
+pnpm sun-ncdp
+pnpm sun-systemserivce
+```
+当然你还可以通过组合命令进行部署，例如想一起部署三个服务
+```
+pnpm sun-all 其实就是  "pnpm sun-ncdp && pnpm sun-basic && pnpm sun-systemservice"
+```
+这里我用的`&&`相当于上面三个命令串行执行，先执行sun-ncdp,再执行sun-basic,最后执行sun-systemservice。如果你的电脑或者服务器性能足够好，可以使用`&`符号，这样就是并行执行，三个服务同时启动，这样可以节省时间。
