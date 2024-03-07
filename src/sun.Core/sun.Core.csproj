@@ -12,6 +12,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Cronos" Version="0.8.2" />
     <PackageReference Include="Hangfire" Version="1.8.9" />
+    <PackageReference Include="IP2Region.Net" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Cryptography.Internal" Version="8.0.0" />
@@ -29,6 +30,12 @@
     <ProjectReference Include="..\Libraries\sun.Redis\sun.Redis.csproj" />
     <ProjectReference Include="..\Libraries\sun.Serilog\sun.Serilog.csproj" />
     <ProjectReference Include="..\Libraries\sun.Swagger\sun.Swagger.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="IP2Region\ip2region.xdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
