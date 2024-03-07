@@ -18,7 +18,7 @@ using sun.Serilog;
 using AutoMapper;
 using Microsoft.AspNetCore.StaticFiles;
 using sun.Core.HostedServices;
-using sun.Infrastructure.Middlewares;
+using sun.Core.Middlewares;
 using Microsoft.Extensions.Options;
 using sun.Core.Filters;
 using Microsoft.AspNetCore.Authentication;

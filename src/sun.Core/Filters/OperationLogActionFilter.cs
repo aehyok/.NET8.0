@@ -14,6 +14,7 @@ using sun.RabbitMQ.EventBus;
 using sun.Core.EventData;
 using Microsoft.AspNetCore.Http;
 using sun.Serilog;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace sun.Core.Filters
 {
@@ -42,6 +43,9 @@ namespace sun.Core.Filters
 
                     //OperationLogActionAttribute 标记自定义操作日志内容（可加入参数）
                     var logAttribute = actionDescriptor.MethodInfo.GetCustomAttribute<OperationLogActionAttribute>();
+
+                    var method = context.HttpContext.Request.Method;
+
                     string logMessage = null;
                     if (logAttribute != null)
                     {
@@ -58,7 +62,6 @@ namespace sun.Core.Filters
                         logMessage = commentsInfo;
                     }
                     // 待处理发布事件
-
                     publisher.Publish(new OperationLogEventData()
                     {
                         Code = menuCode,
@@ -66,8 +69,9 @@ namespace sun.Core.Filters
                         Json = json,
                         UserId = currentUser.UserId,
                         IpAddress = context.HttpContext.Request.GetRemoteIpAddress(),
-                        UserAgent = context.HttpContext.Request.Headers.UserAgent
-                    }) ;
+                        UserAgent = context.HttpContext.Request.Headers.UserAgent,
+                        Method = method
+                    });
                     //await operationLogService.LogAsync(menuCode, logMessage, json);
                 }
             }

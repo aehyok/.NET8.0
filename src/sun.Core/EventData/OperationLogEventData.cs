@@ -40,5 +40,10 @@ namespace sun.Core.EventData
         /// 用户Id
         /// </summary>
         public long UserId { get; set; }
+
+        /// <summary>
+        /// 获取该请求方法
+        /// </summary>
+        public string Method { get; set; }
     }
 }

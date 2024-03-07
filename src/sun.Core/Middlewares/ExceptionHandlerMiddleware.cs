@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Infrastructure.Middlewares
+namespace sun.Core.Middlewares
 {
     /// <summary>
     /// 所有错误异常日志记录中间件(ApiAsyncExceptionFilter周期之外的异常)
