@@ -63,6 +63,7 @@ namespace sun.Basic.Api.Controllers
                             IpAddress = log.IpAddress,
                             UserAgent = log.UserAgent,
                             RequestJson = log.Remark
+
                         };
             query = query.OrderByDescending(a => a.Id);
 
