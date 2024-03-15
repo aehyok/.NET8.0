@@ -10,22 +10,25 @@ using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System.Drawing;
 using X.PagedList;
+using sun.Basic.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace sun.Basic.Api.Controllers
 {
     /// <summary>
     /// 登录日志 
     /// </summary>
-    public class TokenLogController(IUserTokenService userTokenService, IUserService userService, IUserRoleService userRoleService) : ApiControllerBase
+    public class TokenLogController(IUserTokenService userTokenService, IUserService userService, IUserRoleService userRoleService, IRegionService regionService) : BasicControllerBase
     {
         /// <summary>
         /// 获取登录日志列表
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpGet("log/list")]
+        [HttpGet("list")]
         public async Task<IPagedList<UserTokenLogDto>> GetLogListAsync([FromQuery] UserTokenQueryDto model)
         {
+            var currentUser = base.CurrentUser;
             var filter = PredicateBuilder.New<UserToken>(true);
 
             if (model.platformType > 0)
@@ -33,9 +36,21 @@ namespace sun.Basic.Api.Controllers
                 filter.And(a => a.PlatformType == model.platformType);
             }
 
+            if (model.StartTime.HasValue)
+            {
+                filter.And(a => a.CreatedAt >= model.StartTime.Value);
+            }
+
+            if (model.EndTime.HasValue)
+            {
+                filter.And(a => a.CreatedAt <= model.EndTime.Value);
+            }
+
             var query = from ut in userTokenService.GetExpandable().Where(filter)
                         join u in userService.GetQueryable() on ut.UserId equals u.Id
                         join ur in userRoleService.GetQueryable() on ut.RoleId equals ur.RoleId
+                        join re in regionService.GetQueryable() on ur.RegionId equals re.Id
+                        where EF.Functions.Like(re.IdSequences, $"%{currentUser.RegionId}%")
                         select new UserTokenLogDto
                         {
                             Id = ut.Id,
@@ -43,7 +58,9 @@ namespace sun.Basic.Api.Controllers
                             loginAt = ut.CreatedAt,
                             PlatformType = ut.PlatformType,
                             RoleName = ur.Role.Name,
-                            RegionName = ur.Region.Name
+                            RegionName = ur.Region.Name,
+                            IpAddress = ut.IpAddress,
+                            UserAgent = ut.UserAgent
                         };
 
             query.OrderByDescending(a => a.Id);

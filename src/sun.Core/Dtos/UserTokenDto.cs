@@ -60,5 +60,15 @@ namespace sun.Core.Dtos
         /// 登录角色所属区域
         /// </summary>
         public string RegionName { get; set; }
+
+        /// <summary>
+        /// IP地址
+        /// </summary>
+        public string IpAddress { get; set; }
+
+        /// <summary>
+        /// 用户浏览器
+        /// </summary>
+        public string UserAgent { get; set; }
     }
 }
