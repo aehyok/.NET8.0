@@ -8,10 +8,10 @@ using LinqKit;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using System.Drawing;
 using X.PagedList;
 using sun.Basic.Services;
 using Microsoft.EntityFrameworkCore;
+using sun.Core.Domains;
 
 namespace sun.Basic.Api.Controllers
 {
@@ -46,11 +46,14 @@ namespace sun.Basic.Api.Controllers
                 filter.And(a => a.CreatedAt <= model.EndTime.Value);
             }
 
+            var regionFilter = PredicateBuilder.New<Region>(true);
+            regionFilter.And(a => EF.Functions.Like(a.IdSequences, $"%{currentUser.RegionId}%"));
+
+
             var query = from ut in userTokenService.GetExpandable().Where(filter)
                         join u in userService.GetQueryable() on ut.UserId equals u.Id
                         join ur in userRoleService.GetQueryable() on ut.RoleId equals ur.RoleId
-                        join re in regionService.GetQueryable() on ur.RegionId equals re.Id
-                        where EF.Functions.Like(re.IdSequences, $"%{currentUser.RegionId}%")
+                        join re in regionService.GetQueryable().Where(regionFilter) on ur.RegionId equals re.Id
                         select new UserTokenLogDto
                         {
                             Id = ut.Id,
@@ -95,7 +98,7 @@ namespace sun.Basic.Api.Controllers
                 {
                     sheet1.Cells[1, c].Value = cols[c - 1];
                     sheet1.Cells[1, c].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    sheet1.Cells[1, c].Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+                    sheet1.Cells[1, c].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightGray);
                     sheet1.Cells[1, c].Style.Font.Bold = true;
                     sheet1.Cells[1, c].Style.Font.Size = 12;
                     sheet1.Column(c).AutoFit();
