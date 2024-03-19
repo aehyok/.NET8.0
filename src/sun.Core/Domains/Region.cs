@@ -51,6 +51,11 @@ namespace sun.Core.Domains
         /// </summary>
         [MaxLength(250)]
         public string IdSequences { get; set; }
+
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool IsEnable { get; set; }
     }
 
     /// <summary>

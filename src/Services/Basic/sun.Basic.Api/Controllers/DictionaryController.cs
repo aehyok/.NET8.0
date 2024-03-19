@@ -217,5 +217,49 @@ namespace sun.Basic.Api.Controllers
 
             return Ok();
         }
+
+        /// <summary>
+        /// 启用字典项
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("Enable/{id}")]
+        public async Task<StatusCodeResult> ItemEnableAsync(long id)
+        {
+            var entity = await dictionaryItemService.GetByIdAsync(id);
+
+            if (entity is null)
+            {
+                throw new ErrorCodeException(-1, "您要启用的数据不存在");
+            }
+
+            entity.IsEnable = true;
+
+            await dictionaryItemService.UpdateAsync(entity);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// 禁用字典项
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPut("Disable/{id}")]
+        public async Task<StatusCodeResult> ItemDisableAsync(long id)
+        {
+            var entity = await dictionaryItemService.GetByIdAsync(id);
+
+            if (entity is null)
+            {
+                throw new ErrorCodeException(-1, "您要启用的数据不存在");
+            }
+
+            entity.IsEnable = false;
+
+            await dictionaryItemService.UpdateAsync(entity);
+
+            return Ok();
+        }
     }
 }
