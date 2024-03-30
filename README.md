@@ -1,3 +1,5 @@
+## 详细使用情况可以查看我的个人公众号文章
+- https://mp.weixin.qq.com/s/PnuQ_pREkbTDoVNgLPJj7w
 ## 已经使用的技术
 - 依赖注入和控制反转
   - https://furion.net/docs/dependency-injection
