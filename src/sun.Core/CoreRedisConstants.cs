@@ -25,5 +25,10 @@ namespace sun.Core
         /// 定时任务 Cache Key
         /// </summary>
         public static string ScheduleTaskCache = $"ScheduleTask:{{0}}";
+
+        /// <summary>
+        /// 自定义Form表单缓存 Key
+        /// </summary>
+        public static string CollectFormCache = $"{currentAssembly}:CollectFormCache:{{0}}";
     }
 }

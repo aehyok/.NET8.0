@@ -206,11 +206,11 @@ namespace sun.Core
                 options.AddJsonFile(Path.Combine(AppContext.BaseDirectory, $"../../../../../../etc/{moduleKey}-appsettings.json"), true, true);
             });
 
-            //builder.ConfigureAppConfiguration((context, options) =>
-            //{
-            //    // 注册配置中心
-            //    //options.AddAgileConfig();
-            //});
+            builder.ConfigureAppConfiguration((context, options) =>
+            {
+                // 注册配置中心
+                options.AddAgileConfig();
+            });
 
             builder.UseLog();
 
