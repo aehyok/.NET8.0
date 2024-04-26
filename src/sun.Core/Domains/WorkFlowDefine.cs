@@ -41,6 +41,10 @@ namespace sun.Core.Domains
         /// </summary>
         public int IsEnable { get; set; }
 
+        /// <summary>
+        /// JSON定义包
+        /// </summary>
+        public string JsonDefine { get; set; }
     }
 
     /// <summary>
@@ -48,6 +52,10 @@ namespace sun.Core.Domains
     /// </summary>
     public class WorkFlowState : AuditedEntity
     {
+        /// <summary>
+        /// 所在JSON元数据中的唯一ID（GUID）
+        /// </summary>
+        public string JsonDefineId { get; set; }
         /// <summary>
         /// 工作流Id
         /// </summary>
@@ -76,7 +84,7 @@ namespace sun.Core.Domains
         public StateType StateType { get; set; }
 
         /// <summary>
-        /// 顺讯
+        /// 顺序
         /// </summary>
         public int DisplayOrder { get; set; }
 
@@ -92,6 +100,11 @@ namespace sun.Core.Domains
     /// </summary>
     public class WorkFlowAction: AuditedEntity
     {
+        /// <summary>
+        /// 所在JSON元数据中的唯一ID（GUID）
+        /// </summary>
+        public string JsonDefineId { get; set; }
+
         /// <summary>
         /// 流程状态Id
         /// </summary>
@@ -136,7 +149,10 @@ namespace sun.Core.Domains
         /// </summary>
         Start = 1,
 
-
+        /// <summary>
+        /// 正常状态、普通状态
+        /// </summary>
+        Normal = 2,
 
         /// <summary>
         /// 删除
@@ -147,10 +163,7 @@ namespace sun.Core.Domains
         /// 结束
         /// </summary>
         End = 4
-
-        
     }
-
 
     public enum ActionForUserType
     {
