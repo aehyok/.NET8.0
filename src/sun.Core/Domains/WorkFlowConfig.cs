@@ -23,7 +23,7 @@ namespace sun.Core.Domains
         /// <summary>
         /// 工作流状态Id
         /// </summary>
-        public long StateId { get; set; }
+        public long WorkFlowStateId { get; set; }
 
         /// <summary>
         /// 工作流状态
