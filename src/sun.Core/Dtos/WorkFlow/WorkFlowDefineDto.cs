@@ -1,17 +1,13 @@
-﻿using sun.EntityFrameworkCore.Entities;
+﻿using sun.Core.Domains;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Domains
+namespace sun.Core.Dtos.WorkFlow
 {
-    /// <summary>
-    /// 工作流定义
-    /// </summary>
-    public  class WorkFlowDefine: AuditedEntity
+    public class WorkFlowDefineDto
     {
         /// <summary>
         /// 流程名称
@@ -41,7 +37,7 @@ namespace sun.Core.Domains
         /// <summary>
         /// 是否启用
         /// </summary>
-        public bool IsEnable { get; set; }
+        public int IsEnable { get; set; }
 
         /// <summary>
         /// JSON定义包
@@ -49,10 +45,45 @@ namespace sun.Core.Domains
         public string JsonDefine { get; set; }
     }
 
-    /// <summary>
-    /// 工作流下的状态表
-    /// </summary>
-    public class WorkFlowState : AuditedEntity
+    public class CreateWorkFlowDefineDto
+    {
+        /// <summary>
+        /// 流程名称
+        /// </summary>
+        public string FlowName { get; set; }
+
+        /// <summary>
+        /// 流程Code唯一编码
+        /// </summary>
+        public string Code { get; set; }
+
+        /// <summary>
+        /// 流程分类
+        /// </summary>
+        public string FlowType { get; set; }
+
+        /// <summary>
+        /// 流程描述
+        /// </summary>
+        public string Descriptionn { get; set; }
+
+        /// <summary>
+        /// 顺序
+        /// </summary>
+        public int DisplayOrder { get; set; }
+
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public int IsEnable { get; set; }
+
+        /// <summary>
+        /// JSON定义包
+        /// </summary>
+        public string JsonDefine { get; set; }
+    }
+
+    public class WorkFlowStateDto
     {
         /// <summary>
         /// 所在JSON元数据中的唯一ID（GUID）
@@ -78,7 +109,51 @@ namespace sun.Core.Domains
         /// <summary>
         /// 状态描述
         /// </summary>
-        public string Description { get;set; }
+        public string Description { get; set; }
+
+        /// <summary>
+        /// 状态类型
+        /// </summary>
+        public StateType StateType { get; set; }
+
+        /// <summary>
+        /// 顺序
+        /// </summary>
+        public int DisplayOrder { get; set; }
+
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public int IsEnable { get; set; }
+    }
+
+    public class CreateWorkFlowStateDto
+    {
+        /// <summary>
+        /// 所在JSON元数据中的唯一ID（GUID）
+        /// </summary>
+        public string JsonDefineId { get; set; }
+        /// <summary>
+        /// 工作流Id
+        /// </summary>
+        public long WorkFlowId { get; set; }
+
+        public WorkFlowDefine WorkFlowDefine { get; set; }
+
+        /// <summary>
+        /// 状态名称
+        /// </summary>
+        public string StateName { get; set; }
+
+        /// <summary>
+        /// 状态Code唯一编码
+        /// </summary>
+        public string StateCode { get; set; }
+
+        /// <summary>
+        /// 状态描述
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// 状态类型
@@ -96,11 +171,7 @@ namespace sun.Core.Domains
         public bool IsEnable { get; set; }
     }
 
-
-    /// <summary>
-    /// 工作流状态下的动作表
-    /// </summary>
-    public class WorkFlowAction: AuditedEntity
+    public class WorkFlowActionDto
     {
         /// <summary>
         /// 所在JSON元数据中的唯一ID（GUID）
@@ -145,86 +216,54 @@ namespace sun.Core.Domains
         /// <summary>
         /// 是否启用
         /// </summary>
-        public bool IsEnable { get; set; }
+        public int IsEnable { get; set; }
     }
 
-    /// <summary>
-    /// 工作流中配置的生成文档（docx excel pdf等）
-    /// </summary>
-    public class WorkFlowDocument: AuditedEntity
+    public class CreateWorkFlowActionDto
     {
         /// <summary>
-        /// 工作流定义Id
+        /// 所在JSON元数据中的唯一ID（GUID）
         /// </summary>
-        public long WorkFlowDefineId { get; set; }
+        public string JsonDefineId { get; set; }
 
         /// <summary>
-        /// 文书名称
+        /// 流程状态Id
         /// </summary>
-        public string Name { get; set; }
-    }
-    
-    public enum StateType
-    {
+        public long WorkFlowStateId { get; set; }
+
+        public WorkFlowState WorkFlowState { get; set; }
         /// <summary>
-        /// 开始状态
+        /// 动作名称
         /// </summary>
-        Start = 1,
+        public string ActionName { get; set; }
 
         /// <summary>
-        /// 结束
+        /// 动作使用者类型
         /// </summary>
-        End = 2,
+        public ActionForUserType ActionForUserType { get; set; }
 
         /// <summary>
-        /// 正常状态、普通状态
+        /// 动作Code唯一编码
         /// </summary>
-        Normal = 3,
+        public string ActionCode { get; set; }
 
         /// <summary>
-        /// 审批类型
+        /// 目标状态Id(当前动作执行完后的状态)
         /// </summary>
-        Approval = 4,
+        public long WorkFlowTargetStateId { get; set; }
 
         /// <summary>
-        /// 审批文档类型加数据详情
+        /// 目标状态
         /// </summary>
-        ApprovalDoc = 5,
-    }
-
-    public enum ActionForUserType
-    {
-        /// <summary>
-        /// 所有人
-        /// </summary>
-        All=1,
+        public WorkFlowState WorkFlowTargetState { get; set; }
 
         /// <summary>
-        /// 有查看权限的人
+        /// 动作类型
         /// </summary>
-        Detail = 2,
-
+        public ActionType ActionType { get; set; }
         /// <summary>
-        /// 历史处理人
+        /// 是否启用
         /// </summary>
-        History = 3,
-
-        /// <summary>
-        /// 当前处理人
-        /// </summary>
-         Current = 4
-    }
-
-    public enum ActionType
-    {
-        /// <summary>
-        /// 正常的
-        /// </summary>
-        Normal = 1,
-
-        /// <summary>
-        /// 指派
-        /// </summary>
-        Assign = 2,
+        public int IsEnable { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using sun.Core.Domains;
 using sun.Core.Dtos;
 using AutoMapper;
 using File = sun.Core.Domains.File;
+using sun.Core.Dtos.WorkFlow;
 
 namespace sun.Core.MapProfiles
 {
@@ -62,6 +63,10 @@ namespace sun.Core.MapProfiles
                 .ForMember(a => a.HasPassword, a => a.MapFrom(c => !string.IsNullOrWhiteSpace(c.Password)));
 
             CreateMap<AsyncTask, AsyncTaskDto>();
+
+            CreateMap<WorkFlowDefine, WorkFlowDefineDto>();
+            CreateMap<WorkFlowState, WorkFlowStateDto>();
+            CreateMap<WorkFlowAction,WorkFlowActionDto>();
         }
     }
 }

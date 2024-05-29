@@ -11,8 +11,7 @@ using System.Threading.Tasks;
 
 namespace sun.Core.Services
 {
-    public class WorkFlowDefineService(DbContext dbContext, IMapper mapper) : ServiceBase<WorkFlowDefine>(dbContext, mapper), IWorkFlowDefineService, IScopedDependency
+    public class WorkFlowActionService(DbContext dbContext, IMapper mapper) : ServiceBase<WorkFlowAction>(dbContext, mapper), IWorkFlowActionService, IScopedDependency
     {
-
     }
 }

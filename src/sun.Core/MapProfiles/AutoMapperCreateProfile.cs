@@ -1,6 +1,7 @@
 ﻿using sun.Core.Domains;
 using sun.Core.Dtos.Create;
 using AutoMapper;
+using sun.Core.Dtos.WorkFlow;
 
 namespace sun.Core.MapProfiles
 {
@@ -20,6 +21,12 @@ namespace sun.Core.MapProfiles
             CreateMap<CreateUserDto, User>();
 
             CreateMap<CreateUserRoleDto, UserRole>();
+
+            CreateMap<CreateWorkFlowDefineDto, WorkFlowDefine>();
+
+            CreateMap<CreateWorkFlowStateDto, WorkFlowState>();
+
+            CreateMap<CreateWorkFlowActionDto, WorkFlowAction>();
         }
     }
 }
