@@ -67,7 +67,12 @@ namespace sun.Core.Domains
         /// </summary>
         public long WorkFlowActionLogId { get; set; }
 
+        /// <summary>
+        /// 工作流动作定义
+        /// </summary>
         public WorkFlowAction WorkFlowAction { get; set; }
+
+        public long WorkFlowActionId { get; set; }
 
         /// <summary>
         /// 状态Id

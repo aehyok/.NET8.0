@@ -33,17 +33,33 @@ namespace sun.Core.Domains
         /// <summary>
         /// 工作流操作区域Id
         /// </summary>
-        public long RegionId { get; set; }
+        //public long RegionId { get; set; }
+
 
         /// <summary>
         /// 操作区域
         /// </summary>
-        public Region Region { get; set; }
+        //public Region Region { get; set; }
 
         ///// <summary>
         ///// 类型
         ///// </summary>
         //public StateConfigType Type { get; set; }
+
+        /// <summary>
+        /// 区域层级
+        /// </summary>
+        public int RegionLevel { get; set; }
+
+        /// <summary>
+        /// 角色Id
+        /// </summary>
+        public long RoleId { get; set; }
+
+        /// <summary>
+        /// 绑定角色Id
+        /// </summary>
+        public Role Role { get; set; }
     }
 
     /// <summary>
