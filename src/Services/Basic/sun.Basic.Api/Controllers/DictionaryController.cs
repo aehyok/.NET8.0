@@ -15,7 +15,6 @@ using X.PagedList;
 
 namespace sun.Basic.Api.Controllers
 {
-
     /// <summary>
     /// 字典管理
     /// </summary>

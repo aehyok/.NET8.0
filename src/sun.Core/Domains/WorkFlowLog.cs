@@ -60,7 +60,12 @@ namespace sun.Core.Domains
         /// <summary>
         /// 执行具体动作的日志Id
         /// </summary>
-        public WorkFlowActionLog WorkFlowActionLogId { get; set; }
+        public WorkFlowActionLog WorkFlowActionLog { get; set; }
+
+        /// <summary>
+        /// 执行具体动作的日志Id
+        /// </summary>
+        public long WorkFlowActionLogId { get; set; }
 
         public WorkFlowAction WorkFlowAction { get; set; }
 

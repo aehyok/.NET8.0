@@ -37,7 +37,6 @@ namespace sun.Core.Services
             {
                 foreach (var cell in row.Cells)
                 {
-
                     switch (cell.Name)
                     {
                         case "Mobile":

@@ -1,6 +1,7 @@
 ﻿using sun.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.SymbolStore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace sun.Core.Domains
         /// 流程Code唯一编码
         /// </summary>
         public string Code { get; set; }
+
         /// <summary>
         /// 流程分类
         /// </summary>
@@ -137,9 +139,29 @@ namespace sun.Core.Domains
         public WorkFlowState WorkFlowTargetState { get; set; }
 
         /// <summary>
+        /// 动作类型
+        /// </summary>
+        public ActionType ActionType { get; set; }
+        /// <summary>
         /// 是否启用
         /// </summary>
         public int IsEnable { get; set; }
+    }
+
+    /// <summary>
+    /// 工作流中配置的生成文档（docx excel pdf等）
+    /// </summary>
+    public class WorkFlowDocument: AuditedEntity
+    {
+        /// <summary>
+        /// 工作流定义Id
+        /// </summary>
+        public long WorkFlowDefineId { get; set; }
+
+        /// <summary>
+        /// 文书名称
+        /// </summary>
+        public string Name { get; set; }
     }
     
     public enum StateType
@@ -150,19 +172,24 @@ namespace sun.Core.Domains
         Start = 1,
 
         /// <summary>
-        /// 正常状态、普通状态
-        /// </summary>
-        Normal = 2,
-
-        /// <summary>
-        /// 删除
-        /// </summary>
-        Delete = 3,
-
-        /// <summary>
         /// 结束
         /// </summary>
-        End = 4
+        End = 2,
+
+        /// <summary>
+        /// 正常状态、普通状态
+        /// </summary>
+        Normal = 3,
+
+        /// <summary>
+        /// 审批类型
+        /// </summary>
+        Approval = 4,
+
+        /// <summary>
+        /// 审批文档类型加数据详情
+        /// </summary>
+        ApprovalDoc = 5,
     }
 
     public enum ActionForUserType
@@ -186,5 +213,18 @@ namespace sun.Core.Domains
         /// 当前处理人
         /// </summary>
          Current = 4
+    }
+
+    public enum ActionType
+    {
+        /// <summary>
+        /// 正常的
+        /// </summary>
+        Normal = 1,
+
+        /// <summary>
+        /// 指派
+        /// </summary>
+        Assign = 2,
     }
 }

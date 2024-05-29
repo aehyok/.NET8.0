@@ -59,7 +59,7 @@ namespace sun.Core.Domains
         public long WorkFlowStateConfigId { get; set; }
     }
 
-    /// <summary>
+    /// <summary>sub
     /// 工作流动作的流转配置（不配置默认就是当前继续流转）
     /// </summary>
     public class WorkFlowActioncirculateConfig : AuditedEntity
@@ -87,7 +87,6 @@ namespace sun.Core.Domains
         /// 包含状态Id和区域Id
         /// </summary>
         public WorkFlowStateConfig WorkFlowStateConfig { get; set; }
-
     }
 
     /// <summary>
