@@ -15,6 +15,7 @@ using X.PagedList;
 
 namespace sun.Basic.Api.Controllers
 {
+
     /// <summary>
     /// 字典管理
     /// </summary>
@@ -22,7 +23,6 @@ namespace sun.Basic.Api.Controllers
         IDictionaryGroupService dictionaryGroupService,
         IDictionaryItemService dictionaryItemService) : BasicControllerBase
     {
-
         /// <summary>
         /// 获取字典分组
         /// </summary>
@@ -49,9 +49,9 @@ namespace sun.Basic.Api.Controllers
         /// <param name="id">分组Id</param>
         /// <returns></returns>
         [HttpGet("group/{id}")]
-        public Task<DictionaryGroupDto> GetGroupByIdAsync(long id)
+        public async Task<DictionaryGroupDto> GetGroupByIdAsync(long id)
         {
-            return dictionaryGroupService.GetAsync<DictionaryGroupDto>(a => a.Id == id);
+            return await dictionaryGroupService.GetAsync<DictionaryGroupDto>(a => a.Id == id);
         }
 
         /// <summary>

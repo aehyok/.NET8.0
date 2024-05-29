@@ -41,7 +41,7 @@ namespace sun.Core.Domains
         /// <summary>
         /// 是否启用
         /// </summary>
-        public int IsEnable { get; set; }
+        public bool IsEnable { get; set; }
 
         /// <summary>
         /// JSON定义包
