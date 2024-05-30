@@ -61,7 +61,7 @@ namespace sun.Core.Domains
         /// <summary>
         /// 工作流Id
         /// </summary>
-        public long WorkFlowId { get; set; }
+        public long WorkFlowDefineId { get; set; }
 
         public WorkFlowDefine WorkFlowDefine { get; set; }
 

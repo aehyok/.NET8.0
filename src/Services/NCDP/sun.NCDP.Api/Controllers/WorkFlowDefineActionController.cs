@@ -48,7 +48,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<long> PostStateAsync(CreateWorkFlowStateDto model)
+        public async Task<long> PostStateAsync(CreateWorkFlowActionDto model)
         {
             var entity = this.Mapper.Map<WorkFlowAction>(model);
             await workFlowActionService.InsertAsync(entity);
@@ -122,7 +122,7 @@ namespace sun.NCDP.Api.Controllers
             {
                 throw new ErrorCodeException(-1, "禁用的数据不存在");
             }
-            entity.IsEnable = true;
+            entity.IsEnable = false;
 
             await workFlowActionService.UpdateAsync(entity);
 

@@ -128,7 +128,7 @@ namespace sun.NCDP.Api.Controllers
             {
                 throw new ErrorCodeException(-1, "禁用的数据不存在");
             }
-            entity.IsEnable = true;
+            entity.IsEnable = false;
 
             await workFlowDefineService.UpdateAsync(entity);
 

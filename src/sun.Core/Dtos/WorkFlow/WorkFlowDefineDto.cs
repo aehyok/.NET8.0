@@ -10,6 +10,10 @@ namespace sun.Core.Dtos.WorkFlow
     public class WorkFlowDefineDto
     {
         /// <summary>
+        /// 流程定义Id
+        /// </summary>
+        public long Id { get; set; }
+        /// <summary>
         /// 流程名称
         /// </summary>
         public string FlowName { get; set; }
@@ -37,7 +41,7 @@ namespace sun.Core.Dtos.WorkFlow
         /// <summary>
         /// 是否启用
         /// </summary>
-        public int IsEnable { get; set; }
+        public bool IsEnable { get; set; }
 
         /// <summary>
         /// JSON定义包
@@ -75,7 +79,7 @@ namespace sun.Core.Dtos.WorkFlow
         /// <summary>
         /// 是否启用
         /// </summary>
-        public int IsEnable { get; set; }
+        public bool IsEnable { get; set; }
 
         /// <summary>
         /// JSON定义包
@@ -86,15 +90,17 @@ namespace sun.Core.Dtos.WorkFlow
     public class WorkFlowStateDto
     {
         /// <summary>
+        /// 流程状态Id
+        /// </summary>
+        public long Id { get; set; }
+        /// <summary>
         /// 所在JSON元数据中的唯一ID（GUID）
         /// </summary>
         public string JsonDefineId { get; set; }
         /// <summary>
         /// 工作流Id
         /// </summary>
-        public long WorkFlowId { get; set; }
-
-        public WorkFlowDefine WorkFlowDefine { get; set; }
+        public long WorkFlowDefineId { get; set; }
 
         /// <summary>
         /// 状态名称
@@ -124,7 +130,7 @@ namespace sun.Core.Dtos.WorkFlow
         /// <summary>
         /// 是否启用
         /// </summary>
-        public int IsEnable { get; set; }
+        public bool IsEnable { get; set; }
     }
 
     public class CreateWorkFlowStateDto
@@ -137,8 +143,6 @@ namespace sun.Core.Dtos.WorkFlow
         /// 工作流Id
         /// </summary>
         public long WorkFlowId { get; set; }
-
-        public WorkFlowDefine WorkFlowDefine { get; set; }
 
         /// <summary>
         /// 状态名称
@@ -174,6 +178,10 @@ namespace sun.Core.Dtos.WorkFlow
     public class WorkFlowActionDto
     {
         /// <summary>
+        /// 流程动作Id
+        /// </summary>
+        public long Id { get; set; }
+        /// <summary>
         /// 所在JSON元数据中的唯一ID（GUID）
         /// </summary>
         public string JsonDefineId { get; set; }
@@ -183,7 +191,6 @@ namespace sun.Core.Dtos.WorkFlow
         /// </summary>
         public long WorkFlowStateId { get; set; }
 
-        public WorkFlowState WorkFlowState { get; set; }
         /// <summary>
         /// 动作名称
         /// </summary>
@@ -204,10 +211,6 @@ namespace sun.Core.Dtos.WorkFlow
         /// </summary>
         public long WorkFlowTargetStateId { get; set; }
 
-        /// <summary>
-        /// 目标状态
-        /// </summary>
-        public WorkFlowState WorkFlowTargetState { get; set; }
 
         /// <summary>
         /// 动作类型
@@ -216,7 +219,7 @@ namespace sun.Core.Dtos.WorkFlow
         /// <summary>
         /// 是否启用
         /// </summary>
-        public int IsEnable { get; set; }
+        public bool IsEnable { get; set; }
     }
 
     public class CreateWorkFlowActionDto
@@ -230,8 +233,6 @@ namespace sun.Core.Dtos.WorkFlow
         /// 流程状态Id
         /// </summary>
         public long WorkFlowStateId { get; set; }
-
-        public WorkFlowState WorkFlowState { get; set; }
         /// <summary>
         /// 动作名称
         /// </summary>
@@ -253,17 +254,12 @@ namespace sun.Core.Dtos.WorkFlow
         public long WorkFlowTargetStateId { get; set; }
 
         /// <summary>
-        /// 目标状态
-        /// </summary>
-        public WorkFlowState WorkFlowTargetState { get; set; }
-
-        /// <summary>
         /// 动作类型
         /// </summary>
         public ActionType ActionType { get; set; }
         /// <summary>
         /// 是否启用
         /// </summary>
-        public int IsEnable { get; set; }
+        public bool IsEnable { get; set; }
     }
 }
