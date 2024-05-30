@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Services
+namespace sun.Core.Services.WorkFlow
 {
-    public class WorkFlowStateService(DbContext dbContext, IMapper mapper) : ServiceBase<WorkFlowState>(dbContext, mapper), IWorkFlowStateService, IScopedDependency
+    public class WorkFlowActionConfigService(DbContext dbContext, IMapper mapper) : ServiceBase<WorkFlowActionConfig>(dbContext, mapper), IWorkFlowActionConfigService, IScopedDependency
     {
 
     }

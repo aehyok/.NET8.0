@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Services
+namespace sun.Core.Services.WorkFlow
 {
-    public interface IWorkFlowActionService: IServiceBase<WorkFlowAction>
+    public interface IWorkFlowActionService : IServiceBase<WorkFlowAction>
     {
 
     }

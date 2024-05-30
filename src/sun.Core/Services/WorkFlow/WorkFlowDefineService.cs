@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Services
+namespace sun.Core.Services.WorkFlow
 {
     public class WorkFlowDefineService(DbContext dbContext, IMapper mapper) : ServiceBase<WorkFlowDefine>(dbContext, mapper), IWorkFlowDefineService, IScopedDependency
     {
