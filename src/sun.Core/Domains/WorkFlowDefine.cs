@@ -94,6 +94,13 @@ namespace sun.Core.Domains
         /// 是否启用
         /// </summary>
         public bool IsEnable { get; set; }
+
+        /// <summary>
+        /// 自定义form表单Id
+        /// </summary>
+        public long CollectFormMetaDataId { get; set; }
+
+        public CollectFormMetaData CollectFormMetaData { get; set; }
     }
 
 
@@ -137,6 +144,13 @@ namespace sun.Core.Domains
         /// 目标状态
         /// </summary>
         public WorkFlowState WorkFlowTargetState { get; set; }
+
+        /// <summary>
+        /// 自定义form表单Id
+        /// </summary>
+        public long CollectFormMetaDataId { get; set; }
+
+        public CollectFormMetaData CollectFormMetaData { get; set; }
 
         /// <summary>
         /// 动作类型

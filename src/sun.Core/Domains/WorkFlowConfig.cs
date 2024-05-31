@@ -67,12 +67,26 @@ namespace sun.Core.Domains
     /// </summary>
     public class WorkFlowActionConfig :AuditedEntity
     {
-        public WorkFlowStateConfig WorkFlowStateConfig { get; set; }
+        /// <summary>
+        /// 工作流程动作定义Id
+        /// </summary>
+        public long WorkFlowActionId { get; set; }
+
+        public WorkFlowAction WorkFlowAction { get; set; }
+        /// <summary>
+        /// 区域层级
+        /// </summary>
+        public int RegionLevel { get; set; }
 
         /// <summary>
-        /// 工作流状态配置Id
+        /// 角色Id
         /// </summary>
-        public long WorkFlowStateConfigId { get; set; }
+        public long RoleId { get; set; }
+
+        /// <summary>
+        /// 绑定角色Id
+        /// </summary>
+        public Role Role { get; set; }
     }
 
     /// <summary>sub

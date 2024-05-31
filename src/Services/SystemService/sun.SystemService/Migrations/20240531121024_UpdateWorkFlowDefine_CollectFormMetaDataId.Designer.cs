@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sun.EntityFrameworkCore.DbContexts;
 
@@ -10,9 +11,11 @@ using sun.EntityFrameworkCore.DbContexts;
 namespace sun.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    partial class DvsContextModelSnapshot : ModelSnapshot
+    [Migration("20240531121024_UpdateWorkFlowDefine_CollectFormMetaDataId")]
+    partial class UpdateWorkFlowDefine_CollectFormMetaDataId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
