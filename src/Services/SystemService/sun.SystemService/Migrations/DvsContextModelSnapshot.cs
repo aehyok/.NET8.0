@@ -1855,21 +1855,13 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("bigint")
                         .HasComment("");
 
-                    b.Property<long?>("WorkFlowSourceStateId1")
+                    b.Property<long>("WorkFlowSourceStateId")
                         .HasColumnType("bigint")
-                        .HasComment("");
+                        .HasComment("执行动作时的原状态Id");
 
-                    b.Property<long?>("WorkFlowSourceStateIdId")
+                    b.Property<long>("WorkFlowTargetStateId")
                         .HasColumnType("bigint")
-                        .HasComment("");
-
-                    b.Property<long?>("WorkFlowTargetStateId1")
-                        .HasColumnType("bigint")
-                        .HasComment("");
-
-                    b.Property<long?>("WorkFlowTargetStateIdId")
-                        .HasColumnType("bigint")
-                        .HasComment("");
+                        .HasComment("执行动作时的目标状态Id");
 
                     b.HasKey("Id");
 
@@ -1879,13 +1871,9 @@ namespace sun.SystemService.Migrations
 
                     b.HasIndex("WorkFlowActionId1");
 
-                    b.HasIndex("WorkFlowSourceStateId1");
+                    b.HasIndex("WorkFlowSourceStateId");
 
-                    b.HasIndex("WorkFlowSourceStateIdId");
-
-                    b.HasIndex("WorkFlowTargetStateId1");
-
-                    b.HasIndex("WorkFlowTargetStateIdId");
+                    b.HasIndex("WorkFlowTargetStateId");
 
                     b.ToTable("WorkFlowActionLog", t =>
                         {
@@ -2963,19 +2951,15 @@ namespace sun.SystemService.Migrations
 
                     b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowSourceState")
                         .WithMany()
-                        .HasForeignKey("WorkFlowSourceStateId1");
-
-                    b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowSourceStateId")
-                        .WithMany()
-                        .HasForeignKey("WorkFlowSourceStateIdId");
+                        .HasForeignKey("WorkFlowSourceStateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowTargetState")
                         .WithMany()
-                        .HasForeignKey("WorkFlowTargetStateId1");
-
-                    b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowTargetStateId")
-                        .WithMany()
-                        .HasForeignKey("WorkFlowTargetStateIdId");
+                        .HasForeignKey("WorkFlowTargetStateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Region");
 
@@ -2985,11 +2969,7 @@ namespace sun.SystemService.Migrations
 
                     b.Navigation("WorkFlowSourceState");
 
-                    b.Navigation("WorkFlowSourceStateId");
-
                     b.Navigation("WorkFlowTargetState");
-
-                    b.Navigation("WorkFlowTargetStateId");
                 });
 
             modelBuilder.Entity("sun.Core.Domains.WorkFlowActioncirculateConfig", b =>

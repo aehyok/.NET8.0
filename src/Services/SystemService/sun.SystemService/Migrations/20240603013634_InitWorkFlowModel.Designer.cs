@@ -11,8 +11,8 @@ using sun.EntityFrameworkCore.DbContexts;
 namespace sun.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    [Migration("20240529083253_UpdateWorkFlow")]
-    partial class UpdateWorkFlow
+    [Migration("20240603013634_InitWorkFlowModel")]
+    partial class InitWorkFlowModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1696,6 +1696,10 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("int")
                         .HasComment("动作类型");
 
+                    b.Property<long>("CollectFormMetaDataId")
+                        .HasColumnType("bigint")
+                        .HasComment("自定义form表单Id");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)")
                         .HasComment("创建时间");
@@ -1708,8 +1712,8 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasComment("是否删除");
 
-                    b.Property<int>("IsEnable")
-                        .HasColumnType("int")
+                    b.Property<bool>("IsEnable")
+                        .HasColumnType("tinyint(1)")
                         .HasComment("是否启用");
 
                     b.Property<string>("JsonDefineId")
@@ -1737,6 +1741,8 @@ namespace sun.SystemService.Migrations
                         .HasComment("目标状态Id(当前动作执行完后的状态)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CollectFormMetaDataId");
 
                     b.HasIndex("WorkFlowStateId");
 
@@ -1766,9 +1772,17 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasComment("是否删除");
 
+                    b.Property<int>("RegionLevel")
+                        .HasColumnType("int")
+                        .HasComment("区域层级");
+
                     b.Property<string>("Remark")
                         .HasColumnType("longtext")
                         .HasComment("备注");
+
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint")
+                        .HasComment("角色Id");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)")
@@ -1778,13 +1792,15 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("bigint")
                         .HasComment("修改人id");
 
-                    b.Property<long>("WorkFlowStateConfigId")
+                    b.Property<long>("WorkFlowActionId")
                         .HasColumnType("bigint")
-                        .HasComment("工作流状态配置Id");
+                        .HasComment("工作流程动作定义Id");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WorkFlowStateConfigId");
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("WorkFlowActionId");
 
                     b.ToTable("WorkFlowActionConfig", t =>
                         {
@@ -1842,21 +1858,13 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("bigint")
                         .HasComment("");
 
-                    b.Property<long?>("WorkFlowSourceStateId1")
+                    b.Property<long>("WorkFlowSourceStateId")
                         .HasColumnType("bigint")
-                        .HasComment("");
+                        .HasComment("执行动作时的原状态Id");
 
-                    b.Property<long?>("WorkFlowSourceStateIdId")
+                    b.Property<long>("WorkFlowTargetStateId")
                         .HasColumnType("bigint")
-                        .HasComment("");
-
-                    b.Property<long?>("WorkFlowTargetStateId1")
-                        .HasColumnType("bigint")
-                        .HasComment("");
-
-                    b.Property<long?>("WorkFlowTargetStateIdId")
-                        .HasColumnType("bigint")
-                        .HasComment("");
+                        .HasComment("执行动作时的目标状态Id");
 
                     b.HasKey("Id");
 
@@ -1866,13 +1874,9 @@ namespace sun.SystemService.Migrations
 
                     b.HasIndex("WorkFlowActionId1");
 
-                    b.HasIndex("WorkFlowSourceStateId1");
+                    b.HasIndex("WorkFlowSourceStateId");
 
-                    b.HasIndex("WorkFlowSourceStateIdId");
-
-                    b.HasIndex("WorkFlowTargetStateId1");
-
-                    b.HasIndex("WorkFlowTargetStateIdId");
+                    b.HasIndex("WorkFlowTargetStateId");
 
                     b.ToTable("WorkFlowActionLog", t =>
                         {
@@ -2048,8 +2052,8 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasComment("是否删除");
 
-                    b.Property<int>("IsEnable")
-                        .HasColumnType("int")
+                    b.Property<bool>("IsEnable")
+                        .HasColumnType("tinyint(1)")
                         .HasComment("是否启用");
 
                     b.Property<string>("JsonDefine")
@@ -2166,6 +2170,10 @@ namespace sun.SystemService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<long>("CollectFormMetaDataId")
+                        .HasColumnType("bigint")
+                        .HasComment("自定义form表单Id");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)")
                         .HasComment("创建时间");
@@ -2186,8 +2194,8 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasComment("是否删除");
 
-                    b.Property<int>("IsEnable")
-                        .HasColumnType("int")
+                    b.Property<bool>("IsEnable")
+                        .HasColumnType("tinyint(1)")
                         .HasComment("是否启用");
 
                     b.Property<string>("JsonDefineId")
@@ -2218,15 +2226,13 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("bigint")
                         .HasComment("修改人id");
 
-                    b.Property<long?>("WorkFlowDefineId")
-                        .HasColumnType("bigint")
-                        .HasComment("");
-
-                    b.Property<long>("WorkFlowId")
+                    b.Property<long>("WorkFlowDefineId")
                         .HasColumnType("bigint")
                         .HasComment("工作流Id");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CollectFormMetaDataId");
 
                     b.HasIndex("WorkFlowDefineId");
 
@@ -2266,10 +2272,6 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("bigint")
                         .HasComment("角色Id");
 
-                    b.Property<long>("StateId")
-                        .HasColumnType("bigint")
-                        .HasComment("工作流状态Id");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)")
                         .HasComment("修改时间");
@@ -2278,9 +2280,9 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("bigint")
                         .HasComment("修改人id");
 
-                    b.Property<long?>("WorkFlowStateId")
+                    b.Property<long>("WorkFlowStateId")
                         .HasColumnType("bigint")
-                        .HasComment("");
+                        .HasComment("工作流状态Id");
 
                     b.HasKey("Id");
 
@@ -2888,6 +2890,12 @@ namespace sun.SystemService.Migrations
 
             modelBuilder.Entity("sun.Core.Domains.WorkFlowAction", b =>
                 {
+                    b.HasOne("sun.Core.Domains.CollectFormMetaData", "CollectFormMetaData")
+                        .WithMany()
+                        .HasForeignKey("CollectFormMetaDataId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowState")
                         .WithMany()
                         .HasForeignKey("WorkFlowStateId")
@@ -2900,6 +2908,8 @@ namespace sun.SystemService.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("CollectFormMetaData");
+
                     b.Navigation("WorkFlowState");
 
                     b.Navigation("WorkFlowTargetState");
@@ -2907,13 +2917,21 @@ namespace sun.SystemService.Migrations
 
             modelBuilder.Entity("sun.Core.Domains.WorkFlowActionConfig", b =>
                 {
-                    b.HasOne("sun.Core.Domains.WorkFlowStateConfig", "WorkFlowStateConfig")
+                    b.HasOne("sun.Core.Domains.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("WorkFlowStateConfigId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("WorkFlowStateConfig");
+                    b.HasOne("sun.Core.Domains.WorkFlowAction", "WorkFlowAction")
+                        .WithMany()
+                        .HasForeignKey("WorkFlowActionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("WorkFlowAction");
                 });
 
             modelBuilder.Entity("sun.Core.Domains.WorkFlowActionLog", b =>
@@ -2936,19 +2954,15 @@ namespace sun.SystemService.Migrations
 
                     b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowSourceState")
                         .WithMany()
-                        .HasForeignKey("WorkFlowSourceStateId1");
-
-                    b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowSourceStateId")
-                        .WithMany()
-                        .HasForeignKey("WorkFlowSourceStateIdId");
+                        .HasForeignKey("WorkFlowSourceStateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowTargetState")
                         .WithMany()
-                        .HasForeignKey("WorkFlowTargetStateId1");
-
-                    b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowTargetStateId")
-                        .WithMany()
-                        .HasForeignKey("WorkFlowTargetStateIdId");
+                        .HasForeignKey("WorkFlowTargetStateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Region");
 
@@ -2958,11 +2972,7 @@ namespace sun.SystemService.Migrations
 
                     b.Navigation("WorkFlowSourceState");
 
-                    b.Navigation("WorkFlowSourceStateId");
-
                     b.Navigation("WorkFlowTargetState");
-
-                    b.Navigation("WorkFlowTargetStateId");
                 });
 
             modelBuilder.Entity("sun.Core.Domains.WorkFlowActioncirculateConfig", b =>
@@ -2992,9 +3002,19 @@ namespace sun.SystemService.Migrations
 
             modelBuilder.Entity("sun.Core.Domains.WorkFlowState", b =>
                 {
+                    b.HasOne("sun.Core.Domains.CollectFormMetaData", "CollectFormMetaData")
+                        .WithMany()
+                        .HasForeignKey("CollectFormMetaDataId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("sun.Core.Domains.WorkFlowDefine", "WorkFlowDefine")
                         .WithMany()
-                        .HasForeignKey("WorkFlowDefineId");
+                        .HasForeignKey("WorkFlowDefineId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CollectFormMetaData");
 
                     b.Navigation("WorkFlowDefine");
                 });
@@ -3009,7 +3029,9 @@ namespace sun.SystemService.Migrations
 
                     b.HasOne("sun.Core.Domains.WorkFlowState", "WorkFlowState")
                         .WithMany()
-                        .HasForeignKey("WorkFlowStateId");
+                        .HasForeignKey("WorkFlowStateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Role");
 

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace sun.SystemService.Migrations
 {
     /// <inheritdoc />
-    public partial class InitWorkFlow : Migration
+    public partial class InitWorkFlowModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,7 +56,7 @@ namespace sun.SystemService.Migrations
                     Descriptionn = table.Column<string>(type: "longtext", nullable: true, comment: "流程描述")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DisplayOrder = table.Column<int>(type: "int", nullable: false, comment: "顺序"),
-                    IsEnable = table.Column<int>(type: "int", nullable: false, comment: "是否启用"),
+                    IsEnable = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否启用"),
                     JsonDefine = table.Column<string>(type: "longtext", nullable: true, comment: "JSON定义包")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否删除"),
@@ -127,8 +127,7 @@ namespace sun.SystemService.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     JsonDefineId = table.Column<string>(type: "longtext", nullable: true, comment: "所在JSON元数据中的唯一ID（GUID）")
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    WorkFlowId = table.Column<long>(type: "bigint", nullable: false, comment: "工作流Id"),
-                    WorkFlowDefineId = table.Column<long>(type: "bigint", nullable: true, comment: ""),
+                    WorkFlowDefineId = table.Column<long>(type: "bigint", nullable: false, comment: "工作流Id"),
                     StateName = table.Column<string>(type: "longtext", nullable: true, comment: "状态名称")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     StateCode = table.Column<string>(type: "longtext", nullable: true, comment: "状态Code唯一编码")
@@ -137,7 +136,8 @@ namespace sun.SystemService.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     StateType = table.Column<int>(type: "int", nullable: false, comment: "状态类型"),
                     DisplayOrder = table.Column<int>(type: "int", nullable: false, comment: "顺序"),
-                    IsEnable = table.Column<int>(type: "int", nullable: false, comment: "是否启用"),
+                    IsEnable = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否启用"),
+                    CollectFormMetaDataId = table.Column<long>(type: "bigint", nullable: false, comment: "自定义form表单Id"),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否删除"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间"),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: true, comment: "创建人id"),
@@ -150,10 +150,17 @@ namespace sun.SystemService.Migrations
                 {
                     table.PrimaryKey("PK_WorkFlowState", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_WorkFlowState_CollectFormMetaData_CollectFormMetaDataId",
+                        column: x => x.CollectFormMetaDataId,
+                        principalTable: "CollectFormMetaData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_WorkFlowState_WorkFlowDefine_WorkFlowDefineId",
                         column: x => x.WorkFlowDefineId,
                         principalTable: "WorkFlowDefine",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 },
                 comment: "工作流下的状态表")
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -173,8 +180,9 @@ namespace sun.SystemService.Migrations
                     ActionCode = table.Column<string>(type: "longtext", nullable: true, comment: "动作Code唯一编码")
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     WorkFlowTargetStateId = table.Column<long>(type: "bigint", nullable: false, comment: "目标状态Id(当前动作执行完后的状态)"),
+                    CollectFormMetaDataId = table.Column<long>(type: "bigint", nullable: false, comment: "自定义form表单Id"),
                     ActionType = table.Column<int>(type: "int", nullable: false, comment: "动作类型"),
-                    IsEnable = table.Column<int>(type: "int", nullable: false, comment: "是否启用"),
+                    IsEnable = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否启用"),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否删除"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间"),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: true, comment: "创建人id"),
@@ -186,6 +194,12 @@ namespace sun.SystemService.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkFlowAction", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkFlowAction_CollectFormMetaData_CollectFormMetaDataId",
+                        column: x => x.CollectFormMetaDataId,
+                        principalTable: "CollectFormMetaData",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_WorkFlowAction_WorkFlowState_WorkFlowStateId",
                         column: x => x.WorkFlowStateId,
@@ -208,9 +222,9 @@ namespace sun.SystemService.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    StateId = table.Column<long>(type: "bigint", nullable: false, comment: "工作流状态Id"),
-                    WorkFlowStateId = table.Column<long>(type: "bigint", nullable: true, comment: ""),
-                    RegionId = table.Column<long>(type: "bigint", nullable: false, comment: "工作流操作区域Id"),
+                    WorkFlowStateId = table.Column<long>(type: "bigint", nullable: false, comment: "工作流状态Id"),
+                    RegionLevel = table.Column<int>(type: "int", nullable: false, comment: "区域层级"),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false, comment: "角色Id"),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否删除"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间"),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: true, comment: "创建人id"),
@@ -223,18 +237,55 @@ namespace sun.SystemService.Migrations
                 {
                     table.PrimaryKey("PK_WorkFlowStateConfig", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkFlowStateConfig_Region_RegionId",
-                        column: x => x.RegionId,
-                        principalTable: "Region",
+                        name: "FK_WorkFlowStateConfig_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_WorkFlowStateConfig_WorkFlowState_WorkFlowStateId",
                         column: x => x.WorkFlowStateId,
                         principalTable: "WorkFlowState",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 },
                 comment: "工作流状态配置")
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "WorkFlowActionConfig",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    WorkFlowActionId = table.Column<long>(type: "bigint", nullable: false, comment: "工作流程动作定义Id"),
+                    RegionLevel = table.Column<int>(type: "int", nullable: false, comment: "区域层级"),
+                    RoleId = table.Column<long>(type: "bigint", nullable: false, comment: "角色Id"),
+                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否删除"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间"),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: true, comment: "创建人id"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间"),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true, comment: "修改人id"),
+                    Remark = table.Column<string>(type: "longtext", nullable: true, comment: "备注")
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkFlowActionConfig", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkFlowActionConfig_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_WorkFlowActionConfig_WorkFlowAction_WorkFlowActionId",
+                        column: x => x.WorkFlowActionId,
+                        principalTable: "WorkFlowAction",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                },
+                comment: "工作流动作配置")
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
@@ -249,10 +300,8 @@ namespace sun.SystemService.Migrations
                     BusinessId = table.Column<long>(type: "bigint", nullable: false, comment: "业务实体Id"),
                     UserId = table.Column<long>(type: "bigint", nullable: false, comment: "执行动作的用户Id"),
                     RegionId = table.Column<long>(type: "bigint", nullable: false, comment: "执行动作的区域Id"),
-                    WorkFlowSourceStateIdId = table.Column<long>(type: "bigint", nullable: true, comment: ""),
-                    WorkFlowSourceStateId1 = table.Column<long>(type: "bigint", nullable: true, comment: ""),
-                    WorkFlowTargetStateIdId = table.Column<long>(type: "bigint", nullable: true, comment: ""),
-                    WorkFlowTargetStateId1 = table.Column<long>(type: "bigint", nullable: true, comment: ""),
+                    WorkFlowSourceStateId = table.Column<long>(type: "bigint", nullable: false, comment: "执行动作时的原状态Id"),
+                    WorkFlowTargetStateId = table.Column<long>(type: "bigint", nullable: false, comment: "执行动作时的目标状态Id"),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否删除"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间"),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: true, comment: "创建人id"),
@@ -282,25 +331,17 @@ namespace sun.SystemService.Migrations
                         principalTable: "WorkFlowAction",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_WorkFlowActionLog_WorkFlowState_WorkFlowSourceStateId1",
-                        column: x => x.WorkFlowSourceStateId1,
+                        name: "FK_WorkFlowActionLog_WorkFlowState_WorkFlowSourceStateId",
+                        column: x => x.WorkFlowSourceStateId,
                         principalTable: "WorkFlowState",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_WorkFlowActionLog_WorkFlowState_WorkFlowSourceStateIdId",
-                        column: x => x.WorkFlowSourceStateIdId,
+                        name: "FK_WorkFlowActionLog_WorkFlowState_WorkFlowTargetStateId",
+                        column: x => x.WorkFlowTargetStateId,
                         principalTable: "WorkFlowState",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_WorkFlowActionLog_WorkFlowState_WorkFlowTargetStateId1",
-                        column: x => x.WorkFlowTargetStateId1,
-                        principalTable: "WorkFlowState",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_WorkFlowActionLog_WorkFlowState_WorkFlowTargetStateIdId",
-                        column: x => x.WorkFlowTargetStateIdId,
-                        principalTable: "WorkFlowState",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 },
                 comment: "工作流动作日志表")
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -348,41 +389,13 @@ namespace sun.SystemService.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "WorkFlowActionConfig",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    WorkFlowStateConfigId = table.Column<long>(type: "bigint", nullable: false, comment: "工作流状态配置Id"),
-                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, comment: "是否删除"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "创建时间"),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: true, comment: "创建人id"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, comment: "修改时间"),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true, comment: "修改人id"),
-                    Remark = table.Column<string>(type: "longtext", nullable: true, comment: "备注")
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkFlowActionConfig", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WorkFlowActionConfig_WorkFlowStateConfig_WorkFlowStateConfig~",
-                        column: x => x.WorkFlowStateConfigId,
-                        principalTable: "WorkFlowStateConfig",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                },
-                comment: "工作流动作配置")
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "WorkFlowStateLog",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     WorkFlowActionLogId = table.Column<long>(type: "bigint", nullable: false, comment: "执行具体动作的日志Id"),
-                    WorkFlowActionId = table.Column<long>(type: "bigint", nullable: true, comment: ""),
+                    WorkFlowActionId = table.Column<long>(type: "bigint", nullable: false),
                     WorkFlowStateId = table.Column<long>(type: "bigint", nullable: false, comment: "状态Id"),
                     UserId = table.Column<long>(type: "bigint", nullable: false, comment: "当前操作用户Id"),
                     RegionId = table.Column<long>(type: "bigint", nullable: false, comment: "当前状态操作区域Id"),
@@ -423,7 +436,8 @@ namespace sun.SystemService.Migrations
                         name: "FK_WorkFlowStateLog_WorkFlowAction_WorkFlowActionId",
                         column: x => x.WorkFlowActionId,
                         principalTable: "WorkFlowAction",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_WorkFlowStateLog_WorkFlowState_WorkFlowStateId",
                         column: x => x.WorkFlowStateId,
@@ -433,6 +447,11 @@ namespace sun.SystemService.Migrations
                 },
                 comment: "工作流状态日志表")
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkFlowAction_CollectFormMetaDataId",
+                table: "WorkFlowAction",
+                column: "CollectFormMetaDataId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkFlowAction_WorkFlowStateId",
@@ -460,9 +479,14 @@ namespace sun.SystemService.Migrations
                 column: "WorkFlowStateConfigId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkFlowActionConfig_WorkFlowStateConfigId",
+                name: "IX_WorkFlowActionConfig_RoleId",
                 table: "WorkFlowActionConfig",
-                column: "WorkFlowStateConfigId");
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkFlowActionConfig_WorkFlowActionId",
+                table: "WorkFlowActionConfig",
+                column: "WorkFlowActionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkFlowActionLog_RegionId",
@@ -480,24 +504,19 @@ namespace sun.SystemService.Migrations
                 column: "WorkFlowActionId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkFlowActionLog_WorkFlowSourceStateId1",
+                name: "IX_WorkFlowActionLog_WorkFlowSourceStateId",
                 table: "WorkFlowActionLog",
-                column: "WorkFlowSourceStateId1");
+                column: "WorkFlowSourceStateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkFlowActionLog_WorkFlowSourceStateIdId",
+                name: "IX_WorkFlowActionLog_WorkFlowTargetStateId",
                 table: "WorkFlowActionLog",
-                column: "WorkFlowSourceStateIdId");
+                column: "WorkFlowTargetStateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkFlowActionLog_WorkFlowTargetStateId1",
-                table: "WorkFlowActionLog",
-                column: "WorkFlowTargetStateId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_WorkFlowActionLog_WorkFlowTargetStateIdId",
-                table: "WorkFlowActionLog",
-                column: "WorkFlowTargetStateIdId");
+                name: "IX_WorkFlowState_CollectFormMetaDataId",
+                table: "WorkFlowState",
+                column: "CollectFormMetaDataId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkFlowState_WorkFlowDefineId",
@@ -505,9 +524,9 @@ namespace sun.SystemService.Migrations
                 column: "WorkFlowDefineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkFlowStateConfig_RegionId",
+                name: "IX_WorkFlowStateConfig_RoleId",
                 table: "WorkFlowStateConfig",
-                column: "RegionId");
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkFlowStateConfig_WorkFlowStateId",

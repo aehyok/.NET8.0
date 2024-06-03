@@ -41,13 +41,13 @@ namespace sun.Core.Domains
         /// <summary>
         /// 执行动作时的原状态Id
         /// </summary>
-        public WorkFlowState WorkFlowSourceStateId { get; set; }
+        public long WorkFlowSourceStateId { get; set; }
 
         public WorkFlowState WorkFlowSourceState { get; set; }
         /// <summary>
         /// 执行动作时的目标状态Id
         /// </summary>
-        public WorkFlowState WorkFlowTargetStateId { get; set; }
+        public long WorkFlowTargetStateId { get; set; }
 
         public WorkFlowState WorkFlowTargetState { get; set; }
     }
