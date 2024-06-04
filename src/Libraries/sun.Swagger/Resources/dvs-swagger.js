@@ -118,6 +118,12 @@ var dvs = dvs || {};
             dvs.swagger.login(loginCallback);
         };
 
+        window.addEventListener("keydown", function (event) {
+            console.log(event.key, "event.key");
+            if (event.key === 'Enter') {
+                dvs.swagger.login(loginCallback);
+            }
+        });
         authDialog.querySelector('.close-modal').onclick = function () {
             dvs.swagger.closeAuthDialog();
         };
@@ -142,6 +148,15 @@ var dvs = dvs || {};
             platform: 0,
         };
 
+        if (data.userName === "" || data.password === "") {
+            alert("账号或密码不能为空");
+            return;
+        }
+        if (data.captcha === "") {
+            alert("验证码不能为空")
+            return;
+        }
+
         await fetch(`${dvs.host}/api/basic/token/password`, {
             method: 'POST',
             headers: {
@@ -157,6 +172,7 @@ var dvs = dvs || {};
                     callback();
                 } else {
                     alert(response.message);
+                    document.getElementById('captcha').value = "";
                     await loadCaptcha();
                 }
             });
