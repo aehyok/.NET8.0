@@ -10,7 +10,7 @@ namespace sun.Core.Domains
     /// <summary>
     /// form表单自动生成sql的指标定义表
     /// </summary>
-    public class CollectFormMetaDataLine : AuditedEntity
+    public class AutoGuideLineDefine : AuditedEntity
     {
         /// <summary>
         /// 指标名称

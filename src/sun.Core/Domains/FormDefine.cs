@@ -10,7 +10,7 @@ namespace sun.Core.Domains
     /// <summary>
     /// form表单元数据实体
     /// </summary>
-    public class CollectFormMetaData: AuditedEntity
+    public class FormDefine: AuditedEntity
     {
         /// <summary>
         /// 表单的名称
@@ -53,9 +53,9 @@ namespace sun.Core.Domains
         public string TableDefine { get; set; }
 
         /// <summary>
-        /// 1正常，2停用
+        /// 是否启用
         /// </summary>
-        public int Status { get; set; } = 1;
+        public bool IsEnable { get; set; }
 
         /// <summary>
         /// 本模型对应的业务类型

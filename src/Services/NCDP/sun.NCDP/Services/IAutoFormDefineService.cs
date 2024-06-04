@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace sun.Core.Services
 {
-    public interface ICollectFormMetaDataService: IServiceBase<CollectFormMetaData>
+    public interface IAutoFormDefineService: IServiceBase<FormDefine>
     {
         /// <summary>
         /// 获取form表单定义
         /// </summary>
         /// <param name="formName"></param>
         /// <returns></returns>
-        Task<CollectFormMetaData> GetFormAsync(string formName);
+        Task<FormDefine> GetFormAsync(string formName);
         /// <summary>
         /// 初始化
         /// </summary>

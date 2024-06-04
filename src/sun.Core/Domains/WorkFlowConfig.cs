@@ -92,7 +92,7 @@ namespace sun.Core.Domains
     /// <summary>sub
     /// 工作流动作的流转配置（不配置默认就是当前继续流转）
     /// </summary>
-    public class WorkFlowActioncirculateConfig : AuditedEntity
+    public class WorkFlowActionCirculateConfig : AuditedEntity
     {
         /// <summary>
         /// 所在流程的动作Id

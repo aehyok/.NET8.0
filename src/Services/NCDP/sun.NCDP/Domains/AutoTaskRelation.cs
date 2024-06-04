@@ -13,6 +13,18 @@ namespace sun.NCDP.Domains
     /// </summary>
     public class AutoTaskRelation: AuditedEntity
     {
+        /// <summary>
+        /// 自定义任务Id
+        /// </summary>
+        //public long AutoTaskId { get; set; }
 
+        //public AutoTask AutoTask { get; set; }
+
+        //public AutoFormDefine AutoFormDefine {get;set; }
+
+        /// <summary>
+        /// 自定义表单定义Id
+        /// </summary>
+        //public long AutoFormDefineId { get; set; }
     }
 }

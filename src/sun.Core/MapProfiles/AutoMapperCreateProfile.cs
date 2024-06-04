@@ -27,6 +27,10 @@ namespace sun.Core.MapProfiles
             CreateMap<CreateWorkFlowStateDto, WorkFlowState>();
 
             CreateMap<CreateWorkFlowActionDto, WorkFlowAction>();
+
+            CreateMap<CreateWorkFlowStateConfigDto, WorkFlowStateConfig>();
+
+            CreateMap<CreateWorkFlowActionConfigDto, WorkFlowActionConfig>();
         }
     }
 }

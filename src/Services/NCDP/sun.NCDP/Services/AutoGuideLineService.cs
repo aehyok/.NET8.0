@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace sun.Core.Services
 {
-    public  class CollectFormMetaDataLineService(DbContext dbContext, IMapper mapper) : ServiceBase<CollectFormMetaDataLine>(dbContext,mapper), ICollectFormMetaDataLineService, IScopedDependency
+    public  class AutoGuideLineService(DbContext dbContext, IMapper mapper) : ServiceBase<AutoGuideLineDefine>(dbContext,mapper), IAutoGuideLineService, IScopedDependency
     {
         public async Task<DataTable> QueryCustomFormGuideline(string guideLineId, Dictionary<string, object> Parameters, string keyword, long areaid)
         {
@@ -61,7 +61,7 @@ namespace sun.Core.Services
             return _dt;
         }
 
-        private GuideLine_Ex BuildCustomFormGuideline(CollectFormMetaDataLine guideLine, Dictionary<string, object> Parameters, long areaid)
+        private GuideLine_Ex BuildCustomFormGuideline(AutoGuideLineDefine guideLine, Dictionary<string, object> Parameters, long areaid)
         {
             GuideLine_Ex guideLine_Ex = new GuideLine_Ex();
 
@@ -82,7 +82,7 @@ namespace sun.Core.Services
         /// <param name="parameters"></param>
         /// <param name="areaId"></param>
         /// <returns></returns>
-        private void RebuildGuidelineMethod(GuideLine_Ex guideLine_Ex, CollectFormMetaDataLine guideLine, Dictionary<string, object> parameters, string areaId)
+        private void RebuildGuidelineMethod(GuideLine_Ex guideLine_Ex, AutoGuideLineDefine guideLine, Dictionary<string, object> parameters, string areaId)
         {
             string _sql = guideLine.zbsf;
             if (_sql.Contains(" from "))

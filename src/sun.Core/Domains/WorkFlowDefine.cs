@@ -98,9 +98,9 @@ namespace sun.Core.Domains
         /// <summary>
         /// 自定义form表单Id
         /// </summary>
-        public long CollectFormMetaDataId { get; set; }
+        public long AutoFormDefineId { get; set; }
 
-        public CollectFormMetaData CollectFormMetaData { get; set; }
+        public FormDefine FormDefine { get; set; }
     }
 
 
@@ -150,7 +150,7 @@ namespace sun.Core.Domains
         /// </summary>
         public long CollectFormMetaDataId { get; set; }
 
-        public CollectFormMetaData CollectFormMetaData { get; set; }
+        public FormDefine CollectFormMetaData { get; set; }
 
         /// <summary>
         /// 动作类型

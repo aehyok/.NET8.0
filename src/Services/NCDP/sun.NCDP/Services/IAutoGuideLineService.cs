@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace sun.Core.Services
 {
-    public interface ICollectFormMetaDataLineService: IServiceBase<CollectFormMetaDataLine>
+    public interface IAutoGuideLineService: IServiceBase<AutoGuideLineDefine>
     {
         Task<DataTable> QueryCustomFormGuideline(string guideLineId, Dictionary<string, object> sqlParameters, string keyword, long areaid);
     }
