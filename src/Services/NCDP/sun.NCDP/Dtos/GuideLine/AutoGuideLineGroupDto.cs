@@ -5,19 +5,18 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Dtos.MD_GuideLine
+namespace sun.NCDP.Dtos.GuideLine
 {
     /// <summary>
     /// 指标组元数据定义
-    /// 
     /// </summary>
-    public class MD_GuideLineGroup
+    public class AutoGuideLineGroupDto
     {
 
-        public MD_GuideLineGroup()
+        public AutoGuideLineGroupDto()
         {
         }
-        public MD_GuideLineGroup(string _ztmc, string _ztsm, string _nsName, string ssdw, int lx, int qxlx)
+        public AutoGuideLineGroupDto(string _ztmc, string _ztsm, string _nsName, string ssdw, int lx, int qxlx)
         {
             this.SSDW = ssdw;
             this.ZBZTMC = _ztmc;

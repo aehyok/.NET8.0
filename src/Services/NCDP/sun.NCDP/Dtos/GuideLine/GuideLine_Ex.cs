@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Dtos.MD_GuideLine
+namespace sun.NCDP.Dtos.GuideLine
 {
     /// <summary>
     /// 指标元数据定义 
@@ -14,9 +14,8 @@ namespace sun.Core.Dtos.MD_GuideLine
     public class MD_GuideLine
     {
         /// <summary>
-        /// 指标ID
+        /// 指标Id
         /// </summary>
-        /// 
         [DataMember]
         public string ID { get; set; }
 
@@ -60,7 +59,7 @@ namespace sun.Core.Dtos.MD_GuideLine
         public List<MD_GuideLine> Children { get; set; }
 
         [DataMember]
-        public MD_GuideLineGroup MD_GuideLineGroup { get; set; }
+        public AutoGuideLineGroupDto MD_GuideLineGroup { get; set; }
 
         [DataMember]
         public string DetailMeta { get; set; }
@@ -68,18 +67,18 @@ namespace sun.Core.Dtos.MD_GuideLine
         /// 指标查询参数集合
         /// </summary>
         [DataMember]
-        public List<MD_GuideLineParameter> Parameters { get; set; }
+        public List<AutoGuideLineParameterDto> Parameters { get; set; }
 
         /// <summary>
         /// 指标查询结果分组集合
         /// </summary>
         [DataMember]
-        public List<MD_GuideLineFieldGroup> ResultGroups { get; set; }
+        public List<AutoGuideLineFieldGroupDto> ResultGroups { get; set; }
         /// <summary>
         /// 详细信息链接
         /// </summary>
         [DataMember]
-        public List<MD_GuideLineDetailDefine> DetailDefines { get; set; }
+        public List<AutoGuideLineDetailDefineDto> DetailDefines { get; set; }
 
         [DataMember]
         public string GuideLineQueryMethod { get; set; }
@@ -119,7 +118,7 @@ namespace sun.Core.Dtos.MD_GuideLine
     /// </summary>
     public class GuideLine_Ex
     {
-        public List<MD_GuideLineFieldGroup> ResultGroups { get; set; }
+        public List<AutoGuideLineFieldGroupDto> ResultGroups { get; set; }
 
         public string QueryString { get; set; }
 

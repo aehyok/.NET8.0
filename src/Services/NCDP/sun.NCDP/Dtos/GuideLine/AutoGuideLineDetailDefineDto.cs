@@ -5,19 +5,19 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Dtos.MD_GuideLine
+namespace sun.NCDP.Dtos.GuideLine
 {
     /// <summary>
     /// 指标详情元数据定义
     /// 
     /// </summary>
-    public class MD_GuideLineDetailDefine
+    public class AutoGuideLineDetailDefineDto
     {
-        public MD_GuideLineDetailDefine()
+        public AutoGuideLineDetailDefineDto()
         {
         }
 
-        public MD_GuideLineDetailDefine(string _fname, string _type, string _qid, string _qcs)
+        public AutoGuideLineDetailDefineDto(string _fname, string _type, string _qid, string _qcs)
         {
             TargetFieldName = _fname;
             QueryDetailType = _type;
@@ -25,7 +25,7 @@ namespace sun.Core.Dtos.MD_GuideLine
             DetailParameterMeta = _qcs;
         }
 
-        public MD_GuideLineDetailDefine(string _fname, string _type, string _qid, string _qcs, string linkstr)
+        public AutoGuideLineDetailDefineDto(string _fname, string _type, string _qid, string _qcs, string linkstr)
         {
             TargetFieldName = _fname;
             QueryDetailType = _type;

@@ -5,12 +5,12 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Dtos.MD_GuideLine
+namespace sun.NCDP.Dtos.GuideLine
 {
     /// <summary>
     /// 指标字段名称元数据定义
     /// </summary>
-    public class MD_GuideLineFieldName
+    public class AutoGuideLineFieldNameDto
     {
 
         /// <summary>
@@ -80,11 +80,11 @@ namespace sun.Core.Dtos.MD_GuideLine
         [DataMember]
         public string Render { get; set; }
 
-        public MD_GuideLineFieldName()
+        public AutoGuideLineFieldNameDto()
         {
         }
 
-        public MD_GuideLineFieldName(string _fname, string _title, int _order, int _width, string _align, string _format, bool _hide, string _groupName)
+        public AutoGuideLineFieldNameDto(string _fname, string _title, int _order, int _width, string _align, string _format, bool _hide, string _groupName)
         {
             FieldName = _fname;
             DisplayTitle = _title;
@@ -95,7 +95,7 @@ namespace sun.Core.Dtos.MD_GuideLine
             CanHide = _hide;
             GroupName = _groupName;
         }
-        public MD_GuideLineFieldName(string _fname, string _title, int _order, int _width, string _align, string _format, bool _hide)
+        public AutoGuideLineFieldNameDto(string _fname, string _title, int _order, int _width, string _align, string _format, bool _hide)
         {
             FieldName = _fname;
             DisplayTitle = _title;

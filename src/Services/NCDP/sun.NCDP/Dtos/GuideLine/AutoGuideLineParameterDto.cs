@@ -5,13 +5,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Dtos.MD_GuideLine
+namespace sun.NCDP.Dtos.GuideLine
 {
     /// <summary>
     /// 指标参数元数据定义
     /// 
     /// </summary>
-    public class MD_GuideLineParameter
+    public class AutoGuideLineParameterDto
     {
         /// <summary>
         /// 全部的代码
@@ -92,12 +92,12 @@ namespace sun.Core.Dtos.MD_GuideLine
         /// </summary>
         [DataMember]
         public string ParameterExpression { get; set; }
-        public MD_GuideLineParameter()
+        public AutoGuideLineParameterDto()
         {
         }
 
 
-        public MD_GuideLineParameter(string pname, string title, string ptype, int order, string defaultValue, int inputWidth, string refTable, bool includeChildren, string selectAllCode)
+        public AutoGuideLineParameterDto(string pname, string title, string ptype, int order, string defaultValue, int inputWidth, string refTable, bool includeChildren, string selectAllCode)
         {
             ParameterName = pname;
             DisplayTitle = title;
@@ -109,7 +109,7 @@ namespace sun.Core.Dtos.MD_GuideLine
             IncludeChildren = includeChildren;
             SelectAllCode = selectAllCode;
         }
-        public MD_GuideLineParameter(string pname, string title, string ptype, int order, int inputWidth, string refTable, bool includeChildren, string selectAllCode, string expression)
+        public AutoGuideLineParameterDto(string pname, string title, string ptype, int order, int inputWidth, string refTable, bool includeChildren, string selectAllCode, string expression)
         {
             ParameterName = pname;
             DisplayTitle = title;

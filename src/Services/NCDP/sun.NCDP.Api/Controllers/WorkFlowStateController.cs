@@ -31,7 +31,6 @@ namespace sun.NCDP.Api.Controllers
             return await workFlowStateService.GetListAsync<WorkFlowStateDto>(spec);
         }
 
-
         /// <summary>
         /// 获取工作流状态定义详情
         /// </summary>
@@ -92,7 +91,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("Enable/{id}")]
+        [HttpPut("enable/{id}")]
         public async Task<StatusCodeResult> EnableDefine(long id)
         {
             var entity = await workFlowStateService.GetByIdAsync(id);
@@ -114,7 +113,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("Disable/{id}")]
+        [HttpPut("disable/{id}")]
         public async Task<StatusCodeResult> DisableDefine(long id)
         {
             var entity = await workFlowStateService.GetByIdAsync(id);

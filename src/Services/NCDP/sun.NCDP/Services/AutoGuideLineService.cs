@@ -2,20 +2,15 @@
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using sun.Core.Domains;
-using sun.Core.Dtos.MD_GuideLine;
+using sun.NCDP.Dtos.GuideLine;
 using sun.EntityFrameworkCore.Repository;
 using sun.Infrastructure;
 using sun.Infrastructure.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace sun.Core.Services
+namespace sun.NCDP.Services
 {
-    public  class AutoGuideLineService(DbContext dbContext, IMapper mapper) : ServiceBase<AutoGuideLineDefine>(dbContext,mapper), IAutoGuideLineService, IScopedDependency
+    public  class AutoGuideLineService(DbContext dbContext, IMapper mapper): ServiceBase<AutoGuideLineDefine>(dbContext,mapper), IAutoGuideLineService, IScopedDependency
     {
         public async Task<DataTable> QueryCustomFormGuideline(string guideLineId, Dictionary<string, object> Parameters, string keyword, long areaid)
         {
@@ -84,7 +79,7 @@ namespace sun.Core.Services
         /// <returns></returns>
         private void RebuildGuidelineMethod(GuideLine_Ex guideLine_Ex, AutoGuideLineDefine guideLine, Dictionary<string, object> parameters, string areaId)
         {
-            string _sql = guideLine.zbsf;
+            string _sql = guideLine.Algorithm;
             if (_sql.Contains(" from "))
             {
                 //带from的是get指标

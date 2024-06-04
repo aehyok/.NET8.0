@@ -51,7 +51,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<StatusCodeResult> PutTaskAsync(long id, CreateAutoTaskDto model)
         {
             return Ok();

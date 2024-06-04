@@ -5,20 +5,20 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Dtos.MD_GuideLine
+namespace sun.NCDP.Dtos.GuideLine
 {
     /// <summary>
     /// 指标字段组元数据定义
     /// 
     /// </summary>
-    public class MD_GuideLineFieldGroup
+    public class AutoGuideLineFieldGroupDto
     {
         /// <summary>
         /// 字段组下包含的显示字段列表
         /// </summary>
         /// 
         [DataMember]
-        public List<MD_GuideLineFieldName> Fields { get; set; }
+        public List<AutoGuideLineFieldNameDto> Fields { get; set; }
         /// <summary>
         /// 字段组名称
         /// </summary>
@@ -61,9 +61,9 @@ namespace sun.Core.Dtos.MD_GuideLine
         [DataMember]
         public string DefaultStatus { get; set; }
 
-        public MD_GuideLineFieldGroup() { }
+        public AutoGuideLineFieldGroupDto() { }
 
-        public MD_GuideLineFieldGroup(string _name, string _title, string _align, int _order, bool _hide, string _status)
+        public AutoGuideLineFieldGroupDto(string _name, string _title, string _align, int _order, bool _hide, string _status)
         {
             GroupName = _name;
             DisplayTitle = _title;

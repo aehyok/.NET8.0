@@ -97,7 +97,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("Enable/{id}")]
+        [HttpPut("enable/{id}")]
         public async Task<StatusCodeResult> EnableDefine(long id)
         {
             var entity = await workFlowDefineService.GetByIdAsync(id);
@@ -119,7 +119,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("Disable/{id}")]
+        [HttpPut("disable/{id}")]
         public async Task<StatusCodeResult> DisableDefine(long id)
         {
             var entity = await workFlowDefineService.GetByIdAsync(id);

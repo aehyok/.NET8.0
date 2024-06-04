@@ -15,7 +15,7 @@ namespace sun.Core.Domains
         /// <summary>
         /// 指标名称
         /// </summary>
-        public string zbmc { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// 指标主题
@@ -25,22 +25,22 @@ namespace sun.Core.Domains
         /// <summary>
         /// 指标算法
         /// </summary>
-        public string zbsf { get; set; }
+        public string Algorithm { get; set; }
 
         /// <summary>
         /// 指标元数据
         /// </summary>
-        public string zbmeta { get; set; }
+        public string Metadata { get; set; }
 
         /// <summary>
         /// 父级Id
         /// </summary>
-        public long fid { get; set; }
+        public long ParentId { get; set; }
 
         /// <summary>
         /// 指标查询算法 指标查询的SELECT语句
         /// </summary>
-        public string zbcxsf { get; set; }
+        public string SelectAlgorithm { get; set; }
 
         /// <summary>
         /// 明细_指标元数据
@@ -50,16 +50,16 @@ namespace sun.Core.Domains
         /// <summary>
         /// 显示顺序
         /// </summary>
-        public string xsxh { get; set; }
+        public int DisplayOrder { get; set; }
 
         /// <summary>
         /// 指标说明
         /// </summary>
-        public string zbsm { get; set; }
+        public string Descrption { get; set; }
 
         /// <summary>
         /// MD5值
         /// </summary>
-        public string md5 { get; set; }
+        public string Md5 { get; set; }
     }
 }

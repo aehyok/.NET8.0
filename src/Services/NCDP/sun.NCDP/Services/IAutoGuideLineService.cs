@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Services
+namespace sun.NCDP.Services
 {
     public interface IAutoGuideLineService: IServiceBase<AutoGuideLineDefine>
     {
