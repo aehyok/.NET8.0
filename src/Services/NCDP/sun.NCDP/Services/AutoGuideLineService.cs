@@ -29,7 +29,7 @@ namespace sun.NCDP.Services
                 }
                 try
                 {
-                    tb = await FillResultData(guideLine_ex.QueryString, guideLine_ex.Parameters, "ResultTable"); ;
+                    tb = await FillResultData(guideLine_ex.QueryString, guideLine_ex.Parameters, "ResultTable");
 
                 }
                 catch (Exception e)

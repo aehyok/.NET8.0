@@ -94,29 +94,37 @@ namespace sun.Core.Domains
     /// </summary>
     public class WorkFlowActionCirculateConfig : AuditedEntity
     {
+        public long WorkFlowActionConfigId { get; set; }
+
+        public WorkFlowActionConfig WorkFlowActionConfig { get; set; }
+
+        public int RegionLevel { get; set; }
+
+        public long RoleId { get; set; }
+
         /// <summary>
         /// 所在流程的动作Id
         /// </summary>
-        public long WorkFlowActionId { get; set; }
+        //public long WorkFlowActionId { get; set; }
 
-        public WorkFlowAction WorkFlowAction { get; set; }
+        //public WorkFlowAction WorkFlowAction { get; set; }
 
         /// <summary>
         /// 目标所属区域Id
         /// </summary>
-        public long TargetRegionId { get; set; }
+        //public long TargetRegionId { get; set; }
 
-        public Region Region { get; set; }
+        //public Region Region { get; set; }
 
         /// <summary>
         /// 工作流 状态配置Id
         /// </summary>
-        public long WorkFlowStateConfigId { get; set; }
+        //public long WorkFlowStateConfigId { get; set; }
 
         /// <summary>
         /// 包含状态Id和区域Id
         /// </summary>
-        public WorkFlowStateConfig WorkFlowStateConfig { get; set; }
+        //public WorkFlowStateConfig WorkFlowStateConfig { get; set; }
     }
 
     /// <summary>

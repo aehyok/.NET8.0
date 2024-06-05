@@ -68,4 +68,27 @@ namespace sun.Core.Dtos.WorkFlow
         /// </summary>
         //public bool IsSelected { get; set; }
     }
+
+    public class CreateWorkFlowActionCirculateConfigDto
+    {
+        /// <summary>
+        /// 工作流程状态Id
+        /// </summary>
+        public long WorkFlowActionId { get; set; }
+
+        /// <summary>
+        /// 角色Id
+        /// </summary>
+        public long RoleId { get; set; }
+
+        /// <summary>
+        /// 区域级别
+        /// </summary>
+        public int RegionLevel { get; set; }
+
+        /// <summary>
+        /// 是否被选中
+        /// </summary>
+        //public bool IsSelected { get; set; }
+    }
 }

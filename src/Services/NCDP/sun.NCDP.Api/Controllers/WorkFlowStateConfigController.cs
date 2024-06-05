@@ -72,7 +72,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("state")]
-        public async Task<long> PostStateConfig(CreateWorkFlowStateConfigDto model)
+        public async Task<long> PostStateConfigAsync(CreateWorkFlowStateConfigDto model)
         {
             var entity = await stateConfigService.GetAsync(a => a.WorkFlowStateId == model.WorkFlowStateId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
 
@@ -98,7 +98,7 @@ namespace sun.NCDP.Api.Controllers
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
         [HttpPut("state/{id}")]
-        public async Task<StatusCodeResult> PutStateConfig(long id,CreateWorkFlowStateConfigDto model)
+        public async Task<StatusCodeResult> PutStateConfigAsync(long id,CreateWorkFlowStateConfigDto model)
         {
             var entity = await stateConfigService.GetAsync(a => a.WorkFlowStateId == model.WorkFlowStateId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
 
@@ -120,7 +120,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("action")]
-        public async Task<long> PostActionConfig(CreateWorkFlowActionConfigDto model)
+        public async Task<long> PostActionConfigAsync(CreateWorkFlowActionConfigDto model)
         {
             var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
             if(entity is null)
@@ -143,7 +143,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("action/{id}")]
-        public async Task<StatusCodeResult> PutActionConfig(long id, CreateWorkFlowActionConfigDto model)
+        public async Task<StatusCodeResult> PutActionConfigAsync(long id, CreateWorkFlowActionConfigDto model)
         {
             var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
             if (model is not null)
@@ -156,6 +156,40 @@ namespace sun.NCDP.Api.Controllers
             {
                 throw new ErrorCodeException(-1, "当前要修改的配置与数据库不一致，请刷新页面");
             }
+        }
+
+        /// <summary>
+        /// 新增工作流程的动作流转配置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("actioncirculate")]
+        public async Task<long> PostActionCirculateConfigAsync(CreateWorkFlowActionConfigDto model)
+        {
+            var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
+            if (entity is null)
+            {
+                // 直接新增
+                entity = this.Mapper.Map<WorkFlowActionConfig>(model);
+                await actionConfigService.InsertAsync(entity);
+                return entity.Id;
+
+            }
+            else
+            {
+                throw new ErrorCodeException(-1, "当前要修改的配置与数据库不一致，请刷新页面");
+            }
+        }
+
+        /// <summary>
+        /// 修改工作流程的动作配置
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPut("actioncirculate/{id}")]
+        public async Task<StatusCodeResult> PutActionCirculateConfigAsync(long id, CreateWorkFlowActionCirculateConfigDto model)
+        {
+
         }
     }
 }
