@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using sun.EntityFrameworkCore.Repository;
+using sun.Core.Domains;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using sun.Infrastructure;
+using sun.Core.Domains.Auto;
 
-namespace sun.Core.Services.Auto
+namespace sun.NCDP.Services
 {
-    internal class AutoTaskService
+    public class TaskService : ServiceBase<AutoTask>, ITaskService, IScopedDependency
     {
+        public TaskService(DbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        {
+        }
     }
 }

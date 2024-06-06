@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using sun.Core.Domains;
+using sun.Core.Domains.WorkFlow;
 using sun.Core.Dtos.WorkFlow;
 using sun.Core.Services.WorkFlow;
 using sun.Infrastructure.Exceptions;
@@ -14,6 +14,7 @@ namespace sun.NCDP.Api.Controllers
     public class WorkFlowStateConfigController(
         IWorkFlowStateConfigService stateConfigService,
         IWorkFlowActionConfigService actionConfigService,
+        IWorkFlowActionCirculateConfigService circulateService,
         IWorkFlowStateService stateService,
         IWorkFlowActionService actionService
         ) : NCDPControllerBase
@@ -164,14 +165,14 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost("actioncirculate")]
-        public async Task<long> PostActionCirculateConfigAsync(CreateWorkFlowActionConfigDto model)
+        public async Task<long> PostActionCirculateConfigAsync(CreateWorkFlowActionCirculateConfigDto model)
         {
-            var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
+            var entity = await circulateService.GetAsync(a => a.WorkFlowActionConfigId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
             if (entity is null)
             {
                 // 直接新增
-                entity = this.Mapper.Map<WorkFlowActionConfig>(model);
-                await actionConfigService.InsertAsync(entity);
+                entity = this.Mapper.Map<WorkFlowActionCirculateConfig>(model);
+                await circulateService.InsertAsync(entity);
                 return entity.Id;
 
             }
@@ -189,7 +190,17 @@ namespace sun.NCDP.Api.Controllers
         [HttpPut("actioncirculate/{id}")]
         public async Task<StatusCodeResult> PutActionCirculateConfigAsync(long id, CreateWorkFlowActionCirculateConfigDto model)
         {
-
+            var entity = await circulateService.GetAsync(a => a.WorkFlowActionConfigId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
+            if (model is not null)
+            {
+                entity.IsDeleted = true;
+                await circulateService.UpdateAsync(entity);
+                return Ok();
+            }
+            else
+            {
+                throw new ErrorCodeException(-1, "当前要修改的配置与数据库不一致，请刷新页面");
+            }
         }
     }
 }

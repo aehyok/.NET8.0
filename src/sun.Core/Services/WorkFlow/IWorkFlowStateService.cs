@@ -1,4 +1,4 @@
-﻿using sun.Core.Domains;
+﻿using sun.Core.Domains.WorkFlow;
 using sun.EntityFrameworkCore.Repository;
 using System;
 using System.Collections.Generic;

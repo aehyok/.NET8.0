@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.NCDP.Domains
+namespace sun.Core.Domains.Auto
 {
     /// <summary>
     /// 自动化任务关联关系
     /// </summary>
-    public class AutoTaskRelation: AuditedEntity
+    public class AutoTaskRelation : AuditedEntity
     {
         /// <summary>
         /// 自定义任务Id

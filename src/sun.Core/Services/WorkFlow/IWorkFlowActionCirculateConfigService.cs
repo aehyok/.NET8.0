@@ -1,5 +1,4 @@
-﻿using sun.Basic.Domains;
-using sun.Core.Domains.WorkFlow;
+﻿using sun.Core.Domains.WorkFlow;
 using sun.EntityFrameworkCore.Repository;
 using System;
 using System.Collections.Generic;
@@ -9,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace sun.Core.Services.WorkFlow
 {
-    public interface IWorkFlowDefineService : IServiceBase<WorkFlowDefine>
+    public interface IWorkFlowActionCirculateConfigService: IServiceBase<WorkFlowActionCirculateConfig>
     {
-
     }
 }

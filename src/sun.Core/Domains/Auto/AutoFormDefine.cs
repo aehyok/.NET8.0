@@ -1,16 +1,17 @@
-﻿using sun.EntityFrameworkCore.Entities;
+﻿using sun.Basic.Domains;
+using sun.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Domains
+namespace sun.Core.Domains.Auto
 {
     /// <summary>
-    /// form表单元数据实体
+    /// 自定义表单定义
     /// </summary>
-    public class FormDefine: AuditedEntity
+    public class AutoFormDefine : AuditedEntity
     {
         /// <summary>
         /// 表单的名称

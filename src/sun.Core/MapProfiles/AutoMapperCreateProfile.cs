@@ -2,6 +2,7 @@
 using sun.Core.Dtos.Create;
 using AutoMapper;
 using sun.Core.Dtos.WorkFlow;
+using sun.Core.Domains.WorkFlow;
 
 namespace sun.Core.MapProfiles
 {

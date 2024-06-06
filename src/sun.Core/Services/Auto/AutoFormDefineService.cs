@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using sun.Core.Domains;
+using sun.Core.Domains.Auto;
 using sun.Core.Dtos;
 using sun.Core.Extensions;
 using sun.EntityFrameworkCore.Repository;
 using sun.Infrastructure;
-using sun.NCDP.Services;
 using sun.Redis;
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace sun.Core.Services
 {
-    public class AutoFormDefineService(DbContext dbContext, IMapper mapper, IRedisService redisService, IAutoGuideLineService collectFormMetaDataLineService) : ServiceBase<FormDefine>(dbContext, mapper), IAutoFormDefineService, IScopedDependency
+    public class AutoFormDefineService(DbContext dbContext, IMapper mapper, IRedisService redisService, IAutoGuideLineService guidelineService) : ServiceBase<AutoFormDefine>(dbContext, mapper), IAutoFormDefineService, IScopedDependency
     {
         public Task<bool> BuildFormByDefine(string formName, string tableNamePrefix, DbTransaction dbTransaction = null)
         {
@@ -29,10 +29,10 @@ namespace sun.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<FormDefine> GetFormAsync(string formName)
+        public async Task<AutoFormDefine> GetFormAsync(string formName)
         {
             var key = $"{CoreRedisConstants.CollectFormCache}{formName}";
-            var form = await redisService.GetAsync<FormDefine>(key);
+            var form = await redisService.GetAsync<AutoFormDefine>(key);
             if (form is null)
             {
                 form = await GetAsync(item => item.Name == formName && !item.IsDeleted, true);
@@ -44,7 +44,7 @@ namespace sun.Core.Services
             return form;
         }
 
-        public override async Task<FormDefine> InsertAsync(FormDefine model, CancellationToken cancellationToken = default)
+        public override async Task<AutoFormDefine> InsertAsync(AutoFormDefine model, CancellationToken cancellationToken = default)
         {
             model = await base.InsertAsync(model, cancellationToken);
 
@@ -52,7 +52,7 @@ namespace sun.Core.Services
             return model;
         }
 
-        public override async Task<int> UpdateAsync(FormDefine model, CancellationToken cancellationToken = default)
+        public override async Task<int> UpdateAsync(AutoFormDefine model, CancellationToken cancellationToken = default)
         {
             var result = await base.UpdateAsync(model, cancellationToken);
 
@@ -113,7 +113,7 @@ namespace sun.Core.Services
         /// <param name="sqlParameters"></param>
         /// <param name="areaid"></param>
         /// <returns></returns>
-        private async Task<DataTable> GetInitDataAsync(FormDefine form, Dictionary<string, object> sqlParameters, long areaid)
+        private async Task<DataTable> GetInitDataAsync(AutoFormDefine form, Dictionary<string, object> sqlParameters, long areaid)
         {
             DataTable dt = null;
             string keyword = string.Empty;
@@ -136,7 +136,7 @@ namespace sun.Core.Services
                 //按指标查询
                 if (sql.StartsWith("#"))
                 {
-                    dt = await collectFormMetaDataLineService.QueryCustomFormGuideline(sql, sqlParameters, keyword, areaid);
+                    dt = await guidelineService.QueryCustomFormGuideline(sql, sqlParameters, keyword, areaid);
                 }
                 else
                 {
@@ -153,7 +153,7 @@ namespace sun.Core.Services
         /// <param name="sqlParameters"></param>
         /// <param name="areaid"></param>
         /// <returns></returns>
-        private async Task<DataTable> GetExistDataAsync(FormDefine form, Dictionary<string, object> sqlParameters, long areaid)
+        private async Task<DataTable> GetExistDataAsync(AutoFormDefine form, Dictionary<string, object> sqlParameters, long areaid)
         {
             DataTable dt = null;
             string keyword = string.Empty;
@@ -177,7 +177,7 @@ namespace sun.Core.Services
                 //按指标查询
                 if (sql.StartsWith("#"))
                 {
-                    dt = await collectFormMetaDataLineService.QueryCustomFormGuideline(sql, sqlParameters, keyword, areaid);
+                    dt = await guidelineService.QueryCustomFormGuideline(sql, sqlParameters, keyword, areaid);
                 }
                 else
                 {

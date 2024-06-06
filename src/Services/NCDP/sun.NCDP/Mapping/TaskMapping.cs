@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using AutoTask = sun.NCDP.Domains.AutoTask;
+using AutoTask = sun.Core.Domains.Auto.AutoTask;
 
 namespace sun.NCDP.Mapping
 {

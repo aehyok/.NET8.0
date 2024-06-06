@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using sun.Core.Domains;
+using sun.Core.Domains.WorkFlow;
 using sun.EntityFrameworkCore.Repository;
 using sun.Infrastructure;
 using System;

@@ -11,4 +11,9 @@
     <ProjectReference Include="..\..\Basic\sun.Basic\sun.Basic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domains\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,4 @@
 ﻿using sun.Basic.Domains;
-using sun.Core.Domains;
 using sun.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.NCDP.Domains
+namespace sun.Core.Domains.Auto
 {
     /// <summary>
     /// 填写审核状态
@@ -22,7 +21,7 @@ namespace sun.NCDP.Domains
         已填写 = 99  // 不需要审核
     }
 
-    public class AutoRecord: AuditedEntity
+    public class AutoRecord : AuditedEntity
     {
         /// <summary>
         /// 自动化任务Id

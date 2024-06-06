@@ -1,4 +1,5 @@
-﻿using sun.EntityFrameworkCore.Entities;
+﻿using sun.Core.Domains.Auto;
+using sun.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.SymbolStore;
@@ -6,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Domains
+namespace sun.Core.Domains.WorkFlow
 {
     /// <summary>
     /// 工作流定义
     /// </summary>
-    public  class WorkFlowDefine: AuditedEntity
+    public class WorkFlowDefine : AuditedEntity
     {
         /// <summary>
         /// 流程名称
@@ -78,7 +79,7 @@ namespace sun.Core.Domains
         /// <summary>
         /// 状态描述
         /// </summary>
-        public string Description { get;set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// 状态类型
@@ -100,14 +101,14 @@ namespace sun.Core.Domains
         /// </summary>
         public long AutoFormDefineId { get; set; }
 
-        public FormDefine FormDefine { get; set; }
+        public AutoFormDefine FormDefine { get; set; }
     }
 
 
     /// <summary>
     /// 工作流状态下的动作表
     /// </summary>
-    public class WorkFlowAction: AuditedEntity
+    public class WorkFlowAction : AuditedEntity
     {
         /// <summary>
         /// 所在JSON元数据中的唯一ID（GUID）
@@ -150,7 +151,7 @@ namespace sun.Core.Domains
         /// </summary>
         public long CollectFormMetaDataId { get; set; }
 
-        public FormDefine CollectFormMetaData { get; set; }
+        public AutoFormDefine CollectFormMetaData { get; set; }
 
         /// <summary>
         /// 动作类型
@@ -165,7 +166,7 @@ namespace sun.Core.Domains
     /// <summary>
     /// 工作流中配置的生成文档（docx excel pdf等）
     /// </summary>
-    public class WorkFlowDocument: AuditedEntity
+    public class WorkFlowDocument : AuditedEntity
     {
         /// <summary>
         /// 工作流定义Id
@@ -177,7 +178,7 @@ namespace sun.Core.Domains
         /// </summary>
         public string Name { get; set; }
     }
-    
+
     public enum StateType
     {
         /// <summary>
@@ -211,7 +212,7 @@ namespace sun.Core.Domains
         /// <summary>
         /// 所有人
         /// </summary>
-        All=1,
+        All = 1,
 
         /// <summary>
         /// 有查看权限的人
@@ -226,7 +227,7 @@ namespace sun.Core.Domains
         /// <summary>
         /// 当前处理人
         /// </summary>
-         Current = 4
+        Current = 4
     }
 
     public enum ActionType

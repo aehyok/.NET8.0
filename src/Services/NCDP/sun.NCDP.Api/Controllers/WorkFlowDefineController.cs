@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using sun.Basic.Services;
-using sun.Core.Domains;
+using sun.Core.Domains.WorkFlow;
 using sun.Core.Dtos.WorkFlow;
 using sun.Core.Services.WorkFlow;
 using sun.EntityFrameworkCore.Repository;

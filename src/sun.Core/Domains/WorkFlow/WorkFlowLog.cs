@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Domains
+namespace sun.Core.Domains.WorkFlow
 {
     /// <summary>
     /// 工作流动作日志表
@@ -55,7 +55,7 @@ namespace sun.Core.Domains
     /// <summary>
     /// 工作流状态日志表
     /// </summary>
-    public class WorkFlowStateLog: AuditedEntity
+    public class WorkFlowStateLog : AuditedEntity
     {
         /// <summary>
         /// 执行具体动作的日志Id
@@ -131,7 +131,7 @@ namespace sun.Core.Domains
     /// <summary>
     /// 工作流 指派日志
     /// </summary>
-    public class WorkFlowAssignLog: AuditedEntity
+    public class WorkFlowAssignLog : AuditedEntity
     {
         /// <summary>
         /// 所属业务Id

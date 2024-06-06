@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy;
+using sun.Core.Domains.Auto;
 
 namespace sun.Core.Extensions
 {
@@ -87,7 +88,7 @@ namespace sun.Core.Extensions
         /// <param name="dbConnection"></param>
         /// <param name="dbTransaction"></param>
         /// <returns></returns>
-        public static async Task<bool> CheckDataIsNew(this FormDefine form, Dictionary<string, object> formData, DbTransaction dbTransaction)
+        public static async Task<bool> CheckDataIsNew(this AutoFormDefine form, Dictionary<string, object> formData, DbTransaction dbTransaction)
         {
             string id = string.Empty;
             if (formData.ContainsKey("id"))

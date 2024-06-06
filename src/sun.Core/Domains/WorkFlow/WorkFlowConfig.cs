@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Domains
+namespace sun.Core.Domains.WorkFlow
 {
     /// <summary>
     /// Form表单默认值配置
     /// </summary>
-    public class WorkFlowFormDefaultConfig: AuditedEntity
+    public class WorkFlowFormDefaultConfig : AuditedEntity
     {
 
     }
@@ -65,7 +65,7 @@ namespace sun.Core.Domains
     /// <summary>
     /// 工作流动作配置
     /// </summary>
-    public class WorkFlowActionConfig :AuditedEntity
+    public class WorkFlowActionConfig : AuditedEntity
     {
         /// <summary>
         /// 工作流程动作定义Id

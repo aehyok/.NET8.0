@@ -4,6 +4,7 @@ using sun.Core.Dtos;
 using AutoMapper;
 using File = sun.Core.Domains.File;
 using sun.Core.Dtos.WorkFlow;
+using sun.Core.Domains.WorkFlow;
 
 namespace sun.Core.MapProfiles
 {

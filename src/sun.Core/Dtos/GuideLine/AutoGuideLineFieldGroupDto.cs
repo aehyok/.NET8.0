@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.NCDP.Dtos.GuideLine
+namespace sun.Core.Dtos.GuideLine
 {
     /// <summary>
     /// 指标字段组元数据定义

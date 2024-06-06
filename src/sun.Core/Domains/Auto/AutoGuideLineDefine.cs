@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.Core.Domains
+namespace sun.Core.Domains.Auto
 {
     /// <summary>
     /// form表单自动生成sql的指标定义表

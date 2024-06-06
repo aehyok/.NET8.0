@@ -1,4 +1,5 @@
 ﻿using sun.Core.Domains;
+using sun.Core.Domains.Auto;
 using sun.Core.Dtos;
 using sun.EntityFrameworkCore.Repository;
 using System;
@@ -10,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace sun.Core.Services
 {
-    public interface IAutoFormDefineService: IServiceBase<FormDefine>
+    public interface IAutoFormDefineService: IServiceBase<AutoFormDefine>
     {
         /// <summary>
         /// 获取form表单定义
         /// </summary>
         /// <param name="formName"></param>
         /// <returns></returns>
-        Task<FormDefine> GetFormAsync(string formName);
+        Task<AutoFormDefine> GetFormAsync(string formName);
         /// <summary>
         /// 初始化
         /// </summary>

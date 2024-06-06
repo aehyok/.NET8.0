@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace sun.Core.Services.WorkFlow
 {
-    public class WorkFlowActionConfigService(DbContext dbContext, IMapper mapper) : ServiceBase<WorkFlowActionConfig>(dbContext, mapper), IWorkFlowActionConfigService, IScopedDependency
+    public class WorkFlowActionCirculateConfigService(DbContext dbContext, IMapper mapper) : ServiceBase<WorkFlowActionCirculateConfig>(dbContext, mapper), IWorkFlowActionCirculateConfigService, IScopedDependency
     {
 
     }

@@ -2,13 +2,14 @@
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using sun.Core.Domains;
-using sun.NCDP.Dtos.GuideLine;
+using sun.Core.Domains.Auto;
+using sun.Core.Dtos.GuideLine;
 using sun.EntityFrameworkCore.Repository;
 using sun.Infrastructure;
 using sun.Infrastructure.Exceptions;
 using System.Data;
 
-namespace sun.NCDP.Services
+namespace sun.Core.Services
 {
     public  class AutoGuideLineService(DbContext dbContext, IMapper mapper): ServiceBase<AutoGuideLineDefine>(dbContext,mapper), IAutoGuideLineService, IScopedDependency
     {
