@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sun.NCDP.Dto
+namespace sun.Core.Dtos.Auto
 {
     /// <summary>
     /// form表单预览Dto

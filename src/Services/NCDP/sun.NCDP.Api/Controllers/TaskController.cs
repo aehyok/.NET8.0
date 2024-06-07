@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using sun.Core.Dtos.Auto;
 using sun.Infrastructure.Models;
-using sun.NCDP.Dto;
 using X.PagedList;
 
 namespace sun.NCDP.Api.Controllers
