@@ -77,8 +77,5 @@ namespace sun.NCDP.Api.Controllers
         {
             return Ok();
         }
-
-        public async Task<>
-
     }
 }
