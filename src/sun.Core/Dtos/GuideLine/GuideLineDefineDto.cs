@@ -11,13 +11,13 @@ namespace sun.Core.Dtos.GuideLine
     /// 指标元数据定义 
     /// 
     /// </summary>
-    public class MD_GuideLine
+    public class GuideLineDefineDto
     {
         /// <summary>
         /// 指标Id
         /// </summary>
         [DataMember]
-        public string ID { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// 指标名称
@@ -37,7 +37,7 @@ namespace sun.Core.Dtos.GuideLine
         /// 父指标ID
         /// </summary>
         [DataMember]
-        public string FatherID { get; set; }
+        public string ParentId { get; set; }
 
         /// <summary>
         /// 指标显示顺序
@@ -56,7 +56,7 @@ namespace sun.Core.Dtos.GuideLine
         /// 子指标集合
         /// </summary>
         [DataMember]
-        public List<MD_GuideLine> Children { get; set; }
+        public List<GuideLineDefineDto> Children { get; set; }
 
         [DataMember]
         public AutoGuideLineGroupDto MD_GuideLineGroup { get; set; }
@@ -83,25 +83,25 @@ namespace sun.Core.Dtos.GuideLine
         [DataMember]
         public string GuideLineQueryMethod { get; set; }
 
-        public MD_GuideLine() { }
-        public MD_GuideLine(string id, string name, string groupname, string fatherid, int displayorder, string descript)
+        public GuideLineDefineDto() { }
+        public GuideLineDefineDto(string id, string name, string groupname, string fatherid, int displayorder, string descript)
         {
-            ID = id;
+            Id = id;
             GuideLineName = name;
             GroupName = groupname;
-            FatherID = fatherid;
+            ParentId = fatherid;
             DisplayOrder = displayorder;
             Description = descript;
         }
-        public MD_GuideLine(string id, string glName, string groupName, string glMethod, string glMeta, string fid, string glQueryMethod,
+        public GuideLineDefineDto(string id, string glName, string groupName, string glMethod, string glMeta, string fid, string glQueryMethod,
                string detailMeta, int order, string _des)
         {
-            ID = id;
+            Id = id;
             GuideLineName = glName;
             GroupName = groupName;
             GuideLineMethod = glMethod;
             GuideLineMeta = glMeta + detailMeta;
-            FatherID = fid;
+            ParentId = fid;
             GuideLineQueryMethod = glQueryMethod;
             DetailMeta = detailMeta;
             DisplayOrder = order;
@@ -116,7 +116,7 @@ namespace sun.Core.Dtos.GuideLine
     /// <summary>
     /// 指标定义扩展 查询数据时转换使用
     /// </summary>
-    public class GuideLine_Ex
+    public class GuideLineDefineDto_Ex
     {
         public List<AutoGuideLineFieldGroupDto> ResultGroups { get; set; }
 

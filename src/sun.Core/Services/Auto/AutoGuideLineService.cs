@@ -57,9 +57,10 @@ namespace sun.Core.Services
             return _dt;
         }
 
-        private GuideLine_Ex BuildCustomFormGuideline(AutoGuideLineDefine guideLine, Dictionary<string, object> Parameters, long areaid)
+        private GuideLineDefineDto_Ex BuildCustomFormGuideline(AutoGuideLineDefine guideLine, Dictionary<string, object> Parameters, long areaid)
         {
-            GuideLine_Ex guideLine_Ex = new GuideLine_Ex();
+
+            var guideLine_Ex = new GuideLineDefineDto_Ex();
 
             if (guideLine != null)
             {
@@ -78,7 +79,7 @@ namespace sun.Core.Services
         /// <param name="parameters"></param>
         /// <param name="areaId"></param>
         /// <returns></returns>
-        private void RebuildGuidelineMethod(GuideLine_Ex guideLine_Ex, AutoGuideLineDefine guideLine, Dictionary<string, object> parameters, string areaId)
+        private void RebuildGuidelineMethod(GuideLineDefineDto_Ex guideLine_Ex, AutoGuideLineDefine guideLine, Dictionary<string, object> parameters, string areaId)
         {
             string _sql = guideLine.Algorithm;
             if (_sql.Contains(" from "))
@@ -101,7 +102,7 @@ namespace sun.Core.Services
         /// <param name="parameters"></param>
         /// <param name="areaid"></param>
         /// <returns></returns>
-        private void RebuildGuidelineMethodOfInit(GuideLine_Ex guideLine_Ex, string sql, Dictionary<string, object> parameters, string areaid)
+        private void RebuildGuidelineMethodOfInit(GuideLineDefineDto_Ex guideLine_Ex, string sql, Dictionary<string, object> parameters, string areaid)
         {
             Dictionary<string, object> _newparam = new Dictionary<string, object>();
             List<string> _resutlFieldList = new List<string>();
@@ -164,7 +165,7 @@ namespace sun.Core.Services
         /// <param name="param"></param>
         /// <param name="areaid"></param>
         /// <returns></returns>
-        private void RebuildGuidelineMethodOfGet(GuideLine_Ex guideLine_Ex, string sql, Dictionary<string, object> param, string areaid)
+        private void RebuildGuidelineMethodOfGet(GuideLineDefineDto_Ex guideLine_Ex, string sql, Dictionary<string, object> param, string areaid)
         {
             string _ret = sql;
             string _joinStr = "";

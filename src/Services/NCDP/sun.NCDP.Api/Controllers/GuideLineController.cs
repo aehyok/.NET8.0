@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using sun.Core.Dtos.GuideLine;
 using sun.Infrastructure.Models;
+using System.Data;
 using X.PagedList;
 
 namespace sun.NCDP.Api.Controllers
@@ -76,6 +78,65 @@ namespace sun.NCDP.Api.Controllers
         public async Task<StatusCodeResult> DisableGuideLineDefineAsync(long id)
         {
             return Ok();
+        }
+
+
+
+        /// <summary>
+        /// 获取指标定义
+        /// </summary>
+        /// <param name="guideLineId"></param>
+        /// <returns></returns>
+        [HttpGet("guidelinededata/define/{guideLineId}")]
+        [AllowAnonymous]
+        public async Task<GuideLineDefineDto> GetGuidelineDefineAsync(string guideLineId)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 获取多个指标的指标定义
+        /// </summary>
+        /// <param name="guideLineIds"></param>
+        /// <returns></returns>
+        [HttpGet("guidelinededata/defines")]
+        [AllowAnonymous]
+        public async Task<List<GuideLineDefineDto>> GetGuidelineDefinesAsync(string[] guideLineIds)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 取指标全部数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("guidelinededata/list")]
+        public async Task<DataTable> GetGuidelineDataAsync(GuideLineQueryDto model)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 通过指标取单条记录信息
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("guidelinededata")]
+        public async Task<dynamic> GetGuidelineSingleData(GuideLineQueryDto model)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 分页取指标数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost("guidelinededata/pagelist")]
+        public async Task<object> GetGuidelineDataPagedAsync(GuideLinePageQueryDto model)
+        {
+            return null;
         }
     }
 }

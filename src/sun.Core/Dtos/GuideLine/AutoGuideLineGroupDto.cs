@@ -27,7 +27,7 @@ namespace sun.Core.Dtos.GuideLine
         }
 
         [DataMember]
-        public List<MD_GuideLine> ChildGuideLines { get; set; }
+        public List<GuideLineDefineDto> ChildGuideLines { get; set; }
         ///[DataMember]
         /// public MD_Nodes MD_Nodes { get; set; }
         [DataMember]
