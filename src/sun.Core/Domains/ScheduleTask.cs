@@ -13,6 +13,15 @@ namespace sun.Core.Domains
     public class ScheduleTask: EntityBase
     {
         /// <summary>
+        /// 主机编号（用于雪花 Id 生成）
+        /// </summary>
+        public long WorkerId { get; set; }
+
+        /// <summary>
+        /// 数据中心编号（用于雪花 Id 生成）
+        /// </summary>
+        public long DatacenterId { get; set; }
+        /// <summary>
         /// 名称
         /// </summary>
         public string Name { get; set; }

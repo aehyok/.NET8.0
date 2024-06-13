@@ -9,6 +9,7 @@ using sun.Redis;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using sun.Infrastructure.Options;
 
 namespace sun.Core.Services
 {
@@ -20,7 +21,9 @@ namespace sun.Core.Services
 
             foreach (var cronService in TypeFinders.SearchTypes(cronType, TypeFinders.TypeClassification.Class))
             {
-                var code = cronService.FullName;
+                var options = App.Options<CommonOptions>();
+
+                var code = $"{cronService.FullName}-{options.DatacenterId}-{options.WorkerId}";
 
                 var cacheKey = CoreRedisConstants.ScheduleTaskCache.Format(code);
 
@@ -37,6 +40,8 @@ namespace sun.Core.Services
                     exists = new ScheduleTask
                     {
                         Code = code,
+                        WorkerId = options.WorkerId,
+                        DatacenterId = options.DatacenterId,
                         IsEnable = true,
                         Name = name.IsNullOrEmpty() ? code : name
                     };
