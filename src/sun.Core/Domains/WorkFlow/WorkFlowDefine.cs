@@ -149,9 +149,9 @@ namespace sun.Core.Domains.WorkFlow
         /// <summary>
         /// 自定义form表单Id
         /// </summary>
-        public long CollectFormMetaDataId { get; set; }
+        public long AutoFormDefineId { get; set; }
 
-        public AutoFormDefine CollectFormMetaData { get; set; }
+        public AutoFormDefine AutoFormDefine { get; set; }
 
         /// <summary>
         /// 动作类型

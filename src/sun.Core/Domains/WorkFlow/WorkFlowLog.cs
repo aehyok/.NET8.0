@@ -15,7 +15,7 @@ namespace sun.Core.Domains.WorkFlow
         /// <summary>
         /// 当前动作的Id
         /// </summary>
-        public string WorkFlowActionId { get; set; }
+        public long WorkFlowActionId { get; set; }
 
         public WorkFlowAction WorkFlowAction { get; set; }
 
