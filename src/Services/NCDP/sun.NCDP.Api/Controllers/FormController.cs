@@ -16,7 +16,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpGet("autoformdefine")]
+        [HttpGet("define")]
         public async Task<IPagedList<AutoFormDefineDto>> GetFormDefineListAsync([FromQuery] PagedQueryModelBase model)
         {
             return null;
@@ -27,7 +27,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost("autoformdefine")]
+        [HttpPost("define")]
         public async Task<long> PostFormDefineAsync(AutoFormDefineDto model)
         {
             return 0;
@@ -38,7 +38,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut("autoformdefine/{id}")]
+        [HttpPut("define/{id}")]
         public async Task<StatusCodeResult> PutFormDefineAsync(long id, AutoFormDefineDto model)
         {
             return Ok();
@@ -49,7 +49,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("autoformdefine/{id}")]
+        [HttpDelete("define/{id}")]
         public async Task<StatusCodeResult> DeleteFormDefineAsync(long id)
         {
             return Ok();
@@ -60,7 +60,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut("autoformdefine/enable/{id}")]
+        [HttpPut("define/enable/{id}")]
         public async Task<StatusCodeResult> EnableFormDefineAsync(long id)
         {
             return Ok();
@@ -71,7 +71,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut("autoformdefine/disable/{id}")]
+        [HttpPut("define/disable/{id}")]
         public async Task<StatusCodeResult> DisableFormDefineAsync(long id)
         {
             return Ok();

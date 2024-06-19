@@ -88,7 +88,6 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="guideLineId"></param>
         /// <returns></returns>
         [HttpGet("guidelinededata/define/{guideLineId}")]
-        [AllowAnonymous]
         public async Task<GuideLineDefineDto> GetGuidelineDefineAsync(string guideLineId)
         {
             return null;
@@ -100,7 +99,6 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="guideLineIds"></param>
         /// <returns></returns>
         [HttpGet("guidelinededata/defines")]
-        [AllowAnonymous]
         public async Task<List<GuideLineDefineDto>> GetGuidelineDefinesAsync(string[] guideLineIds)
         {
             return null;

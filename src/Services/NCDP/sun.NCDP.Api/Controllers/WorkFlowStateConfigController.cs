@@ -20,15 +20,6 @@ namespace sun.NCDP.Api.Controllers
         ) : NCDPControllerBase
     {
         /// <summary>
-        /// 测试接口
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public Task Test()
-        {
-            return Task.CompletedTask;
-        }
-        /// <summary>
         /// 根据工作流程定义Id获取当前角色下的可配置状态、动作数据
         /// </summary>
         /// <param name="workFlowDefineId"></param>
