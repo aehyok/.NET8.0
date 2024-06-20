@@ -10,11 +10,21 @@ namespace sun.NCDP.Api.Controllers
     public class BusinessController : NCDPControllerBase
     {
         /// <summary>
-        /// 获取流转列表
+        /// 业务列表(根据个人)
         /// </summary>
         /// <returns></returns>
         [HttpGet("circulate")]
         public async Task<IPagedList<dynamic>> GetCirculateListAsync()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 业务列表(根据区域)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("assign")]
+        public async Task<IPagedList<dynamic>> GetAssignListAsync()
         {
             return null;
         }
@@ -44,7 +54,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="stateId"></param>
         /// <returns></returns>
-        [HttpGet("getactionlist")]
+        [HttpGet("actionlist")]
         public async Task<dynamic> GetActionListAsync(long stateId)
         {
             return Task.CompletedTask;
@@ -91,11 +101,63 @@ namespace sun.NCDP.Api.Controllers
         }
 
         /// <summary>
-        /// 获取审批列表
+        /// 业务指派
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("assign")]
+
+        public async Task<IPagedList<dynamic>> AssignAsync()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 业务删除
+        /// </summary>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+
+        public async Task<IPagedList<dynamic>> DeleteAsync(long id)
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 待审批列表
         /// </summary>
         /// <returns></returns>
         [HttpGet("approval")]
-        public async Task<IPagedList<dynamic>> GetApprovalListAsync()
+        public async Task<IPagedList<dynamic>> PendApprovalListAsync()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 审批同意
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("approval/agree")]
+        public async Task<dynamic> ApprovalAgreeAsync()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 审批不同意
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("approval/disagree")]
+        public async Task<dynamic> ApprovalDisAgreeAsync()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 报上级审批
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<dynamic> ApprovalReportAsync()
         {
             return null;
         }

@@ -91,7 +91,5 @@ namespace sun.NCDP.Api.Controllers
         {
             return Ok();
         }
-
-
     }
 }
