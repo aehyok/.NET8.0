@@ -251,7 +251,7 @@ namespace sun.Basic.Api.Controllers
 
             if (entity is null)
             {
-                throw new ErrorCodeException(-1, "您要启用的数据不存在");
+                throw new ErrorCodeException(-1, "您要禁用的数据不存在");
             }
 
             entity.IsEnable = false;
