@@ -28,7 +28,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")] 
+        [HttpGet("{id}")]
         public async Task<AutoTaskDto> GetTaskDetailAsync(long id)
         {
             return null;
@@ -74,7 +74,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPut("test/{id}")] 
+        [HttpPut("test/{id}")]
         public async Task<StatusCodeResult> TestAsync(long id)
         {
             return Ok();

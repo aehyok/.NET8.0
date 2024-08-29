@@ -9,6 +9,14 @@ namespace sun.NCDP.Api.Controllers
     /// </summary>
     public class QueryModelController : NCDPControllerBase
     {
-
+        /// <summary>
+        /// 测试接口
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public Task Test()
+        {
+            return Task.CompletedTask;
+        }
     }
 }

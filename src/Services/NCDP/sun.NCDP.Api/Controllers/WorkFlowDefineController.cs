@@ -29,7 +29,7 @@ namespace sun.NCDP.Api.Controllers
             var spec = Specifications<WorkFlowDefine>.Create();
 
             spec.Query.OrderBy(a => a.DisplayOrder);
-            if(!string.IsNullOrWhiteSpace(model.Keyword))
+            if (!string.IsNullOrWhiteSpace(model.Keyword))
             {
                 spec.Query.Search(a => a.FlowName, $"%{model.Keyword}%");
             }

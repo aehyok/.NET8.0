@@ -62,7 +62,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<StatusCodeResult> PutStatusAsync(long id, CreateWorkFlowActionDto model)
         {
             var entity = await workFlowActionService.GetAsync(a => a.Id == id) ?? throw new Exception("修改的数据不存在");
@@ -91,7 +91,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("Enable/{id}")]
+        [HttpPut("enable/{id}")]
         public async Task<StatusCodeResult> EnableDefine(long id)
         {
             var entity = await workFlowActionService.GetByIdAsync(id);
@@ -113,7 +113,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("Disable/{id}")]
+        [HttpPut("disable/{id}")]
         public async Task<StatusCodeResult> DisableDefine(long id)
         {
             var entity = await workFlowActionService.GetByIdAsync(id);

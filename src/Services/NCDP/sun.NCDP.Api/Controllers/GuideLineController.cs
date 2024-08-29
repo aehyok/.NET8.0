@@ -120,7 +120,7 @@ namespace sun.NCDP.Api.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost("guidelinededata")]
+        [HttpPost("guidelinededata/single")]
         public async Task<dynamic> GetGuidelineSingleData(GuideLineQueryDto model)
         {
             return null;

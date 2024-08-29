@@ -27,7 +27,7 @@ namespace sun.NCDP.Api.Controllers
             var spec = Specifications<WorkFlowState>.Create();
 
             spec.Query.Where(a => a.WorkFlowDefineId == workFlowId);
-            
+
             return await workFlowStateService.GetListAsync<WorkFlowStateDto>(spec);
         }
 

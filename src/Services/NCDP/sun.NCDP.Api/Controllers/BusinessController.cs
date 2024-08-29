@@ -156,7 +156,7 @@ namespace sun.NCDP.Api.Controllers
         /// 报上级审批
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("approval/report")]
         public async Task<dynamic> ApprovalReportAsync()
         {
             return null;
