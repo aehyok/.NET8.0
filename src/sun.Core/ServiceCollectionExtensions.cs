@@ -209,7 +209,7 @@ namespace sun.Core
             builder.ConfigureAppConfiguration((context, options) =>
             {
                 // 注册配置中心
-                options.AddAgileConfig();
+                //options.AddAgileConfig();
             });
 
             builder.UseLog();
