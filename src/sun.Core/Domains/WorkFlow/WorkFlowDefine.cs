@@ -154,6 +154,11 @@ namespace sun.Core.Domains.WorkFlow
         public AutoFormDefine AutoFormDefine { get; set; }
 
         /// <summary>
+        /// 顺序
+        /// </summary>
+        public int DisplayOrder { get; set; }
+
+        /// <summary>
         /// 动作类型
         /// </summary>
         public ActionType ActionType { get; set; }

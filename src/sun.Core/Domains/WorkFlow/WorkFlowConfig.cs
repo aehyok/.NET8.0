@@ -33,13 +33,12 @@ namespace sun.Core.Domains.WorkFlow
         /// <summary>
         /// 工作流操作区域Id
         /// </summary>
-        //public long RegionId { get; set; }
-
+        public long RegionId { get; set; }
 
         /// <summary>
         /// 操作区域
         /// </summary>
-        //public Region Region { get; set; }
+        public Region Region { get; set; }
 
         ///// <summary>
         ///// 类型

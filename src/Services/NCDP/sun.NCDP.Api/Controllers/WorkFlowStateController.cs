@@ -28,6 +28,8 @@ namespace sun.NCDP.Api.Controllers
 
             spec.Query.Where(a => a.WorkFlowDefineId == workFlowId);
 
+            spec.Query.OrderBy(item => item.DisplayOrder);
+
             return await workFlowStateService.GetListAsync<WorkFlowStateDto>(spec);
         }
 

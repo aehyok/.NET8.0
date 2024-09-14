@@ -27,9 +27,10 @@ namespace sun.NCDP.Api.Controllers
 
             spec.Query.Where(a => a.WorkFlowStateId == stateId);
 
+            spec.Query.OrderBy(item => item.DisplayOrder);
+
             return await workFlowActionService.GetListAsync<WorkFlowActionDto>(spec);
         }
-
 
         /// <summary>
         /// 获取工作流动作定义详情

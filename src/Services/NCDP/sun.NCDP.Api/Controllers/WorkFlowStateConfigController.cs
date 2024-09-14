@@ -29,6 +29,8 @@ namespace sun.NCDP.Api.Controllers
         [HttpGet("list")]
         public async Task<List<WorkFlowConfigDto>> GetStateConfigListAsync(long workFlowDefineId, long roleId, int regionLevel)
         {
+            var regionId = base.CurrentUser.RegionId;
+            // 此处应该移除RoleId，或者变更为RegionId
             var query = (from state in stateService.GetQueryable()
                          join action in actionService.GetQueryable() on state.Id equals action.WorkFlowStateId
                          join stateConfig in stateConfigService.GetQueryable() on state.Id equals stateConfig.WorkFlowStateId into stateConfigList

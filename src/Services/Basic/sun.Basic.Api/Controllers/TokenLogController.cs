@@ -43,6 +43,7 @@ namespace sun.Basic.Api.Controllers
 
             if (model.EndTime.HasValue)
             {
+     
                 filter.And(a => a.CreatedAt <= model.EndTime.Value);
             }
 
