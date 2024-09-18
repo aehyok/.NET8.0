@@ -23,11 +23,10 @@ namespace sun.NCDP.Api.Controllers
         /// 根据工作流程定义Id获取当前角色下的可配置状态、动作数据
         /// </summary>
         /// <param name="workFlowDefineId"></param>
-        /// <param name="roleId"></param>
-        /// <param name="regionLevel"></param>
+        /// <param name="RegionId"></param>
         /// <returns></returns>
         [HttpGet("list")]
-        public async Task<List<WorkFlowConfigDto>> GetStateConfigListAsync(long workFlowDefineId, long roleId, int regionLevel)
+        public async Task<List<WorkFlowConfigDto>> GetStateConfigListAsync(long workFlowDefineId, long RegionId)
         {
             var regionId = base.CurrentUser.RegionId;
             // 此处应该移除RoleId，或者变更为RegionId
@@ -39,8 +38,8 @@ namespace sun.NCDP.Api.Controllers
                          from aa in actionConfigList.DefaultIfEmpty()
                          where
                              state.WorkFlowDefineId == workFlowDefineId &&
-                             ss.RoleId == roleId && ss.RegionLevel == regionLevel &&
-                             aa.RoleId == roleId && aa.RegionLevel == regionLevel
+                             ss.RoleId == regionId  &&
+                             aa.RoleId == regionId
                          select new WorkFlowConfigDto
                          {
                              // 创建一个实体来返回数据
