@@ -38,8 +38,8 @@ namespace sun.NCDP.Api.Controllers
                          from aa in actionConfigList.DefaultIfEmpty()
                          where
                              state.WorkFlowDefineId == workFlowDefineId &&
-                             ss.RoleId == regionId  &&
-                             aa.RoleId == regionId
+                             ss.RegionId == regionId  &&
+                             aa.RegionId == regionId
                          select new WorkFlowConfigDto
                          {
                              // 创建一个实体来返回数据
@@ -67,7 +67,8 @@ namespace sun.NCDP.Api.Controllers
         [HttpPost("state")]
         public async Task<long> PostStateConfigAsync(CreateWorkFlowStateConfigDto model)
         {
-            var entity = await stateConfigService.GetAsync(a => a.WorkFlowStateId == model.WorkFlowStateId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
+            //&& a.RegionLevel == model.RegionLevel
+            var entity = await stateConfigService.GetAsync(a => a.WorkFlowStateId == model.WorkFlowStateId && a.RegionId == model.RegionId);
 
             if (entity is null)
             {
@@ -93,7 +94,8 @@ namespace sun.NCDP.Api.Controllers
         [HttpPut("state/{id}")]
         public async Task<StatusCodeResult> PutStateConfigAsync(long id, CreateWorkFlowStateConfigDto model)
         {
-            var entity = await stateConfigService.GetAsync(a => a.WorkFlowStateId == model.WorkFlowStateId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
+            //&& a.RegionLevel == model.RegionLevel
+            var entity = await stateConfigService.GetAsync(a => a.WorkFlowStateId == model.WorkFlowStateId && a.RegionId == model.RegionId );
 
             if (entity is not null)
             {
@@ -115,7 +117,8 @@ namespace sun.NCDP.Api.Controllers
         [HttpPost("action")]
         public async Task<long> PostActionConfigAsync(CreateWorkFlowActionConfigDto model)
         {
-            var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
+            //&& a.RegionLevel == model.RegionLevel
+            var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RegionId == model.RegionId );
             if (entity is null)
             {
                 // 直接新增
@@ -138,7 +141,8 @@ namespace sun.NCDP.Api.Controllers
         [HttpPost("action/{id}")]
         public async Task<StatusCodeResult> PutActionConfigAsync(long id, CreateWorkFlowActionConfigDto model)
         {
-            var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
+            // && a.RegionLevel == model.RegionLevel
+            var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RegionId == model.RegionId );
             if (model is not null)
             {
                 entity.IsDeleted = true;
@@ -159,7 +163,7 @@ namespace sun.NCDP.Api.Controllers
         [HttpPost("actioncirculate")]
         public async Task<long> PostActionCirculateConfigAsync(CreateWorkFlowActionCirculateConfigDto model)
         {
-            var entity = await circulateService.GetAsync(a => a.WorkFlowActionConfigId == model.WorkFlowActionId && a.RoleId == model.RoleId && a.RegionLevel == model.RegionLevel);
+            var entity = await circulateService.GetAsync(a => a.WorkFlowActionConfigId == model.WorkFlowActionId && a == model.RoleId && a.RegionLevel == model.RegionLevel);
             if (entity is null)
             {
                 // 直接新增

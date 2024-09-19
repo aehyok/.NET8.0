@@ -36,6 +36,10 @@ namespace sun.Core.Dtos.WorkFlow
         public long RoleId { get; set; }
 
         /// <summary>
+        /// 区域Id
+        /// </summary>
+        public long RegionId { get; set; }
+        /// <summary>
         /// 区域级别
         /// </summary>
         public int RegionLevel { get; set; }
@@ -63,6 +67,8 @@ namespace sun.Core.Dtos.WorkFlow
         /// </summary>
         public int RegionLevel { get; set; }
 
+        public long RegionId { get; set; }
+
         /// <summary>
         /// 是否被选中
         /// </summary>
@@ -85,6 +91,11 @@ namespace sun.Core.Dtos.WorkFlow
         /// 区域级别
         /// </summary>
         public int RegionLevel { get; set; }
+
+        /// <summary>
+        /// 区域Id
+        /// </summary>
+        public long RegionId { get; set; }
 
         /// <summary>
         /// 是否被选中

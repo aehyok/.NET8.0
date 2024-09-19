@@ -50,15 +50,15 @@ namespace sun.Core.Domains.WorkFlow
         /// </summary>
         public int RegionLevel { get; set; }
 
-        /// <summary>
-        /// 角色Id
-        /// </summary>
-        public long RoleId { get; set; }
+        ///// <summary>
+        ///// 角色Id
+        ///// </summary>
+        //public long RoleId { get; set; }
 
-        /// <summary>
-        /// 绑定角色Id
-        /// </summary>
-        public Role Role { get; set; }
+        ///// <summary>
+        ///// 绑定角色Id
+        ///// </summary>
+        //public Role Role { get; set; }
     }
 
     /// <summary>
@@ -72,20 +72,22 @@ namespace sun.Core.Domains.WorkFlow
         public long WorkFlowActionId { get; set; }
 
         public WorkFlowAction WorkFlowAction { get; set; }
+
+        public long RegionId { get; set; }
         /// <summary>
         /// 区域层级
         /// </summary>
         public int RegionLevel { get; set; }
 
-        /// <summary>
-        /// 角色Id
-        /// </summary>
-        public long RoleId { get; set; }
+        ///// <summary>
+        ///// 角色Id
+        ///// </summary>
+        //public long RoleId { get; set; }
 
-        /// <summary>
-        /// 绑定角色Id
-        /// </summary>
-        public Role Role { get; set; }
+        ///// <summary>
+        ///// 绑定角色Id
+        ///// </summary>
+        //public Role Role { get; set; }
     }
 
     /// <summary>sub
@@ -97,9 +99,17 @@ namespace sun.Core.Domains.WorkFlow
 
         public WorkFlowActionConfig WorkFlowActionConfig { get; set; }
 
+        /// <summary>
+        /// 区域等级
+        /// </summary>
         public int RegionLevel { get; set; }
 
-        public long RoleId { get; set; }
+        /// <summary>
+        /// 区域Id
+        /// </summary>
+        public long RegionId { get; set; }
+
+        //public long RoleId { get; set; }
 
         /// <summary>
         /// 所在流程的动作Id
