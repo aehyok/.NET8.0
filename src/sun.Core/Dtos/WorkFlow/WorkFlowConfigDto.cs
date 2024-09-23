@@ -19,9 +19,6 @@ namespace sun.Core.Dtos.WorkFlow
         public bool IsSelectedState { get; set; }
 
         public bool IsSelectedAction { get; set; }
-
-
-
     }
     public class CreateWorkFlowStateConfigDto
     {
@@ -85,7 +82,7 @@ namespace sun.Core.Dtos.WorkFlow
         /// <summary>
         /// 角色Id
         /// </summary>
-        public long RoleId { get; set; }
+        //public long RoleId { get; set; }
 
         /// <summary>
         /// 区域级别

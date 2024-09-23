@@ -14,7 +14,7 @@ namespace sun.NCDP.Api.Controllers
     public class WorkFlowConfigController(
         IWorkFlowStateConfigService stateConfigService,
         IWorkFlowActionConfigService actionConfigService,
-        IWorkFlowActionCirculateConfigService circulateService,
+        IWorkFlowActionCirculateConfigService circulateConfigService,
         IWorkFlowStateService stateService,
         IWorkFlowActionService actionService
         ) : NCDPControllerBase
@@ -22,8 +22,8 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 根据工作流程定义Id获取当前角色下的可配置状态、动作数据
         /// </summary>
-        /// <param name="workFlowDefineId"></param>
-        /// <param name="RegionId"></param>
+        /// <param name="workFlowDefineId">工作流流程定义Id</param>
+        /// <param name="RegionId">区域</param>
         /// <returns></returns>
         [HttpGet("list")]
         public async Task<List<WorkFlowConfigDto>> GetStateConfigListAsync(long workFlowDefineId, long RegionId)
@@ -87,15 +87,15 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 修改工作流程的状态配置
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowStateConfigId">工作流状态配置Id</param>
         /// <param name="model"></param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("state/{id}")]
-        public async Task<StatusCodeResult> PutStateConfigAsync(long id, CreateWorkFlowStateConfigDto model)
+        [HttpPut("state/{workFlowStateConfigId}")]
+        public async Task<StatusCodeResult> PutStateConfigAsync(long workFlowStateConfigId, CreateWorkFlowStateConfigDto model)
         {
             //&& a.RegionLevel == model.RegionLevel
-            var entity = await stateConfigService.GetAsync(a => a.WorkFlowStateId == model.WorkFlowStateId && a.RegionId == model.RegionId );
+            var entity = await stateConfigService.GetAsync(a => a.Id == workFlowStateConfigId);
 
             if (entity is not null)
             {
@@ -125,7 +125,6 @@ namespace sun.NCDP.Api.Controllers
                 entity = this.Mapper.Map<WorkFlowActionConfig>(model);
                 await actionConfigService.InsertAsync(entity);
                 return entity.Id;
-
             }
             else
             {
@@ -136,13 +135,14 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 修改工作流程的动作配置
         /// </summary>
+        /// <param name="workFlowActionConfigId">工作流动作配置Id</param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost("action/{id}")]
-        public async Task<StatusCodeResult> PutActionConfigAsync(long id, CreateWorkFlowActionConfigDto model)
+        [HttpPost("action/{workFlowActionConfigId}")]
+        public async Task<StatusCodeResult> PutActionConfigAsync(long workFlowActionConfigId, CreateWorkFlowActionConfigDto model)
         {
             // && a.RegionLevel == model.RegionLevel
-            var entity = await actionConfigService.GetAsync(a => a.WorkFlowActionId == model.WorkFlowActionId && a.RegionId == model.RegionId );
+            var entity = await actionConfigService.GetAsync(a => a.Id == workFlowActionConfigId);
             if (model is not null)
             {
                 entity.IsDeleted = true;
@@ -164,14 +164,13 @@ namespace sun.NCDP.Api.Controllers
         public async Task<long> PostActionCirculateConfigAsync(CreateWorkFlowActionCirculateConfigDto model)
         {
             //&& a.RegionLevel == model.RegionLevel
-            var entity = await circulateService.GetAsync(a => a.WorkFlowActionConfigId == model.WorkFlowActionId && a.RegionId == model.RegionId);
+            var entity = await circulateConfigService.GetAsync(a => a.WorkFlowActionConfigId == model.WorkFlowActionId && a.RegionId == model.RegionId);
             if (entity is null)
             {
                 // 直接新增
                 entity = this.Mapper.Map<WorkFlowActionCirculateConfig>(model);
-                await circulateService.InsertAsync(entity);
+                await circulateConfigService.InsertAsync(entity);
                 return entity.Id;
-
             }
             else
             {
@@ -182,17 +181,18 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 修改工作流程的动作配置
         /// </summary>
+        /// <param name="workFlowActionCirculateConfigId">工作流动作流转配置Id</param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut("actioncirculate/{id}")]
-        public async Task<StatusCodeResult> PutActionCirculateConfigAsync(long id, CreateWorkFlowActionCirculateConfigDto model)
+        [HttpPut("actioncirculate/{workFlowActionCirculateConfigId}")]
+        public async Task<StatusCodeResult> PutActionCirculateConfigAsync(long workFlowActionCirculateConfigId, CreateWorkFlowActionCirculateConfigDto model)
         {
             // && a.RegionLevel == model.RegionLevel
-            var entity = await circulateService.GetAsync(a => a.WorkFlowActionConfigId == model.WorkFlowActionId && a.RegionId == model.RegionId);
+            var entity = await circulateConfigService.GetAsync(a => a.Id == workFlowActionCirculateConfigId);
             if (model is not null)
             {
                 entity.IsDeleted = true;
-                await circulateService.UpdateAsync(entity);
+                await circulateConfigService.UpdateAsync(entity);
                 return Ok();
             }
             else

@@ -36,12 +36,12 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 获取工作流状态定义详情
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowStateId">工作流状态Id</param>
         /// <returns></returns>
-        [HttpGet("detail/{id}")]
-        public async Task<WorkFlowStateDto> GetStateByIdAsync(long id)
+        [HttpGet("detail/{workFlowStateId}")]
+        public async Task<WorkFlowStateDto> GetStateByIdAsync(long workFlowStateId)
         {
-            return await workFlowStateService.GetAsync<WorkFlowStateDto>(a => a.Id == id);
+            return await workFlowStateService.GetAsync<WorkFlowStateDto>(a => a.Id == workFlowStateId);
         }
 
         /// <summary>
@@ -60,14 +60,14 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 修改工作流状态定义
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowStateId">工作流状态Id</param>
         /// <param name="model"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         [HttpPut]
-        public async Task<StatusCodeResult> PutStatusAsync(long id, CreateWorkFlowStateDto model)
+        public async Task<StatusCodeResult> PutStatusAsync(long workFlowStateId, CreateWorkFlowStateDto model)
         {
-            var entity = await workFlowStateService.GetAsync(a => a.Id == id) ?? throw new Exception("修改的数据不存在");
+            var entity = await workFlowStateService.GetAsync(a => a.Id == workFlowStateId) ?? throw new Exception("修改的数据不存在");
 
             entity = this.Mapper.Map(model, entity);
 
@@ -78,25 +78,25 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 删除工作流状态定义
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowStateId">工作流状态Id</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<StatusCodeResult> DeleteStateAsync(long id)
+        public async Task<StatusCodeResult> DeleteStateAsync(long workFlowStateId)
         {
-            await workFlowStateService.DeleteAsync(id);
+            await workFlowStateService.DeleteAsync(workFlowStateId);
             return Ok();
         }
 
         /// <summary>
         /// 启用工作流状态定义
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowStateId">工作流状态Id</param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
         [HttpPut("enable/{id}")]
-        public async Task<StatusCodeResult> EnableDefine(long id)
+        public async Task<StatusCodeResult> EnableDefine(long workFlowStateId)
         {
-            var entity = await workFlowStateService.GetByIdAsync(id);
+            var entity = await workFlowStateService.GetByIdAsync(workFlowStateId);
 
             if (entity is null)
             {
@@ -112,13 +112,13 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 禁用工作流状态定义
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowStateId">工作流状态Id</param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("disable/{id}")]
-        public async Task<StatusCodeResult> DisableDefine(long id)
+        [HttpPut("disable/{workFlowStateId}")]
+        public async Task<StatusCodeResult> DisableDefine(long workFlowStateId)
         {
-            var entity = await workFlowStateService.GetByIdAsync(id);
+            var entity = await workFlowStateService.GetByIdAsync(workFlowStateId);
 
             if (entity is null)
             {
@@ -130,6 +130,5 @@ namespace sun.NCDP.Api.Controllers
 
             return Ok();
         }
-
     }
 }

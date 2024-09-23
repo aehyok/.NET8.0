@@ -18,14 +18,14 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 获取工作流动作定义列表
         /// </summary>
-        /// <param name="stateId">工作流程定义Id</param>
+        /// <param name="workFlowStateId">工作流状态Id</param>
         /// <returns></returns>
-        [HttpGet("list/{stateId}")]
-        public async Task<List<WorkFlowActionDto>> GetStateListAsync(long stateId)
+        [HttpGet("list/{workFlowStateId}")]
+        public async Task<List<WorkFlowActionDto>> GetStateListAsync(long workFlowStateId)
         {
             var spec = Specifications<WorkFlowAction>.Create();
 
-            spec.Query.Where(a => a.WorkFlowStateId == stateId);
+            spec.Query.Where(a => a.WorkFlowStateId == workFlowStateId);
 
             spec.Query.OrderBy(item => item.DisplayOrder);
 
@@ -35,12 +35,12 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 获取工作流动作定义详情
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowActionId">工作流动作Id</param>
         /// <returns></returns>
-        [HttpGet("detail/{id}")]
-        public async Task<WorkFlowActionDto> GetStateByIdAsync(long id)
+        [HttpGet("detail/{workFlowActionId}")]
+        public async Task<WorkFlowActionDto> GetStateByIdAsync(long workFlowActionId)
         {
-            return await workFlowActionService.GetAsync<WorkFlowActionDto>(a => a.Id == id);
+            return await workFlowActionService.GetAsync<WorkFlowActionDto>(a => a.Id == workFlowActionId);
         }
 
         /// <summary>
@@ -59,14 +59,14 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 修改工作流动作定义
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowActionId">工作流动作Id</param>
         /// <param name="model"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         [HttpPut("{id}")]
-        public async Task<StatusCodeResult> PutStatusAsync(long id, CreateWorkFlowActionDto model)
+        public async Task<StatusCodeResult> PutStatusAsync(long workFlowActionId, CreateWorkFlowActionDto model)
         {
-            var entity = await workFlowActionService.GetAsync(a => a.Id == id) ?? throw new Exception("修改的数据不存在");
+            var entity = await workFlowActionService.GetAsync(a => a.Id == workFlowActionId) ?? throw new Exception("修改的数据不存在");
 
             entity = this.Mapper.Map(model, entity);
 
@@ -77,25 +77,25 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 删除工作流动作定义
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowActionId">工作流动作Id</param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<StatusCodeResult> DeleteStateAsync(long id)
+        public async Task<StatusCodeResult> DeleteStateAsync(long workFlowActionId)
         {
-            await workFlowActionService.DeleteAsync(id);
+            await workFlowActionService.DeleteAsync(workFlowActionId);
             return Ok();
         }
 
         /// <summary>
         /// 启用工作流动作定义
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowActionId">工作流动作Id</param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("enable/{id}")]
-        public async Task<StatusCodeResult> EnableDefine(long id)
+        [HttpPut("enable/{workFlowActionId}")]
+        public async Task<StatusCodeResult> EnableDefine(long workFlowActionId)
         {
-            var entity = await workFlowActionService.GetByIdAsync(id);
+            var entity = await workFlowActionService.GetByIdAsync(workFlowActionId);
 
             if (entity is null)
             {
@@ -111,13 +111,13 @@ namespace sun.NCDP.Api.Controllers
         /// <summary>
         /// 禁用工作流动作定义
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="workFlowActionId">工作流动作Id</param>
         /// <returns></returns>
         /// <exception cref="ErrorCodeException"></exception>
-        [HttpPut("disable/{id}")]
-        public async Task<StatusCodeResult> DisableDefine(long id)
+        [HttpPut("disable/{workFlowActionId}")]
+        public async Task<StatusCodeResult> DisableDefine(long workFlowActionId)
         {
-            var entity = await workFlowActionService.GetByIdAsync(id);
+            var entity = await workFlowActionService.GetByIdAsync(workFlowActionId);
 
             if (entity is null)
             {
