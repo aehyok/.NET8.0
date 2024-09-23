@@ -48,6 +48,11 @@ namespace sun.Core.Domains.WorkFlow
         /// JSON定义包
         /// </summary>
         public string JsonDefine { get; set; }
+
+        /// <summary>
+        /// 是否需要审批
+        /// </summary>
+        //public bool IsNeedAudit { get; set; }
     }
 
     /// <summary>
