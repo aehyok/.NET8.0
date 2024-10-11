@@ -16,6 +16,9 @@ namespace sun.NCDP.Api.Controllers
         [HttpGet("circulate")]
         public async Task<IPagedList<dynamic>> GetCirculateListAsync()
         {
+            // 先绑定一个流程
+            // 通过当前用户
+            // 查询出当前用户的业务列表
             return null;
         }
 
@@ -26,6 +29,9 @@ namespace sun.NCDP.Api.Controllers
         [HttpGet("assign")]
         public async Task<IPagedList<dynamic>> GetAssignListAsync()
         {
+            // 当前角色所对应的区域
+            // 同样要绑定一个流程
+            // 查询出当前用户的业务列表
             return null;
         }
 
