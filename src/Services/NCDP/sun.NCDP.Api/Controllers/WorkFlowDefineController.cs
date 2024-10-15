@@ -34,7 +34,7 @@ namespace sun.NCDP.Api.Controllers
                 spec.Query.Search(a => a.FlowName, $"%{model.Keyword}%");
             }
 
-            spec.Query.OrderByDescending(item => item.Id);
+            //spec.Query.OrderByDescending(item => item.Id);
 
             return await workFlowDefineService.GetPagedListAsync<WorkFlowDefineDto>(spec, model.Page, model.Limit);
         }

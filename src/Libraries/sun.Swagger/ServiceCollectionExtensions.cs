@@ -85,7 +85,7 @@ namespace sun.Swagger
         }
 
 
-        public static IApplicationBuilder UseSwagger(this WebApplication app, string name, string title, string routePrefix = "docs", string documentTilte = "接口文档")
+        public static IApplicationBuilder UseSwagger(this WebApplication app, string name, string title, string routePrefix = "docs", string documentTilte = "Sass接口文档")
         {
             var swaggerOptions = app.Services.GetService<IOptions<SwaggerOptions>>();
 
