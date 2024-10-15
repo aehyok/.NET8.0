@@ -31,7 +31,7 @@ namespace sun.Core.Dtos.WorkFlow
         /// <summary>
         /// 流程描述
         /// </summary>
-        public string Descriptionn { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
         /// 顺序
