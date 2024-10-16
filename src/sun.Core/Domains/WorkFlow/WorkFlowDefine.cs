@@ -154,9 +154,9 @@ namespace sun.Core.Domains.WorkFlow
         /// <summary>
         /// 自定义form表单Id
         /// </summary>
-        public long AutoFormDefineId { get; set; }
+        public long? AutoFormDefineId { get; set; }
 
-        public AutoFormDefine AutoFormDefine { get; set; }
+        public virtual AutoFormDefine AutoFormDefine { get; set; }
 
         /// <summary>
         /// 顺序

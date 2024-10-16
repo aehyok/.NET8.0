@@ -100,7 +100,7 @@ namespace sun.Core.Dtos.WorkFlow
         /// <summary>
         /// 工作流Id
         /// </summary>
-        public long WorkFlowDefineId { get; set; }
+        public long WorkFlowId { get; set; }
 
         /// <summary>
         /// 状态名称

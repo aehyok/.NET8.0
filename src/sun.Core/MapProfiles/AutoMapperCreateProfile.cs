@@ -25,7 +25,8 @@ namespace sun.Core.MapProfiles
 
             CreateMap<CreateWorkFlowDefineDto, WorkFlowDefine>();
 
-            CreateMap<CreateWorkFlowStateDto, WorkFlowState>();
+            CreateMap<CreateWorkFlowStateDto, WorkFlowState>()
+                 .ForMember(a => a.WorkFlowDefineId, a => a.MapFrom(c => c.WorkFlowId));
 
             CreateMap<CreateWorkFlowActionDto, WorkFlowAction>();
 
