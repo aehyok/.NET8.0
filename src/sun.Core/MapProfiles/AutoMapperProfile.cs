@@ -66,7 +66,8 @@ namespace sun.Core.MapProfiles
             CreateMap<AsyncTask, AsyncTaskDto>();
 
             CreateMap<WorkFlowDefine, WorkFlowDefineDto>();
-            CreateMap<WorkFlowState, WorkFlowStateDto>();
+            CreateMap<WorkFlowState, WorkFlowStateDto>()
+                .ForMember(a => a.WorkFlowId, a => a.MapFrom(c => c.WorkFlowDefineId));
             CreateMap<WorkFlowAction, WorkFlowActionDto>();
         }
     }
