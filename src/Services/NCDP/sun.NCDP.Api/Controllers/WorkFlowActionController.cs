@@ -63,7 +63,7 @@ namespace sun.NCDP.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        [HttpPut("{id}")]
+        [HttpPut("{workFlowActionId}")]
         public async Task<StatusCodeResult> PutStatusAsync(long workFlowActionId, CreateWorkFlowActionDto model)
         {
             var entity = await workFlowActionService.GetAsync(a => a.Id == workFlowActionId) ?? throw new Exception("修改的数据不存在");
