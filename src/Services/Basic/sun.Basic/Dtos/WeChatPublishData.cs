@@ -10,6 +10,20 @@ using System.Threading.Tasks;
 
 namespace sun.Basic.Dtos
 {
+    public class WcChatToken
+    {
+        /// <summary>
+        /// token
+        /// </summary>
+        [JsonPropertyName("access_token")]
+        public string AccessToken { get; set; }
+
+        /// <summary>
+        /// token超时时间
+        /// </summary>
+        [JsonPropertyName("expires_in")]
+        public int ExpiresIn { get; set; }
+    }
     public class WeChatPublishData
     {
         [JsonPropertyName("base_resp")]

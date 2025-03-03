@@ -1,16 +1,40 @@
 ﻿using Flurl;
 using Flurl.Http;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using sun.Basic.Dtos;
 using sun.Basic.Services;
+using sun.Infrastructure;
 
 namespace sun.Basic.Api.Controllers
 {
-
-    public class WeChatController(IWeChatBlogService weChatBlogService) : BasicControllerBase
+    /// <summary>
+    /// 公众号文章对接
+    /// </summary>
+    /// <param name="weChatBlogService"></param>
+    public class WeChatController(IWeChatBlogService weChatBlogService, IConfiguration configuration) : BasicControllerBase
     {
+        /// <summary>
+        /// 获取公众号token
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("token")]
+        public async Task<dynamic> GetToken()
+        {
+            var appid = configuration.GetSection("WeChatOfficialAccounts:appid").Value;
+            var secret = configuration.GetSection("WeChatOfficialAccounts:secret").Value;
+            var result = await "https://api.weixin.qq.com/cgi-bin/token"
+                .SetQueryParams(new
+                {
+                    grant_type="client_credential",
+                    appid = appid,
+                    secret= secret
+                })
+                .GetJsonAsync<WcChatToken>();
+            return result;
+        }
         /// <summary>
         /// 测试接口
         /// </summary>
