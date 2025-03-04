@@ -1,12 +1,16 @@
-﻿using Flurl;
+﻿using AngleSharp;
+using Flurl;
 using Flurl.Http;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using sun.Basic.Dtos;
 using sun.Basic.Services;
 using sun.Infrastructure;
+using System;
+using SIConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace sun.Basic.Api.Controllers
 {
@@ -14,7 +18,7 @@ namespace sun.Basic.Api.Controllers
     /// 公众号文章对接
     /// </summary>
     /// <param name="weChatBlogService"></param>
-    public class WeChatController(IWeChatBlogService weChatBlogService, IConfiguration configuration) : BasicControllerBase
+    public class WeChatController(IWeChatBlogService weChatBlogService, SIConfiguration configuration) : BasicControllerBase
     {
         /// <summary>
         /// 获取公众号token
@@ -33,8 +37,38 @@ namespace sun.Basic.Api.Controllers
                     secret= secret
                 })
                 .GetJsonAsync<WcChatToken>();
+
+            // 将获取的token存入redis
             return result;
         }
+
+        /// <summary>
+        /// 转换html网页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("html")]
+        public async Task<dynamic> GetHtml()
+        {
+            var config = Configuration.Default.WithDefaultLoader();
+            var address = "https://mp.weixin.qq.com/s/QDf6S2hCz5DT2De1vYNlvw";
+            var context = BrowsingContext.New(config);
+            var document = await context.OpenAsync(address);
+            // 获取完整的 HTML 内容
+            var divElement = document.GetElementById("js_content");
+            
+            if(divElement != null)
+            {
+                var htmlContent = divElement.OuterHtml;
+                var converter = new ReverseMarkdown.Converter();
+
+                // 将 HTML 转换为 Markdown
+                string markdown = converter.Convert(htmlContent);
+                return markdown;
+            }
+            return "";
+
+        }
+
         /// <summary>
         /// 测试接口
         /// </summary>

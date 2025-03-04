@@ -8,9 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="1.2.0" />
     <PackageReference Include="EPPlus" Version="7.0.7" />
     <PackageReference Include="Flurl.Http" Version="4.0.2" />
     <PackageReference Include="LinqKit.Core" Version="1.2.5" />
+    <PackageReference Include="Markdig" Version="0.40.0" />
+    <PackageReference Include="ReverseMarkdown" Version="4.6.0" />
     <PackageReference Include="SSH.NET" Version="2023.0.1" />
   </ItemGroup>
 
