@@ -48,6 +48,9 @@ namespace sun.Basic.Dtos
         [JsonPropertyName("publish_count")]
         public int publish_count { get; set; }
 
+        /// <summary>
+        /// 群发数量
+        /// </summary>
         [JsonPropertyName("masssend_count")]
         public int masssend_count { get; set; }
 

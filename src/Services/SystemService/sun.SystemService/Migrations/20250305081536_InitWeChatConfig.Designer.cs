@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sun.EntityFrameworkCore.DbContexts;
 
@@ -10,9 +11,11 @@ using sun.EntityFrameworkCore.DbContexts;
 namespace sun.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    partial class DvsContextModelSnapshot : ModelSnapshot
+    [Migration("20250305081536_InitWeChatConfig")]
+    partial class InitWeChatConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -959,12 +962,7 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("bigint")
                         .HasComment("修改人id");
 
-                    b.Property<long>("WeChatOfficialAccountId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WeChatOfficialAccountId");
 
                     b.ToTable("WeChatBlog", t =>
                         {
@@ -1017,48 +1015,6 @@ namespace sun.SystemService.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("WeChatConfig");
-                });
-
-            modelBuilder.Entity("sun.Basic.Domains.WeChatOfficialAccount", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasComment("创建时间");
-
-                    b.Property<long?>("CreatedBy")
-                        .HasColumnType("bigint")
-                        .HasComment("创建人id");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)")
-                        .HasComment("是否删除");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext")
-                        .HasComment("微信公众号名称");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("longtext")
-                        .HasComment("备注");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime(6)")
-                        .HasComment("修改时间");
-
-                    b.Property<long?>("UpdatedBy")
-                        .HasColumnType("bigint")
-                        .HasComment("修改人id");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WeChatOfficialAccount", t =>
-                        {
-                            t.HasComment("微信公众号列表");
-                        });
                 });
 
             modelBuilder.Entity("sun.Core.Domains.ApiResource", b =>
@@ -3557,17 +3513,6 @@ namespace sun.SystemService.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("sun.Basic.Domains.WeChatBlog", b =>
-                {
-                    b.HasOne("sun.Basic.Domains.WeChatOfficialAccount", "WeChatOfficialAccount")
-                        .WithMany()
-                        .HasForeignKey("WeChatOfficialAccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("WeChatOfficialAccount");
                 });
 
             modelBuilder.Entity("sun.Core.Domains.Auto.AutoRecord", b =>
