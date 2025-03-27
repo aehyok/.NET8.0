@@ -35,6 +35,7 @@ namespace sun.Basic.Domains
         /// </summary>
         public string Name { get; set; }
     }
+
     /// <summary>
     /// 公众号文章列表
     /// </summary>
@@ -43,10 +44,12 @@ namespace sun.Basic.Domains
         public long WeChatOfficialAccountId { get; set; }
 
         public virtual WeChatOfficialAccount WeChatOfficialAccount { get; set; }
+
         /// <summary>
         /// 微信公众号aid
         /// </summary>
         public string AId { get; set; }
+
         /// <summary>
         /// 公众号文章
         /// </summary>
@@ -100,6 +103,7 @@ namespace sun.Basic.Domains
         /// 不填默认为图文消息
         /// </summary>
         public string ArticleType { get; set; }
+
         /// <summary>
         /// 标题
         /// </summary>
@@ -124,7 +128,5 @@ namespace sun.Basic.Domains
         /// 摘要
         /// </summary>
         public string Digest { get; set; }
-
-
     }
 }

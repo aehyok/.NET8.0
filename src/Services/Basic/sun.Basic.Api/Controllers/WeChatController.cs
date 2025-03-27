@@ -1,16 +1,21 @@
 ﻿using AngleSharp;
+using AngleSharp.Io;
 using Flurl;
 using Flurl.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using OpenAI.Chat;
+using Renci.SshNet.Messages;
 using sun.Basic.Dtos;
 using sun.Basic.Services;
 using sun.Infrastructure;
 using sun.Infrastructure.Exceptions;
 using System;
+using System.ClientModel;
 using System.Net;
 using SIConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
@@ -19,8 +24,11 @@ namespace sun.Basic.Api.Controllers
     /// <summary>
     /// 公众号文章对接
     /// </summary>
-    /// <param name="weChatBlogService"></param>
-    public class WeChatController(IWeChatBlogService wxBlogService, IWeChatConfigService wxConfigService,  SIConfiguration configuration) : BasicControllerBase
+    public class WeChatController(
+        IWeChatBlogService wxBlogService,
+        IWeChatConfigService wxConfigService,
+        ILargeLanguageModelService llmService,
+        SIConfiguration configuration) : BasicControllerBase
     {
         /// <summary>
         /// 获取公众号token
@@ -158,6 +166,79 @@ namespace sun.Basic.Api.Controllers
             }
 
             return Ok();
+        }
+
+        /// <summary>
+        /// 测试AI
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("stream")]
+        public async Task<dynamic> GetAsync(string message)
+        {
+            Response.Headers.Append("Content-Type", "text/event-stream");
+            Response.Headers.Append("Cache-Control", "no-cache");
+            Response.Headers.Append("Connection", "keep-alive");
+            var key = new ApiKeyCredential(key: "sk-4ce2e53a474c4287b0066c007ec6fd78");
+
+            var options = new OpenAI.OpenAIClientOptions();
+            options.Endpoint = new System.Uri("https://api.deepseek.com");
+
+            var cancellationToken = HttpContext.RequestAborted;
+
+            ChatClient client = new(model: "deepseek-chat", key, options);
+
+            List<ChatMessage> messages =
+            [
+                new UserChatMessage(message),
+            ];
+
+            //ChatCompletion completion = client.CompleteChat("你好啊");
+
+            var completion = client.CompleteChatStreamingAsync(messages, cancellationToken: cancellationToken);
+
+            await foreach (StreamingChatCompletionUpdate completionUpdate in completion.WithCancellation(cancellationToken))
+            {
+                if (completionUpdate.ContentUpdate.Count > 0)
+                {
+                    var text = completionUpdate.ContentUpdate[0].Text;
+                    await Response.WriteAsync($"{text}", cancellationToken);
+                    await Response.Body.FlushAsync(cancellationToken);
+                }
+            }
+            return "";
+        }
+
+        /// <summary>
+        /// 测试AI
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost("chat")]
+        public async Task<dynamic> PostAsync(string message)
+        {
+            var model = await llmService.GetAsync(item => item.IsDefault);
+
+            var key = new ApiKeyCredential(key: model.ApiKey);
+
+            var options = new OpenAI.OpenAIClientOptions();
+            options.Endpoint = new System.Uri(model.BaseUrl);
+
+            var cancellationToken = HttpContext.RequestAborted;
+
+            ChatClient client = new(model: "deepseek-chat", key, options);
+
+            List<ChatMessage> messages =
+            [
+                new UserChatMessage(message),
+            ];
+
+            //ChatCompletion completion = client.CompleteChat("你好啊");
+
+            var completion = client.CompleteChat(messages);
+
+            return completion.Value.Content[0].Text;
+            //return "";
         }
     }
 }
