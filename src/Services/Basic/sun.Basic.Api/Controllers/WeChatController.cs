@@ -176,17 +176,19 @@ namespace sun.Basic.Api.Controllers
         [HttpPost("stream")]
         public async Task<dynamic> GetAsync(string message)
         {
+            var model = await llmService.GetAsync(item => item.IsDefault);
+
             Response.Headers.Append("Content-Type", "text/event-stream");
             Response.Headers.Append("Cache-Control", "no-cache");
             Response.Headers.Append("Connection", "keep-alive");
-            var key = new ApiKeyCredential(key: "sk-4ce2e53a474c4287b0066c007ec6fd78");
+            var key = new ApiKeyCredential(key: model.ApiKey);
 
             var options = new OpenAI.OpenAIClientOptions();
-            options.Endpoint = new System.Uri("https://api.deepseek.com");
+            options.Endpoint = new System.Uri(model.BaseUrl);
 
             var cancellationToken = HttpContext.RequestAborted;
 
-            ChatClient client = new(model: "deepseek-chat", key, options);
+            ChatClient client = new(model: model.Name, key, options);
 
             List<ChatMessage> messages =
             [
@@ -226,10 +228,11 @@ namespace sun.Basic.Api.Controllers
 
             var cancellationToken = HttpContext.RequestAborted;
 
-            ChatClient client = new(model: "deepseek-chat", key, options);
+            ChatClient client = new(model: model.Name, key, options);
 
             List<ChatMessage> messages =
             [
+                new SystemChatMessage(model.SystemPrompt),
                 new UserChatMessage(message),
             ];
 
