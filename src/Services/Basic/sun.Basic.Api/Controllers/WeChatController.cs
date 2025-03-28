@@ -230,15 +230,27 @@ namespace sun.Basic.Api.Controllers
 
             ChatClient client = new(model: model.Name, key, options);
 
-            List<ChatMessage> messages =
-            [
-                new SystemChatMessage(model.SystemPrompt),
-                new UserChatMessage(message),
-            ];
+            List<ChatMessage> list = new List<ChatMessage>();
+
+            if (!string.IsNullOrEmpty(model.SystemPrompt))
+            {
+                var systemMessage = new SystemChatMessage(model.SystemPrompt);
+                list.Add(systemMessage);
+            }
+            
+            if(string.IsNullOrEmpty(message))
+            {
+                throw new ErrorCodeException(-1, "数据不能为空");
+            }
+            else
+            {
+                var userMessage = new UserChatMessage(message);
+                list.Add(userMessage);
+            }
 
             //ChatCompletion completion = client.CompleteChat("你好啊");
 
-            var completion = client.CompleteChat(messages);
+            var completion = client.CompleteChat(list);
 
             return completion.Value.Content[0].Text;
             //return "";
