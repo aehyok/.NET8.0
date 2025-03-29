@@ -37,7 +37,11 @@ namespace sun.Basic.Domains
 
     public enum SystemPromptType
     {
-        公众号封面图 = 1,
-        公众号卡片 = 2
+        小红书标题 = 1,
+        公众号封面图 = 2,
+        小红书封面图 = 3,
+        公众号卡片 = 4,
+        公众号内容 = 5,
+        其他 = 99
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using OpenAI.Chat;
+using PuppeteerSharp;
 using Renci.SshNet.Messages;
 using sun.Basic.Dtos;
 using sun.Basic.Services;
@@ -254,6 +255,36 @@ namespace sun.Basic.Api.Controllers
 
             return completion.Value.Content[0].Text;
             //return "";
+        }
+
+        /// <summary>
+        /// 将html转换为图片
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("convert")]
+        public async Task CreateHtmlToImage()
+        {
+            var browserFetcher = new BrowserFetcher();
+            await browserFetcher.DownloadAsync();
+            await using var browser = await Puppeteer.LaunchAsync(
+                new LaunchOptions { Headless = true });
+            await using var page = await browser.NewPageAsync();
+            await page.SetViewportAsync(new ViewPortOptions
+            {
+                Width = 500,
+                Height = 725
+            });
+
+            // 加载在线连接
+            //await page.GoToAsync("http://localhost:4000/b.html");
+
+            // 直接加载html 字符串链接
+            await page.SetContentAsync("<div>My Receipt</div>");
+            var result = await page.GetContentAsync();
+
+
+            var outputFile = "tlp.png";
+            await page.ScreenshotAsync(outputFile);
         }
     }
 }
