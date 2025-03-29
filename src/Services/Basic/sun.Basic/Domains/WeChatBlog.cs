@@ -23,6 +23,17 @@ namespace sun.Basic.Domains
         /// Token
         /// </summary>
         public string Token { get; set; }
+
+        /// <summary>
+        /// CookieType类型
+        /// </summary>
+        public CookieType CookieType { get; set; }
+    }
+
+    public enum CookieType
+    {
+        单次拉取Cookie = 1,
+        微信公众号后台管理批量拉取Cookie = 2
     }
 
     /// <summary>

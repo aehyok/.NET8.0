@@ -54,28 +54,52 @@ namespace sun.Basic.Api.Controllers
         }
 
         /// <summary>
-        /// 转换html网页
+        /// 转换微信公众号html网页
         /// </summary>
         /// <returns></returns>
-        [HttpGet("html")]
-        public async Task<dynamic> GetHtml()
+        [HttpGet("wechat/html")]
+        public async Task<dynamic> GetWeChatHtml(string url)
         {
-            var config = Configuration.Default.WithDefaultLoader();
-            var address = "https://mp.weixin.qq.com/s/QDf6S2hCz5DT2De1vYNlvw";
-            var context = BrowsingContext.New(config);
-            var document = await context.OpenAsync(address);
-            // 获取完整的 HTML 内容
-            var divElement = document.GetElementById("js_content");
-            
-            if(divElement != null)
-            {
-                var htmlContent = divElement.OuterHtml;
-                var converter = new ReverseMarkdown.Converter();
+            var wxConfig = await wxConfigService.GetAsync(item => item.CreatedBy == CurrentUser.UserId && item.CookieType == Domains.CookieType.单次拉取Cookie);
 
-                // 将 HTML 转换为 Markdown
-                string markdown = converter.Convert(htmlContent);
-                return markdown;
+            if(wxConfig is null)
+            {
+                return new ErrorCodeException(-1, "请通过浏览器F12获取Cookie进行设置");
             }
+            try
+            {
+                var requester = new DefaultHttpRequester();
+                // 设置必要的头信息
+                requester.Headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36";
+                requester.Headers["Cookie"] = wxConfig.Cookie; // 这里需要有效的微信 Cookie
+                requester.Headers["Referer"] = "https://mp.weixin.qq.com/";
+
+
+                var config = Configuration.Default.WithDefaultLoader(new LoaderOptions
+                {
+                    IsResourceLoadingEnabled = true
+                }).With(requester);
+
+                var address = url;
+                var context = BrowsingContext.New(config);
+                var document = await context.OpenAsync(address);
+                // 获取完整的 HTML 内容
+                var divElement = document.GetElementById("js_content");
+
+                if (divElement != null)
+                {
+                    var htmlContent = divElement.OuterHtml;
+                    var converter = new ReverseMarkdown.Converter();
+
+                    // 将 HTML 转换为 Markdown
+                    string markdown = converter.Convert(htmlContent);
+                    return markdown;
+                }
+            }catch(Exception e)
+            {
+                throw new ErrorCodeException(-1, e.Message);
+            }
+            
             return "";
         }
 
