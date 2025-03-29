@@ -13,6 +13,8 @@ namespace sun.Basic.MapProfiles
             CreateMap<DictionaryItem, DictionaryItemDto>();
 
             CreateMap<Options, OptionsDto>();
+
+            CreateMap<SystemPrompt, SystemPromptDto>();
         }
     }
 }
