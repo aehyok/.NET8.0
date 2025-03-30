@@ -1,5 +1,6 @@
 ﻿using AngleSharp;
 using AngleSharp.Io;
+using Ardalis.Specification;
 using Flurl;
 using Flurl.Http;
 using Microsoft.AspNetCore.Authorization;
@@ -11,10 +12,15 @@ using Newtonsoft.Json;
 using OpenAI.Chat;
 using PuppeteerSharp;
 using Renci.SshNet.Messages;
+using Senparc.Weixin.MP.AdvancedAPIs;
+using Senparc.Weixin.MP.Containers;
+using sun.Basic.Domains;
 using sun.Basic.Dtos;
 using sun.Basic.Services;
+using sun.EntityFrameworkCore.Repository;
 using sun.Infrastructure;
 using sun.Infrastructure.Exceptions;
+using sun.Redis;
 using System;
 using System.ClientModel;
 using System.Net;
@@ -29,6 +35,7 @@ namespace sun.Basic.Api.Controllers
         IWeChatBlogService wxBlogService,
         IWeChatConfigService wxConfigService,
         ILargeLanguageModelService llmService,
+        IRedisService redisService,
         SIConfiguration configuration) : BasicControllerBase
     {
         /// <summary>
@@ -39,18 +46,38 @@ namespace sun.Basic.Api.Controllers
         public async Task<dynamic> GetToken()
         {
             var appid = configuration.GetSection("WeChatOfficialAccounts:appid").Value;
-            var secret = configuration.GetSection("WeChatOfficialAccounts:secret").Value;
-            var result = await "https://api.weixin.qq.com/cgi-bin/token"
-                .SetQueryParams(new
-                {
-                    grant_type="client_credential",
-                    appid = appid,
-                    secret= secret
-                })
-                .GetJsonAsync<WcChatToken>();
+            var appSecret = configuration.GetSection("WeChatOfficialAccounts:secret").Value;
 
-            // 将获取的token存入redis
-            return result;
+            // 注册 AppId 和 AppSecret 到 AccessTokenContainer
+            //await AccessTokenContainer.RegisterAsync(appid, appSecret);
+
+
+
+            // 从 AccessTokenContainer 获取 access_token
+            //string accessToken = AccessTokenContainer.GetAccessToken(appid, true);
+
+            var token = await redisService.GetAsync<string>("WeChatToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                var result = await "https://api.weixin.qq.com/cgi-bin/token"
+                    .SetQueryParams(new
+                    {
+                        grant_type = "client_credential",
+                        appid = appid,
+                        secret = appSecret
+                    })
+                    .GetJsonAsync<WeChatToken>();
+
+                await redisService.SetAsync("WeChatToken", result.AccessToken, TimeSpan.FromSeconds(result.ExpiresIn));
+                // 将获取的token存入redis
+                return result.AccessToken;
+            }
+            else
+            {
+                return token;
+            }
+
+            
         }
 
         /// <summary>
@@ -93,7 +120,16 @@ namespace sun.Basic.Api.Controllers
 
                     // 将 HTML 转换为 Markdown
                     string markdown = converter.Convert(htmlContent);
-                    return markdown;
+
+                    // 这里要将markdown文章转换一下
+                    var content = markdown + "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" +
+                        "根据我上面提供的Html标签中提取出文本内容，注意保持文本原来的格式。记得请使用中文进行回答我。";
+                    var result = await PostAsync(content, "gemini-2.5-pro-exp-03-25");
+
+                    var imageResult = await MediaApi.UploadForeverMediaAsync("", "", Senparc.Weixin.MP.UploadForeverMediaType.image);
+
+                    return result;
+                    //return markdown;
                 }
             }catch(Exception e)
             {
@@ -242,9 +278,20 @@ namespace sun.Basic.Api.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("chat")]
-        public async Task<dynamic> PostAsync(string message)
+        public async Task<dynamic> PostAsync(string message, string modelName = "")
         {
-            var model = await llmService.GetAsync(item => item.IsDefault);
+            var spec = Specifications<LargeLanguageModel>.Create();
+            if(string.IsNullOrEmpty(modelName))
+            {
+                spec.Query.Where(item => item.IsDefault);
+            }
+            else
+            {
+                spec.Query.Where(item => item.Name == modelName);
+            }
+
+
+            var model = await llmService.GetAsync(spec);
 
             var key = new ApiKeyCredential(key: model.ApiKey);
 

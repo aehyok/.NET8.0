@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace sun.Basic.Dtos
 {
-    public class WcChatToken
+    public class WeChatToken
     {
         /// <summary>
         /// token
