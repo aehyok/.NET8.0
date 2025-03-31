@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using OpenAI.Chat;
 using PuppeteerSharp;
 using Renci.SshNet.Messages;
+using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.Containers;
 using sun.Basic.Domains;
@@ -126,10 +127,11 @@ namespace sun.Basic.Api.Controllers
                         "根据我上面提供的Html标签中提取出文本内容，注意保持文本原来的格式。记得请使用中文进行回答我。";
                     var result = await PostAsync(content, "gemini-2.5-pro-exp-03-25");
 
-                    var imageResult = await MediaApi.UploadForeverMediaAsync("", "", Senparc.Weixin.MP.UploadForeverMediaType.image);
+                    var file = "20241101190046.jpg";
+                    var media = await UploadFileAsync(file, UploadForeverMediaType.image);
+                    
 
                     return result;
-                    //return markdown;
                 }
             }catch(Exception e)
             {
@@ -137,6 +139,32 @@ namespace sun.Basic.Api.Controllers
             }
             
             return "";
+        }
+
+        /// <summary>
+        /// 上传文件
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        [HttpPost("upload")]
+        public async Task<WeixinMediaDto> UploadFileAsync(string fileName, UploadForeverMediaType type = UploadForeverMediaType.image)
+        {
+            var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var filePath = Path.Combine(baseDirectory, fileName);
+
+            var accessToken = await this.GetToken();
+            var imageResult = await MediaApi.UploadForeverMediaAsync(accessToken, filePath, type);
+
+            var model = new WeixinMediaDto();
+
+            if(imageResult.ErrorCodeValue == 0)
+            {
+                model.MediaId = imageResult.media_id;
+                model.MediaUrl = imageResult.url;
+            }
+
+            return model;
         }
 
         /// <summary>

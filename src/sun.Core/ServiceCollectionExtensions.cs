@@ -28,6 +28,8 @@ using JsonLongConverter = sun.Infrastructure.Converters.JsonLongConverter;
 using OfficeOpenXml;
 using sun.Core.Schedule;
 using Microsoft.AspNetCore.Hosting;
+using Senparc.Weixin.AspNet.RegisterServices;
+using Senparc.Weixin.RegisterServices;
 
 namespace sun.Core
 {
@@ -139,6 +141,8 @@ namespace sun.Core
                     builder.Services.AddHostedService<InitApiResourceService>();
                 }
             }
+
+            builder.Services.AddSenparcWeixinServices(builder.Configuration);
 
             return builder;
         }
