@@ -146,5 +146,16 @@ namespace sun.Infrastructure.Utils
         {
             return !string.IsNullOrWhiteSpace(value) && !value.Equals("null", StringComparison.CurrentCultureIgnoreCase);
         }
+
+        /// <summary>
+        /// 不区分大小写检查是否同时包含<html>和</html>
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool ContainsHtmlTagsIgnoreCase(string input)
+        {
+            return input.IndexOf("<html>", StringComparison.OrdinalIgnoreCase) >= 0 &&
+                   input.IndexOf("</html>", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
     }
 }

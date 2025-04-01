@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sun.EntityFrameworkCore.DbContexts;
 
@@ -10,9 +11,11 @@ using sun.EntityFrameworkCore.DbContexts;
 namespace sun.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    partial class DvsContextModelSnapshot : ModelSnapshot
+    [Migration("20250331060842_InitWeChatUrlToBlog")]
+    partial class InitWeChatUrlToBlog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -771,10 +774,6 @@ namespace sun.SystemService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Code")
-                        .HasColumnType("longtext")
-                        .HasComment("唯一Code");
-
                     b.Property<string>("Content")
                         .HasColumnType("longtext")
                         .HasComment("提示词内容");
@@ -1273,10 +1272,6 @@ namespace sun.SystemService.Migrations
                     b.Property<string>("ConvertContentToHtml")
                         .HasColumnType("longtext")
                         .HasComment("将重写内容转换为新的html风格");
-
-                    b.Property<string>("ConvertWeChatHtml")
-                        .HasColumnType("longtext")
-                        .HasComment("转换为微信公众号文章格式的html排版");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)")

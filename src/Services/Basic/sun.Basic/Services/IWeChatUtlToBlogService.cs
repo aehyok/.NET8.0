@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace sun.Basic.Services
 {
-    public interface ISystemPromptService : IServiceBase<SystemPrompt>
+    public interface IWeChatUtlToBlogService: IServiceBase<WeChatUrlToBlog>
     {
-         
+
     }
 }

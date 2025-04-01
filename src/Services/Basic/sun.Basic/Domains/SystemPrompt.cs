@@ -20,6 +20,11 @@ namespace sun.Basic.Domains
         public string Content { get; set; }
 
         /// <summary>
+        /// 唯一Code
+        /// </summary>
+        public string Code { get; set; }
+
+        /// <summary>
         /// 分类
         /// </summary>
         public SystemPromptType SystemPromptType { get; set; }

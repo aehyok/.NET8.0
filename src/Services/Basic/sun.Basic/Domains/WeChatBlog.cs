@@ -7,6 +7,45 @@ using System.Threading.Tasks;
 
 namespace sun.Basic.Domains
 {
+    public class WeChatUrlToBlog: AuditedEntity
+    {
+        public string SourceUrl { get; set; }
+
+        /// <summary>
+        /// Url来源分类
+        /// </summary>
+        public SourceUrlType SourceUrlType { get; set; }
+
+        /// <summary>
+        /// 含有html标签的微信公众号文章
+        /// </summary>
+        public string SourceContent { get; set; }
+
+        /// <summary>
+        /// Gemini提取微信公众号文章
+        /// </summary>
+        public string GeminiContent { get; set; }
+
+        /// <summary>
+        /// 重写内容
+        /// </summary>
+        public string ReWriteContent { get; set; }
+
+        /// <summary>
+        /// 将重写内容转换为新的html风格
+        /// </summary>
+        public string ConvertContentToHtml { get; set; }
+
+        /// <summary>
+        /// 转换为微信公众号文章格式的html排版
+        /// </summary>
+        public string ConvertWeChatHtml { get; set; }
+    }
+
+    public enum SourceUrlType
+    {
+        WeChat = 1,
+    }
     public class WeChatConfig: AuditedEntity
     {
         /// <summary>

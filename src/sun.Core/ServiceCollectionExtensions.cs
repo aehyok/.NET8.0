@@ -114,7 +114,10 @@ namespace sun.Core
             });
 
             // 注册 IHttpClientFactory 
-            builder.Services.AddHttpClient();
+            builder.Services.AddHttpClient("myClient", client =>
+            {
+                client.Timeout = TimeSpan.FromSeconds(300);
+            });
 
             builder.Services.AddAllAutoMapper();
 
