@@ -40,6 +40,21 @@ namespace sun.Basic.Domains
         /// 转换为微信公众号文章格式的html排版
         /// </summary>
         public string ConvertWeChatHtml { get; set; }
+
+        /// <summary>
+        /// 生成的文章标题
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// 生成的封面图Id
+        /// </summary>
+        public string CoverImageId { get; set; }
+
+        /// <summary>
+        /// 封面图文件名
+        /// </summary>
+        public string CoverImageUrl { get; set; }
     }
 
     public enum SourceUrlType

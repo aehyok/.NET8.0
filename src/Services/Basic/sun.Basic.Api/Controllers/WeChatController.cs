@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 using OpenAI.Chat;
 using PuppeteerSharp;
 using Renci.SshNet.Messages;
+using Senparc.CO2NET.Helpers.Serializers;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.AdvancedAPIs;
 using Senparc.Weixin.MP.AdvancedAPIs.Draft;
@@ -31,6 +32,7 @@ using sun.Redis;
 using System;
 using System.ClientModel;
 using System.Net;
+using System.Text.RegularExpressions;
 using SIConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using StringUtils = sun.Infrastructure.Utils.StringExtensions;
 
@@ -171,18 +173,61 @@ namespace sun.Basic.Api.Controllers
                 throw new ErrorCodeException(-1, "此Id数据不存在");
             }
 
-            var prompt = await spService.GetAsync(item => item.Code == "urltotext");
+            var prompt = await spService.GetAsync(item => item.Code == "texttoretext");
             var content = $"{prompt.Content} {blog.GeminiContent}";
 
             var result = await PostAsync(content, "gemini-2.5-pro-exp-03-25");
 
-            blog.ReWriteContent = result;
-            blog.UpdatedAt = DateTime.Now;
+            string json = @"";
+            json =  result.Replace("```json", "");
+            json = json.Replace("```", "");
 
-            await blogService.UpdateAsync(blog);
+            if (!string.IsNullOrEmpty(json))
+            {
+                var model = JsonConvert.DeserializeObject<AIReWriteDto>(json);
+                blog.ReWriteContent = model.Content;
+                blog.UpdatedAt = DateTime.Now;
+                blog.Title = model.Title;
+                await blogService.UpdateAsync(blog);
 
-            return result;
+                return result;
+            }
+
+            return "";
+
         }
+
+        /// <summary>
+        /// 生成封面图
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="ErrorCodeException"></exception>
+        [HttpGet("createCoverImage")]
+        public async Task<dynamic> CreateCoverImageAsync(long id)
+        {
+            var blog = await blogService.GetAsync(item => item.Id == id);
+            if (blog is null)
+            {
+                throw new ErrorCodeException(-1, "此Id数据不存在");
+            }
+
+            var prompt = await spService.GetAsync(item => item.Code == "coverimage");
+            var content = $"{prompt.Content} {blog.Title}";
+            var dsResult = await PostAsync(content, "deepseek-chat");
+
+            Regex regex = new Regex(@"```html(.*?)```", RegexOptions.Singleline);
+            Match match = regex.Match(dsResult);
+
+            if (match.Success)
+            {
+                string html = match.Groups[1].Value.Trim();
+                await CreateHtmlToImage(html);
+                return html;
+            }
+            return "";
+        }
+
         /// <summary>
         /// 针对文本内容进行排版
         /// </summary>
@@ -200,7 +245,7 @@ namespace sun.Basic.Api.Controllers
             var prompt = await spService.GetAsync(item => item.Code == "texttohtml");
             var content = $"{prompt.Content} {blog.ReWriteContent}";
 
-            var dsResult = await PostAsync(content, "deepseek-chat", blog.ConvertContentToHtml);
+            var dsResult = await PostAsync(content, "gemini-2.5-pro-exp-03-25", blog.ConvertContentToHtml);
 
             blog.ConvertContentToHtml = (!string.IsNullOrEmpty(blog.ConvertContentToHtml)) ? blog.ConvertContentToHtml + dsResult : dsResult;
             blog.UpdatedAt = DateTime.Now;
@@ -456,7 +501,7 @@ namespace sun.Basic.Api.Controllers
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("chat")]
-        public async Task<dynamic> PostAsync(string message, string modelName = "", string content = "")
+        public async Task<string> PostAsync(string message, string modelName = "", string content = "", bool isJson = false)
         {
             var spec = Specifications<LargeLanguageModel>.Create();
             if(string.IsNullOrEmpty(modelName))
@@ -510,10 +555,47 @@ namespace sun.Basic.Api.Controllers
 
             }
             //ChatCompletion completion = client.CompleteChat("你好啊");
-            ChatCompletionOptions chatOptions = new ChatCompletionOptions { MaxOutputTokenCount = 8000 };
-            var completion = client.CompleteChat(list);
 
-            return completion.Value.Content[0].Text;
+            if(isJson)
+            {
+                var responseFormat = ChatResponseFormat.CreateJsonSchemaFormat(
+                        jsonSchemaFormatName: "custom_response",
+                        jsonSchema: BinaryData.FromBytes("""
+                        {
+                            "type": "object",
+                            "properties": {
+                                "title": { "type": "string" },
+                                "content": { "type": "string" }
+                            },
+                            "required": ["title", "content"],
+                            "additionalProperties": false
+                        }
+                        """u8.ToArray()),
+                        jsonSchemaIsStrict: true);
+
+
+                ChatCompletionOptions chatOptions = new ChatCompletionOptions
+                {
+                    MaxOutputTokenCount = 8000,
+                    ResponseFormat = responseFormat
+                };
+
+                var completion = client.CompleteChat(list);
+
+                return completion.Value.Content[0].Text;
+            }
+            else
+            {
+                ChatCompletionOptions chatOptions = new ChatCompletionOptions
+                {
+                    MaxOutputTokenCount = 8000,
+                };
+
+                var completion = client.CompleteChat(list);
+
+                return completion.Value.Content[0].Text;
+            }
+                
             //return "";
         }
 
@@ -522,7 +604,7 @@ namespace sun.Basic.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("convertHtml2Imag")]
-        public async Task CreateHtmlToImage()
+        public async Task CreateHtmlToImage(string html)
         {
             var browserFetcher = new BrowserFetcher();
             await browserFetcher.DownloadAsync();
@@ -539,7 +621,7 @@ namespace sun.Basic.Api.Controllers
             //await page.GoToAsync("http://localhost:4000/b.html");
 
             // 直接加载html 字符串链接
-            await page.SetContentAsync("<div>My Receipt</div>");
+            await page.SetContentAsync(html);
             var result = await page.GetContentAsync();
 
 
