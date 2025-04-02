@@ -124,7 +124,7 @@ namespace sun.Basic.Api.Controllers
                     // 这里要将markdown文章转换一下
 
                     var prompt = await spService.GetAsync(item => item.Code == "urltotext");
-                    var content = $"{prompt} {markdown}";
+                    var content = $"{prompt.Content} {markdown}";
                     var result = await PostAsync(content, "gemini-2.5-pro-exp-03-25");
 
                     var blog = await blogService.GetAsync(item => item.SourceUrl == url);
@@ -140,8 +140,14 @@ namespace sun.Basic.Api.Controllers
                         await blogService.InsertAsync(model);
                         return model.Id;
                     }
+                    else
+                    {
+                        blog.GeminiContent = result;
+                        blog.UpdatedAt = DateTime.Now;
+                        await blogService.UpdateAsync(blog);
+                    }
 
-                    return result;
+                    return blog.Id;
                 }
             }catch(Exception e)
             {
@@ -166,7 +172,7 @@ namespace sun.Basic.Api.Controllers
             }
 
             var prompt = await spService.GetAsync(item => item.Code == "urltotext");
-            var content = $"{prompt} {blog.GeminiContent}";
+            var content = $"{prompt.Content} {blog.GeminiContent}";
 
             var result = await PostAsync(content, "gemini-2.5-pro-exp-03-25");
 
@@ -175,7 +181,7 @@ namespace sun.Basic.Api.Controllers
 
             await blogService.UpdateAsync(blog);
 
-            return blog;
+            return result;
         }
         /// <summary>
         /// 针对文本内容进行排版
@@ -192,15 +198,15 @@ namespace sun.Basic.Api.Controllers
                 throw new ErrorCodeException(-1, "此Id数据不存在");
             }
             var prompt = await spService.GetAsync(item => item.Code == "texttohtml");
-            var content = $"{prompt} {blog.ReWriteContent}";
+            var content = $"{prompt.Content} {blog.ReWriteContent}";
 
-            var dsResult = await PostAsync(content, "deepseek-chat", blog.ReWriteContent);
+            var dsResult = await PostAsync(content, "deepseek-chat", blog.ConvertContentToHtml);
 
             blog.ConvertContentToHtml = (!string.IsNullOrEmpty(blog.ConvertContentToHtml)) ? blog.ConvertContentToHtml + dsResult : dsResult;
             blog.UpdatedAt = DateTime.Now;
             await blogService.UpdateAsync(blog);
 
-            return blog;
+            return blog.ConvertContentToHtml;
         }
 
         /// <summary>
@@ -218,7 +224,7 @@ namespace sun.Basic.Api.Controllers
             }
 
             var prompt = await spService.GetAsync(item => item.Code == "htmltowechathtml");
-            var content = $"{prompt} {blog.ConvertContentToHtml}";
+            var content = $"{prompt.Content} {blog.ConvertContentToHtml}";
             var dsResult = await PostAsync(content, "deepseek-chat");
 
             blog.ConvertWeChatHtml = dsResult;
