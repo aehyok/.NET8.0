@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.JSInterop.Infrastructure;
 using Newtonsoft.Json;
@@ -25,9 +26,11 @@ using Senparc.Weixin.MP.Containers;
 using sun.Basic.Domains;
 using sun.Basic.Dtos;
 using sun.Basic.Services;
+using sun.Core.Services;
 using sun.EntityFrameworkCore.Repository;
 using sun.Infrastructure;
 using sun.Infrastructure.Exceptions;
+using sun.Infrastructure.Options;
 using sun.Redis;
 using System;
 using System.ClientModel;
@@ -48,6 +51,8 @@ namespace sun.Basic.Api.Controllers
         IRedisService redisService,
         IWeChatUtlToBlogService blogService,
         ISystemPromptService spService,
+        IFileService fileService,
+        IOptionsSnapshot<StorageOptions> storageOptions,
         SIConfiguration configuration) : BasicControllerBase
     {
         /// <summary>
@@ -86,7 +91,7 @@ namespace sun.Basic.Api.Controllers
         /// 将url链接转换为纯内容文本
         /// </summary>
         /// <returns></returns>
-        [HttpGet("wechat/urltotext")]
+        [HttpGet("urltotext")]
         public async Task<dynamic> UrlToTextAsync(string url)
         {
             var wxConfig = await wxConfigService.GetAsync(item => item.CreatedBy == CurrentUser.UserId && item.CookieType == Domains.CookieType.单次拉取Cookie);
@@ -188,6 +193,7 @@ namespace sun.Basic.Api.Controllers
                 blog.ReWriteContent = model.Content;
                 blog.UpdatedAt = DateTime.Now;
                 blog.Title = model.Title;
+                blog.Digest = model.Digest;
                 await blogService.UpdateAsync(blog);
 
                 return result;
@@ -222,8 +228,17 @@ namespace sun.Basic.Api.Controllers
             if (match.Success)
             {
                 string html = match.Groups[1].Value.Trim();
-                await CreateHtmlToImage(html);
-                return html;
+                var base64 =  await CreateHtmlToImage(html,900, 383);
+
+                var bytes = Convert.FromBase64String(base64);
+                long stampId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() * 1000000;
+
+                var file = await fileService.UploadAsync(bytes, $"{stampId}.png");
+                
+                blog.CoverImageId = file.Id;
+                blog.UpdatedAt = DateTime.Now;
+
+                await blogService.UpdateAsync(blog);
             }
             return "";
         }
@@ -279,32 +294,6 @@ namespace sun.Basic.Api.Controllers
         }
 
         /// <summary>
-        /// 针对原始网页文章进行重新排版
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="ErrorCodeException"></exception>
-        [HttpGet("wechat/convertReWriteHtml")]
-        public async Task<dynamic> ConvertReWriteAsync(long id)
-        {
-            var blog = await blogService.GetAsync(item => item.Id == id);
-            if (blog is null)
-            {
-                throw new ErrorCodeException(-1, "此Id数据不存在");
-            }
-            var ds = $"你是一名专业的网页设计师和前端开发专家，对现代 Web 设计趋势和最佳实践有深入理解，尤其擅长创造具有极高审美价值的用户界面。你的设计作品不仅功能完备，而且在视觉上令人惊叹，能够给用户带来强烈的\"Aha-moment\"体验。\r\n\r\n请根据最后提供的内容，设计一个**美观、现代、易读**的\"中文\"可视化网页。请充分发挥你的专业判断，选择最能体现内容精髓的设计风格、配色方案、排版和布局。\r\n\r\n**设计目标：**\r\n\r\n*   **视觉吸引力：** 创造一个在视觉上令人印象深刻的网页，能够立即吸引用户的注意力，并激发他们的阅读兴趣。\r\n*   **可读性：** 确保内容清晰易读，无论在桌面端还是移动端，都能提供舒适的阅读体验。\r\n*   **信息传达：** 以一种既美观又高效的方式呈现信息，突出关键内容，引导用户理解核心思想。\r\n*   **情感共鸣:** 通过设计激发与内容主题相关的情感（例如，对于励志内容，激发积极向上的情绪；对于严肃内容，营造庄重、专业的氛围）。\r\n\r\n**设计指导（请灵活运用，而非严格遵循）：**\r\n\r\n*   **整体风格：** 可以考虑杂志风格、出版物风格，或者其他你认为合适的现代 Web 设计风格。目标是创造一个既有信息量，又有视觉吸引力的页面，就像一本精心设计的数字杂志或一篇深度报道。\r\n*   **Hero 模块（可选，但强烈建议）：** 如果你认为合适，可以设计一个引人注目的 Hero 模块。它可以包含大标题、副标题、一段引人入胜的引言，以及一张高质量的背景图片或插图。\r\n*   **排版：**\r\n    *   精心选择字体组合（衬线和无衬线），以提升中文阅读体验。\r\n    *   利用不同的字号、字重、颜色和样式，创建清晰的视觉层次结构。\r\n    *   可以考虑使用一些精致的排版细节（如首字下沉、悬挂标点）来提升整体质感。\r\n    *   Font-Awesome中有很多图标，选合适的点缀增加趣味性。\r\n*   **配色方案：**\r\n    *   选择一套既和谐又具有视觉冲击力的配色方案。\r\n    *   考虑使用高对比度的颜色组合来突出重要元素。\r\n    *   可以探索渐变、阴影等效果来增加视觉深度。\r\n*   **布局：**\r\n    *   使用基于网格的布局系统来组织页面元素。\r\n    *   充分利用负空间（留白），创造视觉平衡和呼吸感。\r\n    *   可以考虑使用卡片、分割线、图标等视觉元素来分隔和组织内容。\r\n*   **调性：**整体风格精致, 营造一种高级感。\r\n*   **数据可视化：** \r\n    *   设计一个或多个数据可视化元素，展示关键概念和它们之间的关系。\r\n    *   可以考虑使用思想导图、概念关系图、时间线或主题聚类展示等方式。\r\n    *   确保可视化设计既美观又有洞察性，帮助用户更直观地理解整体框架。\r\n    *   \r\n\r\n**技术规范：**\r\n\r\n*   使用 HTML5、Font Awesome、和最基本的CSS。\r\n    *   Font Awesome: [https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css](https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css)\r\n    *   Tailwind CSS: [https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css](https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css)\r\n    *   非中文字体: [https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap](https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap)\r\n    *   `font-family: Tahoma,Arial,Roboto,\"Droid Sans\",\"Helvetica Neue\",\"Droid Sans Fallback\",\"Heiti SC\",\"Hiragino Sans GB\",Simsun,sans-self;`\r\n    *   Mermaid: [https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js](https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js)\r\n*   \r\n*   代码结构清晰、语义化，包含适当的注释。\r\n*   实现完整的响应式，必须在所有设备上（手机、平板、桌面）完美展示。\r\n\r\n\r\n*  \r\n\r\n**输出要求：**\r\n\r\n*   提供一个完整、可运行的单一 HTML 文件，其中包含所有必要的 CSS不要使用JavaScript。\r\n*   确保代码符合 W3C 标准，没有错误或警告。   \r\n\r\n 记住这里有最重要的一个点：请直接返回给我最终的Html网页内容即可,其他内容无需进行返回。 \r\n\r\n请你像一个真正的设计师一样思考，充分发挥你的专业技能和创造力，打造一个令人惊艳的网页！\r\n\r\n待处理内容：{{{blog.ReWriteContent}}}";
-            var dsResult = await PostAsync(ds, "deepseek-chat", blog.ConvertContentToHtml);
-
-            blog.ConvertContentToHtml = (!string.IsNullOrEmpty(blog.ConvertContentToHtml)) ? blog.ConvertContentToHtml + dsResult : dsResult;
-
-            blog.UpdatedAt = DateTime.Now;
-            await blogService.UpdateAsync(blog);
-            
-
-            return blog.ConvertContentToHtml;
-        }
-
-        /// <summary>
         /// 创建草稿
         /// </summary>
         /// <param name="id"></param>
@@ -319,22 +308,47 @@ namespace sun.Basic.Api.Controllers
                 throw new ErrorCodeException(-1, "此Id数据不存在");
             }
 
-            var file = "20241101190046.jpg";
-            // var media = await UploadFileAsync(file, UploadForeverMediaType.image);
+            WeixinMediaDto mediaDto = null;
+
+            if(blog.CoverImageId > 0)
+            {
+                if(string.IsNullOrEmpty(blog.MediaId))
+                {
+                    var file = await fileService.GetByIdAsync(blog.CoverImageId);
+                    var basePath = Path.Combine(storageOptions.Value.Path, file.Path);
+                    mediaDto = await UploadFileAsync(basePath, UploadForeverMediaType.image);
+
+                    if (!string.IsNullOrEmpty(mediaDto.MediaId))
+                    {
+                        blog.MediaId = mediaDto.MediaId;
+                        blog.MediaUrl = mediaDto.MediaUrl;
+                    }
+                }
+            } 
 
             var dto = new DraftModel
             {
-                title = "ceshi11",
-                content = "<section><span leaf=\"\">"+ blog.ConvertWeChatHtml +"</span></section><p style=\"display: none;\"><mp-style-type data-value=\"3\"></mp-style-type></p>",
-                thumb_media_id = "WT6sJmnkf0Wc51KJ8L2SX8stqQGNwGosBXMs_SeHXKhrObYnQl6BnkzYhYoKvvs4",  //media.MediaId,
-                digest = "ceshi zhaiyao",
+                title = blog.Title,
+                content = "<section><span leaf=\"\">" + blog.ConvertWeChatHtml + "</span></section><p style=\"display: none;\"><mp-style-type data-value=\"3\"></mp-style-type></p>",
+                thumb_media_id = blog.MediaId,
+                digest = (blog.Digest.Length> 120) ? blog.Digest.Substring(0,120) : blog.Digest,
                 show_cover_pic = "1",
                 need_open_comment = 1
             };
 
             var access_token = await GetToken();
-            var newsResult = await DraftApi.AddDraftAsync(access_token, 10000, dto);
-            return newsResult;
+            AddDraftResultJson result = await DraftApi.AddDraftAsync(access_token, 10000, dto);
+
+            if (result.ErrorCodeValue == 0)
+            {
+                blog.UpdatedAt = DateTime.Now;
+                await blogService.UpdateAsync(blog);
+                return Ok();
+            }
+            else
+            {
+                throw new ErrorCodeException(-1, "创建草稿出现错误");
+            }
         }
         /// <summary>
         /// 上传文件
@@ -565,7 +579,8 @@ namespace sun.Basic.Api.Controllers
                             "type": "object",
                             "properties": {
                                 "title": { "type": "string" },
-                                "content": { "type": "string" }
+                                "content": { "type": "string" },
+                                "digest": { "type": "string" }
                             },
                             "required": ["title", "content"],
                             "additionalProperties": false
@@ -604,7 +619,7 @@ namespace sun.Basic.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("convertHtml2Imag")]
-        public async Task CreateHtmlToImage(string html)
+        public async Task<string> CreateHtmlToImage(string html, int width, int height)
         {
             var browserFetcher = new BrowserFetcher();
             await browserFetcher.DownloadAsync();
@@ -613,8 +628,8 @@ namespace sun.Basic.Api.Controllers
             await using var page = await browser.NewPageAsync();
             await page.SetViewportAsync(new ViewPortOptions
             {
-                Width = 500,
-                Height = 725
+                Width = width,
+                Height = height
             });
 
             // 加载在线连接
@@ -623,10 +638,7 @@ namespace sun.Basic.Api.Controllers
             // 直接加载html 字符串链接
             await page.SetContentAsync(html);
             var result = await page.GetContentAsync();
-
-
-            var outputFile = "tlp.png";
-            await page.ScreenshotAsync(outputFile);
+            return await page.ScreenshotBase64Async();
         }
     }
 }

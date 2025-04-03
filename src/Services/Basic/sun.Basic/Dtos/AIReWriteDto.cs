@@ -11,5 +11,7 @@ namespace sun.Basic.Dtos
         public string Title { get; set; }
 
         public string Content { get; set; }
+
+        public string Digest { get; set; }
     }
 }

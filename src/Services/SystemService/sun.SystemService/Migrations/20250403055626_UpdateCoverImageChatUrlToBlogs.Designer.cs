@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sun.EntityFrameworkCore.DbContexts;
 
@@ -10,9 +11,11 @@ using sun.EntityFrameworkCore.DbContexts;
 namespace sun.SystemService.Migrations
 {
     [DbContext(typeof(DvsContext))]
-    partial class DvsContextModelSnapshot : ModelSnapshot
+    [Migration("20250403055626_UpdateCoverImageChatUrlToBlogs")]
+    partial class UpdateCoverImageChatUrlToBlogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1282,8 +1285,8 @@ namespace sun.SystemService.Migrations
                         .HasColumnType("longtext")
                         .HasComment("base64 封面图片");
 
-                    b.Property<long>("CoverImageId")
-                        .HasColumnType("bigint")
+                    b.Property<string>("CoverImageId")
+                        .HasColumnType("longtext")
                         .HasComment("生成的封面图Id");
 
                     b.Property<string>("CoverImageUrl")
@@ -1309,14 +1312,6 @@ namespace sun.SystemService.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)")
                         .HasComment("是否删除");
-
-                    b.Property<string>("MediaId")
-                        .HasColumnType("longtext")
-                        .HasComment("上传封面图返回Id");
-
-                    b.Property<string>("MediaUrl")
-                        .HasColumnType("longtext")
-                        .HasComment("封面图Url");
 
                     b.Property<string>("ReWriteContent")
                         .HasColumnType("longtext")

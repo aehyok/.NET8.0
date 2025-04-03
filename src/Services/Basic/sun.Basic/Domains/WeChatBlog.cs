@@ -47,9 +47,29 @@ namespace sun.Basic.Domains
         public string Title { get; set; }
 
         /// <summary>
+        /// 摘要
+        /// </summary>
+        public string Digest { get; set; }
+
+        /// <summary>
         /// 生成的封面图Id
         /// </summary>
-        public string CoverImageId { get; set; }
+        public long CoverImageId { get; set; }
+
+        /// <summary>
+        /// 上传封面图返回Id
+        /// </summary>
+        public string MediaId { get; set; }
+
+        /// <summary>
+        /// 封面图Url
+        /// </summary>
+        public string MediaUrl { get; set; }
+
+        /// <summary>
+        /// base64 封面图片
+        /// </summary>
+        public string CoverImageBase64 { get; set; }
 
         /// <summary>
         /// 封面图文件名
