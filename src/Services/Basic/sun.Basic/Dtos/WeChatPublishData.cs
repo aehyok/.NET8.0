@@ -23,6 +23,14 @@ namespace sun.Basic.Dtos
         /// </summary>
         [JsonPropertyName("expires_in")]
         public int ExpiresIn { get; set; }
+
+
+        [JsonPropertyName("errcode")]
+        public int ErrorCode { get; set; }
+
+
+        [JsonPropertyName("errmsg")]
+        public string ErrorMessage { get; set; }
     }
     public class WeChatPublishData
     {

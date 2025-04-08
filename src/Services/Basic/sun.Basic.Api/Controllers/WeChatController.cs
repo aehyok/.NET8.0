@@ -76,6 +76,10 @@ namespace sun.Basic.Api.Controllers
                         secret = appSecret
                     })
                     .GetJsonAsync<WeChatToken>();
+                if(result.ErrorCode == 40164)
+                {
+                    throw new ErrorCodeException(-1, result.ErrorMessage);
+                }
 
                 await redisService.SetAsync("WeChatToken", result.AccessToken, TimeSpan.FromSeconds(result.ExpiresIn));
                 // 将获取的token存入redis
@@ -312,17 +316,14 @@ namespace sun.Basic.Api.Controllers
 
             if(blog.CoverImageId > 0)
             {
-                if(string.IsNullOrEmpty(blog.MediaId))
-                {
-                    var file = await fileService.GetByIdAsync(blog.CoverImageId);
-                    var basePath = Path.Combine(storageOptions.Value.Path, file.Path);
-                    mediaDto = await UploadFileAsync(basePath, UploadForeverMediaType.image);
+                var file = await fileService.GetByIdAsync(blog.CoverImageId);
+                var basePath = Path.Combine(storageOptions.Value.Path, file.Path);
+                mediaDto = await UploadFileAsync(basePath, UploadForeverMediaType.image);
 
-                    if (!string.IsNullOrEmpty(mediaDto.MediaId))
-                    {
-                        blog.MediaId = mediaDto.MediaId;
-                        blog.MediaUrl = mediaDto.MediaUrl;
-                    }
+                if (!string.IsNullOrEmpty(mediaDto.MediaId))
+                {
+                    blog.MediaId = mediaDto.MediaId;
+                    blog.MediaUrl = mediaDto.MediaUrl;
                 }
             } 
 
