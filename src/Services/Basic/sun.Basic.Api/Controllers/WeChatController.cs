@@ -169,6 +169,53 @@ namespace sun.Basic.Api.Controllers
         }
 
         /// <summary>
+        /// 合并生成纯文本
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        [HttpGet("mergecreatetext")]
+        public async Task<dynamic> MergeCreateTextAsync(long[] ids)
+        {
+            var blogs = await blogService.GetListAsync(item => ids.Contains(item.Id));
+            var blog = blogs.FirstOrDefault();
+            var contents = "";
+            foreach (var item in blogs)
+            {
+                if(!string.IsNullOrEmpty(contents))
+                {
+                    contents = contents + "\n\n\n"+ item.GeminiContent;
+                }
+                else
+                {
+                    contents = item.GeminiContent;
+                }                
+            }
+
+
+            var prompt = await spService.GetAsync(item => item.Code == "mergetext");
+            var content = $"{prompt.Content}{contents}";
+
+            var result = await PostAsync(content, "gemini-2.5-pro-exp-03-25");
+
+            string json = @"";
+            json = result.Replace("```json", "");
+            json = json.Replace("```", "");
+
+            if (!string.IsNullOrEmpty(json))
+            {
+                var model = JsonConvert.DeserializeObject<AIReWriteDto>(json);
+                blog.ReWriteContent = model.Content;
+                blog.UpdatedAt = DateTime.Now;
+                blog.Title = model.Title;
+                blog.Digest = model.Digest;
+                await blogService.UpdateAsync(blog);
+
+                return result;
+            }
+            return "";
+        }
+
+        /// <summary>
         /// 纯文本润色改写
         /// </summary>
         /// <param name="id"></param>
