@@ -174,7 +174,7 @@ namespace sun.Basic.Api.Controllers
         /// <param name="ids"></param>
         /// <returns></returns>
         [HttpGet("mergecreatetext")]
-        public async Task<dynamic> MergeCreateTextAsync(long[] ids)
+        public async Task<dynamic> MergeCreateTextAsync([FromQuery] long[] ids)
         {
             var blogs = await blogService.GetListAsync(item => ids.Contains(item.Id));
             var blog = blogs.FirstOrDefault();
