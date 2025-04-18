@@ -31,10 +31,12 @@ using sun.EntityFrameworkCore.Repository;
 using sun.Infrastructure;
 using sun.Infrastructure.Exceptions;
 using sun.Infrastructure.Options;
+using sun.RabbitMQ;
 using sun.Redis;
 using System;
 using System.ClientModel;
 using System.Net;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using SIConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using StringUtils = sun.Infrastructure.Utils.StringExtensions;
@@ -53,7 +55,8 @@ namespace sun.Basic.Api.Controllers
         ISystemPromptService spService,
         IFileService fileService,
         IOptionsSnapshot<StorageOptions> storageOptions,
-        SIConfiguration configuration) : BasicControllerBase
+        ILogger<WeChatController> logger,
+    SIConfiguration configuration) : BasicControllerBase
     {
         /// <summary>
         /// 获取公众号token
@@ -112,15 +115,20 @@ namespace sun.Basic.Api.Controllers
                 requester.Headers["Cookie"] = wxConfig.Cookie; // 这里需要有效的微信 Cookie
                 requester.Headers["Referer"] = "https://mp.weixin.qq.com/";
 
-
-                var config = Configuration.Default.WithDefaultLoader(new LoaderOptions
-                {
-                    IsResourceLoadingEnabled = true
-                }).With(requester);
+                logger.LogInformation("sssssssssssssssssss");
+                var config = Configuration.Default.WithDefaultLoader(
+                    new LoaderOptions
+                    {
+                        IsResourceLoadingEnabled = true
+                    }).With(requester);
 
                 var address = url;
+                logger.LogInformation(wxConfig.Cookie);
                 var context = BrowsingContext.New(config);
+                logger.LogInformation(url);
+
                 var document = await context.OpenAsync(address);
+                logger.LogInformation(document.Body.OuterHtml);
                 // 获取完整的 HTML 内容
                 var divElement = document.GetElementById("js_content");
 
@@ -232,7 +240,7 @@ namespace sun.Basic.Api.Controllers
             var prompt = await spService.GetAsync(item => item.Code == "texttoretext");
             var content = $"{prompt.Content} {blog.GeminiContent}";
 
-            var result = await PostAsync(content, "gemini-2.5-pro-exp-03-25");
+            var result = await PostAsync(content, "gemini-2.5-pro-exp-03-25", "", true);
 
             string json = @"";
             json =  result.Replace("```json", "");
@@ -263,33 +271,40 @@ namespace sun.Basic.Api.Controllers
         [HttpGet("createCoverImage")]
         public async Task<dynamic> CreateCoverImageAsync(long id)
         {
-            var blog = await blogService.GetAsync(item => item.Id == id);
-            if (blog is null)
+            try
             {
-                throw new ErrorCodeException(-1, "此Id数据不存在");
+                var blog = await blogService.GetAsync(item => item.Id == id);
+                if (blog is null)
+                {
+                    throw new ErrorCodeException(-1, "此Id数据不存在");
+                }
+
+                var prompt = await spService.GetAsync(item => item.Code == "coverimage");
+                var content = $"{prompt.Content} {blog.Title}";
+                var dsResult = await PostAsync(content, "deepseek-chat");
+
+                Regex regex = new Regex(@"```html(.*?)```", RegexOptions.Singleline);
+                Match match = regex.Match(dsResult);
+
+                if (match.Success)
+                {
+                    string html = match.Groups[1].Value.Trim();
+                    var base64 = await CreateHtmlToImage(html, 900, 383);
+
+                    var bytes = Convert.FromBase64String(base64);
+                    long stampId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() * 1000000;
+
+                    var file = await fileService.UploadAsync(bytes, $"{stampId}.png");
+
+                    blog.CoverImageId = file.Id;
+                    blog.UpdatedAt = DateTime.Now;
+
+                    await blogService.UpdateAsync(blog);
+                }
             }
-
-            var prompt = await spService.GetAsync(item => item.Code == "coverimage");
-            var content = $"{prompt.Content} {blog.Title}";
-            var dsResult = await PostAsync(content, "deepseek-chat");
-
-            Regex regex = new Regex(@"```html(.*?)```", RegexOptions.Singleline);
-            Match match = regex.Match(dsResult);
-
-            if (match.Success)
+            catch(Exception e)
             {
-                string html = match.Groups[1].Value.Trim();
-                var base64 =  await CreateHtmlToImage(html,900, 383);
-
-                var bytes = Convert.FromBase64String(base64);
-                long stampId = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() * 1000000;
-
-                var file = await fileService.UploadAsync(bytes, $"{stampId}.png");
-                
-                blog.CoverImageId = file.Id;
-                blog.UpdatedAt = DateTime.Now;
-
-                await blogService.UpdateAsync(blog);
+                throw new ErrorCodeException(-1, e.Message);
             }
             return "";
         }
@@ -336,9 +351,9 @@ namespace sun.Basic.Api.Controllers
 
             var prompt = await spService.GetAsync(item => item.Code == "htmltowechathtml");
             var content = $"{prompt.Content} {blog.ConvertContentToHtml}";
-            var dsResult = await PostAsync(content, "deepseek-chat");
+            var dsResult = await PostAsync(content, "gemini-2.5-pro-exp-03-25", blog.ConvertWeChatHtml);
 
-            blog.ConvertWeChatHtml = dsResult;
+            blog.ConvertWeChatHtml = (!string.IsNullOrEmpty(blog.ConvertWeChatHtml)) ? blog.ConvertWeChatHtml + dsResult : dsResult;
             blog.UpdatedAt = DateTime.Now;
             await blogService.UpdateAsync(blog);
             return dsResult;
@@ -630,7 +645,7 @@ namespace sun.Basic.Api.Controllers
                                 "content": { "type": "string" },
                                 "digest": { "type": "string" }
                             },
-                            "required": ["title", "content"],
+                            "required": ["title", "content", "digest"],
                             "additionalProperties": false
                         }
                         """u8.ToArray()),
@@ -669,24 +684,44 @@ namespace sun.Basic.Api.Controllers
         [HttpGet("convertHtml2Imag")]
         public async Task<string> CreateHtmlToImage(string html, int width, int height)
         {
-            var browserFetcher = new BrowserFetcher();
-            await browserFetcher.DownloadAsync();
-            await using var browser = await Puppeteer.LaunchAsync(
-                new LaunchOptions { Headless = true });
-            await using var page = await browser.NewPageAsync();
-            await page.SetViewportAsync(new ViewPortOptions
+            try
             {
-                Width = width,
-                Height = height
-            });
+                var isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
 
-            // 加载在线连接
-            //await page.GoToAsync("http://localhost:4000/b.html");
+                var options = new LaunchOptions
+                {
+                    Headless = true,
+                    Args = new[] { "--no-sandbox", "--disable-setuid-sandbox" },
+                };
 
-            // 直接加载html 字符串链接
-            await page.SetContentAsync(html);
-            var result = await page.GetContentAsync();
-            return await page.ScreenshotBase64Async();
+                if (isLinux)
+                {
+                    options.ExecutablePath = "/root/chrome-linux64/chrome";
+                }
+                else
+                {
+                    var browserFetcher = new BrowserFetcher();
+                    await browserFetcher.DownloadAsync();
+                }
+
+                await using var browser = await Puppeteer.LaunchAsync(options);
+                await using var page = await browser.NewPageAsync();
+                await page.SetViewportAsync(new ViewPortOptions
+                {
+                    Width = width,
+                    Height = height
+                });
+
+
+                // 直接加载html 字符串链接
+                await page.SetContentAsync(html);
+                var result = await page.GetContentAsync();
+                return await page.ScreenshotBase64Async();
+            }
+            catch(Exception e)
+            {
+                throw new ErrorCodeException(-1, e.Message);
+            }
         }
     }
 }
