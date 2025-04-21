@@ -165,7 +165,7 @@ namespace sun.Core.Services
             var cacheData = this.Mapper.Map<UserTokenCacheDto>(token);
 
             // 将 Token 信息存储到 Redis，有效期 10 小时
-            await redisService.SetAsync(CoreRedisConstants.UserToken.Format(token.TokenHash), cacheData, TimeSpan.FromHours(10));
+            await redisService.SetAsync(CoreRedisConstants.UserToken.Format(token.TokenHash), cacheData, TimeSpan.FromHours(100));
             return this.Mapper.Map<UserTokenDto>(token);
         }
 
